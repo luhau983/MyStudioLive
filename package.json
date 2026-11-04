@@ -17,7 +17,7 @@
     "socket.io": "^4.8.1",
     "three": "0.160.1",
     "tiktok-live-connector": "2.0.0",
-    "ws": "8.18.3"
+    "ws": "^8.22.1"
   },
   "devDependencies": {
     "electron": "45.2.1",
