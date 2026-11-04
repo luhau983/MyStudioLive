@@ -21,7 +21,13 @@
   },
   "devDependencies": {
     "electron": "45.2.1",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.0.12",
+    "@openapitools/openapi-generator-cli": "file:stubs/unused-dependency",
+    "protobufjs": "file:stubs/unused-dependency"
+  },
+  "overrides": {
+    "@openapitools/openapi-generator-cli": "$@openapitools/openapi-generator-cli",
+    "protobufjs": "$protobufjs"
   },
   "build": {
     "appId": "vn.studiolive.app",

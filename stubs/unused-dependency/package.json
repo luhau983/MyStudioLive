@@ -1,0 +1,8 @@
+{
+  "name": "unused-dependency",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Empty stand-in for transitive dependencies that are declared upstream but never loaded at runtime. See the overrides in the root package.json.",
+  "main": "index.js",
+  "license": "MIT"
+}
