@@ -104,3 +104,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 - Giọng đọc (chế độ Đi Chùa): dịch vụ Read Aloud của Microsoft Edge qua `msedge-tts`, dự phòng Google Translate TTS. Đây không phải API chính thức cho mục đích này và có thể bị giới hạn.
 - Đọc sự kiện TikTok: trang web công khai của TikTok, đọc ngay trên máy người dùng.
+
+## Giao diện
+
+- Bảng màu, bóng đổ và kiểu thành phần của dashboard (`renderer/styles.css`, `vua/studio-theme.css`) theo **TailAdmin Free Tailwind Dashboard Template** — MIT, Copyright (c) 2023 TailAdmin. Chỉ dùng lại design tokens, không nhúng mã nguồn của TailAdmin.
+- Font **Plus Jakarta Sans** (`renderer/fonts/`, `vua/fonts/`) — SIL Open Font License 1.1, Copyright 2020 The Plus Jakarta Sans Project Authors. Toàn văn giấy phép: `renderer/fonts/OFL.txt`.

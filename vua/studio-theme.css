@@ -1,28 +1,31 @@
 /*
  * StudioLive theme for the Vua Tiếng Việt control page.
  * Only applied when the page is served in bridge mode (body.studio-embed), i.e. embedded in the
- * StudioLive dashboard; the standalone app keeps its own cream look. Tokens mirror renderer/styles.css.
+ * StudioLive dashboard; the standalone app keeps its own cream look. Tokens mirror renderer/styles.css
+ * (TailAdmin palette: brand #465fff, TailAdmin gray scale, theme-xs shadow).
  */
+@font-face { font-family: "Plus Jakarta Sans"; font-style: normal; font-weight: 200 800; font-display: swap; src: url("/fonts/plus-jakarta-sans.ttf") format("truetype"); }
 .studio-embed {
-  --sl-bg: #0b0d10; --sl-panel: #13171d; --sl-panel-2: #181d24; --sl-panel-3: #1d232b; --sl-field: #0c0f13; --sl-sunken: #0e1115;
-  --sl-line: #222832; --sl-line-2: #2b333f; --sl-line-3: #3a4452; --sl-text: #e8ecf1; --sl-text-2: #c3cad4; --sl-muted: #8b95a5; --sl-faint: #5b6472;
-  --sl-accent: #3b82f6; --sl-accent-rgb: 59, 130, 246; --sl-accent-hover: #60a5fa; --sl-accent-ink: #ffffff; --sl-danger: #f43f5e;
-  --sl-danger-text: #fda4af; --sl-warn-text: #fcd34d; --sl-ok-text: #86efac; --sl-sky-text: #7dd3fc;
-  --sl-scroll: #232a33; --sl-shadow: rgba(0, 0, 0, .45);
+  --sl-bg: #101828; --sl-panel: #171f2e; --sl-panel-2: #1c2433; --sl-panel-3: #232a39; --sl-field: #101828; --sl-sunken: #0c111d;
+  --sl-line: #1d2939; --sl-line-2: #344054; --sl-line-3: #475467; --sl-text: #e7e8ea; --sl-text-2: #d0d5dd; --sl-muted: #98a2b3; --sl-faint: #667085;
+  --sl-accent: #465fff; --sl-accent-rgb: 70, 95, 255; --sl-accent-hover: #3641f5; --sl-accent-ink: #ffffff; --sl-danger: #f04438;
+  --sl-accent-text: #7592ff; --sl-accent-soft: rgba(70, 95, 255, .12); --sl-focus-line: #252dae;
+  --sl-danger-text: #f97066; --sl-warn-text: #fdb022; --sl-ok-text: #32d583; --sl-sky-text: #7cd4fd;
+  --sl-scroll: #344054; --sl-shadow: rgba(0, 0, 0, .4); --sl-shadow-xs: 0 1px 2px 0 rgba(16, 24, 40, .05);
   --ink: var(--sl-text); --orange: var(--sl-accent); --line: var(--sl-line);
 }
 /* Light: the host app sets nativeTheme, so this follows the dashboard's Sáng / Tối choice */
 @media (prefers-color-scheme: light) {
   .studio-embed {
-    --sl-bg: #f4f6f9; --sl-panel: #ffffff; --sl-panel-2: #f3f5f8; --sl-panel-3: #e9edf2; --sl-field: #ffffff; --sl-sunken: #eef1f5;
-    --sl-line: #e3e7ed; --sl-line-2: #d4dae2; --sl-line-3: #b8c1cd; --sl-text: #0f172a; --sl-text-2: #334155; --sl-muted: #64748b; --sl-faint: #94a3b8;
-    --sl-accent: #2563eb; --sl-accent-rgb: 37, 99, 235; --sl-accent-hover: #1d4ed8;
-    --sl-danger-text: #e11d48; --sl-warn-text: #b45309; --sl-ok-text: #15803d; --sl-sky-text: #0369a1;
-    --sl-scroll: #cbd2db; --sl-shadow: rgba(15, 23, 42, .12);
+    --sl-bg: #f9fafb; --sl-panel: #ffffff; --sl-panel-2: #f9fafb; --sl-panel-3: #f2f4f7; --sl-field: #ffffff; --sl-sunken: #f2f4f7;
+    --sl-line: #e4e7ec; --sl-line-2: #d0d5dd; --sl-line-3: #98a2b3; --sl-text: #1d2939; --sl-text-2: #344054; --sl-muted: #667085; --sl-faint: #98a2b3;
+    --sl-accent-text: #465fff; --sl-accent-soft: #ecf3ff; --sl-focus-line: #9cb9ff;
+    --sl-danger-text: #d92d20; --sl-warn-text: #b54708; --sl-ok-text: #039855; --sl-sky-text: #026aa2;
+    --sl-scroll: #e4e7ec; --sl-shadow: rgba(16, 24, 40, .08);
   }
-  :root:has(.studio-embed) { background: #f4f6f9; color: #0f172a; }
+  :root:has(.studio-embed) { background: #f9fafb; color: #1d2939; }
 }
-:root:has(.studio-embed) { font-family: "SF Pro Text", "Segoe UI", system-ui, -apple-system, sans-serif; background: #0b0d10; color: #e8ecf1; color-scheme: dark light; }
+:root:has(.studio-embed) { font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif; background: #101828; color: #e7e8ea; color-scheme: dark light; }
 .studio-embed { background: var(--sl-bg); color: var(--sl-text); font-size: 14px; -webkit-font-smoothing: antialiased; }
 .studio-embed ::-webkit-scrollbar { width: 10px; }
 .studio-embed ::-webkit-scrollbar-thumb { background: var(--sl-scroll); border-radius: 10px; border: 3px solid var(--sl-bg); }
@@ -47,8 +50,8 @@
 .studio-embed .text-button { color: var(--sl-muted); font-size: 12px; font-weight: 600; }
 .studio-embed .text-button:hover { color: var(--sl-text); }
 .studio-embed .danger, .studio-embed .text-button.danger { color: var(--sl-danger-text); }
-.studio-embed #stop-class { background: rgba(244, 63, 94, .14); border: 1px solid rgba(244, 63, 94, .4); color: var(--sl-danger-text); }
-.studio-embed #stop-class:hover { background: rgba(244, 63, 94, .22); }
+.studio-embed #stop-class { background: rgba(240, 68, 56, .14); border: 1px solid rgba(240, 68, 56, .4); color: var(--sl-danger-text); }
+.studio-embed #stop-class:hover { background: rgba(240, 68, 56, .22); }
 
 /* Form fields: StudioLive .inp */
 .studio-embed label { color: var(--sl-text); font-weight: 700; font-size: 13px; }
@@ -90,7 +93,7 @@
 .studio-embed .difficulty-picker button small { color: var(--sl-faint); }
 .studio-embed .difficulty-picker button.active { background: var(--sl-panel-2); color: var(--sl-text); box-shadow: 0 1px 0 var(--sl-line-2) inset; }
 .studio-embed .difficulty-picker button.active small { color: var(--sl-accent); }
-.studio-embed .difficulty-picker button[data-difficulty=hard].active { background: rgba(244, 63, 94, .16); color: var(--sl-danger-text); }
+.studio-embed .difficulty-picker button[data-difficulty=hard].active { background: rgba(240, 68, 56, .16); color: var(--sl-danger-text); }
 .studio-embed .save-row small, .studio-embed .compact p { color: var(--sl-muted); }
 .studio-embed .compact h3 { color: var(--sl-text); }
 
@@ -114,7 +117,7 @@
 
 /* Preview column */
 .studio-embed .preview-label { color: var(--sl-muted); font-size: 11px; font-weight: 700; }
-.studio-embed .preview-label i { background: #22c55e; }
+.studio-embed .preview-label i { background: #12b76a; }
 .studio-embed .preview-frame { border: 1px solid var(--sl-line-2); border-radius: 16px; background: #000; box-shadow: 0 10px 30px var(--sl-shadow); }
 .studio-embed .preview-instructions { color: var(--sl-muted); }
 .studio-embed .preview-instructions > span { color: var(--sl-accent); }
@@ -174,3 +177,27 @@
 .studio-embed .preview-label { margin-bottom: 8px; }
 .studio-embed { --sl-frame-h: min(620px, calc(100vh - 170px)); }
 .studio-embed .control-stack { columns: 2 280px; }
+
+/* TailAdmin component layer: rounded-lg controls, font-medium, shadow-theme-xs, brand focus ring */
+.studio-embed, .studio-embed button, .studio-embed input, .studio-embed select { font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif; }
+.studio-embed .button { border-radius: 8px; font-weight: 500; box-shadow: var(--sl-shadow-xs); }
+.studio-embed .button:active { transform: none; }
+.studio-embed .primary { box-shadow: var(--sl-shadow-xs); }
+.studio-embed .dark, .studio-embed .light { background: var(--sl-panel); color: var(--sl-text-2); border-color: var(--sl-line-2); }
+.studio-embed .dark:hover, .studio-embed .light:hover { background: var(--sl-panel-3); border-color: var(--sl-line-2); }
+.studio-embed label { font-weight: 500; color: var(--sl-text-2); }
+.studio-embed input:not([type=checkbox]):not([type=range]):not([type=file]), .studio-embed select { border-radius: 8px; box-shadow: var(--sl-shadow-xs); }
+.studio-embed input:focus, .studio-embed select:focus { border-color: var(--sl-focus-line); }
+.studio-embed input[type=file] { border-radius: 8px; }
+.studio-embed .panel h2 { font-size: 16px; font-weight: 600; }
+.studio-embed .panel h2 > span, .studio-embed .current-question strong { color: var(--sl-accent-text); font-weight: 600; }
+.studio-embed .metrics strong { font-weight: 700; }
+.studio-embed .metrics span { font-weight: 500; letter-spacing: .4px; }
+.studio-embed .badge { background: var(--sl-accent-soft); border-color: transparent; color: var(--sl-accent-text); border-radius: 999px; font-weight: 600; padding: 2px 10px; }
+.studio-embed .difficulty-picker { background: var(--sl-sunken); border: none; border-radius: 8px; padding: 2px; }
+.studio-embed .difficulty-picker button { border-radius: 6px; font-weight: 500; }
+.studio-embed .difficulty-picker button.active { background: var(--sl-panel); box-shadow: var(--sl-shadow-xs); }
+@media (prefers-color-scheme: dark) { .studio-embed .difficulty-picker button.active { background: var(--sl-line); } }
+.studio-embed .current-question { border-style: solid; border-color: var(--sl-line); }
+.studio-embed .preview-frame { border-color: var(--sl-line); }
+.studio-embed #toast { border-radius: 12px; }

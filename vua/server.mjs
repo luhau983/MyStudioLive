@@ -17,7 +17,7 @@ files['/auditorium-layout.mjs']='auditorium-layout.mjs';
 files['/questions-template.json']='questions-template.json';
 // Resolve three from whichever node_modules the host app installed it in (StudioLive keeps vua/ one level down).
 const threeModule=createRequire(import.meta.url).resolve('three').replace(/three\.cjs$/,'three.module.js');
-for(const name of ['open-sans.ttf','open-sans-italic.ttf'])files['/fonts/'+name]='fonts/'+name;
+for(const name of ['open-sans.ttf','open-sans-italic.ttf','plus-jakarta-sans.ttf'])files['/fonts/'+name]='fonts/'+name;
 for(const clip of ['welcome','next-1','next-2','next-3','correct-1','correct-2','correct-3','hurry','timeout','hint','pause','resume','reveal','gift-1','gift-2','gift-3'])files[`/audio/${clip}.mp3`]=`audio/${clip}.mp3`;
 const load=async(file,fallback)=>{try{return JSON.parse(await readFile(file,'utf8'));}catch(e){if(e.code==='ENOENT')return fallback;throw e;}};
 /*
