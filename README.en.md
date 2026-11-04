@@ -120,13 +120,3 @@ Contributions are welcome: fork the repo → create a branch → commit → open
 ### Website: https://thuantech.com
 ### Facebook: https://www.facebook.com/thuanht31
 ### Tiktok: https://www.tiktok.com/@rv.dev
-
-## ☕ Buy me a coffee
-
-If StudioLive is useful to you, you can buy me a coffee to keep the project going. Entirely optional — the app stays free for everyone. Thank you! 💚
-
-<p align="center">
-  <img src="docs/screenshots/donate-qr.png" alt="Donation QR code (VietQR / Napas 247)" width="260">
-</p>
-
-<p align="center"><sub>Scan with any banking app that supports VietQR / Napas 247 (Vietnamese banks).</sub></p>

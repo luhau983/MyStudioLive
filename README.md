@@ -118,13 +118,3 @@ Chào mừng mọi đóng góp: fork repo → tạo nhánh → commit → mở P
 ### Website: https://thuantech.com
 ### Facebook: https://www.facebook.com/thuanht31
 ### Tiktok: https://www.tiktok.com/@rv.dev
-
-## ☕ Mời tác giả ly cà phê
-
-Nếu StudioLive giúp ích cho bạn, có thể mời mình một ly cà phê để có thêm động lực phát triển tiếp. Hoàn toàn tự nguyện — app vẫn miễn phí cho tất cả mọi người. Cảm ơn bạn! 💚
-
-<p align="center">
-  <img src="docs/screenshots/donate-qr.png" alt="Mã QR ủng hộ (VietQR / Napas 247)" width="260">
-</p>
-
-<p align="center"><sub>Quét bằng app ngân hàng bất kỳ hỗ trợ VietQR / Napas 247.</sub></p>
