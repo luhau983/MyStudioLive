@@ -57,8 +57,8 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 - Thanh PARTY ENERGY đầy: cả sàn cùng quẩy, drop đèn laser, bắn pháo hoa. Có nền xanh lá để ghép trong OBS.
 - **Master Rules**: tự đặt luật "quà / từ khoá chat → hành động" (zoom, VIP, danh hiệu, khổng lồ, pháo hoa…) ngay trong tab, xét trước bảng quà mặc định; bấm vào quà vừa nhận để tạo luật theo Gift ID.
 - Màn LED sau bàn DJ phát ảnh hoặc video của bạn (mặc định là màn LED nhảy theo nhạc); nhạc nền chọn file trên máy.
-- **DJ 3D**: chọn model `.fbx` / `.glb` có sẵn điệu nhảy (vd. `UnityProject/Assets/Resources/DJ/Megan_DJ.fbx` của tiktok-live-bar) để thay DJ vẽ bằng code.
-- **Bộ nhân vật GIF**: chọn một thư mục GIF / PNG / WEBP, mỗi người xem nhận một nhân vật động (giống bản gốc), `đổi nv` để đổi. Trỏ thẳng được vào `TikTokBridge/assets/gifs` của tiktok-live-bar; tiếng pháo hoa cũng chọn được file riêng. Các tài nguyên đó không đi kèm MyStudioLive vì không rõ giấy phép — tự kiểm tra trước khi dùng trên live.
+- **Tài nguyên gốc đi kèm**: mặc định Live Bar dùng nguyên bộ 33 nhân vật GIF, model DJ 3D `Megan_DJ.fbx` (có điệu nhảy) và tiếng pháo hoa của tiktok-live-bar (`overlay/bar/assets`, xem README trong đó về nguồn gốc). Mỗi người xem nhận một nhân vật động, `đổi nv` để đổi.
+- Trong tab Live Bar đổi được sang thư mục nhân vật / model `.fbx` `.glb` / file tiếng pháo hoa của bạn, hoặc bấm "Vẽ bằng code" / "Tự tổng hợp" để không dùng tài nguyên gốc. Bộ GIF (Weibo), model Mixamo và tiếng pháo hoa không có giấy phép rõ ràng — tự kiểm tra trước khi live thương mại.
 - Chuyển thể luật chơi từ [tiktok-live-bar](https://github.com/cherry9001/tiktok-live-bar) (MIT); cảnh 3D viết lại bằng three.js, chạy như các cảnh khác (một link cho LIVE Studio / OBS).
 
 ### 🪢 Kéo Co Online

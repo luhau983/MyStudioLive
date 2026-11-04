@@ -690,11 +690,12 @@
       customGiftSound: 'Mặc định: chuông chùa', customChatSound: 'Mặc định: ting', customJumpscare: 'Mặc định: 6 mặt ma ngẫu nhiên',
       customScareSound: 'Mặc định: 4 kiểu tiếng thét ngẫu nhiên', customAmbient: 'Mặc định: gió hú tự tạo',
       barMusic: 'Chưa có nhạc nền', barScreen: 'Mặc định: màn LED nhảy theo nhạc',
-      barCharDir: 'Mặc định: nhân vật vẽ bằng code', barDjModel: 'Mặc định: DJ vẽ bằng code', barFireworkFile: 'Mặc định: tiếng tự tổng hợp'
+      barCharDir: 'Mặc định: 33 nhân vật GIF gốc', barDjModel: 'Mặc định: DJ Megan 3D gốc', barFireworkFile: 'Mặc định: tiếng pháo hoa gốc'
     };
+    const NONE_LABEL = { barCharDir: 'Nhân vật vẽ bằng code', barDjModel: 'DJ vẽ bằng code', barFireworkFile: 'Tiếng tự tổng hợp' };
     for (const k of Object.keys(DEF)) {
       const def = DEF[k];
-      $('#f-' + k).textContent = o[k] ? o[k].split(/[\\/]/).pop() : def;
+      $('#f-' + k).textContent = o[k] === 'none' ? NONE_LABEL[k] : o[k] ? o[k].split(/[\\/]/).pop() : def;
       $('#f-' + k).title = o[k] || '';
     }
     renderBarRules();
@@ -771,6 +772,12 @@
     settings.overlay[b.dataset.pick] = file;
     renderSettings();
     save({ overlay: { [b.dataset.pick]: file } }, true);
+  }));
+  // Live Bar: 'none' = drawn in code / synthesized instead of the built-in original assets
+  $$('[data-none]').forEach((b) => b.addEventListener('click', () => {
+    settings.overlay[b.dataset.none] = 'none';
+    renderSettings();
+    save({ overlay: { [b.dataset.none]: 'none' } }, true);
   }));
   $$('[data-clear]').forEach((b) => b.addEventListener('click', () => {
     settings.overlay[b.dataset.clear] = '';

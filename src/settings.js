@@ -30,9 +30,9 @@ const DEFAULTS = {
     barMusic: '',               // file nhạc nền trên máy (mp3/wav/ogg)
     barMusicVolume: 0.35,
     barFireworkSound: true,
-    barDjModel: '',             // model DJ 3D .fbx/.glb/.gltf (trống = DJ vẽ bằng code)
-    barCharDir: '',             // thư mục nhân vật GIF/PNG/WEBP (trống = nhân vật vẽ bằng code)
-    barFireworkFile: '',        // tiếng pháo hoa tự chọn (trống = tiếng tự tổng hợp)
+    barDjModel: '',             // model DJ 3D .fbx/.glb/.gltf ('' = DJ Megan gốc, 'none' = DJ vẽ bằng code)
+    barCharDir: '',             // thư mục nhân vật GIF/PNG/WEBP ('' = 33 GIF gốc, 'none' = vẽ bằng code)
+    barFireworkFile: '',        // tiếng pháo hoa ('' = mp3 gốc, 'none' = tự tổng hợp)
     barScreen: '',              // ảnh / video trên màn LED sau bàn DJ (trống = màn LED nhảy theo nhạc)
     barRules: DEFAULT_BAR_RULES,  // Master Rules: luật chat / quà -> hành động, ưu tiên hơn bảng quà mặc định
     rapName: '',                // tên rạp (tiêu đề + giọng đọc)

@@ -782,20 +782,22 @@
             <div class="field">
               <label>Bộ nhân vật <span class="muted small">(thư mục GIF / PNG / WEBP)</span></label>
               <div class="file-row">
-                <span class="file-name" id="f-barCharDir">Mặc định: nhân vật vẽ bằng code</span>
+                <span class="file-name" id="f-barCharDir">Mặc định: 33 nhân vật GIF gốc</span>
                 <button class="btn ghost sm" id="bar-chardir-pick">Chọn thư mục</button>
                 <button class="btn ghost sm" data-clear="barCharDir">Mặc định</button>
+                <button class="btn ghost sm" data-none="barCharDir">Vẽ bằng code</button>
               </div>
-              <p class="hint">Mỗi người xem nhận ngẫu nhiên 1 nhân vật động trong thư mục, gõ “đổi nv” để đổi. Dùng được thư mục <code>TikTokBridge/assets/gifs</code> của tiktok-live-bar — tự kiểm tra quyền sử dụng các ảnh đó trước khi lên live.</p>
+              <p class="hint">Mỗi người xem nhận ngẫu nhiên 1 nhân vật động, gõ “đổi nv” để đổi. Mặc định dùng bộ GIF, model DJ và tiếng pháo hoa gốc của tiktok-live-bar (đi kèm app, xem <code>overlay/bar/assets/README.md</code> về nguồn gốc) — tự kiểm tra quyền sử dụng trước khi live thương mại.</p>
             </div>
             <div class="field">
               <label>DJ 3D <span class="muted small">(.fbx / .glb có sẵn điệu nhảy)</span></label>
               <div class="file-row">
-                <span class="file-name" id="f-barDjModel">Mặc định: DJ vẽ bằng code</span>
+                <span class="file-name" id="f-barDjModel">Mặc định: DJ Megan 3D gốc</span>
                 <button class="btn ghost sm" data-pick="barDjModel" data-kind="model">Chọn file</button>
                 <button class="btn ghost sm" data-clear="barDjModel">Mặc định</button>
+                <button class="btn ghost sm" data-none="barDjModel">Vẽ bằng code</button>
               </div>
-              <p class="hint">Ví dụ <code>UnityProject/Assets/Resources/DJ/Megan_DJ.fbx</code> của tiktok-live-bar (texture trong thư mục <code>Textures</code> cạnh file được tự tìm).</p>
+              <p class="hint">Model khác: texture trong thư mục <code>Textures</code> hoặc <code>.fbm</code> cạnh file được tự tìm.</p>
             </div>
             <div class="field">
               <label>Khách ảo giữ sàn không trống <span class="val" id="v-barNpc"></span></label>
@@ -850,9 +852,10 @@
             <div class="field">
               <label>File tiếng pháo hoa</label>
               <div class="file-row">
-                <span class="file-name" id="f-barFireworkFile">Mặc định: tiếng tự tổng hợp</span>
+                <span class="file-name" id="f-barFireworkFile">Mặc định: tiếng pháo hoa gốc</span>
                 <button class="btn ghost sm" data-pick="barFireworkFile">Chọn file</button>
                 <button class="btn ghost sm" data-clear="barFireworkFile">Mặc định</button>
+                <button class="btn ghost sm" data-none="barFireworkFile">Tự tổng hợp</button>
               </div>
             </div>
             <div class="toggles" style="margin-top:8px">

@@ -32,14 +32,29 @@ function findDjResource(model, name) {
   return null;
 }
 
+// Live Bar ships the original tiktok-live-bar assets (overlay/bar/assets). Setting value:
+// '' = those built-in files, 'none' = drawn in code / synthesized, anything else = the user's own path.
+const BAR_ASSETS = path.join(__dirname, '..', 'overlay', 'bar', 'assets');
+const BUILTIN_BAR = {
+  chars: path.join(BAR_ASSETS, 'characters'),
+  dj: path.join(BAR_ASSETS, 'dj', 'Megan_DJ.fbx'),
+  firework: path.join(BAR_ASSETS, 'sfx', 'fireworks.mp3')
+};
+function resolveBarAsset(value, kind) {
+  if (value === 'none') return '';
+  if (!value) return fs.existsSync(BUILTIN_BAR[kind]) ? BUILTIN_BAR[kind] : '';
+  return value;
+}
+
 const CHARACTER_EXT = /\.(gif|png|webp)$/i;
 const MAX_CHARACTERS = 60;
 function listCharacterFiles(dir) {
   if (typeof dir !== 'string' || !dir) return [];
   try {
-    return fs.readdirSync(dir, { withFileTypes: true })
-      .filter((d) => d.isFile() && CHARACTER_EXT.test(d.name) && path.basename(d.name) === d.name)
-      .map((d) => d.name).sort((a, b) => a.localeCompare(b)).slice(0, MAX_CHARACTERS);
+    // readdir + stat (not Dirent) so it also works inside the packaged app.asar
+    return fs.readdirSync(dir)
+      .filter((n) => CHARACTER_EXT.test(n) && path.basename(n) === n && fs.statSync(path.join(dir, n)).isFile())
+      .sort((a, b) => a.localeCompare(b)).slice(0, MAX_CHARACTERS);
   } catch { return []; }
 }
 
@@ -128,23 +143,28 @@ class OverlayServer {
       express.static(path.join(path.dirname(resolveThreeModule()), '..', 'examples', 'jsm'), { fallthrough: false, maxAge: '1d' }));
 
     // Model DJ 3D (.fbx / .glb / .gltf, như Megan_DJ.fbx của bản gốc) + texture đi kèm, tìm theo tên file
+    app.get('/bar/dj/info', (_req, res) => {
+      const file = resolveBarAsset(this.getConfig().overlay.barDjModel, 'dj');
+      const kind = file && fs.existsSync(file) ? (file.match(DJ_MODEL_EXT) || [])[1] || '' : '';
+      res.set('Cache-Control', 'no-store').json({ kind: kind.toLowerCase() });
+    });
     app.get('/bar/dj/model', (_req, res) => {
-      const file = this.getConfig().overlay.barDjModel;
+      const file = resolveBarAsset(this.getConfig().overlay.barDjModel, 'dj');
       if (!file || !DJ_MODEL_EXT.test(file) || !fs.existsSync(file)) return res.sendStatus(404);
       res.sendFile(file, { headers: { 'Content-Type': 'application/octet-stream', 'Cache-Control': 'no-store' } });
     });
     app.get('/bar/dj/res/:name', (req, res) => {
-      const file = findDjResource(this.getConfig().overlay.barDjModel, String(req.params.name || ''));
+      const file = findDjResource(resolveBarAsset(this.getConfig().overlay.barDjModel, 'dj'), String(req.params.name || ''));
       if (!file) return res.sendStatus(404);
       res.sendFile(file, { headers: { 'Content-Type': MEDIA_TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': 'no-store' } });
     });
 
     // Bộ nhân vật Live Bar (GIF/PNG/WEBP trong thư mục người dùng chọn), giống CharacterLibrary của bản gốc
     app.get('/bar/chars', (_req, res) => {
-      res.set('Cache-Control', 'no-store').json({ files: listCharacterFiles(this.getConfig().overlay.barCharDir) });
+      res.set('Cache-Control', 'no-store').json({ files: listCharacterFiles(resolveBarAsset(this.getConfig().overlay.barCharDir, 'chars')) });
     });
     app.get('/bar/chars/:name', (req, res) => {
-      const dir = this.getConfig().overlay.barCharDir;
+      const dir = resolveBarAsset(this.getConfig().overlay.barCharDir, 'chars');
       const name = String(req.params.name || '');
       // chỉ phục vụ đúng tên file có trong danh sách (không cho ../ ra ngoài thư mục)
       if (!listCharacterFiles(dir).includes(name)) return res.sendStatus(404);
@@ -165,7 +185,7 @@ class OverlayServer {
       const o = this.getConfig().overlay;
       const file = {
         gift: o.customGiftSound, chat: o.customChatSound, jumpscare: o.customJumpscare,
-        scare: o.customScareSound, ambient: o.customAmbient, barMusic: o.barMusic, barScreen: o.barScreen, barFirework: o.barFireworkFile
+        scare: o.customScareSound, ambient: o.customAmbient, barMusic: o.barMusic, barScreen: o.barScreen, barFirework: resolveBarAsset(o.barFireworkFile, 'firework')
       }[req.params.kind] || '';
       const type = MEDIA_TYPES[path.extname(file).toLowerCase()];
       if (!file || !type || !fs.existsSync(file)) return res.sendStatus(404);
@@ -225,4 +245,4 @@ class OverlayServer {
   }
 }
 
-module.exports = { OverlayServer, isAvatarUrl, listCharacterFiles, findDjResource };
+module.exports = { OverlayServer, isAvatarUrl, listCharacterFiles, findDjResource, resolveBarAsset };

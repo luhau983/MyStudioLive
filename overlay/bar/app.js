@@ -63,9 +63,9 @@ function crackle(delay = 0) {
 }
 club.setSfx((name) => {
   if (name !== 'fireworks' || muted() || !cfg.barFireworkSound) return;
-  if (cfg.barFireworkFile) {
+  if (cfg.barFireworkFile !== 'none') { // '' = the original tiktok-live-bar sound shipped with the app
     // the user's own firework sound (e.g. the one shipped with tiktok-live-bar); synth as fallback
-    const src = '/media/barFirework?v=' + encodeURIComponent(cfg.barFireworkFile);
+    const src = '/media/barFirework?v=' + encodeURIComponent(cfg.barFireworkFile || 'builtin');
     if (!fwSound.src.endsWith(src)) fwSound.src = src;
     fwSound.volume = Math.min(1, cfg.volume);
     fwSound.currentTime = 0;
@@ -347,6 +347,7 @@ function onCommand(c) {
 
 // ---------------------------------------------------------------- config
 let loadedCharDir = null;
+let loadedDj = null;
 function applyConfig(next) {
   const prevNpc = cfg.barNpc;
   cfg = { ...cfg, ...next };
@@ -357,11 +358,16 @@ function applyConfig(next) {
   if (cfg.barCharDir !== loadedCharDir) {
     loadedCharDir = cfg.barCharDir;
     const dir = loadedCharDir;
-    (dir ? fetch('/bar/chars').then((r) => r.json()).then((j) => j.files || []).catch(() => []) : Promise.resolve([]))
+    (dir !== 'none' ? fetch('/bar/chars').then((r) => r.json()).then((j) => j.files || []).catch(() => []) : Promise.resolve([]))
       .then((files) => (dir === loadedCharDir ? club.setCharacters(files.map((f) => '/bar/chars/' + encodeURIComponent(f) + '?v=' + encodeURIComponent(dir))) : 0));
   }
-  const djExt = (String(cfg.barDjModel || '').match(/\.(fbx|glb|gltf)$/i) || [])[1];
-  club.setDjModel(djExt ? '/bar/dj/model?v=' + encodeURIComponent(cfg.barDjModel) : '', (djExt || '').toLowerCase());
+  // DJ: '' = Megan_DJ.fbx shipped with the app, 'none' = DJ drawn in code, else the user's model
+  if (cfg.barDjModel !== loadedDj) {
+    loadedDj = cfg.barDjModel;
+    const want = loadedDj;
+    (want === 'none' ? Promise.resolve({ kind: '' }) : fetch('/bar/dj/info').then((r) => r.json()).catch(() => ({ kind: '' })))
+      .then(({ kind }) => { if (want === loadedDj) club.setDjModel(kind ? '/bar/dj/model?v=' + encodeURIComponent(want || 'builtin') : '', kind); });
+  }
   club.setScreen(cfg.barScreen ? '/media/barScreen?v=' + encodeURIComponent(cfg.barScreen) : '', /\.(mp4|webm|mov|m4v)$/i.test(cfg.barScreen || ''));
   club.setChroma(!!cfg.barChroma);
   document.body.classList.toggle('chroma', !!cfg.barChroma);

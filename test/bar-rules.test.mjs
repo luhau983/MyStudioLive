@@ -210,3 +210,14 @@ test('DJ model textures are only looked up by name next to the model', () => {
   assert.equal(findDjResource('', 'skin.png'), null);
   fs.rmSync(dir, { recursive: true, force: true });
 });
+
+test('resolveBarAsset: empty = bundled upstream assets, none = code-drawn, path = user file', () => {
+  const fs = require('fs'); const path = require('path');
+  const { resolveBarAsset, listCharacterFiles } = require('../src/server.js');
+  const dj = resolveBarAsset('', 'dj');
+  assert.ok(dj.endsWith(path.join('dj', 'Megan_DJ.fbx')) && fs.existsSync(dj));
+  assert.ok(fs.existsSync(resolveBarAsset('', 'firework')));
+  assert.equal(listCharacterFiles(resolveBarAsset('', 'chars')).length, 33);
+  assert.equal(resolveBarAsset('none', 'dj'), '');
+  assert.equal(resolveBarAsset('C:/x/y.glb', 'dj'), 'C:/x/y.glb');
+});
