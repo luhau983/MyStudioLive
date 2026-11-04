@@ -1,120 +1,172 @@
-# StudioLive
+<p align="center">
+  <img src="build/icon.png" alt="MyStudioLive" width="120">
+</p>
 
-[English](README.en.md) | **Tiếng Việt**
+<h1 align="center">MyStudioLive</h1>
 
-[![Release](https://img.shields.io/github/v/release/tanthuan031/StudioLive)](https://github.com/tanthuan031/StudioLive/releases/latest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-lightgrey)
+<p align="center">
+  <a href="README.en.md">English</a> | <b>Tiếng Việt</b>
+</p>
 
-App máy tính tạo **cảnh tương tác cho TikTok LIVE**, chạy hoàn toàn trên máy của bạn. Mã nguồn mở, miễn phí — ai cũng có thể tải về dùng hoặc phát triển thêm.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-lightgrey" alt="Platform">
+  <img src="https://img.shields.io/badge/Electron-45-47848f" alt="Electron 45">
+</p>
 
-> ⚠️ **Đọc [Tuyên bố miễn trừ trách nhiệm](DISCLAIMER.md) trước khi dùng.** Nghiêm cấm dùng StudioLive để lừa đảo, trục lợi, lợi dụng tín ngưỡng hay livestream vi phạm pháp luật.
+App máy tính tạo **cảnh tương tác cho TikTok LIVE**: người xem bình luận, thả tim, tặng quà là cảnh trên live phản ứng ngay. Chạy hoàn toàn trên máy của bạn, không cần server ngoài.
+
+MyStudioLive phát triển tiếp từ [StudioLive](https://github.com/tanthuan031/StudioLive) của Tanthuan031 (MIT), bổ sung hai game **Vua Tiếng Việt** và **Kéo Co Online**, giao diện sáng/tối và nhận diện mới.
+
+> ⚠️ **Đọc [Tuyên bố miễn trừ trách nhiệm](DISCLAIMER.md) trước khi dùng.** Nghiêm cấm dùng app để lừa đảo, trục lợi, lợi dụng tín ngưỡng hay livestream vi phạm pháp luật. MyStudioLive không liên kết với TikTok / ByteDance.
 
 ![Bảng điều khiển](docs/screenshots/dashboard.png)
 
-## Tính năng
+## Các cảnh
 
-- **👻 Live Ma Online** — người xem hoá ma, gõ `hù` / `trốn` / `tìm` / `bùa` / `gọi hồn` / `tắt đèn`… để chơi với nhau; quà lớn gọi Bà Ma + jumpscare; vòng TRỐN TÌM định kỳ.
-- **🪷 Đi Chùa Online** — chánh điện; người xem ngồi bồ đoàn, gõ `adidaphat` lên thắp hương; quà làm sen vàng nở, giọng đọc cảm ơn và chúc; thả tim đủ mục tiêu thì mưa hoa sen.
-- **🎬 Rạp Phim Online** — phòng chiếu phim; người xem được chào, vào ghế ngồi; chiếu danh sách phim (link YouTube, .mp4/.webm hoặc file trên máy); lệnh `vỗ tay` / `haha` / `wow` / `bắp`; quà = ghế VIP; đủ tim = mưa bắp rang. 4 kiểu phòng: Cổ điển, VIP Gold, IMAX, Gia đình.
+Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh dùng chung **một kết nối TikTok** ở Bảng điều khiển.
 
-Mở tab nào thì cảnh đó chạy trên live.
-
-| 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online |
+| Cảnh | Người xem làm gì | Điểm nhấn |
 |---|---|---|
-| ![Live Ma Online](docs/screenshots/live-ma-online.png) | ![Đi Chùa Online](docs/screenshots/di-chua-online.png) | ![Rạp Phim Online](docs/screenshots/rap-phim-online.png) |
+| 👻 **Live Ma Online** | Gõ `hù` / `trốn` / `tìm` / `bùa` / `gọi hồn` / `tắt đèn`… | Mỗi người là một con ma; quà lớn gọi Bà Ma + jumpscare; vòng TRỐN TÌM định kỳ |
+| 🪷 **Đi Chùa Online** | Gõ `adidaphat` để lên thắp hương | Chánh điện, giọng đọc cảm ơn và chúc; quà làm sen vàng nở; đủ tim thì mưa hoa sen |
+| 🎬 **Rạp Phim Online** | Gõ `vỗ tay` / `haha` / `wow` / `bắp` | Chiếu playlist YouTube, link .mp4/.webm hoặc file trên máy; quà = ghế VIP; 4 kiểu phòng |
+| 👑 **Vua Tiếng Việt** | Comment đáp án ô chữ bị xáo | Giảng đường 3D, cô giáo đọc lời dẫn; ai đúng đầu tiên là MVP; 550+ câu, import thêm được |
+| 🪢 **Kéo Co Online** | Comment `ĐỎ` / `XANH` để vào đội, thả tim để kéo | Sân kéo co 3D, 5 người mỗi đội, bot bù chỗ; quà cộng điểm kéo và nạp mana |
 
-## Tải & cài đặt (người dùng)
+| 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
+|---|---|---|---|
+| ![Live Ma Online](docs/screenshots/live-ma-online.png) | ![Đi Chùa Online](docs/screenshots/di-chua-online.png) | ![Rạp Phim Online](docs/screenshots/rap-phim-online.png) | ![Vua Tiếng Việt](docs/screenshots/vua-tieng-viet.png) |
 
-Tải bản cài sẵn tại **[Releases v1.0.0](https://github.com/tanthuan031/StudioLive/releases/tag/v1.0.0)**:
+### 👑 Vua Tiếng Việt
 
-| Máy | File tải |
+- Bảng hiện các chữ cái bị xáo kèm gợi ý; người xem **comment nguyên đáp án**, không cần lệnh hay đăng ký. Đáp án không dấu cũng được tính (tắt được).
+- Người đúng đầu tiên là **MVP** (mặc định +100 điểm); mỗi lần host mở thêm một chữ, điểm giảm 20 (tối thiểu 10).
+- Người vào live được xếp ghế trong giảng đường (tối đa 50 chỗ); tên và câu trả lời hiện cạnh chỗ ngồi.
+- Độ khó **Thường / Khó / Trộn**; import thêm câu hỏi bằng file JSON (có file mẫu trong bảng điều khiển).
+- Có **chế độ chơi thử**: giả lập người vào, bình luận, tặng quà mà không cần lên live.
+- Nhạc nền khi làm bài (link YouTube hoặc nhạc mặc định), tự giảm khi cô giáo nói.
+
+### 🪢 Kéo Co Online
+
+- Hai đội ĐỎ – XANH, mỗi đội 5 người trên sân; người đến sau xếp hàng chờ trên khán đài và được luân phiên lên sân.
+- Mỗi tim = 1 điểm kéo (×2 trong 10 giây cuối hiệp chính); quà cộng thẳng điểm kéo theo số kim cương và nạp mana cho đội.
+- Vòng mặc định: sắp đội 5s → đếm ngược 3s → kéo 45s → kết quả 10s; hòa thì có hiệp phụ. Chỉnh được trong bảng điều khiển.
+- Người im lặng lâu trên sân tự xuống khán đài; comment hoặc thả tim là quay lại.
+
+## Tải & cài đặt
+
+Tải bản cài mới nhất ở trang **[Releases](https://github.com/luhau983/MyStudioLive/releases)**. Chưa có bản phù hợp thì [tự đóng gói từ mã nguồn](#chạy-từ-mã-nguồn).
+
+| Máy | File |
 |---|---|
-| Mac chip Apple (M1, M2, M3, M4…) | [`StudioLive-1.0.0-mac-arm64.dmg`](https://github.com/tanthuan031/StudioLive/releases/download/v1.0.0/StudioLive-1.0.0-mac-arm64.dmg) |
-| Mac chip Intel | [`StudioLive-1.0.0-mac-x64.dmg`](https://github.com/tanthuan031/StudioLive/releases/download/v1.0.0/StudioLive-1.0.0-mac-x64.dmg) |
-| Windows 10/11 64-bit | [`StudioLive-Setup-1.0.0-win-x64.exe`](https://github.com/tanthuan031/StudioLive/releases/download/v1.0.0/StudioLive-Setup-1.0.0-win-x64.exe) |
+| Windows 10/11 64-bit | `MyStudioLive-Setup-<phiên bản>-win-x64.exe` |
+| Mac chip Apple (M1–M4) | `MyStudioLive-<phiên bản>-mac-arm64.dmg` |
+| Mac chip Intel | `MyStudioLive-<phiên bản>-mac-x64.dmg` |
 
-Không biết Mac chip gì: bấm  → **Giới thiệu về máy Mac** — “Chip: Apple M…” là chip Apple, “Bộ xử lý: Intel…” là chip Intel.
+<details>
+<summary><b>Windows</b></summary>
 
-### macOS (12 trở lên)
+1. Chạy file `.exe` → chọn thư mục → **Install**.
+2. Hiện **“Windows đã bảo vệ PC của bạn”** (SmartScreen, do app chưa ký số): bấm **More info → Run anyway**.
+3. Mở **MyStudioLive** từ Desktop hoặc menu Start.
 
-1. Mở file `.dmg`, **kéo StudioLive vào thư mục Applications**.
-2. Vào **Applications**, **chuột phải (Control + bấm) vào StudioLive → Mở → Mở**. App chưa ký số Apple nên lần đầu macOS hỏi lại, chỉ cần làm một lần.
-3. Vẫn bị chặn: **Cài đặt hệ thống → Quyền riêng tư & Bảo mật → Vẫn mở (Open Anyway)**.
-4. Báo **“StudioLive bị hỏng và không thể mở”**: mở **Terminal**, chạy lệnh rồi mở lại app:
+</details>
+
+<details>
+<summary><b>macOS 12 trở lên</b></summary>
+
+1. Mở file `.dmg`, kéo **MyStudioLive** vào **Applications**.
+2. Lần đầu: **chuột phải vào app → Mở → Mở** (app chưa ký số Apple).
+3. Vẫn bị chặn: **Cài đặt hệ thống → Quyền riêng tư & Bảo mật → Vẫn mở**.
+4. Báo “app bị hỏng và không thể mở”: chạy lệnh sau trong Terminal rồi mở lại.
 
    ```bash
-   xattr -cr /Applications/StudioLive.app
+   xattr -cr /Applications/MyStudioLive.app
    ```
 
-### Windows
+</details>
 
-1. Chạy `StudioLive-Setup-1.0.0-win-x64.exe` → chọn thư mục → **Install**.
-2. Nếu hiện **“Windows đã bảo vệ PC của bạn”** (SmartScreen, do app chưa ký số): bấm **More info → Run anyway**.
-3. Mở **StudioLive** từ Desktop hoặc menu Start.
+## Lên live
 
-### Lên live lần đầu
+1. **Chọn cảnh** ở menu trái (hoặc tab **Đưa lên live → Phát …**).
+2. **Đưa cảnh vào phần mềm live**, khung **dọc 1080 × 1920**:
+   - **TikTok LIVE Studio**: thêm nguồn **Link** `http://lvh.me:3000` (LIVE Studio không nhận `localhost`; `lvh.me` luôn trỏ về chính máy bạn). Dự phòng: bấm **Mở màn hình phát** rồi dùng **Chụp cửa sổ**.
+   - **OBS**: thêm **Browser Source** `http://localhost:3000`.
+3. Bấm **Go LIVE** trên TikTok.
+4. Ở **Bảng điều khiển**, nhập username TikTok (không cần @) → **Kết nối**.
 
-1. **Chọn cảnh**: bấm tab 👻 Ma / 🪷 Chùa / 🎬 Rạp ở menu trái.
-2. **Thêm vào TikTok LIVE Studio**: khung **dọc**, thêm nguồn **Link** `http://lvh.me:3000`, kích thước **1080 × 1920**, kéo phủ kín khung. (LIVE Studio không nhận `localhost`; `lvh.me` luôn trỏ về chính máy bạn.)
-3. Bấm **Go LIVE** trên TikTok LIVE Studio.
-4. **Kết nối**: ở Bảng điều khiển nhập username TikTok (không cần @) → **Kết nối**.
+Đổi cảnh giữa chừng không cần sửa link: mọi màn hình đang trỏ tới `localhost:3000` / `lvh.me:3000` tự chuyển sang cảnh mới. Chưa live vẫn thử được bằng các nút **Gửi thử** / **Chơi thử** trong từng tab.
 
-Chưa live vẫn thử được bằng các nút **Gửi thử** trong từng tab. Hướng dẫn đầy đủ (chất lượng hình, OBS, mẹo khi live, xử lý lỗi): **[docs/HUONG-DAN-CAI-DAT.md](docs/HUONG-DAN-CAI-DAT.md)**.
+Hướng dẫn chi tiết (chất lượng hình, âm thanh, xử lý lỗi): **[docs/HUONG-DAN-CAI-DAT.md](docs/HUONG-DAN-CAI-DAT.md)**.
 
-## Chạy từ mã nguồn (nhà phát triển)
+## Dữ liệu của bạn
 
-Cần **Node.js 18+** và **git**.
+| Nội dung | Windows | macOS |
+|---|---|---|
+| Cài đặt app | `%APPDATA%\StudioLive\settings.json` | `~/Library/Application Support/StudioLive/settings.json` |
+| Vua Tiếng Việt (câu hỏi, điểm, cấu hình) | `%APPDATA%\StudioLive\vua\` | `~/Library/Application Support/StudioLive/vua/` |
+| Kéo Co (cấu hình, thống kê, lịch sử trận) | `%APPDATA%\StudioLive\keoco\` | `~/Library/Application Support/StudioLive/keoco/` |
+
+Thư mục dữ liệu vẫn tên `StudioLive` để giữ cài đặt cũ sau khi đổi tên app. Nếu máy đã từng cài app **Vua Tiếng Việt** riêng, lần đầu mở MyStudioLive sẽ tự chép câu hỏi đã import, điểm và cấu hình sang.
+
+## Chạy từ mã nguồn
+
+Cần **Node.js 20+** và **git**.
 
 ```bash
-git clone https://github.com/tanthuan031/StudioLive.git
-cd StudioLive
+git clone https://github.com/luhau983/MyStudioLive.git
+cd MyStudioLive
 npm install
 npm start
 ```
 
-Đóng gói bản cài (không ký số):
+Đóng gói bản cài (không ký số), xem thêm [docs/BUILD.md](docs/BUILD.md):
 
 ```bash
-npm run dist:mac   # .dmg + .zip cho arm64 và x64
 npm run dist:win   # bộ cài NSIS x64
+npm run dist:mac   # .dmg + .zip cho arm64 và x64
 ```
 
-Chi tiết: [docs/BUILD.md](docs/BUILD.md).
+Chạy test của hai game:
 
-### Cấu trúc
-
-```
-src/main.js       Tiến trình chính: cửa sổ, IPC, dữ liệu thử, tự kiểm tra (STUDIO_SELFTEST)
-src/live.js       Quản lý kết nối TikTok, chuẩn hoá sự kiện, tự kết nối lại
-src/direct.js     Đọc sự kiện qua trình duyệt ẩn + giải mã protobuf (tiktok-live-connector 2.0.0, MIT)
-src/server.js     Server overlay Express + Socket.IO (chỉ 127.0.0.1) + giọng đọc /api/tts
-src/tts.js        Giọng đọc tiếng Việt (Microsoft Edge, dự phòng Google)
-src/settings.js   Lưu cài đặt trong thư mục userData
-renderer/         Giao diện điều khiển
-overlay/          Trang hiển thị trên live: game.js (Nhà Ma), temple.js (Đi Chùa), rap.js (Rạp Phim), faces.js, audio.js
-overlay/chua-assets/  Ảnh, nhân vật, hiệu ứng, nhạc của cảnh Đi Chùa
-build/icon.png    Icon app
+```bash
+cd vua && node --test
+cd keoco && node --test
 ```
 
-Cài đặt người dùng lưu tại `~/Library/Application Support/StudioLive/settings.json` (macOS), `%APPDATA%\StudioLive\settings.json` (Windows).
+### Kiến trúc
+
+```
+src/main.js        Tiến trình chính: cửa sổ, IPC, khởi động server overlay + server của từng game
+src/live.js        Kết nối TikTok, chuẩn hoá sự kiện, tự kết nối lại (một kết nối dùng chung)
+src/direct.js      Đọc sự kiện qua trình duyệt ẩn + giải mã protobuf
+src/server.js      Server overlay Express + Socket.IO (chỉ 127.0.0.1), giọng đọc /api/tts,
+                   chuyển hướng sang server game khi cảnh đó đang phát
+src/tts.js         Giọng đọc tiếng Việt (Microsoft Edge, dự phòng Google)
+src/settings.js    Lưu cài đặt trong thư mục userData
+renderer/          Giao diện điều khiển (sáng / tối / theo hệ thống)
+overlay/           Cảnh Nhà Ma, Đi Chùa, Rạp Phim
+vua/               Game Vua Tiếng Việt: server riêng, overlay 3D (Three.js), bảng điều khiển, ngân hàng câu hỏi
+keoco/             Game Kéo Co: server riêng, sân 3D (Three.js), bảng điều khiển
+```
+
+Hai game `vua/` và `keoco/` chạy server riêng ngay trong tiến trình chính và nhận sự kiện qua cầu nối từ `src/live.js`, nên chỉ có một kết nối TikTok cho cả app. Bảng điều khiển của từng game được nhúng vào tab tương ứng; bảng của Vua Tiếng Việt đổi theo giao diện sáng/tối của MyStudioLive (`vua/studio-theme.css`).
 
 > Lưu ý: giữ `tiktok-live-connector` ở **2.0.0** (MIT). Các bản mới hơn dùng giấy phép AGPL-3.0.
 
 ### Đóng góp
 
-Chào mừng mọi đóng góp: fork repo → tạo nhánh → commit → mở Pull Request. Báo lỗi hoặc đề xuất tính năng tại [Issues](https://github.com/tanthuan031/StudioLive/issues).
+Fork repo → tạo nhánh → commit → mở Pull Request. Báo lỗi hoặc đề xuất tính năng tại [Issues](https://github.com/luhau983/MyStudioLive/issues).
 
-## Giấy phép & miễn trừ trách nhiệm
+## Giấy phép & ghi công
 
-- Mã nguồn phát hành theo giấy phép **[MIT](LICENSE)** — © 2026 [Tanthuan031](https://github.com/tanthuan031).
+- Mã nguồn phát hành theo giấy phép **[MIT](LICENSE)**.
+- Dựa trên [StudioLive](https://github.com/tanthuan031/StudioLive) © 2026 [Tanthuan031](https://github.com/tanthuan031) (MIT).
 - Thư viện & tài nguyên bên thứ ba giữ giấy phép riêng: [docs/THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md).
-- **[DISCLAIMER.md](DISCLAIMER.md)** — phần mềm chỉ phục vụ giải trí, học tập. Người dùng tự chịu hoàn toàn trách nhiệm về nội dung livestream; tác giả không chịu trách nhiệm cho mọi hành vi lừa đảo, trục lợi, lợi dụng tín ngưỡng, vi phạm bản quyền hay vi phạm pháp luật của người sử dụng. StudioLive không liên kết với TikTok / ByteDance.
+- **[DISCLAIMER.md](DISCLAIMER.md)**: phần mềm chỉ phục vụ giải trí, học tập. Người dùng tự chịu hoàn toàn trách nhiệm về nội dung livestream của mình.
 
 ## Tác giả
 
-** Tanthuan031 **
-### GitHub: [@tanthuan031](https://github.com/tanthuan031)
-### Website: https://thuantech.com
-### Facebook: https://www.facebook.com/thuanht31
-### Tiktok: https://www.tiktok.com/@rv.dev
+- Phát triển & duy trì MyStudioLive: [@luhau983](https://github.com/luhau983)
+- Tác giả StudioLive gốc: **Tanthuan031** · [GitHub](https://github.com/tanthuan031) · [Website](https://thuantech.com) · [Facebook](https://www.facebook.com/thuanht31) · [TikTok](https://www.tiktok.com/@rv.dev)

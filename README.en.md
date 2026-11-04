@@ -1,122 +1,174 @@
-# StudioLive
+<p align="center">
+  <img src="build/icon.png" alt="MyStudioLive" width="120">
+</p>
 
-**English** | [Tiếng Việt](README.md)
+<h1 align="center">MyStudioLive</h1>
 
-[![Release](https://img.shields.io/github/v/release/tanthuan031/StudioLive)](https://github.com/tanthuan031/StudioLive/releases/latest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-lightgrey)
+<p align="center">
+  <b>English</b> | <a href="README.md">Tiếng Việt</a>
+</p>
 
-A desktop app that creates **interactive scenes for TikTok LIVE**, running entirely on your own computer. Free and open source — anyone can download it, use it, or build on it.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-lightgrey" alt="Platform">
+  <img src="https://img.shields.io/badge/Electron-45-47848f" alt="Electron 45">
+</p>
 
-> ⚠️ **Read the [Disclaimer](DISCLAIMER.md) before use.** Using StudioLive for scams, profiteering, exploiting religious beliefs, or any illegal livestream is strictly prohibited.
+A desktop app that creates **interactive scenes for TikTok LIVE**: viewers comment, send likes and gifts, and the scene on the stream reacts instantly. Everything runs on your own computer, with no external server.
+
+MyStudioLive builds on [StudioLive](https://github.com/tanthuan031/StudioLive) by Tanthuan031 (MIT) and adds two games, **Vua Tiếng Việt** (word puzzle) and **Kéo Co Online** (tug of war), a light/dark interface and a new identity.
+
+> ⚠️ **Read the [Disclaimer](DISCLAIMER.md) (Vietnamese) before use.** Using the app for scams, profiteering, exploiting religious beliefs or any illegal livestream is strictly prohibited. MyStudioLive is not affiliated with TikTok / ByteDance.
 
 > The app interface and in-scene chat commands are in Vietnamese.
 
 ![Dashboard](docs/screenshots/dashboard.png)
 
-## Features
+## Scenes
 
-- **👻 Live Ma Online (Haunted House)** — viewers turn into ghosts and type `hù` (boo) / `trốn` (hide) / `tìm` (seek) / `bùa` (talisman) / `gọi hồn` (summon) / `tắt đèn` (lights out)… to play with each other; big gifts summon the Granny Ghost + a jumpscare; periodic HIDE-AND-SEEK rounds.
-- **🪷 Đi Chùa Online (Temple Visit)** — a temple main hall; viewers sit on meditation cushions and type `adidaphat` to come up and light incense; gifts make golden lotuses bloom, with a voice thanking and blessing them; reaching the like goal triggers a lotus-petal shower.
-- **🎬 Rạp Phim Online (Movie Theater)** — a cinema room; viewers are greeted and walk to their seats; the screen plays a playlist (YouTube links, .mp4/.webm links, or local files); commands `vỗ tay` (clap) / `haha` / `wow` / `bắp` (popcorn); gifts = VIP seats; enough likes = popcorn rain. 4 room styles: Classic, VIP Gold, IMAX, Family.
+Whichever tab is open in the left menu is the scene shown on the live stream. All scenes share **one TikTok connection** on the Dashboard.
 
-Whichever tab is open is the scene shown on the live stream.
-
-| 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online |
+| Scene | What viewers do | Highlights |
 |---|---|---|
-| ![Live Ma Online](docs/screenshots/live-ma-online.png) | ![Đi Chùa Online](docs/screenshots/di-chua-online.png) | ![Rạp Phim Online](docs/screenshots/rap-phim-online.png) |
+| 👻 **Live Ma Online** (Haunted House) | Type `hù` (boo) / `trốn` (hide) / `tìm` (seek) / `bùa` (talisman) / `gọi hồn` (summon) / `tắt đèn` (lights out)… | Every viewer is a ghost; big gifts summon the Granny Ghost + a jumpscare; periodic hide-and-seek rounds |
+| 🪷 **Đi Chùa Online** (Temple Visit) | Type `adidaphat` to light incense | Temple hall with a voice that thanks and blesses; gifts bloom golden lotuses; like goals trigger a lotus shower |
+| 🎬 **Rạp Phim Online** (Movie Theater) | Type `vỗ tay` (clap) / `haha` / `wow` / `bắp` (popcorn) | Plays a YouTube, .mp4/.webm or local-file playlist; gifts = VIP seats; 4 room styles |
+| 👑 **Vua Tiếng Việt** (Word King) | Comment the answer to a scrambled word | 3D lecture hall with a narrating teacher; first correct answer is MVP; 550+ questions, import more |
+| 🪢 **Kéo Co Online** (Tug of War) | Comment `ĐỎ` (red) / `XANH` (blue) to join, send likes to pull | 3D arena, 5 per team with bots filling gaps; gifts add pull points and team mana |
 
-## Download & install (users)
+| 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
+|---|---|---|---|
+| ![Live Ma Online](docs/screenshots/live-ma-online.png) | ![Đi Chùa Online](docs/screenshots/di-chua-online.png) | ![Rạp Phim Online](docs/screenshots/rap-phim-online.png) | ![Vua Tiếng Việt](docs/screenshots/vua-tieng-viet.png) |
 
-Download the ready-made installers from **[Releases v1.0.0](https://github.com/tanthuan031/StudioLive/releases/tag/v1.0.0)**:
+### 👑 Vua Tiếng Việt
+
+- The board shows scrambled letters and a hint; viewers **comment the full answer**, with no command or sign-up. Answers without Vietnamese accents count too (can be turned off).
+- The first correct viewer is the **MVP** (default +100 points); each letter the host reveals lowers the reward by 20 (minimum 10).
+- Viewers who join get a seat in the hall (up to 50); their name and answer appear next to the seat.
+- **Normal / Hard / Mixed** difficulty; import more questions from a JSON file (a template is available in the control panel).
+- **Practice mode** simulates joins, comments and gifts without going live.
+- Background music while solving (a YouTube link or the built-in track), lowered automatically while the teacher speaks.
+
+### 🪢 Kéo Co Online
+
+- Red vs Blue, 5 players per team on the field; later arrivals queue in the stands and rotate in.
+- Each like = 1 pull point (×2 in the last 10 seconds of regulation); gifts add pull points by diamond value and charge team mana.
+- Default round: line-up 5s → countdown 3s → pull 45s → result 10s, with overtime on a tie. All adjustable in the control panel.
+- Players who stay silent on the field go back to the stands; a comment or like brings them back.
+
+## Download & install
+
+Get the latest installer from **[Releases](https://github.com/luhau983/MyStudioLive/releases)**. If there is no build for your machine, [build it from source](#run-from-source).
 
 | Computer | File |
 |---|---|
-| Mac with Apple chip (M1, M2, M3, M4…) | [`StudioLive-1.0.0-mac-arm64.dmg`](https://github.com/tanthuan031/StudioLive/releases/download/v1.0.0/StudioLive-1.0.0-mac-arm64.dmg) |
-| Mac with Intel chip | [`StudioLive-1.0.0-mac-x64.dmg`](https://github.com/tanthuan031/StudioLive/releases/download/v1.0.0/StudioLive-1.0.0-mac-x64.dmg) |
-| Windows 10/11 64-bit | [`StudioLive-Setup-1.0.0-win-x64.exe`](https://github.com/tanthuan031/StudioLive/releases/download/v1.0.0/StudioLive-Setup-1.0.0-win-x64.exe) |
+| Windows 10/11 64-bit | `MyStudioLive-Setup-<version>-win-x64.exe` |
+| Mac with Apple chip (M1–M4) | `MyStudioLive-<version>-mac-arm64.dmg` |
+| Mac with Intel chip | `MyStudioLive-<version>-mac-x64.dmg` |
 
-Not sure which Mac chip you have? Click  → **About This Mac** — “Chip: Apple M…” means Apple chip, “Processor: Intel…” means Intel.
+<details>
+<summary><b>Windows</b></summary>
 
-### macOS (12 or later)
+1. Run the `.exe` → choose a folder → **Install**.
+2. If **“Windows protected your PC”** appears (SmartScreen, the app is unsigned): click **More info → Run anyway**.
+3. Open **MyStudioLive** from the Desktop or Start menu.
 
-1. Open the `.dmg` file and **drag StudioLive into the Applications folder**.
-2. In **Applications**, **right-click (Control + click) StudioLive → Open → Open**. The app is not signed with an Apple certificate, so macOS asks once on first launch.
-3. Still blocked? Go to **System Settings → Privacy & Security → Open Anyway**.
-4. If you see **“StudioLive is damaged and can’t be opened”**: open **Terminal**, run the command below, then open the app again:
+</details>
+
+<details>
+<summary><b>macOS 12 or later</b></summary>
+
+1. Open the `.dmg` and drag **MyStudioLive** into **Applications**.
+2. First launch: **right-click the app → Open → Open** (the app is not signed by Apple).
+3. Still blocked: **System Settings → Privacy & Security → Open Anyway**.
+4. If macOS says the app “is damaged and can’t be opened”, run this in Terminal and open it again:
 
    ```bash
-   xattr -cr /Applications/StudioLive.app
+   xattr -cr /Applications/MyStudioLive.app
    ```
 
-### Windows
+</details>
 
-1. Run `StudioLive-Setup-1.0.0-win-x64.exe` → choose a folder → **Install**.
-2. If **“Windows protected your PC”** (SmartScreen, because the app is unsigned) appears: click **More info → Run anyway**.
-3. Open **StudioLive** from the Desktop or the Start menu.
+## Going live
 
-### Going live for the first time
+1. **Pick a scene** in the left menu (or **Đưa lên live → Phát …**).
+2. **Add the scene to your streaming software** as a **vertical 1080 × 1920** source:
+   - **TikTok LIVE Studio**: add a **Link** source `http://lvh.me:3000` (LIVE Studio rejects `localhost`; `lvh.me` always points to your own machine). Fallback: click **Mở màn hình phát** (open output window) and use **Window capture**.
+   - **OBS**: add a **Browser Source** `http://localhost:3000`.
+3. Press **Go LIVE** on TikTok.
+4. On the **Dashboard**, enter your TikTok username (no @) → **Kết nối** (Connect).
 
-1. **Pick a scene**: click the 👻 Ma / 🪷 Chùa / 🎬 Rạp tab in the left menu.
-2. **Add it to TikTok LIVE Studio**: use a **portrait** layout, add a **Link** source `http://lvh.me:3000`, size **1080 × 1920**, stretched to fill the frame. (LIVE Studio rejects `localhost`; `lvh.me` always points back to your own machine.)
-3. Click **Go LIVE** in TikTok LIVE Studio.
-4. **Connect**: on the Dashboard, enter your TikTok username (no @) → **Kết nối** (Connect).
+Switching scenes needs no link change: every screen pointing at `localhost:3000` / `lvh.me:3000` follows the new scene automatically. Before going live, try everything with the **Gửi thử** (send test) / **Chơi thử** (practice) buttons in each tab.
 
-You can try everything before going live with the **Gửi thử** (Send test) buttons in each tab. Full guide (video quality, OBS, live tips, troubleshooting — Vietnamese): **[docs/HUONG-DAN-CAI-DAT.md](docs/HUONG-DAN-CAI-DAT.md)**.
+Full guide (Vietnamese; picture quality, audio, troubleshooting): **[docs/HUONG-DAN-CAI-DAT.md](docs/HUONG-DAN-CAI-DAT.md)**.
 
-## Run from source (developers)
+## Your data
 
-Requires **Node.js 18+** and **git**.
+| Content | Windows | macOS |
+|---|---|---|
+| App settings | `%APPDATA%\StudioLive\settings.json` | `~/Library/Application Support/StudioLive/settings.json` |
+| Vua Tiếng Việt (questions, scores, config) | `%APPDATA%\StudioLive\vua\` | `~/Library/Application Support/StudioLive/vua/` |
+| Kéo Co (config, stats, match history) | `%APPDATA%\StudioLive\keoco\` | `~/Library/Application Support/StudioLive/keoco/` |
+
+The data folder keeps the `StudioLive` name so existing settings survive the rename. If the standalone **Vua Tiếng Việt** app was installed before, MyStudioLive copies its imported questions, scores and config on first launch.
+
+## Run from source
+
+Requires **Node.js 20+** and **git**.
 
 ```bash
-git clone https://github.com/tanthuan031/StudioLive.git
-cd StudioLive
+git clone https://github.com/luhau983/MyStudioLive.git
+cd MyStudioLive
 npm install
 npm start
 ```
 
-Build installers (unsigned):
+Build unsigned installers (see [docs/BUILD.md](docs/BUILD.md), Vietnamese):
 
 ```bash
-npm run dist:mac   # .dmg + .zip for arm64 and x64
 npm run dist:win   # NSIS installer, x64
+npm run dist:mac   # .dmg + .zip for arm64 and x64
 ```
 
-Details: [docs/BUILD.md](docs/BUILD.md).
+Run the game test suites:
 
-### Project structure
-
-```
-src/main.js       Main process: windows, IPC, test data, self-test (STUDIO_SELFTEST)
-src/live.js       TikTok connection manager, event normalisation, auto-reconnect
-src/direct.js     Reads events via a hidden browser + protobuf decoding (tiktok-live-connector 2.0.0, MIT)
-src/server.js     Express + Socket.IO overlay server (127.0.0.1 only) + /api/tts voice endpoint
-src/tts.js        Vietnamese text-to-speech (Microsoft Edge, Google fallback)
-src/settings.js   Settings stored in the userData folder
-renderer/         Control panel UI
-overlay/          Pages shown on the live stream: game.js (Haunted House), temple.js (Temple), rap.js (Theater), faces.js, audio.js
-overlay/chua-assets/  Images, characters, effects and music for the Temple scene
-build/icon.png    App icon
+```bash
+cd vua && node --test
+cd keoco && node --test
 ```
 
-User settings are stored at `~/Library/Application Support/StudioLive/settings.json` (macOS) and `%APPDATA%\StudioLive\settings.json` (Windows).
+### Architecture
 
-> Note: keep `tiktok-live-connector` pinned at **2.0.0** (MIT). Newer versions are licensed under AGPL-3.0.
+```
+src/main.js        Main process: windows, IPC, starts the overlay server and each game's server
+src/live.js        TikTok connection, event normalisation, auto-reconnect (one shared connection)
+src/direct.js      Reads events through a hidden browser + protobuf decoding
+src/server.js      Express + Socket.IO overlay server (127.0.0.1 only), /api/tts voice,
+                   redirects to a game's server while that scene is on air
+src/tts.js         Vietnamese voice (Microsoft Edge, Google fallback)
+src/settings.js    Settings stored in the userData folder
+renderer/          Control UI (light / dark / system)
+overlay/           Haunted House, Temple and Movie Theater scenes
+vua/               Vua Tiếng Việt: own server, 3D overlay (Three.js), control panel, question bank
+keoco/             Kéo Co: own server, 3D arena (Three.js), control panel
+```
+
+The `vua/` and `keoco/` games run their own servers inside the main process and receive events through a bridge from `src/live.js`, so the whole app keeps a single TikTok connection. Each game's control panel is embedded in its tab; the Vua Tiếng Việt panel follows MyStudioLive's light/dark theme (`vua/studio-theme.css`).
+
+> Note: keep `tiktok-live-connector` at **2.0.0** (MIT). Newer versions are licensed AGPL-3.0.
 
 ### Contributing
 
-Contributions are welcome: fork the repo → create a branch → commit → open a Pull Request. Report bugs or suggest features in [Issues](https://github.com/tanthuan031/StudioLive/issues).
+Fork → create a branch → commit → open a Pull Request. Report bugs or suggest features in [Issues](https://github.com/luhau983/MyStudioLive/issues).
 
-## License & disclaimer
+## License & credits
 
-- Source code is released under the **[MIT License](LICENSE)** — © 2026 [Tanthuan031](https://github.com/tanthuan031).
+- Source code is released under the **[MIT License](LICENSE)**.
+- Based on [StudioLive](https://github.com/tanthuan031/StudioLive) © 2026 [Tanthuan031](https://github.com/tanthuan031) (MIT).
 - Third-party libraries and assets keep their own licenses: [docs/THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md).
-- **[DISCLAIMER.md](DISCLAIMER.md)** (Vietnamese) — this software is for entertainment and learning only. Users are solely and fully responsible for their livestream content. The author is not responsible for any scam, fraud, profiteering, exploitation of religious beliefs, copyright infringement, or other unlawful conduct by users. StudioLive is not affiliated with, endorsed by, or sponsored by TikTok / ByteDance.
+- **[DISCLAIMER.md](DISCLAIMER.md)** (Vietnamese): this software is for entertainment and learning only. Users are solely responsible for their livestream content.
 
-## Author
+## Authors
 
-** Tanthuan031 **
-### GitHub: [@tanthuan031](https://github.com/tanthuan031)
-### Website: https://thuantech.com
-### Facebook: https://www.facebook.com/thuanht31
-### Tiktok: https://www.tiktok.com/@rv.dev
+- MyStudioLive development & maintenance: [@luhau983](https://github.com/luhau983)
+- Original StudioLive author: **Tanthuan031** · [GitHub](https://github.com/tanthuan031) · [Website](https://thuantech.com) · [Facebook](https://www.facebook.com/thuanht31) · [TikTok](https://www.tiktok.com/@rv.dev)
