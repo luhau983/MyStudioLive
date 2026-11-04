@@ -784,6 +784,17 @@
               <input type="range" min="0" max="20" step="1" data-o="barNpc" data-num>
             </div>
           </div>
+          <div class="panel bar-rules-panel">
+            <div class="panel-head"><h2>Luật quà &amp; lệnh (Master Rules)</h2>
+              <div style="display:flex;gap:6px"><button class="btn ghost sm" id="bar-rules-reset">Mặc định</button><button class="btn primary sm" id="bar-rule-add">+ Thêm luật</button></div>
+            </div>
+            <p class="hint" style="margin-top:0">Luật ở đây được xét trước bảng quà mặc định. Quà khớp theo <b>Gift ID</b> trước, sau đó theo tên; lệnh chat khớp theo từ khoá (không phân biệt dấu, nhiều từ cách nhau bằng dấu phẩy).</p>
+            <div class="bar-rules" id="bar-rules"></div>
+            <div class="bar-seen">
+              <div class="bar-seen-head">Quà vừa nhận <span class="muted small">(bấm để tạo luật theo Gift ID)</span></div>
+              <div class="bar-seen-list" id="bar-seen"><span class="muted small">Chưa có quà nào trong phiên này.</span></div>
+            </div>
+          </div>
           <div class="panel">
             <div class="panel-head"><h2>Âm nhạc &amp; ánh sáng</h2></div>
             <div class="field" style="margin-top:0">
@@ -792,6 +803,14 @@
                 <span class="file-name" id="f-barMusic">Chưa có nhạc nền</span>
                 <button class="btn ghost sm" data-pick="barMusic">Chọn file</button>
                 <button class="btn ghost sm" data-clear="barMusic">Bỏ</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Màn LED sau bàn DJ <span class="muted small">(ảnh hoặc video)</span></label>
+              <div class="file-row">
+                <span class="file-name" id="f-barScreen">Mặc định: màn LED nhảy theo nhạc</span>
+                <button class="btn ghost sm" data-pick="barScreen" data-kind="media">Chọn file</button>
+                <button class="btn ghost sm" data-clear="barScreen">Mặc định</button>
               </div>
             </div>
             <div class="field">

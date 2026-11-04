@@ -111,7 +111,7 @@ class OverlayServer {
       const o = this.getConfig().overlay;
       const file = {
         gift: o.customGiftSound, chat: o.customChatSound, jumpscare: o.customJumpscare,
-        scare: o.customScareSound, ambient: o.customAmbient, barMusic: o.barMusic
+        scare: o.customScareSound, ambient: o.customAmbient, barMusic: o.barMusic, barScreen: o.barScreen
       }[req.params.kind] || '';
       const type = MEDIA_TYPES[path.extname(file).toLowerCase()];
       if (!file || !type || !fs.existsSync(file)) return res.sendStatus(404);

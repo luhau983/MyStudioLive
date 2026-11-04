@@ -542,6 +542,36 @@ export function createBarScene(canvas) {
   let wallSub = 'GÕ "hey" ĐỂ VÀO SÀN';
   let energy = 0;
   const eq = Array.from({ length: 32 }, () => Math.random());
+  // User media on the LED wall (image or looping muted video), cover-fitted to the 2:1 screen
+  const screen = { src: '', tex: null, video: null };
+  function coverFit(tex, w, h) {
+    const a = w / h; const pa = 2;
+    tex.repeat.set(a > pa ? pa / a : 1, a > pa ? 1 : a / pa);
+    tex.offset.set((1 - tex.repeat.x) / 2, (1 - tex.repeat.y) / 2);
+  }
+  function setScreen(src, isVideo) {
+    if (src === screen.src) return;
+    if (screen.video) { screen.video.pause(); screen.video.removeAttribute('src'); screen.video.load(); }
+    screen.tex?.dispose();
+    Object.assign(screen, { src: src || '', tex: null, video: null });
+    led.material.map = ledTex; led.material.needsUpdate = true;
+    if (!src) return;
+    if (isVideo) {
+      const v = Object.assign(document.createElement('video'), { src, loop: true, muted: true, playsInline: true, crossOrigin: 'anonymous' });
+      v.addEventListener('loadedmetadata', () => { if (screen.video === v && screen.tex) coverFit(screen.tex, v.videoWidth, v.videoHeight); });
+      v.play().catch(() => {});
+      const t = new THREE.VideoTexture(v); t.colorSpace = THREE.SRGBColorSpace;
+      Object.assign(screen, { tex: t, video: v });
+      led.material.map = t; led.material.needsUpdate = true;
+    } else {
+      new THREE.TextureLoader().load(src, (t) => {
+        if (screen.src !== src) { t.dispose(); return; }
+        t.colorSpace = THREE.SRGBColorSpace; coverFit(t, t.image.width, t.image.height);
+        screen.tex = t; led.material.map = t; led.material.needsUpdate = true;
+      });
+    }
+  }
+
   function drawLed() {
     const g = ledG;
     const grad = g.createLinearGradient(0, 0, 1024, 512);
@@ -646,7 +676,7 @@ export function createBarScene(canvas) {
     env.children.forEach((o) => { if (o.userData.speaker) o.scale.setScalar(1 + pump * 0.12); });
 
     ledAcc += dt;
-    if (ledAcc > 1 / 20) { ledAcc = 0; drawLed(); }
+    if (ledAcc > 1 / 20 && !screen.src) { ledAcc = 0; drawLed(); }
 
     // fireworks + fountains
     while (fwQueue.length && fwQueue[0] <= clock) {
@@ -703,9 +733,9 @@ export function createBarScene(canvas) {
       if (!shot.sky && !shot.wide) {
         const p = shot.actor.root.position;
         const kk = shot.actor.curScale || 1;
-        const d = (shot.close ? 2.6 : 3.8) * Math.max(1, kk * 0.8);
+        const d = (shot.close ? 4.4 : 5.6) * Math.max(1, kk * 0.7);
         const orb = shot.orbit ? Math.sin(clock * 0.5) * 0.9 : 0;
-        shot.pos.set(p.x * 0.85 + orb, p.y + (shot.close ? 1.3 : 2.1) * Math.max(1, kk * 0.7), p.z + d);
+        shot.pos.set(p.x * 0.85 + orb, p.y + (shot.close ? 2.6 : 3.3) * Math.max(1, kk * 0.6), p.z + d);
         shot.look.set(p.x, p.y + 0.8 * kk, p.z);
       }
       tPos = shot.pos; tLook = shot.look; speed = 2.4;
@@ -733,7 +763,11 @@ export function createBarScene(canvas) {
     },
     setEnergy(v) { energy = v; },
     setBpm(v) { bpm = clamp(Number(v) || 128, 60, 200); },
-    setPaused(p) { paused = !!p; last = performance.now(); },
+    setPaused(p) {
+      paused = !!p; last = performance.now();
+      if (screen.video) { if (paused) screen.video.pause(); else screen.video.play().catch(() => {}); }
+    },
+    setScreen,
     setChroma(on) {
       chroma = !!on;
       env.visible = !chroma;

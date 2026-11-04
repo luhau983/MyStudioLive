@@ -5,7 +5,7 @@
  */
 import { createBarScene } from './scene.js';
 import {
-  parseChat, resolveGift, evolutionFor, energyFor, addEnergy, bumpCombo, topDonors, joinsFloor,
+  matchRule, parseChat, resolveGift, evolutionFor, energyFor, addEnergy, bumpCombo, topDonors, joinsFloor,
   allocateSlot, SPOTLIGHT_ACTIONS, FOCUS_ACTIONS, NPC_NAMES, VARIANT_COLORS
 } from './rules.mjs';
 
@@ -234,6 +234,22 @@ function gainEnergy(ev) {
 }
 
 // ---------------------------------------------------------------- live events
+// Effect of a resolved rule (Master Rule or built-in) on a viewer already on the floor.
+// `total` = gift diamonds (0 for chat rules).
+function runEffect(key, rule, total, fromGift) {
+  const seconds = rule.durationMs / 1000;
+  applyAction(key, rule.action, seconds, rule.label, rule.variant);
+  if (SPOTLIGHT_ACTIONS.has(rule.action) && (!fromGift || total >= 20)) club.spotlight(key, seconds, total >= 100 || rule.action === 'vip' || rule.action === 'topdj');
+  if (rule.action === 'fireworks' || rule.action === 'topdj' || total >= 500) club.fireworks(Math.max(4, rule.fireworkBursts || 4));
+  else if (rule.fireworkBursts > 0) club.fireworks(rule.fireworkBursts);
+  if (FOCUS_ACTIONS.has(rule.action)) {
+    const opts = rule.action === 'fireworks' ? { sky: true }
+      : rule.action === 'walk' ? { wide: true }
+        : { close: rule.action === 'vip' || rule.action === 'topdj' || total >= 100 };
+    club.focus(key, rule.action === 'fireworks' ? Math.max(6, seconds) : seconds, opts);
+  }
+}
+
 function onLive(ev) {
   if (!ev || !ev.type || paused) return;
   if (ev.type === 'giftStreak') return; // wait for the final gift event of a combo
@@ -241,7 +257,9 @@ function onLive(ev) {
   gainEnergy(ev);
   const key = keyOf(ev.user);
   if (!key) return;
-  const cmd = ev.type === 'chat' ? parseChat(ev.text, cfg.barJoinKeyword) : null;
+  // Master Rules first (host-defined), then the built-in commands / gift table
+  const master = matchRule(cfg.barRules, ev);
+  const cmd = ev.type === 'chat' ? (master || parseChat(ev.text, cfg.barJoinKeyword)) : null;
   const known = players.has(key) && !players.get(key).npc;
   if (ev.type === 'chat') addFeed([{ b: ev.user.nickname }, ': ' + String(ev.text).slice(0, 60)], '#e2e8f0');
   if (!joinsFloor(ev, cmd, { joinMode: cfg.barJoinMode, known })) return;
@@ -252,8 +270,11 @@ function onLive(ev) {
     case 'chat':
       if (cmd?.action === 'join') {
         if (joinedNow) { club.welcome(key, 2.5); addFeed([{ b: ev.user.nickname }, ' vào sàn 🎉'], '#67e8f9'); } else club.act(key, 'celebrate', 2);
-      } else if (cmd) applyAction(key, cmd.action, cmd.durationMs / 1000);
-      else if (joinedNow) club.welcome(key, 2.5);
+        if (master?.label) club.title(key, master.label, master.variant || 'aura', Math.max(3, master.durationMs / 1000));
+      } else if (cmd) {
+        if (master?.label) banner(`${ev.user.nickname}: ${master.label}`, 0, master.durationMs / 1000);
+        runEffect(key, cmd, 0, false);
+      } else if (joinedNow) club.welcome(key, 2.5);
       break;
     case 'join':
       if (joinedNow) club.welcome(key, 2.5);
@@ -266,27 +287,18 @@ function onLive(ev) {
       break;
     case 'gift': {
       const total = Math.max(0, Number(ev.total ?? (ev.diamonds || 0) * (ev.repeatCount || 1)) || 0);
-      const rule = resolveGift(ev.giftName, total);
-      const seconds = rule.durationMs / 1000;
+      const rule = master || resolveGift(ev.giftName, total);
       p.giftPower += total;
       const d = donors.get(key) || { key, nickname: ev.user.nickname, score: 0 };
       d.nickname = ev.user.nickname || d.nickname; d.score += total;
       donors.set(key, d);
       const combo = bumpCombo(combos, key);
       const gift = (ev.repeatCount > 1 ? `${ev.repeatCount}× ` : '') + (ev.giftName || 'Quà');
-      banner(`${ev.user.nickname} đã tặng ${gift} cho anh em bar!`, combo, seconds);
+      banner(`${ev.user.nickname} đã tặng ${gift} cho anh em bar!`, combo, rule.durationMs / 1000);
       addFeed([{ b: ev.user.nickname }, ` tặng ${gift} (+${fmt(total)} 💎)`], '#f0abfc');
-      applyAction(key, rule.action, seconds, rule.label, rule.variant);
+      runEffect(key, rule, total, true);
       applyEvolution(p);
       renderTop();
-      if (SPOTLIGHT_ACTIONS.has(rule.action) && total >= 20) club.spotlight(key, seconds, total >= 100);
-      if (rule.action === 'fireworks' || rule.action === 'topdj' || total >= 500) club.fireworks(Math.max(4, rule.fireworkBursts || 4));
-      if (FOCUS_ACTIONS.has(rule.action)) {
-        const opts = rule.action === 'fireworks' ? { sky: true }
-          : rule.action === 'walk' ? { wide: true }
-            : { close: rule.action === 'vip' || rule.action === 'topdj' || total >= 100 };
-        club.focus(key, rule.action === 'fireworks' ? Math.max(6, seconds) : seconds, opts);
-      }
       break;
     }
   }
@@ -332,6 +344,7 @@ function applyConfig(next) {
   $('#guide-join').textContent = cfg.barJoinMode === 'all' ? 'bình luận' : (cfg.barJoinKeyword || 'hey');
   club.setTitle(title, cfg.barJoinMode === 'all' ? 'BÌNH LUẬN ĐỂ VÀO SÀN' : `GÕ "${cfg.barJoinKeyword || 'hey'}" ĐỂ VÀO SÀN`);
   club.setBpm(cfg.barBpm);
+  club.setScreen(cfg.barScreen ? '/media/barScreen?v=' + encodeURIComponent(cfg.barScreen) : '', /\.(mp4|webm|mov|m4v)$/i.test(cfg.barScreen || ''));
   club.setChroma(!!cfg.barChroma);
   document.body.classList.toggle('chroma', !!cfg.barChroma);
   const b = Math.max(0, Math.min(40, Number(cfg.liveBoost ?? 15))) / 100;

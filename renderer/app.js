@@ -301,6 +301,96 @@
     save({ overlay: { barJoinMode: b.dataset.join } }, true);
   }));
 
+  // Master Rules của Live Bar. Mảng không đi qua save()/deepMerge (biến mảng thành object) -> gọi thẳng updateSettings
+  const BAR_ACTION_LABELS = {
+    join: 'Vào sàn', dance: 'Nhảy', jump: 'Bật nhảy', walk: 'Đi vòng', change: 'Đổi nhân vật', grow: 'Khổng lồ',
+    camera: 'Zoom camera', medal: 'Danh hiệu', vip: 'VIP camera', topdj: 'TOP DJ', fireworks: 'Pháo hoa'
+  };
+  const BAR_VARIANT_LABELS = { '': 'Không', aura: 'Aura', neon: 'Neon', fire: 'Lửa', royal: 'Hoàng gia' };
+  let barRulesTimer = 0;
+  function saveBarRules(rules, immediate) {
+    settings.overlay.barRules = rules;
+    clearTimeout(barRulesTimer);
+    barRulesTimer = setTimeout(async () => {
+      const r = await api.updateSettings({ overlay: { barRules: settings.overlay.barRules } });
+      settings = r.settings;
+      if (immediate) renderBarRules(true);
+    }, immediate ? 0 : 400);
+  }
+  function ruleField(rule, i, key, node) {
+    node.addEventListener(node.type === 'checkbox' || node.tagName === 'SELECT' ? 'change' : 'input', () => {
+      const rules = settings.overlay.barRules.map((r) => ({ ...r }));
+      rules[i][key] = node.type === 'checkbox' ? node.checked : node.type === 'number' ? Number(node.value) || 0 : node.value;
+      if (key === 'seconds') { rules[i].durationMs = Math.round((Number(node.value) || 0) * 1000); delete rules[i].seconds; }
+      saveBarRules(rules, node.tagName === 'SELECT' || node.type === 'checkbox');
+    });
+    return node;
+  }
+  function renderBarRules(force) {
+    const host = $('#bar-rules');
+    if (!host || (!force && host.contains(document.activeElement))) return;
+    const rules = settings.overlay.barRules || [];
+    const mk = (tag, props = {}) => Object.assign(document.createElement(tag), props);
+    const select = (opts, value) => {
+      const s = mk('select', { className: 'inp' });
+      for (const [v, t] of Object.entries(opts)) s.append(mk('option', { value: v, textContent: t, selected: v === value }));
+      return s;
+    };
+    const field = (label, node, cls) => { const l = mk('label', { className: 'f ' + (cls || '') }); l.append(label, node); return l; };
+    host.replaceChildren(...rules.map((r, i) => {
+      const row = mk('div', { className: 'bar-rule' + (r.enabled ? '' : ' off') });
+      const on = mk('label', { className: 'rule-on c2' });
+      on.append(ruleField(r, i, 'enabled', mk('input', { type: 'checkbox', checked: r.enabled })), r.enabled ? 'Bật' : 'Tắt');
+      const del = mk('button', { className: 'btn ghost sm rule-del', title: 'Xoá luật' });
+      del.append(icon('x'));
+      del.addEventListener('click', () => saveBarRules(settings.overlay.barRules.filter((_, j) => j !== i), true));
+      const delWrap = mk('div', { className: 'c4' }); delWrap.style.display = 'flex'; delWrap.style.justifyContent = 'flex-end'; delWrap.append(del);
+      row.append(
+        on, delWrap,
+        field('Nguồn', ruleField(r, i, 'source', select({ gift: '🎁 Quà', chat: '💬 Chat' }, r.source)), 'c2'),
+        field(r.source === 'chat' ? 'Từ khoá' : 'Tên quà', ruleField(r, i, 'trigger', mk('input', { className: 'inp', value: r.trigger, placeholder: 'vd: hoa hồng, rose', maxLength: 300 })), 'c4'),
+        field('Gift ID', ruleField(r, i, 'giftId', mk('input', { className: 'inp', value: r.giftId, placeholder: r.source === 'chat' ? '—' : 'tuỳ chọn', disabled: r.source === 'chat', maxLength: 40 })), 'c2'),
+        field('Khớp', ruleField(r, i, 'match', select({ exact: 'Đúng', contains: 'Có chứa' }, r.match)), 'c2'),
+        field('Hành động', ruleField(r, i, 'action', select(BAR_ACTION_LABELS, r.action)), 'c2'),
+        field('Giây', ruleField(r, i, 'seconds', mk('input', { className: 'inp', type: 'number', min: 0.5, max: 300, step: 0.5, value: r.durationMs / 1000 })), 'c2'),
+        field('Banner / danh hiệu', ruleField(r, i, 'label', mk('input', { className: 'inp', value: r.label, maxLength: 40 })), 'c4'),
+        field('Màu', ruleField(r, i, 'variant', select(BAR_VARIANT_LABELS, r.variant)), 'c2'),
+        field('🎆 Pháo hoa', ruleField(r, i, 'fireworkBursts', mk('input', { className: 'inp', type: 'number', min: 0, max: 12, value: r.fireworkBursts })), 'c2')
+      );
+      return row;
+    }));
+    if (!rules.length) host.append(mk('div', { className: 'muted small', textContent: 'Chưa có luật nào — dùng bảng quà mặc định.' }));
+  }
+  function addBarRule(seed = {}) {
+    const rules = [...(settings.overlay.barRules || []), { id: 'rule-' + Date.now().toString(36), enabled: true, source: 'gift', trigger: '', giftId: '', match: 'exact', action: 'camera', durationMs: 5000, label: '', variant: '', fireworkBursts: 0, ...seed }];
+    saveBarRules(rules, true);
+    setTimeout(() => $('#bar-rules').lastElementChild?.scrollIntoView({ block: 'nearest' }), 150);
+  }
+  $('#bar-rule-add').addEventListener('click', () => addBarRule());
+  $('#bar-rules-reset').addEventListener('click', async () => {
+    const r = await api.updateSettings({ overlay: { barRules: null } });
+    settings = r.settings;
+    renderBarRules(true);
+    notify('Đã khôi phục luật mặc định');
+  });
+  // Quà vừa nhận trong phiên: lấy Gift ID để tạo luật (giống "observed gifts" của bản gốc)
+  const seenGifts = new Map();
+  api.onEvent((e) => {
+    if (e?.type !== 'gift' || !e.giftName) return;
+    const k = e.giftId || e.giftName;
+    seenGifts.delete(k);
+    seenGifts.set(k, { giftId: e.giftId || '', giftName: e.giftName, diamonds: e.diamonds || 0 });
+    while (seenGifts.size > 16) seenGifts.delete(seenGifts.keys().next().value);
+    $('#bar-seen').replaceChildren(...[...seenGifts.values()].reverse().map((g) => {
+      const b = Object.assign(document.createElement('button'), { className: 'chip', textContent: `${g.giftName} · ${g.diamonds}💎${g.giftId ? ' · #' + g.giftId : ''}` });
+      b.addEventListener('click', () => {
+        addBarRule({ trigger: g.giftName, giftId: String(g.giftId || ''), label: g.giftName.toUpperCase() });
+        notify('Đã tạo luật cho quà ' + g.giftName);
+      });
+      return b;
+    }));
+  });
+
   // ---------- Kéo Co Online ----------
   // Bảng điều khiển gốc của game (server riêng) nhúng nguyên trong tab; chỉ nạp lần đầu mở tab để giữ trạng thái form
   let keoco = { running: false, port: 0, error: '' };
@@ -591,13 +681,14 @@
     const DEF = {
       customGiftSound: 'Mặc định: chuông chùa', customChatSound: 'Mặc định: ting', customJumpscare: 'Mặc định: 6 mặt ma ngẫu nhiên',
       customScareSound: 'Mặc định: 4 kiểu tiếng thét ngẫu nhiên', customAmbient: 'Mặc định: gió hú tự tạo',
-      barMusic: 'Chưa có nhạc nền'
+      barMusic: 'Chưa có nhạc nền', barScreen: 'Mặc định: màn LED nhảy theo nhạc'
     };
     for (const k of Object.keys(DEF)) {
       const def = DEF[k];
       $('#f-' + k).textContent = o[k] ? o[k].split(/[\\/]/).pop() : def;
       $('#f-' + k).title = o[k] || '';
     }
+    renderBarRules();
     $('#autoReconnect').checked = settings.autoReconnect;
     $$('.preview-sound-cb').forEach((x) => { x.checked = settings.previewSound; });
     $('#port').value = settings.port;

@@ -61,6 +61,26 @@ export function resolveGift(giftName, total) {
 }
 
 /**
+ * Master Rules (host-defined, from settings.barRules): first a gift rule whose Gift ID equals the gift,
+ * then the first enabled rule whose trigger list (comma separated, accents ignored) matches
+ * the chat text / gift name exactly or as a substring. Returns the rule or null.
+ */
+export function matchRule(rules, ev) {
+  if (!Array.isArray(rules) || !ev) return null;
+  const source = ev.type === 'chat' ? 'chat' : ev.type === 'gift' ? 'gift' : '';
+  if (!source) return null;
+  const live = rules.filter((r) => r && r.enabled !== false && r.source === source);
+  if (source === 'gift' && ev.giftId) {
+    const byId = live.find((r) => r.giftId && String(r.giftId) === String(ev.giftId));
+    if (byId) return byId;
+  }
+  const value = normalize(source === 'chat' ? ev.text : ev.giftName);
+  if (!value) return null;
+  return live.find((r) => String(r.trigger || '').split(',').map(normalize).filter(Boolean)
+    .some((t) => (r.match === 'contains' ? value.includes(t) : value === t))) || null;
+}
+
+/**
  * Chat text -> action, or null when the comment is not a command.
  * `joinKeyword` is the word viewers type to step onto the floor (default "hey").
  */

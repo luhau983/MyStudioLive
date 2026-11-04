@@ -126,3 +126,56 @@ test('avatar proxy only accepts TikTok image CDNs over https', () => {
   assert.equal(isAvatarUrl('https://p16.tiktokcdn.com:8443/a.png'), false);
   assert.equal(isAvatarUrl('not a url'), false);
 });
+
+test('master rules: gift id first, then name; chat by keyword; disabled ignored', async () => {
+  const { matchRule } = await import('../overlay/bar/rules.mjs');
+  const rules = [
+    { id: 'a', enabled: true, source: 'gift', trigger: 'hoa hồng, rose', giftId: '', match: 'exact', action: 'camera' },
+    { id: 'b', enabled: true, source: 'gift', trigger: 'zzz', giftId: '5655', match: 'exact', action: 'vip' },
+    { id: 'c', enabled: true, source: 'chat', trigger: 'phao hoa', giftId: '', match: 'contains', action: 'fireworks' },
+    { id: 'd', enabled: false, source: 'chat', trigger: 'xin chao', giftId: '', match: 'exact', action: 'dance' }
+  ];
+  assert.equal(matchRule(rules, { type: 'gift', giftId: '5655', giftName: 'Hoa Hồng' }).id, 'b');
+  assert.equal(matchRule(rules, { type: 'gift', giftId: '1', giftName: 'Hoa Hồng' }).id, 'a');
+  assert.equal(matchRule(rules, { type: 'gift', giftName: 'Hoa' }), null);
+  assert.equal(matchRule(rules, { type: 'chat', text: 'bắn PHÁO HOA đi' }).id, 'c');
+  assert.equal(matchRule(rules, { type: 'chat', text: 'xin chào' }), null);
+  assert.equal(matchRule(rules, { type: 'like' }), null);
+  assert.equal(matchRule(undefined, { type: 'chat', text: 'x' }), null);
+});
+
+test('master rules are sanitized when saved', () => {
+  const { sanitizeBarRules, DEFAULT_BAR_RULES } = require('../src/bar-rules.js');
+  assert.ok(DEFAULT_BAR_RULES.length >= 5);
+  assert.deepEqual(sanitizeBarRules(null).map((r) => r.id), DEFAULT_BAR_RULES.map((r) => r.id));
+  const [r] = sanitizeBarRules([{ id: 'x<script>', source: 'evil', action: 'rm -rf', giftId: '12ab34', durationMs: 1e9, fireworkBursts: 99, variant: 'gold', label: 'A\u0000B', match: 'regex' }]);
+  assert.equal(r.id, 'xscript');
+  assert.equal(r.source, 'gift');
+  assert.equal(r.action, 'dance');
+  assert.equal(r.giftId, '1234');
+  assert.equal(r.durationMs, 300000);
+  assert.equal(r.fireworkBursts, 12);
+  assert.equal(r.variant, '');
+  assert.equal(r.label, 'AB');
+  assert.equal(r.match, 'exact');
+  const dup = sanitizeBarRules([{ id: 'same' }, { id: 'same' }]);
+  assert.notEqual(dup[0].id, dup[1].id);
+  assert.equal(sanitizeBarRules(Array.from({ length: 150 }, () => ({}))).length, 100);
+});
+
+test('settings keep the bar scene and its rules valid', () => {
+  const os = require('os'); const fs = require('fs'); const path = require('path');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bar-settings-'));
+  const { Settings } = require('../src/settings.js');
+  const s = new Settings(dir);
+  assert.ok(Array.isArray(s.get().overlay.barRules));
+  let o = s.update({ overlay: { mode: 'bar', barNpc: 99, barBpm: 10, barJoinKeyword: '  ', barRules: [{ source: 'chat', trigger: 'quẩy', action: 'dance' }] } }).overlay;
+  assert.equal(o.mode, 'bar');
+  assert.equal(o.barNpc, 40);
+  assert.equal(o.barBpm, 70);
+  assert.equal(o.barJoinKeyword, 'hey');
+  assert.equal(o.barRules.length, 1);
+  o = new Settings(dir).get().overlay; // reload from disk
+  assert.equal(o.barRules[0].trigger, 'quẩy');
+  fs.rmSync(dir, { recursive: true, force: true });
+});

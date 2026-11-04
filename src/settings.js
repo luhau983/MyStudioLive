@@ -1,6 +1,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const { DEFAULT_BAR_RULES, sanitizeBarRules } = require('./bar-rules');
 
 const DEFAULTS = {
   username: '',
@@ -29,6 +30,8 @@ const DEFAULTS = {
     barMusic: '',               // file nhạc nền trên máy (mp3/wav/ogg)
     barMusicVolume: 0.35,
     barFireworkSound: true,
+    barScreen: '',              // ảnh / video trên màn LED sau bàn DJ (trống = màn LED nhảy theo nhạc)
+    barRules: DEFAULT_BAR_RULES,  // Master Rules: luật chat / quà -> hành động, ưu tiên hơn bảng quà mặc định
     rapName: '',                // tên rạp (tiêu đề + giọng đọc)
     rapVoice: true,
     rapGreet: true,
@@ -92,6 +95,7 @@ class Settings {
     try {
       this.data = merge(DEFAULTS, JSON.parse(fs.readFileSync(this.file, 'utf8')));
       if (this.data.overlay.mode === 'cards') this.data.overlay.mode = 'game'; // bản bán chỉ còn 2 cảnh
+      this.data.overlay.barRules = sanitizeBarRules(this.data.overlay.barRules);
     } catch { /* lần đầu chạy hoặc file hỏng -> dùng mặc định */ }
   }
 
@@ -124,6 +128,7 @@ class Settings {
     o.barEnergyGoal = Math.min(100000, Math.max(50, Math.round(o.barEnergyGoal) || 1000));
     o.barBpm = Math.min(180, Math.max(70, Math.round(o.barBpm) || 128));
     o.barMusicVolume = Math.min(1, Math.max(0, o.barMusicVolume));
+    o.barRules = sanitizeBarRules(o.barRules);
     o.rapName = String(o.rapName).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 40);
     o.rapRate = Math.min(1.3, Math.max(0.6, o.rapRate));
     if (!['classic', 'gold', 'imax', 'home'].includes(o.rapTheme)) o.rapTheme = 'classic';

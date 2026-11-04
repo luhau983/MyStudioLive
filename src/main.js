@@ -7,7 +7,8 @@ const { OverlayServer } = require('./server');
 
 app.setName('MyStudioLive');
 // Giữ nguyên thư mục dữ liệu cũ (settings.json, phiên TikTok) sau khi đổi tên app
-app.setPath('userData', path.join(app.getPath('appData'), 'StudioLive'));
+// STUDIO_DATA_DIR: thư mục dữ liệu riêng (chạy thử / test song song với app đang mở, không đụng cài đặt thật)
+app.setPath('userData', process.env.STUDIO_DATA_DIR || path.join(app.getPath('appData'), 'StudioLive'));
 // Cho phép phát âm thanh hiệu ứng mà không cần bấm vào trang trước
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 nativeTheme.themeSource = 'dark';
