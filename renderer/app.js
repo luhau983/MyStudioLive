@@ -667,12 +667,22 @@
   $('#side-toggle').addEventListener('click', () => setSideCollapsed(!document.body.classList.contains('side-collapsed')));
 
   // ---------- Giao diện sáng / tối ----------
-  const renderUiTheme = () => $$('#ui-theme button').forEach((b) => b.classList.toggle('active', b.dataset.ui === settings.uiTheme));
-  $$('#ui-theme button').forEach((b) => b.addEventListener('click', () => {
-    settings.uiTheme = b.dataset.ui;
+  // Một nút: bấm để đổi qua lại sáng / tối. 'system' (bản cũ) được hiểu theo màu hệ thống hiện tại.
+  const darkMq = matchMedia('(prefers-color-scheme: dark)');
+  const effectiveTheme = () => (settings.uiTheme === 'system' ? (darkMq.matches ? 'dark' : 'light') : settings.uiTheme);
+  const renderUiTheme = () => {
+    const dark = effectiveTheme() === 'dark';
+    const btn = $('#ui-theme-toggle');
+    btn.querySelector('use').setAttribute('href', dark ? '#i-moon' : '#i-sun');
+    btn.querySelector('.seg-label').textContent = dark ? 'Giao diện tối' : 'Giao diện sáng';
+    btn.title = dark ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối';
+  };
+  $('#ui-theme-toggle').addEventListener('click', () => {
+    settings.uiTheme = effectiveTheme() === 'dark' ? 'light' : 'dark';
     renderUiTheme();
-    save({ uiTheme: b.dataset.ui }, true);
-  }));
+    save({ uiTheme: settings.uiTheme }, true);
+  });
+  darkMq.addEventListener('change', () => { if (settings) renderUiTheme(); });
 
   // ---------- Khởi động ----------
   api.onStatus(renderStatus);
