@@ -3,6 +3,15 @@
   const api = window.studio;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  // Lucide icon from the sprite in index.html
+  const icon = (name) => {
+    const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    s.setAttribute('class', 'ic');
+    const u = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    u.setAttribute('href', '#i-' + name);
+    s.append(u);
+    return s;
+  };
   const fmt = (n) => Number(n || 0).toLocaleString('vi-VN');
 
   let settings = null;
@@ -65,9 +74,7 @@
     const btn = $('#btn-connect');
     btn.className = 'btn ' + (on ? 'danger' : 'primary');
     btn.querySelector('span').textContent = on ? (busy ? 'Huỷ' : 'Ngắt kết nối') : 'Kết nối';
-    btn.querySelector('svg').innerHTML = on
-      ? '<path d="M6 6h12v12H6z"/>'
-      : '<path d="M8 5v14l11-7z"/>';
+    btn.querySelector('svg use').setAttribute('href', on ? '#i-square' : '#i-play');
     $('#username').disabled = on;
   }
 
@@ -127,7 +134,7 @@
       nm.textContent = g.nickname;
       const dm = document.createElement('span');
       dm.className = 'dm';
-      dm.textContent = fmt(g.diamonds) + ' 💎';
+      dm.replaceChildren(fmt(g.diamonds) + ' ', icon('gem'));
       li.append(avatarEl(g.avatar), nm, dm);
       ol.appendChild(li);
     }
@@ -155,7 +162,7 @@
     }
     const d = document.createElement('div');
     d.className = 'av';
-    d.textContent = '👻';
+    d.replaceChildren(icon('ghost'));
     return d;
   }
 
@@ -193,7 +200,7 @@
       text.append('Tặng ');
       const b = document.createElement('b');
       b.textContent = `${ev.giftName} x${ev.repeatCount}`;
-      text.append(b, ` · ${fmt(ev.total)} 💎`);
+      text.append(b, ` · ${fmt(ev.total)} `, icon('gem'));
     } else if (ev.type === 'follow') text.textContent = 'Đã theo dõi kênh';
     else if (ev.type === 'share') text.textContent = 'Đã chia sẻ buổi live';
     body.append(who, text);
@@ -225,7 +232,7 @@
     set('golive', live);
     set('connect', live);
     const sc = $('#qs-scene');
-    if (sc) sc.textContent = mode === 'chua' ? 'Đang chọn: 🪷 Đi Chùa Online' : mode === 'rap' ? 'Đang chọn: 🎬 Rạp Phim Online' : mode === 'vua' ? 'Đang chọn: 👑 Vua Tiếng Việt' : mode === 'keoco' ? 'Đang chọn: 🪢 Kéo Co Online' : 'Đang chọn: 👻 Live Ma Online';
+    if (sc) sc.textContent = mode === 'chua' ? 'Đang chọn: Đi Chùa Online' : mode === 'rap' ? 'Đang chọn: Rạp Phim Online' : mode === 'vua' ? 'Đang chọn: Vua Tiếng Việt' : mode === 'keoco' ? 'Đang chọn: Kéo Co Online' : 'Đang chọn: Live Ma Online';
   }
   $$('[data-goto]').forEach((b) => b.addEventListener('click', () => $(`.nav-item[data-view=${b.dataset.goto}]`).click()));
   $('#qs-copy').addEventListener('click', async () => {
@@ -260,7 +267,7 @@
     settings.overlay.mode = want;
     renderSettings();
     save({ overlay: { mode: want } }, true);
-    notify(view === 'chua' ? '🪷 Live đang chạy: Đi Chùa Online' : view === 'rap' ? '🎬 Live đang chạy: Rạp Phim Online' : view === 'vua' ? '👑 Live đang chạy: Vua Tiếng Việt' : view === 'keoco' ? '🪢 Live đang chạy: Kéo Co Online' : '👻 Live đang chạy: Live Ma Online');
+    notify(view === 'chua' ? 'Live đang chạy: Đi Chùa Online' : view === 'rap' ? 'Live đang chạy: Rạp Phim Online' : view === 'vua' ? 'Live đang chạy: Vua Tiếng Việt' : view === 'keoco' ? 'Live đang chạy: Kéo Co Online' : 'Live đang chạy: Live Ma Online');
   }
 
   // ---------- Kéo Co Online ----------
@@ -317,8 +324,8 @@
   // ---------- Rạp Phim Online ----------
   const ytIdOf = (u) => (String(u).match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/|embed\/)|youtu\.be\/)([\w-]{11})/i) || [])[1] || '';
   const movieName = (p) => {
-    if (ytIdOf(p)) return '▶ YouTube · ' + ytIdOf(p);
-    if (/^https?:\/\//i.test(p)) { try { const u = new URL(p); return '🔗 ' + u.hostname + decodeURIComponent(u.pathname).slice(0, 60); } catch { return '🔗 ' + p; } }
+    if (ytIdOf(p)) return 'YouTube · ' + ytIdOf(p);
+    if (/^https?:\/\//i.test(p)) { try { const u = new URL(p); return u.hostname + decodeURIComponent(u.pathname).slice(0, 60); } catch { return p; } }
     return String(p || '').split(/[\\/]/).pop();
   };
   function renderMovies() {
@@ -329,9 +336,9 @@
       const li = document.createElement('li');
       li.className = i === cur ? 'on' : '';
       li.title = 'Bấm để chiếu phim này — ' + p;
-      const n = document.createElement('span'); n.className = 'mv-n'; n.textContent = i === cur ? '▶' : i + 1;
+      const n = document.createElement('span'); n.className = 'mv-n'; if (i === cur) n.replaceChildren(icon('play')); else n.textContent = i + 1;
       const nm = document.createElement('span'); nm.className = 'mv-name'; nm.textContent = movieName(p);
-      const del = document.createElement('button'); del.className = 'mv-del'; del.textContent = '✕'; del.title = 'Xoá khỏi danh sách';
+      const del = document.createElement('button'); del.className = 'mv-del'; del.replaceChildren(icon('x')); del.title = 'Xoá khỏi danh sách';
       del.addEventListener('click', (e) => {
         e.stopPropagation();
         const next = list.filter((_, k) => k !== i);
@@ -416,7 +423,7 @@
   function renderPause(p) {
     $$('[data-pause]').forEach((b) => {
       b.classList.toggle('paused', p);
-      b.textContent = p ? '▶ Chạy tiếp' : '⏸ Tạm dừng';
+      b.replaceChildren(icon(p ? 'play' : 'pause'), p ? ' Chạy tiếp' : ' Tạm dừng');
     });
   }
   $$('[data-pause]').forEach((b) => b.addEventListener('click', async () => {
@@ -432,7 +439,7 @@
     outputOpen = open;
     $$('[data-open-output]').forEach((b) => {
       b.classList.toggle('open', open);
-      b.textContent = open ? '📺 Màn hình phát đang mở' : '📺 Mở màn hình phát live';
+      b.replaceChildren(icon('tv'), open ? ' Màn hình phát đang mở' : ' Mở màn hình phát live');
     });
     // tránh phát tiếng 2 lần: khi cửa sổ phát mở, khung xem trước tự tắt tiếng
     setPreviewSrc(false);
@@ -577,7 +584,7 @@
     if (document.activeElement !== $('#rap-name')) $('#rap-name').value = o.rapName || '';
     renderMovies();
     $$('#rap-theme button').forEach((b) => b.classList.toggle('active', b.dataset.theme === (o.rapTheme || 'classic')));
-    $('#rap-lights').textContent = o.rapLightsOff ? '💡 Bật đèn phòng' : '🌑 Tắt đèn phòng';
+    $('#rap-lights').replaceChildren(icon(o.rapLightsOff ? 'lightbulb' : 'lightbulb-off'), o.rapLightsOff ? ' Bật đèn phòng' : ' Tắt đèn phòng');
     $('#rap-lights').classList.toggle('on', !!o.rapLightsOff);
     $('#v-liveBoost').textContent = o.liveBoost ? '+' + o.liveBoost + '%' : 'Tắt';
     $('#v-chuaMusicVolume').textContent = Math.round(o.chuaMusicVolume * 100) + '%';

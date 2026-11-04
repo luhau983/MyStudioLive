@@ -8,6 +8,72 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Icons: Lucide (ISC License, https://lucide.dev) -->
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-audio-lines" viewBox="0 0 24 24"><path d="M2 10v3" /><path d="M6 6v11" /><path d="M10 3v18" /><path d="M14 8v7" /><path d="M18 5v13" /><path d="M22 10v3" /></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol>
+    <symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 5v16" /><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></symbol>
+    <symbol id="i-cast" viewBox="0 0 24 24"><path d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6" /><path d="M2 12a9 9 0 0 1 8 8" /><path d="M2 16a5 5 0 0 1 4 4" /><line x1="2" x2="2.01" y1="20" y2="20" /></symbol>
+    <symbol id="i-castle" viewBox="0 0 24 24"><path d="M10 5V3" /><path d="M14 5V3" /><path d="M15 21v-3a3 3 0 0 0-6 0v3" /><path d="M18 3v8" /><path d="M18 5H6" /><path d="M22 11H2" /><path d="M22 9v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9" /><path d="M6 3v8" /></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol>
+    <symbol id="i-church" viewBox="0 0 24 24"><path d="M10 9h4" /><path d="M12 7v5" /><path d="M14 21v-3a2 2 0 0 0-4 0v3" /><path d="m18 9 3.52 2.147a1 1 0 0 1 .48.854V19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6.999a1 1 0 0 1 .48-.854L6 9" /><path d="M6 21V7a1 1 0 0 1 .376-.782l5-3.999a1 1 0 0 1 1.249.001l5 4A1 1 0 0 1 18 7v14" /></symbol>
+    <symbol id="i-clapperboard" viewBox="0 0 24 24"><path d="m12.296 3.464 3.02 3.956" /><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z" /><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="m6.18 5.276 3.1 3.899" /></symbol>
+    <symbol id="i-cloud-fog" viewBox="0 0 24 24"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" /><path d="M16 17H7" /><path d="M17 21H9" /></symbol>
+    <symbol id="i-cloud-lightning" viewBox="0 0 24 24"><path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" /><path d="m13 12-3 5h4l-3 5" /></symbol>
+    <symbol id="i-cloud-rain" viewBox="0 0 24 24"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" /><path d="M16 14v6" /><path d="M8 14v6" /><path d="M12 16v6" /></symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z" /><path d="M5 21h14" /></symbol>
+    <symbol id="i-disc-3" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M6 12c0-1.7.7-3.2 1.8-4.2" /><circle cx="12" cy="12" r="2" /><path d="M18 12c0 1.7-.7 3.2-1.8 4.2" /></symbol>
+    <symbol id="i-door-open" viewBox="0 0 24 24"><path d="M10 21H2" /><path d="M10 3H7a2 2 0 00-2 2v16" /><path d="M14 12h.01" /><path d="M19 21V5a2 2 0 00-1.675-1.974l-6.163-1.013A1 1 0 0010 3v18a1 1 0 001.124.992z" /><path d="M22 21h-3" /></symbol>
+    <symbol id="i-drum" viewBox="0 0 24 24"><path d="m2 2 8 8" /><path d="m22 2-8 8" /><ellipse cx="12" cy="9" rx="10" ry="5" /><path d="M7 13.4v7.9" /><path d="M12 14v8" /><path d="M17 13.4v7.9" /><path d="M2 9v8a10 5 0 0 0 20 0V9" /></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /><circle cx="12" cy="12" r="3" /></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" /><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" /><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" /><path d="m2 2 20 20" /></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></symbol>
+    <symbol id="i-flashlight" viewBox="0 0 24 24"><path d="M12 13v1" /><path d="M17 2a1 1 0 0 1 1 1v4a3 3 0 0 1-.6 1.8l-.6.8A4 4 0 0 0 16 12v8a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-8a4 4 0 0 0-.8-2.4l-.6-.8A3 3 0 0 1 6 7V3a1 1 0 0 1 1-1z" /><path d="M6 6h12" /></symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 1 1-4.5 4.5" /><path d="M12 7.5V9" /><path d="M7.5 12H9" /><path d="M16.5 12H15" /><path d="M12 16.5V15" /><path d="m8 8 1.88 1.88" /><path d="M14.12 9.88 16 8" /><path d="m8 16 1.88-1.88" /><path d="M14.12 14.12 16 16" /></symbol>
+    <symbol id="i-flower-2" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /><circle cx="12" cy="8" r="2" /><path d="M12 10v12" /><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></symbol>
+    <symbol id="i-frown" viewBox="0 0 24 24"><path d="M15 10V9" /><path d="M9 10V9" /><path d="M9 16a5 5 0 016 0" /><circle cx="12" cy="12" r="10" /></symbol>
+    <symbol id="i-gem" viewBox="0 0 24 24"><path d="M10.5 3 8 9l4 13 4-13-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" /><path d="M2 9h20" /></symbol>
+    <symbol id="i-ghost" viewBox="0 0 24 24"><path d="M15 10v1" /><path d="M7.528 20.472a1.6 1.6 0 012.277 0l1.057 1.056a1.6 1.6 0 002.276 0l1.057-1.056a1.6 1.6 0 012.277 0l1.114 1.114a1.4 1.4 0 002.414-1V10a8 8 0 00-16 0v10.586a1.4 1.4 0 002.414 1z" /><path d="M9 10v1" /></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><path d="M12 7v14" /><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" /><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5" /><rect x="3" y="7" width="18" height="4" rx="1" /></symbol>
+    <symbol id="i-hand-heart" viewBox="0 0 24 24"><path d="M11 14h2a2 2 0 0 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16" /><path d="m14.45 13.39 5.05-4.694C20.196 8 21 6.85 21 5.75a2.75 2.75 0 0 0-4.797-1.837.276.276 0 0 1-.406 0A2.75 2.75 0 0 0 11 5.75c0 1.2.802 2.248 1.5 2.946L16 11.95" /><path d="m2 15 6 6" /><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a1 1 0 0 0-2.75-2.91" /></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></symbol>
+    <symbol id="i-heart-handshake" viewBox="0 0 24 24"><path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" /></symbol>
+    <symbol id="i-heart-pulse" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2z" /><path d="M20.054 15.987H3.946" /></symbol>
+    <symbol id="i-laugh" viewBox="0 0 24 24"><path d="M15 10V9" /><path d="M7.084 14.302a5.12 5.12 0 009.833 0 .24.24 0 00-.235-.302H7.32a.24.24 0 00-.235.302" /><path d="M9 10V9" /><circle cx="12" cy="12" r="10" /></symbol>
+    <symbol id="i-layout-dashboard" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1" /><rect width="7" height="5" x="14" y="3" rx="1" /><rect width="7" height="9" x="14" y="12" rx="1" /><rect width="7" height="5" x="3" y="16" rx="1" /></symbol>
+    <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></symbol>
+    <symbol id="i-lightbulb-off" viewBox="0 0 24 24"><path d="M16.8 11.2c.8-.9 1.2-2 1.2-3.2a6 6 0 0 0-9.3-5" /><path d="m2 2 20 20" /><path d="M6.3 6.3a4.67 4.67 0 0 0 1.2 5.2c.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" /><path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" /><path d="M8 6v8" /></symbol>
+    <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M21 16V3a1 1 0 0 0-1.28-.96l-10 2.917a1 1 0 0 0-.72.96V19" /><circle cx="18" cy="16" r="3" /><circle cx="6" cy="19" r="3" /></symbol>
+    <symbol id="i-party-popper" viewBox="0 0 24 24"><path d="M5.8 11.3 2 22l10.7-3.79" /><path d="M4 3h.01" /><path d="M22 8h.01" /><path d="M15 2h.01" /><path d="M22 20h.01" /><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10" /><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17" /><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7" /><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z" /></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1" /><rect x="5" y="3" width="5" height="18" rx="1" /></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol>
+    <symbol id="i-popcorn" viewBox="0 0 24 24"><path d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4" /><path d="M10 22 9 8" /><path d="m14 22 1-14" /><path d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z" /></symbol>
+    <symbol id="i-scan-face" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></symbol>
+    <symbol id="i-scroll-text" viewBox="0 0 24 24"><path d="M15 12h-5" /><path d="M15 8h-5" /><path d="M19 17V5a2 2 0 0 0-2-2H4" /><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" /></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /><circle cx="12" cy="12" r="3" /></symbol>
+    <symbol id="i-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol>
+    <symbol id="i-skip-back" viewBox="0 0 24 24"><path d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z" /><path d="M3 20V4" /></symbol>
+    <symbol id="i-skip-forward" viewBox="0 0 24 24"><path d="M21 4v16" /><path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z" /></symbol>
+    <symbol id="i-skull" viewBox="0 0 24 24"><path d="m12.5 17-.5-1-.5 1h1z" /><path d="M15 22a1 1 0 0 0 1-1v-1a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20v1a1 1 0 0 0 1 1z" /><circle cx="15" cy="12" r="1" /><circle cx="9" cy="12" r="1" /></symbol>
+    <symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /><path d="M12 18h.01" /></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></symbol>
+    <symbol id="i-square" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></symbol>
+    <symbol id="i-trees" viewBox="0 0 24 24"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></symbol>
+    <symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></symbol>
+    <symbol id="i-tv" viewBox="0 0 24 24"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></symbol>
+    <symbol id="i-user-plus" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><line x1="19" x2="19" y1="8" y2="14" /><line x1="22" x2="16" y1="11" y2="11" /></symbol>
+    <symbol id="i-volume-2" viewBox="0 0 24 24"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" /><path d="M16 9a5 5 0 0 1 0 6" /><path d="M19.364 18.364a9 9 0 0 0 0-12.728" /></symbol>
+    <symbol id="i-wind" viewBox="0 0 24 24"><path d="M12.8 19.6A2 2 0 1 0 14 16H2" /><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" /><path d="M9.8 4.4A2 2 0 1 1 11 8H2" /></symbol>
+    <symbol id="i-rotate-cw" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /></symbol>
+    <symbol id="i-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol>
+    <symbol id="i-biceps-flexed" viewBox="0 0 24 24"><path d="M12.409 13.017A5 5 0 0 1 22 15c0 3.866-4 7-9 7-4.077 0-8.153-.82-10.371-2.462-.426-.316-.631-.832-.62-1.362C2.118 12.723 2.627 2 10 2a3 3 0 0 1 3 3 2 2 0 0 1-2 2c-1.105 0-1.64-.444-2-1" /><path d="M15 14a5 5 0 0 0-7.584 2" /><path d="M9.964 6.825C8.019 7.977 9.5 13 8 15" /></symbol>
+  </svg>
   <div class="titlebar"></div>
 
   <aside class="sidebar">
@@ -18,42 +84,42 @@
         <div class="brand-sub">TikTok Live Overlay</div>
       </div>
       <button class="side-toggle" id="side-toggle" title="Thu gọn menu" aria-label="Thu gọn menu">
-        <svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>
+        <svg class="ic"><use href="#i-chevron-left"/></svg>
       </button>
     </div>
 
     <nav>
       <button class="nav-item active" data-view="dashboard" title="Bảng điều khiển">
-        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3zm0 8h8v-6H3zm10 0h8V11h-8zm0-18v6h8V3z"/></svg><span class="nav-label">Bảng điều khiển</span>
+        <svg class="ic"><use href="#i-layout-dashboard"/></svg><span class="nav-label">Bảng điều khiển</span>
       </button>
       <button class="nav-item" data-view="ma" title="Live Ma Online">
-        <span class="nav-emoji">👻</span><span class="nav-label">Live Ma Online</span><span class="live-dot" data-live-for="ma">LIVE</span>
+        <span class="nav-emoji"><svg class="ic"><use href="#i-ghost"/></svg></span><span class="nav-label">Live Ma Online</span><span class="live-dot" data-live-for="ma">LIVE</span>
       </button>
       <button class="nav-item" data-view="chua" id="nav-chua" title="Đi Chùa Online">
-        <span class="nav-emoji">🪷</span><span class="nav-label">Đi Chùa Online</span><span class="live-dot" data-live-for="chua">LIVE</span>
+        <span class="nav-emoji"><svg class="ic"><use href="#i-flower-2"/></svg></span><span class="nav-label">Đi Chùa Online</span><span class="live-dot" data-live-for="chua">LIVE</span>
       </button>
       <button class="nav-item" data-view="rap" title="Rạp Phim Online">
-        <span class="nav-emoji">🎬</span><span class="nav-label">Rạp Phim Online</span><span class="live-dot" data-live-for="rap">LIVE</span>
+        <span class="nav-emoji"><svg class="ic"><use href="#i-clapperboard"/></svg></span><span class="nav-label">Rạp Phim Online</span><span class="live-dot" data-live-for="rap">LIVE</span>
       </button>
       <button class="nav-item" data-view="vua" title="Vua Tiếng Việt">
-        <span class="nav-emoji">👑</span><span class="nav-label">Vua Tiếng Việt</span><span class="live-dot" data-live-for="vua">LIVE</span>
+        <span class="nav-emoji"><svg class="ic"><use href="#i-crown"/></svg></span><span class="nav-label">Vua Tiếng Việt</span><span class="live-dot" data-live-for="vua">LIVE</span>
       </button>
       <button class="nav-item" data-view="keoco" title="Kéo Co Online">
-        <span class="nav-emoji">🪢</span><span class="nav-label">Kéo Co Online</span><span class="live-dot" data-live-for="keoco">LIVE</span>
+        <span class="nav-emoji"><svg class="ic"><use href="#i-biceps-flexed"/></svg></span><span class="nav-label">Kéo Co Online</span><span class="live-dot" data-live-for="keoco">LIVE</span>
       </button>
       <button class="nav-item" data-view="overlay" title="Đưa lên live">
-        <svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5v2h8v-2h5a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 14H3V5h18z"/></svg><span class="nav-label">Đưa lên live</span>
+        <svg class="ic"><use href="#i-cast"/></svg><span class="nav-label">Đưa lên live</span>
       </button>
       <button class="nav-item" data-view="settings" title="Cài đặt">
-        <svg viewBox="0 0 24 24"><path d="M19.14 12.94a7.1 7.1 0 0 0 0-1.88l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7 7 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.49.42l-.36 2.54a7.3 7.3 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.66 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.2 7.2 0 0 0 0 1.88l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.12.22.38.3.6.22l2.39-.96c.5.38 1.05.7 1.63.94l.36 2.54c.05.24.25.42.49.42h3.84c.25 0 .45-.18.5-.42l.36-2.54a7 7 0 0 0 1.63-.94l2.39.96c.22.08.48 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></svg><span class="nav-label">Cài đặt</span>
+        <svg class="ic"><use href="#i-settings"/></svg><span class="nav-label">Cài đặt</span>
       </button>
     </nav>
 
     <div class="side-foot">
       <div class="seg ui-theme" id="ui-theme" title="Giao diện">
-        <button data-ui="light" title="Sáng">☀️<span class="seg-label"> Sáng</span></button>
-        <button data-ui="dark" title="Tối">🌙<span class="seg-label"> Tối</span></button>
-        <button data-ui="system" title="Theo hệ thống">💻<span class="seg-label"> Hệ thống</span></button>
+        <button data-ui="light" title="Sáng"><svg class="ic"><use href="#i-sun"/></svg><span class="seg-label"> Sáng</span></button>
+        <button data-ui="dark" title="Tối"><svg class="ic"><use href="#i-moon"/></svg><span class="seg-label"> Tối</span></button>
+        <button data-ui="system" title="Theo hệ thống"><svg class="ic"><use href="#i-laptop"/></svg><span class="seg-label"> Hệ thống</span></button>
       </div>
       <div class="srv" id="srv-box">
         <span class="dot" id="srv-dot"></span>
@@ -77,7 +143,7 @@
       </header>
 
       <div class="warn-bar" id="warn-connect">
-        <span class="warn-ico">⚠️</span>
+        <span class="warn-ico"><svg class="ic"><use href="#i-triangle-alert"/></svg></span>
         <div><b>Chưa kết nối TikTok</b> — người xem vào phòng, bình luận, tặng quà sẽ <b>không hiện</b> trên cảnh live. Bật LIVE trên TikTok trước, rồi nhập username bên dưới và bấm <b>Kết nối</b>.</div>
       </div>
 
@@ -91,7 +157,7 @@
               <input id="username" placeholder="ten_kenh_cua_ban" autocomplete="off" spellcheck="false">
             </div>
             <button class="btn primary" id="btn-connect">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span>Kết nối</span>
+              <svg class="ic"><use href="#i-play"/></svg><span>Kết nối</span>
             </button>
           </div>
           <div class="status-line">
@@ -106,12 +172,12 @@
       </div>
 
       <div class="stats">
-        <div class="stat" style="--c:#38bdf8"><div class="stat-ico">👁</div><div><div class="stat-val" id="s-viewers">0</div><div class="stat-lbl">Người xem</div></div></div>
-        <div class="stat" style="--c:#fb7185"><div class="stat-ico">❤</div><div><div class="stat-val" id="s-likes">0</div><div class="stat-lbl">Lượt tim</div></div></div>
-        <div class="stat" style="--c:#a3e635"><div class="stat-ico">💬</div><div><div class="stat-val" id="s-comments">0</div><div class="stat-lbl">Bình luận</div></div></div>
-        <div class="stat" style="--c:#f472b6"><div class="stat-ico">🎁</div><div><div class="stat-val" id="s-gifts">0</div><div class="stat-lbl">Quà tặng</div></div></div>
-        <div class="stat" style="--c:#facc15"><div class="stat-ico">💎</div><div><div class="stat-val" id="s-diamonds">0</div><div class="stat-lbl">Kim cương</div></div></div>
-        <div class="stat" style="--c:#c084fc"><div class="stat-ico">➕</div><div><div class="stat-val" id="s-follows">0</div><div class="stat-lbl">Theo dõi mới</div></div></div>
+        <div class="stat" style="--c:#38bdf8"><div class="stat-ico"><svg class="ic"><use href="#i-eye"/></svg></div><div><div class="stat-val" id="s-viewers">0</div><div class="stat-lbl">Người xem</div></div></div>
+        <div class="stat" style="--c:#fb7185"><div class="stat-ico"><svg class="ic"><use href="#i-heart"/></svg></div><div><div class="stat-val" id="s-likes">0</div><div class="stat-lbl">Lượt tim</div></div></div>
+        <div class="stat" style="--c:#a3e635"><div class="stat-ico"><svg class="ic"><use href="#i-message-circle"/></svg></div><div><div class="stat-val" id="s-comments">0</div><div class="stat-lbl">Bình luận</div></div></div>
+        <div class="stat" style="--c:#f472b6"><div class="stat-ico"><svg class="ic"><use href="#i-gift"/></svg></div><div><div class="stat-val" id="s-gifts">0</div><div class="stat-lbl">Quà tặng</div></div></div>
+        <div class="stat" style="--c:#facc15"><div class="stat-ico"><svg class="ic"><use href="#i-gem"/></svg></div><div><div class="stat-val" id="s-diamonds">0</div><div class="stat-lbl">Kim cương</div></div></div>
+        <div class="stat" style="--c:#c084fc"><div class="stat-ico"><svg class="ic"><use href="#i-user-plus"/></svg></div><div><div class="stat-val" id="s-follows">0</div><div class="stat-lbl">Theo dõi mới</div></div></div>
       </div>
 
       <div class="grid-2">
@@ -127,7 +193,7 @@
           </div>
           <div class="feed" id="feed">
             <div class="empty" id="feed-empty">
-              <div class="empty-ghost">👻</div>
+              <div class="empty-ghost"><svg class="ic"><use href="#i-ghost"/></svg></div>
               <div>Chưa có hoạt động nào</div>
               <div class="muted small">Kết nối live hoặc bấm “Gửi thử” để xem hiệu ứng.</div>
             </div>
@@ -138,7 +204,7 @@
           <div class="panel quick">
             <div class="panel-head"><h2>Bắt đầu nhanh</h2></div>
             <ol class="qs">
-              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><div class="qs-actions"><button class="btn ghost sm" data-goto="ma">👻 Ma</button><button class="btn ghost sm" data-goto="chua">🪷 Chùa</button><button class="btn ghost sm" data-goto="rap">🎬 Rạp</button></div></li>
+              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><div class="qs-actions"><button class="btn ghost sm" data-goto="ma"><svg class="ic"><use href="#i-ghost"/></svg> Ma</button><button class="btn ghost sm" data-goto="chua"><svg class="ic"><use href="#i-flower-2"/></svg> Chùa</button><button class="btn ghost sm" data-goto="rap"><svg class="ic"><use href="#i-clapperboard"/></svg> Rạp</button></div></li>
               <li data-qs="link"><span class="qs-n">2</span><div><b>Thêm vào TikTok LIVE Studio</b><small>Nguồn <b>Link</b>: <code id="qs-link">http://lvh.me:3000</code> · 1080×1920</small></div><button class="btn ghost sm" id="qs-copy">Sao chép</button></li>
               <li data-qs="golive"><span class="qs-n">3</span><div><b>Bấm Go LIVE trên TikTok</b><small>Bật live trước khi kết nối ở bước 4</small></div></li>
               <li data-qs="connect"><span class="qs-n">4</span><div><b>Kết nối username</b><small>Nhập @username ở trên và bấm Kết nối</small></div></li>
@@ -161,16 +227,16 @@
           <p class="muted">Cách để người xem TikTok nhìn thấy cảnh đang chạy (Live Ma Online, Đi Chùa Online hoặc Rạp Phim Online).</p>
         </div>
         <div class="head-actions">
-          <button class="btn ghost" id="btn-reload-overlay">↻ Tải lại cảnh</button>
-          <button class="btn pause-btn" data-pause>⏸ Tạm dừng</button>
+          <button class="btn ghost" id="btn-reload-overlay"><svg class="ic"><use href="#i-rotate-cw"/></svg> Tải lại cảnh</button>
+          <button class="btn pause-btn" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
         </div>
       </header>
       <div class="scene-row">
-        <button class="btn scene-btn ma" data-open-scene="ma"><span class="sb-ico">👻</span><span><b>Phát Live Ma Online</b><small>Chuyển live sang Nhà Ma + mở màn hình phát</small></span></button>
-        <button class="btn scene-btn chua" data-open-scene="chua"><span class="sb-ico">🪷</span><span><b>Phát Đi Chùa Online</b><small>Chuyển live sang chánh điện + mở màn hình phát</small></span></button>
-        <button class="btn scene-btn rap" data-open-scene="rap"><span class="sb-ico">🎬</span><span><b>Phát Rạp Phim Online</b><small>Chuyển live sang rạp phim + mở màn hình phát</small></span></button>
-        <button class="btn scene-btn vua" data-open-scene="vua"><span class="sb-ico">👑</span><span><b>Phát Vua Tiếng Việt</b><small>Chuyển live sang giảng đường đoán chữ + mở màn hình phát</small></span></button>
-        <button class="btn scene-btn keoco" data-open-scene="keoco"><span class="sb-ico">🪢</span><span><b>Phát Kéo Co Online</b><small>Chuyển live sang sân kéo co + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn ma" data-open-scene="ma"><span class="sb-ico"><svg class="ic"><use href="#i-ghost"/></svg></span><span><b>Phát Live Ma Online</b><small>Chuyển live sang Nhà Ma + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn chua" data-open-scene="chua"><span class="sb-ico"><svg class="ic"><use href="#i-flower-2"/></svg></span><span><b>Phát Đi Chùa Online</b><small>Chuyển live sang chánh điện + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn rap" data-open-scene="rap"><span class="sb-ico"><svg class="ic"><use href="#i-clapperboard"/></svg></span><span><b>Phát Rạp Phim Online</b><small>Chuyển live sang rạp phim + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn vua" data-open-scene="vua"><span class="sb-ico"><svg class="ic"><use href="#i-crown"/></svg></span><span><b>Phát Vua Tiếng Việt</b><small>Chuyển live sang giảng đường đoán chữ + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn keoco" data-open-scene="keoco"><span class="sb-ico"><svg class="ic"><use href="#i-biceps-flexed"/></svg></span><span><b>Phát Kéo Co Online</b><small>Chuyển live sang sân kéo co + mở màn hình phát</small></span></button>
       </div>
 
       <div class="live-guide">
@@ -251,7 +317,7 @@
     <section class="view scene-view" id="view-ma">
       <header class="page-head">
         <div>
-          <h1>👻 Live Ma Online</h1>
+          <h1><svg class="ic"><use href="#i-ghost"/></svg> Live Ma Online</h1>
           <p class="muted">Đang mở tab này thì cảnh Nhà Ma chạy trên live. Người xem hoá ma, gõ “hù / trốn / tìm…” để chơi với nhau.</p>
         </div>
       </header>
@@ -262,12 +328,12 @@
           </div>
           <div class="preview-actions">
             <div style="display:flex;gap:6px">
-              <button class="btn ghost sm" data-pause>⏸ Tạm dừng</button>
-              <button class="btn ghost sm" data-open-output>📺 Mở màn hình phát live</button>
-              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen">↻</button>
+              <button class="btn ghost sm" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output><svg class="ic"><use href="#i-tv"/></svg> Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen"><svg class="ic"><use href="#i-rotate-cw"/></svg></button>
             </div>
-            <label class="switch-inline"><input type="checkbox" class="preview-safe-cb"> 📱 Vùng bị TikTok che</label>
-            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> 🔊 Nghe</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-safe-cb"> <svg class="ic"><use href="#i-smartphone"/></svg> Vùng bị TikTok che</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> <svg class="ic"><use href="#i-volume-2"/></svg> Nghe</label>
           </div>
           <p class="hint" style="max-width:405px">Đây chính là màn hình người xem thấy trên live. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
         </div>
@@ -291,30 +357,30 @@
         <div class="panel">
             <div class="panel-head"><h2>Gửi thử</h2></div>
             <div class="test-grid">
-              <button class="btn ghost" data-test="chat">💬 Bình luận</button>
-              <button class="btn ghost" data-test="gift">🎁 Quà nhỏ</button>
-              <button class="btn ghost" data-test="bigGift">🏰 Quà lớn</button>
-              <button class="btn ghost" data-test="follow">➕ Theo dõi</button>
-              <button class="btn ghost" data-test="share">🔗 Chia sẻ</button>
-              <button class="btn ghost" data-test="join">🚪 Vào phòng</button>
+              <button class="btn ghost" data-test="chat"><svg class="ic"><use href="#i-message-circle"/></svg> Bình luận</button>
+              <button class="btn ghost" data-test="gift"><svg class="ic"><use href="#i-gift"/></svg> Quà nhỏ</button>
+              <button class="btn ghost" data-test="bigGift"><svg class="ic"><use href="#i-castle"/></svg> Quà lớn</button>
+              <button class="btn ghost" data-test="follow"><svg class="ic"><use href="#i-user-plus"/></svg> Theo dõi</button>
+              <button class="btn ghost" data-test="share"><svg class="ic"><use href="#i-share-2"/></svg> Chia sẻ</button>
+              <button class="btn ghost" data-test="join"><svg class="ic"><use href="#i-door-open"/></svg> Vào phòng</button>
             </div>
             <div class="sub-lbl">Trò chơi Nhà Ma</div>
             <div class="test-grid">
-              <button class="btn ghost" data-test="scare">👻 Gõ “hù”</button>
-              <button class="btn ghost" data-test="hide">🤫 Gõ “trốn”</button>
-              <button class="btn ghost" data-test="seek">🔦 Gõ “tìm”</button>
-              <button class="btn ghost" data-test="thunder">⚡ Sấm chớp</button>
-              <button class="btn ghost" data-test="jumpscare">😱 Jumpscare</button>
-              <button class="btn ghost" data-test="peek">👀 Ma ló mặt</button>
-              <button class="btn ghost" data-test="howto">📖 Hiện cách chơi</button>
-              <button class="btn ghost" data-test="freeze">📜 Gõ “bùa”</button>
-              <button class="btn ghost" data-test="summon">🕯️ Gõ “gọi hồn”</button>
-              <button class="btn ghost" data-test="blackout">🌑 Gõ “tắt đèn”</button>
-              <button class="btn ghost" data-test="hug">🤗 Gõ “ôm”</button>
-              <button class="btn ghost" data-test="dance">💃 Gõ “nhảy”</button>
-              <button class="btn ghost" data-test="laugh">😈 Gõ “cười”</button>
-              <button class="btn ghost" data-test="cry">😭 Gõ “khóc”</button>
-              <button class="btn game-btn" data-test="round">💀 Bắt đầu vòng TRỐN TÌM ngay</button>
+              <button class="btn ghost" data-test="scare"><svg class="ic"><use href="#i-ghost"/></svg> Gõ “hù”</button>
+              <button class="btn ghost" data-test="hide"><svg class="ic"><use href="#i-eye-off"/></svg> Gõ “trốn”</button>
+              <button class="btn ghost" data-test="seek"><svg class="ic"><use href="#i-flashlight"/></svg> Gõ “tìm”</button>
+              <button class="btn ghost" data-test="thunder"><svg class="ic"><use href="#i-cloud-lightning"/></svg> Sấm chớp</button>
+              <button class="btn ghost" data-test="jumpscare"><svg class="ic"><use href="#i-scan-face"/></svg> Jumpscare</button>
+              <button class="btn ghost" data-test="peek"><svg class="ic"><use href="#i-eye"/></svg> Ma ló mặt</button>
+              <button class="btn ghost" data-test="howto"><svg class="ic"><use href="#i-book-open"/></svg> Hiện cách chơi</button>
+              <button class="btn ghost" data-test="freeze"><svg class="ic"><use href="#i-scroll-text"/></svg> Gõ “bùa”</button>
+              <button class="btn ghost" data-test="summon"><svg class="ic"><use href="#i-flame"/></svg> Gõ “gọi hồn”</button>
+              <button class="btn ghost" data-test="blackout"><svg class="ic"><use href="#i-lightbulb-off"/></svg> Gõ “tắt đèn”</button>
+              <button class="btn ghost" data-test="hug"><svg class="ic"><use href="#i-hand-heart"/></svg> Gõ “ôm”</button>
+              <button class="btn ghost" data-test="dance"><svg class="ic"><use href="#i-music"/></svg> Gõ “nhảy”</button>
+              <button class="btn ghost" data-test="laugh"><svg class="ic"><use href="#i-laugh"/></svg> Gõ “cười”</button>
+              <button class="btn ghost" data-test="cry"><svg class="ic"><use href="#i-frown"/></svg> Gõ “khóc”</button>
+              <button class="btn game-btn" data-test="round"><svg class="ic"><use href="#i-skull"/></svg> Bắt đầu vòng TRỐN TÌM ngay</button>
             </div>
           </div>
         
@@ -328,16 +394,16 @@
           <div class="field">
             <label>Kiểu nhạc nền</label>
             <div class="amb-grid" id="amb-grid">
-              <button data-amb="drone"><b>🌫️ U ám</b><span>Tiếng trầm nghịch tai, thì thầm xa</span></button>
-              <button data-amb="wind"><b>🌪️ Gió hú</b><span>Gió rít qua khe cửa, cửa kẽo kẹt</span></button>
-              <button data-amb="rain"><b>🌧️ Mưa đêm</b><span>Mưa rơi, giọt nước, sấm rền xa</span></button>
-              <button data-amb="church"><b>⛪ Nhà thờ hoang</b><span>Đàn organ giọng thứ, chuông xa</span></button>
-              <button data-amb="heartbeat"><b>💓 Hồi hộp</b><span>Tim đập chậm, tiếng thở</span></button>
-              <button data-amb="musicbox"><b>🎠 Hộp nhạc ma</b><span>Điệu ru lệch tông, đĩa rè</span></button>
-              <button data-amb="whispers"><b>🗣️ Thì thầm</b><span>Tiếng thì thầm trái phải, trẻ con cười</span></button>
-              <button data-amb="forest"><b>🦉 Rừng đêm</b><span>Dế kêu, cú gáy, gió nhẹ</span></button>
+              <button data-amb="drone"><b><svg class="ic"><use href="#i-cloud-fog"/></svg> U ám</b><span>Tiếng trầm nghịch tai, thì thầm xa</span></button>
+              <button data-amb="wind"><b><svg class="ic"><use href="#i-wind"/></svg> Gió hú</b><span>Gió rít qua khe cửa, cửa kẽo kẹt</span></button>
+              <button data-amb="rain"><b><svg class="ic"><use href="#i-cloud-rain"/></svg> Mưa đêm</b><span>Mưa rơi, giọt nước, sấm rền xa</span></button>
+              <button data-amb="church"><b><svg class="ic"><use href="#i-church"/></svg> Nhà thờ hoang</b><span>Đàn organ giọng thứ, chuông xa</span></button>
+              <button data-amb="heartbeat"><b><svg class="ic"><use href="#i-heart-pulse"/></svg> Hồi hộp</b><span>Tim đập chậm, tiếng thở</span></button>
+              <button data-amb="musicbox"><b><svg class="ic"><use href="#i-disc-3"/></svg> Hộp nhạc ma</b><span>Điệu ru lệch tông, đĩa rè</span></button>
+              <button data-amb="whispers"><b><svg class="ic"><use href="#i-audio-lines"/></svg> Thì thầm</b><span>Tiếng thì thầm trái phải, trẻ con cười</span></button>
+              <button data-amb="forest"><b><svg class="ic"><use href="#i-trees"/></svg> Rừng đêm</b><span>Dế kêu, cú gáy, gió nhẹ</span></button>
             </div>
-            <p class="hint">Bấm chọn là đổi ngay. Nghe thử ở khung xem bên trái (bật 🔊 Nghe).</p>
+            <p class="hint">Bấm chọn là đổi ngay. Nghe thử ở khung xem bên trái (bật <svg class="ic"><use href="#i-volume-2"/></svg> Nghe).</p>
           </div>
           <div class="field">
             <label>Âm lượng nhạc nền <span class="val" id="v-ambientVolume"></span></label>
@@ -370,7 +436,7 @@
           <div class="field">
             <label>Nền overlay</label>
             <div class="seg" id="bg-seg">
-              <button data-bg="haunted">Cảnh nhà ma 👻</button>
+              <button data-bg="haunted"><svg class="ic"><use href="#i-ghost"/></svg> Cảnh nhà ma</button>
               <button data-bg="transparent">Trong suốt (đè camera)</button>
             </div>
           </div>
@@ -454,7 +520,7 @@
     <section class="view scene-view" id="view-chua">
       <header class="page-head">
         <div>
-          <h1>🪷 Đi Chùa Online</h1>
+          <h1><svg class="ic"><use href="#i-flower-2"/></svg> Đi Chùa Online</h1>
           <p class="muted">Đang mở tab này thì cảnh chánh điện chạy trên live. Người xem gõ “adidaphat” để lên thắp hương, quà làm sen vàng nở.</p>
         </div>
       </header>
@@ -465,12 +531,12 @@
           </div>
           <div class="preview-actions">
             <div style="display:flex;gap:6px">
-              <button class="btn ghost sm" data-pause>⏸ Tạm dừng</button>
-              <button class="btn ghost sm" data-open-output>📺 Mở màn hình phát live</button>
-              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen">↻</button>
+              <button class="btn ghost sm" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output><svg class="ic"><use href="#i-tv"/></svg> Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen"><svg class="ic"><use href="#i-rotate-cw"/></svg></button>
             </div>
-            <label class="switch-inline"><input type="checkbox" class="preview-safe-cb"> 📱 Vùng bị TikTok che</label>
-            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> 🔊 Nghe</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-safe-cb"> <svg class="ic"><use href="#i-smartphone"/></svg> Vùng bị TikTok che</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> <svg class="ic"><use href="#i-volume-2"/></svg> Nghe</label>
           </div>
           <p class="hint" style="max-width:405px">Đây chính là màn hình người xem thấy trên live. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
         </div>
@@ -509,29 +575,29 @@
             <div class="panel-head"><h2>Đọc ngay</h2></div>
             <textarea class="inp" id="chua-speak" rows="3" maxlength="400" placeholder="Ví dụ: Cảm ơn cả nhà đã ghé xem live tối nay ạ."></textarea>
             <div class="file-row" style="margin-top:8px">
-              <button class="btn primary sm" id="chua-speak-btn">🔊 Đọc ngay</button>
+              <button class="btn primary sm" id="chua-speak-btn"><svg class="ic"><use href="#i-volume-2"/></svg> Đọc ngay</button>
               <span class="muted small">Được đọc trước mọi câu khác.</span>
             </div>
           </div>
           <div class="panel">
             <div class="panel-head"><h2>Điều khiển</h2></div>
             <div class="test-grid">
-              <button class="btn ghost" data-chua="bell">🔔 Thỉnh chuông</button>
-              <button class="btn ghost" data-chua="mo">🪵 Gõ mõ</button>
-              <button class="btn ghost" data-chua="share">📣 Nhắc chia sẻ</button>
-              <button class="btn ghost" data-chua="rain">🌸 Mưa hoa sen ngay</button>
-              <button class="btn ghost" data-chua="reset">↺ Đặt lại bảng điểm</button>
+              <button class="btn ghost" data-chua="bell"><svg class="ic"><use href="#i-bell"/></svg> Thỉnh chuông</button>
+              <button class="btn ghost" data-chua="mo"><svg class="ic"><use href="#i-drum"/></svg> Gõ mõ</button>
+              <button class="btn ghost" data-chua="share"><svg class="ic"><use href="#i-megaphone"/></svg> Nhắc chia sẻ</button>
+              <button class="btn ghost" data-chua="rain"><svg class="ic"><use href="#i-flower"/></svg> Mưa hoa sen ngay</button>
+              <button class="btn ghost" data-chua="reset"><svg class="ic"><use href="#i-rotate-ccw"/></svg> Đặt lại bảng điểm</button>
             </div>
           </div>
           <div class="panel">
             <div class="panel-head"><h2>Gửi thử</h2></div>
             <div class="test-grid">
-              <button class="btn ghost" data-test="adidaphat">🙏 Gõ “adidaphat”</button>
-              <button class="btn ghost" data-test="join">🚪 Vào phòng</button>
-              <button class="btn ghost" data-test="wish">💬 Bình luận cầu chúc</button>
-              <button class="btn ghost" data-test="gift">🎁 Quà nhỏ</button>
-              <button class="btn ghost" data-test="bigGift">🪷 Quà lớn</button>
-              <button class="btn ghost" data-chua="testLikes">❤️ Thả 100 tim</button>
+              <button class="btn ghost" data-test="adidaphat"><svg class="ic"><use href="#i-heart-handshake"/></svg> Gõ “adidaphat”</button>
+              <button class="btn ghost" data-test="join"><svg class="ic"><use href="#i-door-open"/></svg> Vào phòng</button>
+              <button class="btn ghost" data-test="wish"><svg class="ic"><use href="#i-message-circle"/></svg> Bình luận cầu chúc</button>
+              <button class="btn ghost" data-test="gift"><svg class="ic"><use href="#i-gift"/></svg> Quà nhỏ</button>
+              <button class="btn ghost" data-test="bigGift"><svg class="ic"><use href="#i-flower-2"/></svg> Quà lớn</button>
+              <button class="btn ghost" data-chua="testLikes"><svg class="ic"><use href="#i-heart"/></svg> Thả 100 tim</button>
             </div>
           </div>
         </div>
@@ -543,7 +609,7 @@
     <section class="view scene-view" id="view-rap">
       <header class="page-head">
         <div>
-          <h1>🎬 Rạp Phim Online</h1>
+          <h1><svg class="ic"><use href="#i-clapperboard"/></svg> Rạp Phim Online</h1>
           <p class="muted">Đang mở tab này thì cảnh rạp chiếu phim chạy trên live. Người xem vào được chào, đi vào ghế ngồi xem phim cùng nhau.</p>
         </div>
       </header>
@@ -554,12 +620,12 @@
           </div>
           <div class="preview-actions">
             <div style="display:flex;gap:6px">
-              <button class="btn ghost sm" data-pause>⏸ Tạm dừng</button>
-              <button class="btn ghost sm" data-open-output>📺 Mở màn hình phát live</button>
-              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen">↻</button>
+              <button class="btn ghost sm" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output><svg class="ic"><use href="#i-tv"/></svg> Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen"><svg class="ic"><use href="#i-rotate-cw"/></svg></button>
             </div>
-            <label class="switch-inline"><input type="checkbox" class="preview-safe-cb"> 📱 Vùng bị TikTok che</label>
-            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> 🔊 Nghe</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-safe-cb"> <svg class="ic"><use href="#i-smartphone"/></svg> Vùng bị TikTok che</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> <svg class="ic"><use href="#i-volume-2"/></svg> Nghe</label>
           </div>
           <p class="hint" style="max-width:405px">Đây chính là màn hình người xem thấy trên live. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
         </div>
@@ -582,17 +648,17 @@
             <ol class="movie-list" id="rap-list"></ol>
             <div class="movie-empty" id="rap-empty">Chưa có phim. Dán <b>link YouTube</b> / link video, hoặc bấm <b>+ Thêm phim</b> để chọn file trên máy (mp4, webm, mov).</div>
             <div class="movie-ctrl">
-              <button class="btn ghost sm" data-rap="prev">⏮ Phim trước</button>
-              <button class="btn primary sm" data-rap="play">▶ Chiếu</button>
-              <button class="btn ghost sm" data-rap="pause">⏸ Dừng</button>
-              <button class="btn ghost sm" data-rap="next">Phim sau ⏭</button>
+              <button class="btn ghost sm" data-rap="prev"><svg class="ic"><use href="#i-skip-back"/></svg> Phim trước</button>
+              <button class="btn primary sm" data-rap="play"><svg class="ic"><use href="#i-play"/></svg> Chiếu</button>
+              <button class="btn ghost sm" data-rap="pause"><svg class="ic"><use href="#i-pause"/></svg> Dừng</button>
+              <button class="btn ghost sm" data-rap="next">Phim sau <svg class="ic"><use href="#i-skip-forward"/></svg></button>
             </div>
             <div class="field">
               <label>Âm lượng phim <span class="val" id="v-rapVolume"></span></label>
               <input type="range" min="0" max="1" step="0.05" data-o="rapVolume" data-num>
             </div>
             <label class="toggle"><span>Hết danh sách thì chiếu lại từ đầu</span><input type="checkbox" data-o="rapLoop"><i></i></label>
-            <p class="hint warn-hint">⚠️ Chỉ chiếu phim bạn có quyền phát (phim tự quay, phim đã hết bản quyền, phim được phép chiếu). Chiếu phim có bản quyền lên TikTok rất dễ bị tắt live hoặc khoá tài khoản.</p>
+            <p class="hint warn-hint"><svg class="ic"><use href="#i-triangle-alert"/></svg> Chỉ chiếu phim bạn có quyền phát (phim tự quay, phim đã hết bản quyền, phim được phép chiếu). Chiếu phim có bản quyền lên TikTok rất dễ bị tắt live hoặc khoá tài khoản.</p>
           </div>
           <div class="panel">
             <div class="panel-head"><h2>Tên rạp &amp; giọng đọc</h2></div>
@@ -624,30 +690,30 @@
           <div class="panel">
             <div class="panel-head"><h2>Đọc ngay</h2></div>
             <textarea class="inp" id="rap-speak" rows="2" maxlength="400" placeholder="Ví dụ: Phim sắp bắt đầu, mọi người ổn định chỗ ngồi nhé."></textarea>
-            <div class="file-row" style="margin-top:8px"><button class="btn primary sm" id="rap-speak-btn">🔊 Đọc ngay</button></div>
+            <div class="file-row" style="margin-top:8px"><button class="btn primary sm" id="rap-speak-btn"><svg class="ic"><use href="#i-volume-2"/></svg> Đọc ngay</button></div>
           </div>
           <div class="panel">
             <div class="panel-head"><h2>Điều khiển</h2></div>
             <div class="test-grid">
-              <button class="btn ghost lights-btn" id="rap-lights">💡 Tắt đèn phòng</button>
-              <button class="btn ghost" data-rap="clap">👏 Cả rạp vỗ tay</button>
-              <button class="btn ghost" data-rap="rain">🍿 Mưa bắp rang</button>
-              <button class="btn ghost" data-rap="share">📣 Nhắc chia sẻ</button>
-              <button class="btn ghost" data-rap="reset">↺ Đặt lại bảng điểm</button>
+              <button class="btn ghost lights-btn" id="rap-lights"><svg class="ic"><use href="#i-lightbulb"/></svg> Tắt đèn phòng</button>
+              <button class="btn ghost" data-rap="clap"><svg class="ic"><use href="#i-party-popper"/></svg> Cả rạp vỗ tay</button>
+              <button class="btn ghost" data-rap="rain"><svg class="ic"><use href="#i-popcorn"/></svg> Mưa bắp rang</button>
+              <button class="btn ghost" data-rap="share"><svg class="ic"><use href="#i-megaphone"/></svg> Nhắc chia sẻ</button>
+              <button class="btn ghost" data-rap="reset"><svg class="ic"><use href="#i-rotate-ccw"/></svg> Đặt lại bảng điểm</button>
             </div>
           </div>
           <div class="panel">
             <div class="panel-head"><h2>Gửi thử</h2></div>
             <div class="test-grid">
-              <button class="btn ghost" data-test="join">🚪 Vào rạp</button>
-              <button class="btn ghost" data-test="chat">💬 Bình luận</button>
-              <button class="btn ghost" data-test="clap">👏 Gõ “vỗ tay”</button>
-              <button class="btn ghost" data-test="haha">😂 Gõ “haha”</button>
-              <button class="btn ghost" data-test="wow">😮 Gõ “wow”</button>
-              <button class="btn ghost" data-test="popcorn">🍿 Gõ “bắp”</button>
-              <button class="btn ghost" data-test="gift">🎁 Quà nhỏ</button>
-              <button class="btn ghost" data-test="bigGift">💎 Quà lớn</button>
-              <button class="btn ghost" data-rap="testLikes">❤️ Thả 100 tim</button>
+              <button class="btn ghost" data-test="join"><svg class="ic"><use href="#i-door-open"/></svg> Vào rạp</button>
+              <button class="btn ghost" data-test="chat"><svg class="ic"><use href="#i-message-circle"/></svg> Bình luận</button>
+              <button class="btn ghost" data-test="clap"><svg class="ic"><use href="#i-party-popper"/></svg> Gõ “vỗ tay”</button>
+              <button class="btn ghost" data-test="haha"><svg class="ic"><use href="#i-laugh"/></svg> Gõ “haha”</button>
+              <button class="btn ghost" data-test="wow"><svg class="ic"><use href="#i-sparkles"/></svg> Gõ “wow”</button>
+              <button class="btn ghost" data-test="popcorn"><svg class="ic"><use href="#i-popcorn"/></svg> Gõ “bắp”</button>
+              <button class="btn ghost" data-test="gift"><svg class="ic"><use href="#i-gift"/></svg> Quà nhỏ</button>
+              <button class="btn ghost" data-test="bigGift"><svg class="ic"><use href="#i-gem"/></svg> Quà lớn</button>
+              <button class="btn ghost" data-rap="testLikes"><svg class="ic"><use href="#i-heart"/></svg> Thả 100 tim</button>
             </div>
           </div>
         </div>
@@ -658,7 +724,7 @@
     <section class="view scene-view vua-view" id="view-vua">
       <header class="page-head">
         <div>
-          <h1>👑 Vua Tiếng Việt</h1>
+          <h1><svg class="ic"><use href="#i-crown"/></svg> Vua Tiếng Việt</h1>
           <p class="muted">Đang mở tab này thì giảng đường đoán chữ chạy trên live. Người xem comment đáp án, ai đúng đầu tiên là MVP. Dùng chung kết nối TikTok với StudioLive.</p>
         </div>
       </header>
@@ -672,7 +738,7 @@
     <section class="view scene-view keoco-view" id="view-keoco">
       <header class="page-head">
         <div>
-          <h1>🪢 Kéo Co Online</h1>
+          <h1><svg class="ic"><use href="#i-biceps-flexed"/></svg> Kéo Co Online</h1>
           <p class="muted">Đang mở tab này thì sân kéo co 3D chạy trên live. Người xem comment <b>ĐỎ</b>/<b>XANH</b> để vào đội, thả tim để kéo, tặng quà để cộng điểm. Dùng chung kết nối TikTok với StudioLive.</p>
         </div>
       </header>
@@ -683,11 +749,11 @@
           </div>
           <div class="preview-actions">
             <div style="display:flex;gap:6px">
-              <button class="btn ghost sm" data-pause>⏸ Tạm dừng</button>
-              <button class="btn ghost sm" data-open-output>📺 Mở màn hình phát live</button>
-              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen">↻</button>
+              <button class="btn ghost sm" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output><svg class="ic"><use href="#i-tv"/></svg> Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen"><svg class="ic"><use href="#i-rotate-cw"/></svg></button>
             </div>
-            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> 🔊 Nghe</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> <svg class="ic"><use href="#i-volume-2"/></svg> Nghe</label>
           </div>
           <p class="hint" style="max-width:405px">Âm thanh, thông số trận và giả lập chỉnh ở bảng bên phải. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
         </div>
@@ -715,7 +781,7 @@
             <input type="range" min="0" max="40" step="5" data-o="liveBoost" data-num>
             <p class="hint">TikTok nén video làm màu nhạt và tối đi. Tăng mức này để bù lại; 10–20% là vừa. Đặt 0% nếu thấy màu bị gắt.</p>
           </div>
-          <p class="hint">Mọi chữ, bảng điểm, nhân vật đã được đặt trong <b>vùng an toàn</b>: chừa phần trên (thanh TikTok), phần dưới (bình luận) và hai mép (bị cắt trên điện thoại dài). Bật ô <b>📱 Vùng bị TikTok che</b> dưới khung xem cảnh để kiểm tra.</p>
+          <p class="hint">Mọi chữ, bảng điểm, nhân vật đã được đặt trong <b>vùng an toàn</b>: chừa phần trên (thanh TikTok), phần dưới (bình luận) và hai mép (bị cắt trên điện thoại dài). Bật ô <b><svg class="ic"><use href="#i-smartphone"/></svg> Vùng bị TikTok che</b> dưới khung xem cảnh để kiểm tra.</p>
         </div>
 
         <div class="panel">

@@ -583,3 +583,26 @@ body.side-collapsed .srv { justify-content: center; padding: 12px 0; }
 .keoco-host iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
 .keoco-error { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; background: var(--panel-3); color: var(--text); }
 .keoco-error[hidden] { display: none; }
+
+/* ===== Icon (Lucide sprite thay cho emoji) ===== */
+.icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ic { width: 1.15em; height: 1.15em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.2em; }
+.btn svg.ic { width: 17px; height: 17px; }
+.btn.sm svg.ic { width: 15px; height: 15px; }
+.nav-emoji { display: inline-grid; place-items: center; width: 18px; }
+.nav-emoji .ic { width: 18px; height: 18px; }
+.stat-ico { color: var(--c); }
+.stat-ico .ic { width: 20px; height: 20px; }
+.sb-ico { display: inline-grid; place-items: center; }
+.sb-ico .ic { width: 1em; height: 1em; }
+.empty-ghost { color: var(--muted); }
+.empty-ghost .ic { width: 44px; height: 44px; stroke-width: 1.6; }
+.warn-ico .ic { width: 20px; height: 20px; color: var(--danger-text); }
+.page-head h1 .ic { width: .95em; height: .95em; vertical-align: -.12em; color: var(--accent); }
+.amb-grid button b .ic { width: 15px; height: 15px; margin-right: 2px; vertical-align: -.18em; }
+.seg button .ic { width: 14px; height: 14px; vertical-align: -.2em; }
+.switch-inline .ic { width: 14px; height: 14px; }
+.leader .dm .ic, .item .text .ic { width: 13px; height: 13px; vertical-align: -.15em; }
+.mv-n .ic { width: 11px; height: 11px; fill: currentColor; }
+.item .av .ic { width: 18px; height: 18px; color: var(--muted); }
+.mv-del .ic { width: 14px; height: 14px; vertical-align: -.2em; }
