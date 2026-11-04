@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Vua Tiếng Việt · LIVE</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/classroom.css"></head>
+<body class="overlay-page"><main class="stage" id="stage">
+  <canvas id="classroom" aria-label="Giảng đường 3D: cô giáo ở bảng, học viên ngồi các dãy bàn bên dưới"></canvas>
+  <div id="scene-fallback" hidden>Không khởi tạo được đồ họa 3D. Hãy bật tăng tốc phần cứng trong trình duyệt. Câu hỏi vẫn hoạt động trên bảng.</div>
+<div class="round-live-info"><div class="answer-count-card"><span class="live-card-icon">✓</span><div><strong id="correct-count">0</strong><small>NGƯỜI ĐOÁN ĐÚNG</small></div></div><div class="mvp-status-card"><span class="live-card-icon">♛</span><div><small>MVP ĐẦU TIÊN</small><strong id="mvp-label">Đang chờ chủ nhân</strong></div></div></div>
+  <section class="puzzle-card"><div class="puzzle-top"><span id="category" class="pill">ĐỐ VUI TIẾNG VIỆT</span><div class="timer"><span class="timer-icon">◷</span><strong id="timer">45</strong><small>GIÂY</small></div></div>
+    <div class="progress"><div id="progress"></div></div><p class="eyebrow" id="puzzle-label">SẮP XẾP CÁC CHỮ SAU</p>
+    <div class="letter-tiles" id="tiles"><span>V</span><span>U</span><span>A</span></div>
+    <div class="answer-mask" id="mask"></div><div class="hint-box"><span>✦</span><div><small>GỢI Ý CHO BẠN</small><p id="hint">Một chút nhanh trí. Một chút yêu tiếng Việt.</p></div></div>
+  </section>
+  <div class="teacher-caption" id="teacher-caption">Chào cả lớp! Cùng cô khám phá tiếng Việt nhé.</div>
+  <div id="student-labels" aria-hidden="true"></div>
+  <div class="bottom-dock">
+    <div class="callout" id="callout"><span>↳</span><div><strong>Biết đáp án? Comment ngay!</strong><p>Đúng nhận <b id="points-label">100</b> điểm</p></div><span class="callout-star">✳</span></div>
+    <section class="result-card" id="result" hidden><div class="result-icon">♛</div><div><small id="result-label">MVP CỦA CÂU NÀY</small><h2 id="winner-name"></h2><p id="result-answer"></p></div><strong id="winner-points"></strong></section>
+    <section class="ranking"><div class="section-heading"><h2>Học viên xuất sắc <span>✧</span></h2><span class="heading-actions"><button id="enable-teacher-audio" type="button" title="Bật âm thanh" aria-label="Bật âm thanh">♫</button><span>TOP 3</span></span></div><ol id="leaderboard"><li class="empty-ranking">Bảng vàng đang chờ tên cả lớp…</li></ol></section>
+    <div class="live-comment" id="latest-comment">Chỉ cần comment đáp án · Ai cũng có thể chơi</div>
+  </div>
+  <div class="connection-banner" id="connection-banner" hidden></div>
+  <footer class="stage-footer"><span>YÊU TIẾNG VIỆT, CHƠI HẾT MÌNH.</span><span>✦</span></footer>
+  <div id="mvp-popup" class="mvp-popup" role="status" aria-live="polite" hidden></div>
+  <aside id="gift-notice" class="gift-notice" role="status" aria-live="polite" hidden></aside>
+</main><script type="module" src="/app.js"></script></body></html>

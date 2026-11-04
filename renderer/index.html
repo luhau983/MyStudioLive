@@ -34,6 +34,9 @@
       <button class="nav-item" data-view="rap">
         <span class="nav-emoji">🎬</span>Rạp Phim Online<span class="live-dot" data-live-for="rap">LIVE</span>
       </button>
+      <button class="nav-item" data-view="vua">
+        <span class="nav-emoji">👑</span>Vua Tiếng Việt<span class="live-dot" data-live-for="vua">LIVE</span>
+      </button>
       <button class="nav-item" data-view="overlay">
         <svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5v2h8v-2h5a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 14H3V5h18z"/></svg>Đưa lên live
       </button>
@@ -157,6 +160,7 @@
         <button class="btn scene-btn ma" data-open-scene="ma"><span class="sb-ico">👻</span><span><b>Phát Live Ma Online</b><small>Chuyển live sang Nhà Ma + mở màn hình phát</small></span></button>
         <button class="btn scene-btn chua" data-open-scene="chua"><span class="sb-ico">🪷</span><span><b>Phát Đi Chùa Online</b><small>Chuyển live sang chánh điện + mở màn hình phát</small></span></button>
         <button class="btn scene-btn rap" data-open-scene="rap"><span class="sb-ico">🎬</span><span><b>Phát Rạp Phim Online</b><small>Chuyển live sang rạp phim + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn vua" data-open-scene="vua"><span class="sb-ico">👑</span><span><b>Phát Vua Tiếng Việt</b><small>Chuyển live sang giảng đường đoán chữ + mở màn hình phát</small></span></button>
       </div>
 
       <div class="live-guide">
@@ -636,6 +640,20 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= VUA TIẾNG VIỆT ================= -->
+    <section class="view scene-view vua-view" id="view-vua">
+      <header class="page-head">
+        <div>
+          <h1>👑 Vua Tiếng Việt</h1>
+          <p class="muted">Đang mở tab này thì giảng đường đoán chữ chạy trên live. Người xem comment đáp án, ai đúng đầu tiên là MVP. Dùng chung kết nối TikTok với StudioLive.</p>
+        </div>
+      </header>
+      <div class="vua-host">
+        <iframe id="vua-control" title="Bảng điều khiển Vua Tiếng Việt" allow="clipboard-write; autoplay"></iframe>
+        <div class="vua-error" id="vua-error" hidden></div>
       </div>
     </section>
 

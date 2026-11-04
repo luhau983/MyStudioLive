@@ -16,8 +16,9 @@ const MEDIA_TYPES = {
  * OBS / TikTok Live Studio thêm Browser Source trỏ tới http://localhost:<port>
  */
 class OverlayServer {
-  constructor({ getConfig, getSnapshot, getPaused }) {
+  constructor({ getConfig, getSnapshot, getPaused, getRedirect }) {
     this.getConfig = getConfig;
+    this.getRedirect = getRedirect || (() => null);
     this.getPaused = getPaused || (() => false);
     this.getSnapshot = getSnapshot;
     this.server = null;
@@ -44,6 +45,14 @@ class OverlayServer {
         console.error('[tts]', e.message);
         res.status(500).json({ error: 'TTS failed' });
       }
+    });
+
+    // Cảnh chạy trên server riêng (Vua Tiếng Việt): chuyển hướng mọi màn hình phát sang đó
+    app.get('/', (req, res, next) => {
+      const to = this.getRedirect(req);
+      if (!to) return next();
+      res.set('Cache-Control', 'no-store');
+      res.redirect(302, to);
     });
 
     app.use(express.static(path.join(__dirname, '..', 'overlay'), { index: 'index.html' }));

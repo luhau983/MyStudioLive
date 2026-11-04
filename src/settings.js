@@ -17,7 +17,7 @@ const DEFAULTS = {
     showLikeCounter: true,
     showViewerCounter: true,
     showTopGifter: true,
-    mode: 'game',               // game (Nhà Ma) | cards (thẻ bình luận) | chua (Đi Chùa) | rap (Rạp Phim)
+    mode: 'game',               // game (Nhà Ma) | cards (thẻ bình luận) | chua (Đi Chùa) | rap (Rạp Phim) | vua (Vua Tiếng Việt)
     rapName: '',                // tên rạp (tiêu đề + giọng đọc)
     rapVoice: true,
     rapGreet: true,
@@ -105,7 +105,7 @@ class Settings {
     o.ambientVolume = Math.min(1, Math.max(0, o.ambientVolume));
     o.liveBoost = Math.min(40, Math.max(0, Math.round(o.liveBoost)));
     if (!['drone', 'wind', 'rain', 'church', 'heartbeat', 'musicbox', 'whispers', 'forest'].includes(o.ambientPreset)) o.ambientPreset = 'drone';
-    if (!['game', 'cards', 'chua', 'rap'].includes(o.mode)) o.mode = 'game';
+    if (!['game', 'cards', 'chua', 'rap', 'vua'].includes(o.mode)) o.mode = 'game';
     o.rapName = String(o.rapName).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 40);
     o.rapRate = Math.min(1.3, Math.max(0.6, o.rapRate));
     if (!['classic', 'gold', 'imax', 'home'].includes(o.rapTheme)) o.rapTheme = 'classic';

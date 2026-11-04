@@ -26,10 +26,72 @@ async function connectLive(username) {
   }
 }
 
+// ---- Vua Tiếng Việt: game đoán chữ chạy server riêng (vua/server.mjs), dùng chung kết nối TikTok ----
+let vua = null;
+let vuaState = { running: false, port: 0, error: '', dataDir: '' };
+const VUA_HOSTS = ['127.0.0.1', 'localhost', 'lvh.me'];
+
+function vuaRedirect(req) {
+  if (!vua || settings.get().overlay.mode !== 'vua') return null;
+  const host = VUA_HOSTS.includes(req.hostname) ? req.hostname : '127.0.0.1';
+  const q = String(req.originalUrl.split('?')[1] || '');
+  const silent = new URLSearchParams(q).get('mute') === '1';
+  return `http://${host}:${vuaState.port}/overlay.html?sl=1${silent ? '&silent=1' : ''}${q ? '&' + q : ''}`;
+}
+
+async function startVua() {
+  const fs = require('fs');
+  const { pathToFileURL } = require('url');
+  const root = path.join(__dirname, '..', 'vua');
+  const dataDir = path.join(app.getPath('userData'), 'vua');
+  const paths = { dataDir, questionsPath: path.join(dataDir, 'questions.json'), logsDir: path.join(dataDir, 'logs') };
+  try {
+    // Đã dùng app Vua Tiếng Việt riêng trước đó: mang theo câu hỏi đã import, điểm và cài đặt
+    const legacy = path.join(app.getPath('appData'), 'VuaTiengViet');
+    if (!fs.existsSync(paths.questionsPath) && fs.existsSync(path.join(legacy, 'questions.json'))) {
+      fs.mkdirSync(dataDir, { recursive: true });
+      for (const f of ['questions.json', 'config.json', 'scores.json']) {
+        if (fs.existsSync(path.join(legacy, f))) fs.copyFileSync(path.join(legacy, f), path.join(dataDir, f));
+      }
+    }
+    const { initializeData } = await import(pathToFileURL(path.join(root, 'electron', 'runtime.mjs')).href);
+    const { createApp } = await import(pathToFileURL(path.join(root, 'server.mjs')).href);
+    await initializeData(paths, path.join(root, 'questions.json'));
+    const bridge = {
+      get studioPort() { return serverState.port; },
+      get overlayURL() { return `http://localhost:${serverState.port}`; },
+      initialStatus: { status: live.status, username: live.username },
+      current: () => ({ status: live.status, username: live.username }),
+      async connect(username) {
+        const s = live.snapshot();
+        if (s.status === 'live' && s.username.toLowerCase() === username.toLowerCase()) {
+          vua.liveStatus({ status: 'live', username: s.username });
+          return { ok: true };
+        }
+        const r = await connectLive(username);
+        return r;
+      },
+      disconnect: () => live.stop()
+    };
+    const opts = { dataDir, questionsPath: paths.questionsPath, bridge };
+    try {
+      vua = await createApp({ ...opts, port: settings.get().port + 1 });
+    } catch (e) {
+      if (e.code !== 'EADDRINUSE') throw e;
+      vua = await createApp({ ...opts, port: 0 });
+    }
+    vuaState = { running: true, port: vua.server.address().port, error: '', dataDir };
+  } catch (e) {
+    console.error('[vua]', e);
+    vuaState = { running: false, port: 0, error: e.message, dataDir };
+  }
+}
+
 const overlay = new OverlayServer({
   getConfig: () => settings.get(),
   getSnapshot: () => live.snapshot(),
-  getPaused: () => paused
+  getPaused: () => paused,
+  getRedirect: vuaRedirect
 });
 
 let serverState = { running: false, port: 0, error: '', clients: 0 };
@@ -67,7 +129,10 @@ const send = (channel, payload) => {
 };
 
 // ---- Chuyển tiếp sự kiện live -> dashboard + overlay ----
-live.on('status', (s) => send('live:status', s));
+live.on('status', (s) => {
+  send('live:status', s);
+  if (vua) vua.liveStatus(s);
+});
 live.on('stats', (s) => {
   send('live:stats', s);
   overlay.broadcast('stats', s);
@@ -75,6 +140,8 @@ live.on('stats', (s) => {
 live.on('event', (e) => {
   send('live:event', e);
   overlay.broadcast('live', e);
+  // chỉ chấm điểm khi Vua Tiếng Việt đang là cảnh trên live
+  if (vua && !paused && settings.get().overlay.mode === 'vua') vua.ingest(e);
 });
 overlay.onClients = (n) => {
   serverState.clients = n;
@@ -120,6 +187,11 @@ function createWindow() {
 
   // Link ngoài mở bằng trình duyệt mặc định
   win.webContents.setWindowOpenHandler(({ url }) => {
+    // Nút "Mở overlay LIVE" trong bảng điều khiển Vua Tiếng Việt -> chuyển cảnh + mở màn hình phát của StudioLive
+    if (vuaState.running && /^http:\/\/(127\.0\.0\.1|localhost):\d+\/overlay\.html/.test(url) && new URL(url).port === String(vuaState.port)) {
+      send('vua:goLive');
+      return { action: 'deny' };
+    }
     if (/^https?:\/\//.test(url)) shell.openExternal(url);
     return { action: 'deny' };
   });
@@ -133,6 +205,7 @@ ipcMain.handle('app:init', () => ({
   server: serverState,
   live: live.snapshot(),
   paused,
+  vua: vuaState,
   platform: process.platform,
   version: app.getVersion()
 }));
@@ -144,6 +217,8 @@ ipcMain.handle('settings:update', async (_e, patch) => {
   if (next.overlay.mode !== before.overlay.mode) {
     // đổi chế độ: mọi trang đang hiện cảnh (LIVE Studio, OBS, xem trước) tải lại để sang cảnh mới
     overlay.broadcast('reload');
+    // các màn hình đang ở cảnh Vua Tiếng Việt (server riêng) quay về StudioLive
+    if (before.overlay.mode === 'vua' && vua) vua.navigateOverlays();
   }
   if (next.port !== before.port) await startServer(next.port);
   return { settings: next, server: serverState };
@@ -332,6 +407,7 @@ if (!gotLock) {
   app.whenReady().then(async () => {
     settings = new Settings(app.getPath('userData'));
     await startServer(settings.get().port);
+    await startVua();
     createWindow();
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -351,8 +427,15 @@ if (!gotLock) {
     if (process.platform !== 'darwin') app.quit();
   });
 
-  app.on('before-quit', () => {
+  // Đợi Vua Tiếng Việt ghi xong điểm / câu hỏi đang lưu rồi mới thoát
+  let vuaClosed = false;
+  app.on('before-quit', (e) => {
     live.stop(true);
     overlay.stop();
+    if (!vua || vuaClosed) return;
+    e.preventDefault();
+    const v = vua;
+    vua = null;
+    Promise.resolve(v.close()).catch((err) => console.error('[vua]', err)).finally(() => { vuaClosed = true; app.quit(); });
   });
 }

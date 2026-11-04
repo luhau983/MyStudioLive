@@ -1,0 +1,1808 @@
+[
+  {
+    "answer": "UYÊN BÁC",
+    "hint": "Có kiến thức sâu rộng về nhiều lĩnh vực",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "MẪN TIỆP",
+    "hint": "Thông minh, nhanh trí và ứng đáp mau lẹ",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THẤU ĐÁO",
+    "hint": "Hiểu hoặc xem xét vấn đề đến nơi đến chốn",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TƯỜNG MINH",
+    "hint": "Rõ ràng, được diễn đạt trực tiếp và dễ nhận biết",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THẬN TRỌNG",
+    "hint": "Cân nhắc kỹ để tránh sai sót hoặc điều bất lợi",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHÍNH TRỰC",
+    "hint": "Ngay thẳng, giữ lẽ phải, không làm điều gian dối",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LIÊM KHIẾT",
+    "hint": "Trong sạch, không tham của cải hay lợi ích bất chính",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KHOAN DUNG",
+    "hint": "Rộng lòng tha thứ cho lỗi lầm của người khác",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BẤT KHUẤT",
+    "hint": "Không chịu khuất phục trước sức ép hoặc khó khăn",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KIÊN CƯỜNG",
+    "hint": "Vững vàng, bền chí trước thử thách lớn",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NHẪN NẠI",
+    "hint": "Bền lòng làm việc dù khó khăn kéo dài",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐIỀM TĨNH",
+    "hint": "Bình tĩnh, giữ được sự chủ động trong cảm xúc",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TẾ NHỊ",
+    "hint": "Khéo léo và kín đáo khi ứng xử với điều nhạy cảm",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TINH TẾ",
+    "hint": "Nhạy bén nhận ra những khác biệt nhỏ và sâu sắc",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "QUẢ CẢM",
+    "hint": "Can đảm và kiên quyết hành động trước nguy hiểm",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HÀO HIỆP",
+    "hint": "Rộng rãi, sẵn lòng giúp người gặp khó khăn",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VẸN TOÀN",
+    "hint": "Đầy đủ, trọn vẹn và không có phần nào thiếu sót",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRÁC VIỆT",
+    "hint": "Xuất sắc, vượt xa mức thông thường",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VIÊN MÃN",
+    "hint": "Đầy đủ, tốt đẹp và đạt đến sự trọn vẹn",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THANH LIÊM",
+    "hint": "Trong sạch, không nhận lợi lộc bất chính, thường nói về người có chức quyền",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TƯ DUY",
+    "hint": "Hoạt động suy nghĩ để nhận biết và giải quyết vấn đề",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LẬP LUẬN",
+    "hint": "Sắp xếp lý lẽ để đi đến hoặc bảo vệ một kết luận",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHÂN TÍCH",
+    "hint": "Tách một vấn đề thành các phần để xem xét rõ hơn",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TỔNG HỢP",
+    "hint": "Kết hợp các phần đã xem xét để có nhận định chung",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỐI CHIẾU",
+    "hint": "Đặt các sự vật cạnh nhau để tìm điểm giống và khác",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GIẢ THUYẾT",
+    "hint": "Cách giải thích được đề xuất và còn cần kiểm chứng",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SUY LUẬN",
+    "hint": "Dựa vào điều đã biết để rút ra một nhận định mới",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KHÁI QUÁT",
+    "hint": "Rút ra những đặc điểm chung từ nhiều trường hợp cụ thể",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRỪU TƯỢNG",
+    "hint": "Tách khỏi những nét riêng, chỉ giữ các thuộc tính được xét đến",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CỤ THỂ",
+    "hint": "Rõ ràng, riêng biệt và có thể chỉ ra bằng chi tiết",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HỆ THỐNG",
+    "hint": "Tập hợp các thành phần có liên hệ và tác động lẫn nhau",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TƯƠNG QUAN",
+    "hint": "Mối liên hệ hoặc sự thay đổi có liên quan giữa các yếu tố",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NHÂN QUẢ",
+    "hint": "Mối quan hệ giữa nguyên nhân và kết quả",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TIỀN ĐỀ",
+    "hint": "Điều được dùng làm cơ sở để xây dựng một lập luận",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LUẬN ĐIỂM",
+    "hint": "Ý kiến chính được nêu ra để bàn luận và chứng minh",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LUẬN CỨ",
+    "hint": "Lý lẽ hoặc bằng chứng dùng để làm rõ một ý kiến",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHỨNG MINH",
+    "hint": "Dùng lý lẽ và bằng chứng để cho thấy một nhận định là đúng",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHẢN BIỆN",
+    "hint": "Nêu lý lẽ để xem xét, đánh giá một quan điểm hoặc lập luận",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SUY DIỄN",
+    "hint": "Từ nguyên lý chung rút ra kết luận cho trường hợp riêng",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "QUY NẠP",
+    "hint": "Từ nhiều trường hợp riêng rút ra nhận định chung",
+    "category": "Từ khó · Tư duy",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ẨN DỤ",
+    "hint": "Gọi sự vật bằng tên sự vật khác có nét tương đồng",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HOÁN DỤ",
+    "hint": "Gọi sự vật bằng tên sự vật khác có quan hệ gần gũi với nó",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NHÂN HÓA",
+    "hint": "Gán đặc điểm hoặc hành động của con người cho sự vật",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐIỆP NGỮ",
+    "hint": "Lặp lại từ hoặc cụm từ để nhấn mạnh ý hay tạo nhịp điệu",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TƯƠNG PHẢN",
+    "hint": "Đặt những đặc điểm đối lập cạnh nhau để làm nổi bật chúng",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHƠI CHỮ",
+    "hint": "Khai thác âm hoặc nghĩa của từ để tạo ý nghĩa thú vị, bất ngờ",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HÀM SÚC",
+    "hint": "Ít lời nhưng chứa đựng và gợi ra nhiều ý nghĩa",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SÚC TÍCH",
+    "hint": "Ngắn gọn mà vẫn đầy đủ những ý cần diễn đạt",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KHÚC CHIẾT",
+    "hint": "Rõ ràng, mạch lạc, các ý được phân biệt rành mạch",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THANH ĐIỆU",
+    "hint": "Sự biến đổi cao độ có thể làm khác nghĩa của tiếng trong tiếng Việt",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ÂM TIẾT",
+    "hint": "Đơn vị phát âm tự nhiên, thường tương ứng với một tiếng",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỒNG ÂM",
+    "hint": "Giống nhau về âm đọc nhưng khác nghĩa",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỒNG NGHĨA",
+    "hint": "Có nghĩa giống hoặc gần giống nhau, thường nói về các từ",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRÁI NGHĨA",
+    "hint": "Có nghĩa đối lập nhau, thường nói về các từ",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TỪ LÁY",
+    "hint": "Từ phức có sự lặp lại về âm giữa các tiếng",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TỪ GHÉP",
+    "hint": "Từ phức tạo bằng cách kết hợp các tiếng có quan hệ về nghĩa",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NGỮ CẢNH",
+    "hint": "Hoàn cảnh sử dụng giúp xác định nghĩa của lời nói hoặc từ ngữ",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NGỤ Ý",
+    "hint": "Ý được gửi gắm kín đáo, không nói ra trực tiếp",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐIỂN TÍCH",
+    "hint": "Tích chuyện xưa thường được vận dụng trong văn chương",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BÚT PHÁP",
+    "hint": "Cách sử dụng phương tiện nghệ thuật để thể hiện nội dung trong tác phẩm",
+    "category": "Từ khó · Ngôn ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HỮU XẠ TỰ NHIÊN HƯƠNG",
+    "hint": "Có phẩm chất tốt thì tự khắc được người khác biết đến",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỒNG SÀNG DỊ MỘNG",
+    "hint": "Ở cùng nhau hoặc cùng làm một việc nhưng nuôi ý định khác nhau",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NƯỚC ĐẾN CHÂN MỚI NHẢY",
+    "hint": "Đợi đến lúc cấp bách mới bắt đầu lo giải quyết",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CƯỠI NGỰA XEM HOA",
+    "hint": "Xem xét qua loa, không tìm hiểu kỹ càng",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ẾCH NGỒI ĐÁY GIẾNG",
+    "hint": "Hiểu biết hạn hẹp nhưng lại tưởng mình biết rộng",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỨNG NÚI NÀY TRÔNG NÚI NỌ",
+    "hint": "Không bằng lòng với điều mình có, luôn mong điều khác hơn",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐẦU VOI ĐUÔI CHUỘT",
+    "hint": "Khởi đầu rất lớn nhưng kết thúc lại nhỏ bé, kém cỏi",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HÁ MIỆNG CHỜ SUNG",
+    "hint": "Thụ động chờ lợi ích đến mà không chịu làm việc",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GẮP LỬA BỎ TAY NGƯỜI",
+    "hint": "Vu khống hoặc đổ việc xấu cho người khác",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NÉM ĐÁ GIẤU TAY",
+    "hint": "Gây chuyện xấu rồi che giấu vai trò của mình",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TREO ĐẦU DÊ BÁN THỊT CHÓ",
+    "hint": "Quảng cáo một đằng nhưng thực chất lại làm một nẻo",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "MƯỢN GIÓ BẺ MĂNG",
+    "hint": "Lợi dụng hoàn cảnh thuận lợi để thực hiện ý đồ riêng",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHÂN LẤM TAY BÙN",
+    "hint": "Chỉ cuộc sống lao động nông nghiệp vất vả",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHÍN BỎ LÀM MƯỜI",
+    "hint": "Bỏ qua sai sót nhỏ để giữ hòa khí",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐƯỢC VOI ĐÒI TIÊN",
+    "hint": "Đã được nhiều lại còn tham muốn nhiều hơn nữa",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "MỘT NẮNG HAI SƯƠNG",
+    "hint": "Chỉ sự lao động vất vả từ sớm đến khuya",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LÁ LÀNH ĐÙM LÁ RÁCH",
+    "hint": "Người có điều kiện tốt giúp người đang khó khăn",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĂN QUẢ NHỚ KẺ TRỒNG CÂY",
+    "hint": "Hưởng thành quả phải nhớ người đã tạo nên thành quả đó",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ÔN CỐ TRI TÂN",
+    "hint": "Ôn lại điều cũ để hiểu thêm điều mới",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BÁCH CHIẾN BÁCH THẮNG",
+    "hint": "Đánh trận nào cũng thắng trận ấy",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHÙ SA",
+    "hint": "Vật liệu nhỏ do dòng nước mang theo rồi lắng đọng, thường làm đất thêm màu mỡ",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THỦY TRIỀU",
+    "hint": "Sự lên xuống có chu kỳ của mực nước biển do sức hút của Mặt Trăng và Mặt Trời",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NHẬT THỰC",
+    "hint": "Hiện tượng Mặt Trăng che khuất một phần hoặc toàn bộ Mặt Trời khi nhìn từ Trái Đất",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NGUYỆT THỰC",
+    "hint": "Hiện tượng Mặt Trăng đi vào vùng bóng của Trái Đất",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "XUÂN PHÂN",
+    "hint": "Mốc thiên văn mùa xuân ở bán cầu Bắc khi ngày và đêm gần bằng nhau",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HẠ CHÍ",
+    "hint": "Mốc trong năm khi bán cầu Bắc có thời gian ban ngày dài nhất",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THU PHÂN",
+    "hint": "Mốc thiên văn mùa thu ở bán cầu Bắc khi ngày và đêm gần bằng nhau",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐÔNG CHÍ",
+    "hint": "Mốc trong năm khi bán cầu Bắc có thời gian ban ngày ngắn nhất",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KHÍ QUYỂN",
+    "hint": "Lớp chất khí bao quanh một hành tinh",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SINH QUYỂN",
+    "hint": "Phần của Trái Đất có sự sống tồn tại",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HỆ SINH THÁI",
+    "hint": "Quần xã sinh vật cùng môi trường sống và những mối tác động giữa chúng",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐA DẠNG SINH HỌC",
+    "hint": "Sự phong phú về loài, nguồn gen và các hệ sinh thái",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "QUANG HỢP",
+    "hint": "Quá trình dùng năng lượng ánh sáng để tạo chất hữu cơ ở cây xanh",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HÔ HẤP",
+    "hint": "Quá trình trao đổi khí hoặc giải phóng năng lượng từ chất hữu cơ trong cơ thể sống",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NẢY MẦM",
+    "hint": "Giai đoạn hạt bắt đầu phát triển thành cây non",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "DIỆP LỤC",
+    "hint": "Sắc tố màu xanh tham gia hấp thụ ánh sáng trong quang hợp",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRẦM TÍCH",
+    "hint": "Vật liệu lắng đọng và tích tụ sau khi được nước, gió hoặc băng vận chuyển",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHONG HÓA",
+    "hint": "Quá trình đá bị phá hủy hoặc biến đổi ngay tại chỗ trên bề mặt Trái Đất",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "XÓI MÒN",
+    "hint": "Quá trình đất hoặc đá bị bào mòn và cuốn đi bởi các tác nhân tự nhiên",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BỒI TỤ",
+    "hint": "Quá trình vật liệu được vận chuyển đến rồi tích lại ở nơi mới",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THÔNG TUỆ",
+    "hint": "Sáng suốt, hiểu biết sâu sắc và thấu đáo mọi lẽ",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KHẢNG KHÁI",
+    "hint": "Có khí phách cứng cỏi, không chịu khuất phục hay cầu cạnh ai",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CƯƠNG TRỰC",
+    "hint": "Cứng cỏi và ngay thẳng, không chịu luồn cúi",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐÔN HẬU",
+    "hint": "Hiền lành, tử tế, ăn ở có tình có nghĩa",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐẠM BẠC",
+    "hint": "Đơn sơ, ít ỏi, không cầu kỳ (thường nói về bữa ăn, cuộc sống)",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THANH BẠCH",
+    "hint": "Nghèo nhưng trong sạch, không tham lam",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHÓNG KHOÁNG",
+    "hint": "Rộng rãi, thoải mái, không bị gò bó bởi những điều nhỏ nhặt",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VÔ THƯỜNG",
+    "hint": "Theo nhà Phật, mọi sự vật đều biến đổi, không có gì tồn tại mãi",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KIỆT XUẤT",
+    "hint": "Tài năng vượt trội hẳn so với những người cùng thời",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LỖI LẠC",
+    "hint": "Tài năng và phẩm cách sáng ngời, hơn hẳn người thường",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ANH MINH",
+    "hint": "Tài giỏi và sáng suốt (thường dùng khen vua, người lãnh đạo)",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NGUYÊN KHÍ",
+    "hint": "Theo bia Văn Miếu, người tài đức được ví là thứ này của quốc gia",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRUNG KIÊN",
+    "hint": "Một lòng một dạ, vững vàng không lay chuyển trước khó khăn",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRÁNG LỆ",
+    "hint": "Đẹp rực rỡ, lộng lẫy và đồ sộ",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TĨNH MỊCH",
+    "hint": "Yên lặng hoàn toàn, vắng vẻ, không một tiếng động",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HOANG SƠ",
+    "hint": "Còn nguyên vẻ tự nhiên, chưa bị con người tác động",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ƯU TƯ",
+    "hint": "Lo nghĩ, buồn rầu, mang nhiều tâm sự",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRẦM MẶC",
+    "hint": "Lặng lẽ, ít nói, có vẻ suy tư sâu lắng",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "MẪN CÁN",
+    "hint": "Nhanh nhẹn, giỏi giang và siêng năng trong công việc",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHÙ DU",
+    "hint": "Ngắn ngủi, chóng tàn như kiếp loài côn trùng sớm sinh tối chết",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TANG THƯƠNG",
+    "hint": "Những đổi thay lớn lao của cuộc đời, như bãi bể hóa nương dâu",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHONG TRẦN",
+    "hint": "Gian truân, vất vả, từng trải nhiều sóng gió cuộc đời",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LƯU LẠC",
+    "hint": "Trôi dạt nơi đất khách, không nơi nương tựa",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRUÂN CHUYÊN",
+    "hint": "Gian nan, vất vả, gặp nhiều khó khăn trắc trở",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HỒNG NHAN",
+    "hint": "Từ văn chương chỉ người con gái đẹp",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BẠC MỆNH",
+    "hint": "Số phận mỏng manh, gặp nhiều bất hạnh",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "QUỐC SẮC",
+    "hint": "Vẻ đẹp nhất nước, thường đi đôi với thiên hương",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRI ÂM",
+    "hint": "Người hiểu thấu lòng mình, như tích Bá Nha và Tử Kỳ",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BẰNG HỮU",
+    "hint": "Từ Hán Việt chỉ bạn bè",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHU THÊ",
+    "hint": "Từ Hán Việt chỉ vợ chồng",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GIANG SƠN",
+    "hint": "Sông núi, dùng để chỉ đất nước",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "XÃ TẮC",
+    "hint": "Đất nước, quốc gia; nghĩa gốc là thần đất và thần lúa",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HÀO KIỆT",
+    "hint": "Người có tài năng và chí khí hơn người",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SĨ PHU",
+    "hint": "Tầng lớp trí thức có danh vọng trong xã hội phong kiến",
+    "category": "Từ khó · Hán Việt",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐÁ BÁT",
+    "hint": "Hoàn thành thành ngữ chỉ kẻ vô ơn: Ăn cháo …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THẤM LÂU",
+    "hint": "Hoàn thành thành ngữ về tác động từ từ mà bền bỉ: Mưa dầm …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐÁ MÒN",
+    "hint": "Hoàn thành thành ngữ về sức mạnh của sự kiên trì: Nước chảy …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "DÃ TẬT",
+    "hint": "Hoàn thành tục ngữ: Thuốc đắng …, sự thật mất lòng",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHIM LỒNG",
+    "hint": "Hoàn thành thành ngữ chỉ cảnh mất tự do: Cá chậu …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐẦU VỊT",
+    "hint": "Hoàn thành thành ngữ chỉ lời khuyên vô ích: Nước đổ …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TAI TRÂU",
+    "hint": "Hoàn thành thành ngữ chỉ việc nói với người không hiểu: Đàn gảy …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BỎ VỎ",
+    "hint": "Hoàn thành thành ngữ chỉ kẻ lợi dụng xong rồi phũ phàng: Vắt chanh …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "RÚT VÁN",
+    "hint": "Hoàn thành thành ngữ chỉ kẻ bội bạc sau khi xong việc: Qua cầu …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LÂU ĐẦY TỔ",
+    "hint": "Hoàn thành thành ngữ về tích góp dần dần: Kiến tha …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KÊU TO",
+    "hint": "Hoàn thành tục ngữ chê người ít hiểu biết mà hay khoe: Thùng rỗng …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VI QUÝ",
+    "hint": "Hoàn thành thành ngữ lấy hòa khí làm trọng: Dĩ hòa …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TÂM XÀ",
+    "hint": "Hoàn thành thành ngữ chỉ kẻ nói lời hiền mà lòng độc ác: Khẩu Phật …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HẬU ỦNG",
+    "hint": "Hoàn thành thành ngữ chỉ cảnh đông người hộ tống trước sau: Tiền hô …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CỘNG KHỔ",
+    "hint": "Hoàn thành thành ngữ về sự sẻ chia ngọt bùi: Đồng cam …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TÒNG TÂM",
+    "hint": "Hoàn thành thành ngữ chỉ muốn làm mà sức không đủ: Lực bất …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CÁNH SINH",
+    "hint": "Hoàn thành thành ngữ về việc tự dựa vào sức mình: Tự lực …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NHƯ Ý",
+    "hint": "Hoàn thành lời chúc đầu năm: Vạn sự …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VẠN HÓA",
+    "hint": "Hoàn thành thành ngữ chỉ sự thay đổi khôn lường: Thiên biến …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VÔ NHỊ",
+    "hint": "Hoàn thành thành ngữ chỉ thứ duy nhất trên đời: Độc nhất …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "RĂNG LẠNH",
+    "hint": "Hoàn thành thành ngữ về quan hệ gắn bó, nương tựa nhau: Môi hở …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LÀM NGỌT",
+    "hint": "Hoàn thành thành ngữ chỉ sự cam chịu điều đắng cay: Ngậm bồ hòn …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐƯỜNG CŨ",
+    "hint": "Hoàn thành thành ngữ chỉ thói xấu khó bỏ: Ngựa quen …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GẶP LÀNH",
+    "hint": "Hoàn thành tục ngữ khuyên sống tốt: Ở hiền …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GẶT BÃO",
+    "hint": "Hoàn thành thành ngữ chỉ làm điều xấu sẽ chịu hậu quả lớn: Gieo gió …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NÓI THẲNG",
+    "hint": "Hoàn thành tục ngữ đề cao sự ngay thật: Ăn ngay …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LO LÀM CHUỒNG",
+    "hint": "Hoàn thành tục ngữ chê sự chậm trễ khi việc đã rồi: Mất bò mới …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HÒN NÚI CAO",
+    "hint": "Hoàn thành ca dao: Một cây làm chẳng nên non, ba cây chụm lại nên …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VÔ ÁY NÁY",
+    "hint": "Hoàn thành thành ngữ khuyên cẩn thận trước: Cẩn tắc …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GIAI HUYNH ĐỆ",
+    "hint": "Hoàn thành thành ngữ nghĩa bốn biển đều là anh em: Tứ hải …",
+    "category": "Từ khó · Thành ngữ",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BẠCH ĐẰNG",
+    "hint": "Dòng sông gắn với ba trận thủy chiến lẫy lừng có cắm cọc gỗ",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHI LĂNG",
+    "hint": "Cửa ải hiểm yếu ở Lạng Sơn, nơi nghĩa quân Lam Sơn diệt viện binh Liễu Thăng năm 1427",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỐNG ĐA",
+    "hint": "Gò ở Hà Nội gắn với chiến thắng của vua Quang Trung mùa xuân Kỷ Dậu 1789",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "RẠCH GẦM",
+    "hint": "Khúc sông Tiền nơi Nguyễn Huệ phục kích đánh tan quân Xiêm năm 1785",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NHƯ NGUYỆT",
+    "hint": "Phòng tuyến trên sông Cầu, nơi Lý Thường Kiệt chặn đứng quân Tống",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VĂN LANG",
+    "hint": "Nhà nước đầu tiên của người Việt dưới thời các vua Hùng",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ÂU LẠC",
+    "hint": "Nhà nước do An Dương Vương lập nên sau thời Hùng Vương",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CỔ LOA",
+    "hint": "Tòa thành hình xoắn ốc gắn với An Dương Vương và chiếc nỏ thần",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐẠI CỒ VIỆT",
+    "hint": "Quốc hiệu nước ta do Đinh Tiên Hoàng đặt năm 968",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐẠI VIỆT",
+    "hint": "Quốc hiệu nước ta từ năm 1054 dưới thời Lý Thánh Tông",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HOA LƯ",
+    "hint": "Kinh đô nước ta dưới thời nhà Đinh và Tiền Lê",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HỊCH TƯỚNG SĨ",
+    "hint": "Bài văn Trần Hưng Đạo viết để khích lệ quân lính chống giặc Nguyên Mông",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "DIÊN HỒNG",
+    "hint": "Hội nghị vua Trần triệu tập các bô lão để hỏi nên hòa hay nên đánh",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHƯƠNG DƯƠNG",
+    "hint": "Bến sông nơi Trần Quang Khải đánh tan quân Nguyên năm 1285",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LAM SƠN",
+    "hint": "Vùng đất ở Thanh Hóa nơi Lê Lợi dựng cờ khởi nghĩa năm 1418",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VĂN MIẾU",
+    "hint": "Nơi thờ Khổng Tử được xây ở kinh thành năm 1070 thời Lý",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "QUỐC TỬ GIÁM",
+    "hint": "Được xem là trường đại học đầu tiên của nước ta, lập năm 1076",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRẠNG NGUYÊN",
+    "hint": "Danh hiệu dành cho người đỗ đầu kỳ thi Đình thời phong kiến",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BẢNG NHÃN",
+    "hint": "Danh hiệu dành cho người đỗ thứ hai trong kỳ thi Đình",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THÁM HOA",
+    "hint": "Danh hiệu dành cho người đỗ thứ ba trong kỳ thi Đình",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VẠN XUÂN",
+    "hint": "Quốc hiệu do Lý Nam Đế đặt năm 544",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐẠI NAM",
+    "hint": "Quốc hiệu nước ta từ năm 1838 dưới thời vua Minh Mạng",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐIỆN BIÊN PHỦ",
+    "hint": "Chiến thắng năm 1954 được ví là lừng lẫy năm châu, chấn động địa cầu",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NGỌ MÔN",
+    "hint": "Cổng chính phía nam của Hoàng thành Huế",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BIA TIẾN SĨ",
+    "hint": "Những tấm đá khắc tên người đỗ đại khoa, đặt trên lưng rùa ở Văn Miếu",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHÚ XUÂN",
+    "hint": "Tên gọi xưa của Huế khi là kinh đô thời Quang Trung",
+    "category": "Từ khó · Lịch sử",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHAN XI PĂNG",
+    "hint": "Đỉnh núi cao nhất Việt Nam, được mệnh danh là nóc nhà Đông Dương",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard",
+    "aliases": [
+      "FANSIPAN"
+    ]
+  },
+  {
+    "answer": "HOÀNG LIÊN SƠN",
+    "hint": "Dãy núi cao và đồ sộ nhất Việt Nam ở vùng Tây Bắc",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "MÃ PÍ LÈNG",
+    "hint": "Con đèo hiểm trở ở cực Bắc, nhìn xuống dòng Nho Quế",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HẢI VÂN",
+    "hint": "Con đèo giữa Huế và Đà Nẵng, được gọi là Thiên hạ đệ nhất hùng quan",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỒNG THÁP MƯỜI",
+    "hint": "Vùng trũng ngập nước ở Nam Bộ, nổi tiếng với sen và tràm",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TÂY NGUYÊN",
+    "hint": "Vùng đất đỏ ba-dan rộng lớn, quê hương của cồng chiêng và cà phê",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHÂU THỔ",
+    "hint": "Vùng đồng bằng hình thành ở cửa sông nhờ phù sa bồi đắp",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "XÍCH ĐẠO",
+    "hint": "Đường tròn tưởng tượng chia Trái Đất thành bán cầu Bắc và bán cầu Nam",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KINH TUYẾN",
+    "hint": "Đường nối cực Bắc với cực Nam trên bề mặt Trái Đất",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VĨ TUYẾN",
+    "hint": "Vòng tròn trên bề mặt Trái Đất song song với đường xích đạo",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GIÓ MÙA",
+    "hint": "Hoàn lưu khí quyển đổi hướng theo hè và đông, đặc trưng khí hậu nước ta",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHONG NHA",
+    "hint": "Động nổi tiếng ở miền Trung, cùng Kẻ Bàng tạo nên di sản thiên nhiên thế giới",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SƠN ĐOÒNG",
+    "hint": "Hang động tự nhiên lớn nhất thế giới, nằm trong vườn quốc gia Phong Nha – Kẻ Bàng",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "MŨI CÀ MAU",
+    "hint": "Điểm cực Nam trên đất liền của Việt Nam",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LŨNG CÚ",
+    "hint": "Nơi có cột cờ đánh dấu điểm cực Bắc của Việt Nam",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRÀNG AN",
+    "hint": "Quần thể danh thắng ở Ninh Bình, di sản văn hóa và thiên nhiên thế giới",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "MỸ SƠN",
+    "hint": "Thánh địa của người Chăm ở miền Trung với các đền tháp gạch cổ",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CÁT TIÊN",
+    "hint": "Vườn quốc gia ở Đông Nam Bộ, nơi từng có tê giác Java",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CÚC PHƯƠNG",
+    "hint": "Vườn quốc gia đầu tiên của Việt Nam, thành lập năm 1962",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỊA TRUNG HẢI",
+    "hint": "Vùng biển nằm giữa châu Âu, châu Phi và Tây Á",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ỐC ĐẢO",
+    "hint": "Vùng có nước và cây xanh hiếm hoi giữa sa mạc",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THẢO NGUYÊN",
+    "hint": "Đồng cỏ rộng lớn, bằng phẳng ở vùng khí hậu khô",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BĂNG HÀ",
+    "hint": "Khối nước đá khổng lồ trôi chậm trên đất liền dưới tác dụng trọng lực",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HẢI LƯU",
+    "hint": "Dòng nước chuyển động trong đại dương theo một hướng ổn định",
+    "category": "Từ khó · Địa lý",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRỌNG LỰC",
+    "hint": "Sức hút của Trái Đất kéo mọi vật về phía tâm của nó",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "QUÁN TÍNH",
+    "hint": "Xu hướng của vật giữ nguyên vận tốc khi không chịu tác động nào từ bên ngoài",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TỪ TRƯỜNG",
+    "hint": "Vùng không gian quanh nam châm, nơi kim la bàn bị tác động",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHÂN TỬ",
+    "hint": "Hạt nhỏ nhất của một chất còn giữ tính chất hóa học, gồm các hạt liên kết với nhau",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỒNG VỊ",
+    "hint": "Các dạng của cùng một nguyên tố có số nơtron khác nhau",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "XÚC TÁC",
+    "hint": "Chất làm tăng tốc độ phản ứng hóa học mà không bị tiêu hao",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "OXI HÓA",
+    "hint": "Quá trình một chất nhường electron, ví dụ sắt bị gỉ",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐIỆN PHÂN",
+    "hint": "Cho dòng một chiều đi qua dung dịch hay chất nóng chảy để tách chất ở các cực",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BÁN DẪN",
+    "hint": "Loại vật liệu như silic, khả năng truyền điện nằm giữa kim loại và chất cách điện",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "QUANG PHỔ",
+    "hint": "Dải màu thu được khi ánh sáng trắng đi qua lăng kính",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LĂNG KÍNH",
+    "hint": "Khối trong suốt hình tam giác dùng để tách ánh sáng thành nhiều màu",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THẤU KÍNH",
+    "hint": "Khối trong suốt có mặt cong, dùng để hội tụ hoặc phân kỳ chùm sáng",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỘNG NĂNG",
+    "hint": "Đại lượng bằng một nửa khối lượng nhân bình phương vận tốc của vật",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THẾ NĂNG",
+    "hint": "Đại lượng vật có được nhờ độ cao so với mặt đất hoặc do biến dạng đàn hồi",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SỐ NGUYÊN TỐ",
+    "hint": "Như 2, 3, 5, 7: lớn hơn 1 và chỉ chia hết cho 1 và chính nó",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GIAI THỪA",
+    "hint": "Tích các số tự nhiên từ 1 đến n, ký hiệu n!",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TIỆM CẬN",
+    "hint": "Đường thẳng mà đồ thị hàm số tiến sát dần khi đi ra vô cực",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐẠO HÀM",
+    "hint": "Khái niệm giải tích đo tốc độ thay đổi tức thời, ký hiệu f'(x)",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THIÊN HÀ",
+    "hint": "Hệ thống khổng lồ gồm hàng tỷ ngôi sao, khí và bụi vũ trụ",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NGÂN HÀ",
+    "hint": "Dải sáng bạc vắt ngang bầu trời đêm, cũng là tên quê hương của Hệ Mặt Trời",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TINH VÂN",
+    "hint": "Đám mây khí và bụi khổng lồ trong vũ trụ, nơi các ngôi sao hình thành",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SAO HÔM",
+    "hint": "Tên dân gian gọi Kim tinh khi xuất hiện ở phía tây lúc chiều tối",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SAO MAI",
+    "hint": "Tên dân gian gọi Kim tinh khi xuất hiện ở phía đông lúc rạng sáng",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NĂM ÁNH SÁNG",
+    "hint": "Đơn vị khoảng cách thiên văn, xấp xỉ 9.460 tỷ ki-lô-mét",
+    "category": "Từ khó · Khoa học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NHIỄM SẮC THỂ",
+    "hint": "Cấu trúc mang gen trong nhân tế bào, ở người có 46 chiếc",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "DI TRUYỀN",
+    "hint": "Hiện tượng con cái mang các đặc điểm giống bố mẹ",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BIẾN DỊ",
+    "hint": "Hiện tượng con sinh ra có đặc điểm khác bố mẹ và khác nhau",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐỘT BIẾN",
+    "hint": "Sự thay đổi bất thường trong vật chất di truyền như gen, nhiễm sắc thể",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TIẾN HÓA",
+    "hint": "Quá trình sinh giới biến đổi qua nhiều thế hệ, gắn với học thuyết Darwin",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HỒNG CẦU",
+    "hint": "Tế bào máu chứa hemoglobin, làm nhiệm vụ vận chuyển oxi",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BẠCH CẦU",
+    "hint": "Tế bào máu giúp cơ thể chống lại vi khuẩn và mầm bệnh",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TIỂU CẦU",
+    "hint": "Thành phần của máu giúp đông máu khi bị thương",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KHÁNG THỂ",
+    "hint": "Protein do hệ miễn dịch tạo ra để nhận diện và vô hiệu hóa mầm bệnh",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VẮC XIN",
+    "hint": "Chế phẩm tiêm hoặc uống giúp cơ thể tạo sức đề kháng với bệnh",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard",
+    "aliases": [
+      "VACCINE"
+    ]
+  },
+  {
+    "answer": "LƯỠNG CƯ",
+    "hint": "Lớp động vật như ếch, nhái, sống được cả dưới nước và trên cạn",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GIÁP XÁC",
+    "hint": "Nhóm động vật như tôm, cua, có lớp vỏ cứng bao ngoài",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THÂN MỀM",
+    "hint": "Ngành động vật gồm ốc, trai, mực",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BIẾN THÁI",
+    "hint": "Quá trình ếch hay bướm thay đổi hình dạng rõ rệt khi lớn lên",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CỘNG SINH",
+    "hint": "Mối quan hệ hai loài sống chung và cùng có lợi, như nấm và tảo trong địa y",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KÝ SINH",
+    "hint": "Lối sống bám vào cơ thể loài khác để hút chất dinh dưỡng, như giun sán",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NỘI TIẾT",
+    "hint": "Hệ gồm các tuyến đổ hormone thẳng vào máu, như tuyến giáp",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HÓA THẠCH",
+    "hint": "Di tích của sinh vật cổ được lưu giữ trong lớp đá",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TUYỆT CHỦNG",
+    "hint": "Tình trạng một loài không còn cá thể nào tồn tại",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SÁCH ĐỎ",
+    "hint": "Danh mục ghi tên các loài động thực vật quý hiếm có nguy cơ biến mất",
+    "category": "Từ khó · Sinh học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRUYỆN KIỀU",
+    "hint": "Kiệt tác thơ Nôm của Nguyễn Du, gồm 3.254 câu lục bát",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LỤC BÁT",
+    "hint": "Thể thơ dân tộc gồm từng cặp câu sáu chữ và tám chữ",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐƯỜNG LUẬT",
+    "hint": "Thể thơ cổ điển chặt chẽ về niêm, vần, đối, như thất ngôn bát cú",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LỤC VÂN TIÊN",
+    "hint": "Truyện thơ Nôm của Nguyễn Đình Chiểu đề cao đạo lý nhân nghĩa",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HỒ XUÂN HƯƠNG",
+    "hint": "Nữ sĩ được mệnh danh là Bà chúa thơ Nôm",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NGUYỄN DU",
+    "hint": "Đại thi hào dân tộc, tác giả Đoạn trường tân thanh",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TÙY BÚT",
+    "hint": "Thể văn ghi lại tự do cảm xúc, suy nghĩ của tác giả trước sự việc",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "PHÓNG SỰ",
+    "hint": "Thể loại báo chí điều tra, phản ánh chân thực đời sống, như tác phẩm của Vũ Trọng Phụng",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NGỤ NGÔN",
+    "hint": "Truyện mượn chuyện loài vật, đồ vật để răn dạy bài học đạo đức",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SỬ THI",
+    "hint": "Tác phẩm tự sự dài ca ngợi người anh hùng, như Đăm Săn",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KHỔ THƠ",
+    "hint": "Nhóm vài câu trong một bài thi ca, thường ngăn cách bằng dòng trống",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NHÃN TỰ",
+    "hint": "Chữ then chốt được xem là con mắt của câu thơ",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CHÍ PHÈO",
+    "hint": "Nhân vật nổi tiếng của Nam Cao, mở đầu truyện bằng tiếng chửi",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TẮT ĐÈN",
+    "hint": "Tiểu thuyết của Ngô Tất Tố với nhân vật chị Dậu",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SỐ ĐỎ",
+    "hint": "Tiểu thuyết trào phúng của Vũ Trọng Phụng kể về Xuân và gia đình cụ cố Hồng",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VỢ NHẶT",
+    "hint": "Truyện ngắn của Kim Lân lấy bối cảnh nạn đói năm 1945",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRẠNG QUỲNH",
+    "hint": "Nhân vật dân gian nổi tiếng thông minh, hay trêu chọc vua chúa",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THÁNH GIÓNG",
+    "hint": "Cậu bé làng Phù Đổng lớn nhanh như thổi, cưỡi ngựa sắt đánh giặc Ân",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THẠCH SANH",
+    "hint": "Chàng trai nghèo diệt chằn tinh, có cây đàn thần và niêu cơm ăn mãi không hết",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "MỴ CHÂU",
+    "hint": "Công chúa con An Dương Vương, rắc lông ngỗng chỉ đường cho Trọng Thủy",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TAO ĐÀN",
+    "hint": "Hội các nhà thơ, nổi tiếng nhất là hội 28 người thời Lê Thánh Tông",
+    "category": "Từ khó · Văn học",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "THÀNH HOÀNG",
+    "hint": "Vị thần bảo hộ của một làng, được thờ trong đình",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CỒNG CHIÊNG",
+    "hint": "Nhạc cụ bằng đồng đặc trưng của Tây Nguyên, là di sản UNESCO",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CA TRÙ",
+    "hint": "Lối hát cổ có đào nương gõ phách, kép đàn đệm theo",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐÀN ĐÁY",
+    "hint": "Nhạc cụ có cần dài, ba dây, dùng để đệm cho ca trù",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "HÁT BỘI",
+    "hint": "Tên gọi ở miền Nam của nghệ thuật tuồng",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VÍ GIẶM",
+    "hint": "Dân ca xứ Nghệ được UNESCO ghi danh năm 2014",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "BÀI CHÒI",
+    "hint": "Trò chơi kết hợp hát dân gian ở Trung Bộ, là di sản UNESCO",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "SƠN MÀI",
+    "hint": "Chất liệu hội họa truyền thống phủ nhiều lớp nhựa cây rồi đánh bóng",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "KHẢM TRAI",
+    "hint": "Nghề gắn mảnh vỏ xà cừ lên gỗ để tạo hoa văn trang trí",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "GỐM CHU ĐẬU",
+    "hint": "Dòng đồ men lam xứ Đông thế kỷ 15–17, từng xuất khẩu đi nhiều nước",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "VẠN PHÚC",
+    "hint": "Làng lụa nổi tiếng lâu đời ở Hà Đông",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ÁO TỨ THÂN",
+    "hint": "Trang phục truyền thống của phụ nữ Bắc Bộ gồm bốn vạt",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TẾT ĐOAN NGỌ",
+    "hint": "Ngày mùng 5 tháng 5 âm lịch, có tục giết sâu bọ",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TẢO MỘ",
+    "hint": "Việc sửa sang, dọn dẹp mồ mả tổ tiên, thường vào tiết Thanh minh",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "RƯỢU CẦN",
+    "hint": "Thức uống hút bằng ống trúc dài cắm vào ché, đặc trưng Tây Nguyên",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "ĐUA GHE NGO",
+    "hint": "Cuộc tranh tài chèo thuyền dài truyền thống của đồng bào Khmer Nam Bộ",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "NGŨ HÀNH",
+    "hint": "Năm yếu tố Kim, Mộc, Thủy, Hỏa, Thổ trong triết học phương Đông",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "CAN CHI",
+    "hint": "Cách gọi năm theo âm lịch, như Giáp Tý, Ất Sửu",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "LẬP XUÂN",
+    "hint": "Tiết đầu tiên trong 24 tiết khí, khoảng ngày 4 tháng 2 dương lịch",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TỨ QUÝ",
+    "hint": "Bộ tranh bốn loài cây tượng trưng bốn mùa: tùng, cúc, trúc, mai",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  },
+  {
+    "answer": "TRẦU CAU",
+    "hint": "Lễ vật mời khách truyền thống, gắn với sự tích hai anh em và người vợ hóa đá, cây, dây leo",
+    "category": "Từ khó · Văn hóa",
+    "difficulty": "hard"
+  }
+]

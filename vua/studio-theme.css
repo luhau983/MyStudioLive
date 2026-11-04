@@ -1,0 +1,163 @@
+/*
+ * StudioLive theme for the Vua Tiếng Việt control page.
+ * Only applied when the page is served in bridge mode (body.studio-embed), i.e. embedded in the
+ * StudioLive dashboard; the standalone app keeps its own cream look. Tokens mirror renderer/styles.css.
+ */
+.studio-embed {
+  --sl-bg: #0b0d10; --sl-panel: #13171d; --sl-panel-2: #181d24; --sl-field: #0c0f13;
+  --sl-line: #222832; --sl-line-2: #2b333f; --sl-text: #e8ecf1; --sl-muted: #8b95a5;
+  --sl-accent: #a3e635; --sl-accent-ink: #1a2e05; --sl-danger: #f43f5e;
+  --ink: var(--sl-text); --orange: var(--sl-accent); --line: var(--sl-line);
+}
+:root:has(.studio-embed) { font-family: "SF Pro Text", "Segoe UI", system-ui, -apple-system, sans-serif; background: var(--sl-bg, #0b0d10); color: #e8ecf1; color-scheme: dark; }
+.studio-embed { background: var(--sl-bg); color: var(--sl-text); font-size: 14px; -webkit-font-smoothing: antialiased; }
+.studio-embed ::-webkit-scrollbar { width: 10px; }
+.studio-embed ::-webkit-scrollbar-thumb { background: #232a33; border-radius: 10px; border: 3px solid var(--sl-bg); }
+
+/* StudioLive already has the navigation, title and data folder: drop the duplicates */
+.studio-embed .sidebar, .studio-embed .breadcrumb, .studio-embed .dashboard-header h1, .studio-embed .dashboard-header p,
+.studio-embed #desktop-data, .studio-embed .dashboard-footer { display: none !important; }
+.studio-embed .workspace { margin: 0; width: 100%; max-width: none; padding: 16px 18px 24px; }
+.studio-embed .dashboard-header { justify-content: flex-end; }
+
+/* Buttons: same shapes and colours as StudioLive .btn */
+.studio-embed .button { min-height: 0; padding: 11px 18px; border-radius: 12px; font-size: 14px; font-weight: 700; transition: transform .08s, background .15s, border-color .15s; }
+.studio-embed .button:hover { transform: none; }
+.studio-embed .button:active { transform: scale(.97); }
+.studio-embed .primary { background: var(--sl-accent); color: var(--sl-accent-ink); box-shadow: 0 6px 20px rgba(163, 230, 53, .25); }
+.studio-embed .primary:hover { background: #b5f04a; }
+.studio-embed .dark { background: var(--sl-panel-2); color: var(--sl-text); border: 1px solid var(--sl-line-2); }
+.studio-embed .dark:hover { background: #1d232b; border-color: #3a4452; }
+.studio-embed .light { background: var(--sl-panel-2); color: var(--sl-text); border: 1px solid var(--sl-line-2); }
+.studio-embed .light:hover { background: #1d232b; border-color: #3a4452; }
+.studio-embed .action-grid button { font-size: 13px; }
+.studio-embed .text-button { color: var(--sl-muted); font-size: 12px; font-weight: 600; }
+.studio-embed .text-button:hover { color: var(--sl-text); }
+.studio-embed .danger, .studio-embed .text-button.danger { color: #fda4af; }
+.studio-embed #stop-class { background: rgba(244, 63, 94, .14); border: 1px solid rgba(244, 63, 94, .4); color: #fda4af; }
+.studio-embed #stop-class:hover { background: rgba(244, 63, 94, .22); }
+
+/* Form fields: StudioLive .inp */
+.studio-embed label { color: var(--sl-text); font-weight: 700; font-size: 13px; }
+.studio-embed input:not([type=checkbox]):not([type=range]):not([type=file]), .studio-embed select {
+  background: var(--sl-field); border: 1px solid var(--sl-line-2); border-radius: 10px; color: var(--sl-text); padding: 10px 12px; font-size: 14px;
+}
+.studio-embed input:focus, .studio-embed select:focus { outline: none; border-color: var(--sl-accent); box-shadow: 0 0 0 4px rgba(163, 230, 53, .12); }
+.studio-embed input::placeholder { color: #5b6472; }
+.studio-embed input[type=file] { width: 100%; background: var(--sl-field); border: 1px dashed var(--sl-line-2); border-radius: 10px; padding: 10px 12px; color: var(--sl-muted); font-size: 12px; }
+.studio-embed input[type=file]::file-selector-button { background: var(--sl-panel-2); color: var(--sl-text); border: 1px solid var(--sl-line-2); border-radius: 8px; padding: 7px 12px; margin-right: 10px; font: inherit; font-weight: 700; cursor: pointer; }
+.studio-embed input[type=range], .studio-embed .check-row input { accent-color: var(--sl-accent); }
+.studio-embed .username-field > span { color: var(--sl-muted); top: 10px; font-weight: 700; }
+.studio-embed .username-field input:not([type=checkbox]):not([type=range]):not([type=file]) { padding-left: 32px; }
+.studio-embed .check-row { color: var(--sl-text); font-weight: 600; font-size: 13px; }
+.studio-embed .subtle { color: var(--sl-muted); }
+
+/* Metrics + panels: StudioLive .panel / stat cards */
+.studio-embed .metrics { background: var(--sl-panel); border-color: var(--sl-line); border-radius: 16px; margin: 6px 0 16px; padding: 16px 0; }
+.studio-embed .metrics > div { border-color: var(--sl-line); }
+.studio-embed .metrics span { color: var(--sl-muted); font-size: 11px; font-weight: 700; letter-spacing: .6px; }
+.studio-embed .metrics strong { color: var(--sl-text); font-weight: 800; }
+.studio-embed .metrics small { color: var(--sl-muted); font-size: 11px; }
+.studio-embed .studio-grid { gap: 16px; }
+.studio-embed .control-stack { gap: 16px; }
+.studio-embed .panel { background: var(--sl-panel); border-color: var(--sl-line); border-radius: 16px; padding: 16px; }
+.studio-embed .panel-heading { margin-bottom: 14px; }
+.studio-embed .panel h2 { font-size: 14px; font-weight: 800; color: var(--sl-text); }
+.studio-embed .panel h2 > span { color: var(--sl-accent); font-weight: 800; }
+.studio-embed .badge { background: rgba(163, 230, 53, .1); border-color: rgba(163, 230, 53, .35); color: var(--sl-accent); font-size: 10px; font-weight: 800; border-radius: 7px; padding: 4px 8px; }
+.studio-embed .tiny-label { color: var(--sl-muted); font-size: 10px; font-weight: 700; }
+.studio-embed .current-question { background: var(--sl-field); border: 1px dashed var(--sl-line-2); border-radius: 12px; }
+.studio-embed .current-question small { color: var(--sl-muted); font-size: 10px; font-weight: 700; }
+.studio-embed .current-question strong { color: var(--sl-accent); font-weight: 800; }
+.studio-embed .current-question p { color: var(--sl-muted); font-size: 12px; }
+.studio-embed .difficulty-picker > span { color: var(--sl-muted); font-weight: 700; }
+.studio-embed .difficulty-picker { background: #0e1115; border: 1px solid var(--sl-line); border-radius: 10px; padding: 3px; gap: 3px; }
+.studio-embed .difficulty-picker > span { padding-left: 8px; }
+.studio-embed .difficulty-picker button { background: none; border: 0; border-radius: 7px; color: var(--sl-muted); font-weight: 700; }
+.studio-embed .difficulty-picker button small { color: #5b6472; }
+.studio-embed .difficulty-picker button.active { background: var(--sl-panel-2); color: var(--sl-text); box-shadow: 0 1px 0 var(--sl-line-2) inset; }
+.studio-embed .difficulty-picker button.active small { color: var(--sl-accent); }
+.studio-embed .difficulty-picker button[data-difficulty=hard].active { background: rgba(244, 63, 94, .16); color: #fda4af; }
+.studio-embed .save-row small, .studio-embed .compact p { color: var(--sl-muted); }
+.studio-embed .compact h3 { color: var(--sl-text); }
+
+/* Feeds and logs */
+.studio-embed .comment-row { border-color: var(--sl-line); color: var(--sl-text); }
+.studio-embed .comment-row > span { color: var(--sl-muted); }
+.studio-embed .comment-row.correct > small { color: var(--sl-accent); }
+.studio-embed .import-status { background: var(--sl-field); border: 1px solid var(--sl-line); color: var(--sl-muted); }
+.studio-embed .activity-log { border-color: var(--sl-line); }
+.studio-embed .activity-row { border-color: var(--sl-line); }
+.studio-embed .activity-row > time, .studio-embed .activity-user span, .studio-embed .activity-kind { color: var(--sl-muted); }
+.studio-embed .activity-user strong { color: var(--sl-text); }
+.studio-embed .activity-body p { color: #c3cad4; }
+.studio-embed .activity-row.success { background: rgba(163, 230, 53, .07); }
+.studio-embed .activity-row.success .activity-kind { color: var(--sl-accent); }
+.studio-embed .activity-row.gift { background: rgba(245, 158, 11, .08); }
+.studio-embed .activity-row.gift .activity-kind { color: #fcd34d; }
+.studio-embed .activity-row.position { background: rgba(56, 189, 248, .08); }
+.studio-embed .activity-row.position .activity-kind { color: #7dd3fc; }
+.studio-embed .activity-row.join .activity-kind { color: #86efac; }
+
+/* Preview column */
+.studio-embed .preview-label { color: var(--sl-muted); font-size: 11px; font-weight: 700; }
+.studio-embed .preview-label i { background: #22c55e; }
+.studio-embed .preview-frame { border: 1px solid var(--sl-line-2); border-radius: 16px; background: #000; box-shadow: 0 10px 30px rgba(0, 0, 0, .4); }
+.studio-embed .preview-instructions { color: var(--sl-muted); }
+.studio-embed .preview-instructions > span { color: var(--sl-accent); }
+.studio-embed .preview-instructions strong { color: var(--sl-text); }
+.studio-embed .preview-instructions a { color: var(--sl-accent); }
+.studio-embed .rules-note { background: var(--sl-panel); border-color: var(--sl-line); border-radius: 16px; }
+.studio-embed .rules-note h3 { font-size: 15px; font-weight: 800; color: var(--sl-text); }
+.studio-embed .rules-note h3 span { color: var(--sl-accent); }
+.studio-embed .rules-note p, .studio-embed .rules-note small { color: var(--sl-muted); }
+.studio-embed #music-volume-value { color: var(--sl-accent); }
+.studio-embed #toast { background: var(--sl-panel-2); color: var(--sl-text); border: 1px solid rgba(163, 230, 53, .4); box-shadow: 0 10px 30px rgba(0, 0, 0, .45); }
+
+/* Layout like the other StudioLive scene tabs: live preview pinned on the left, controls scroll on the right */
+.studio-embed { --sl-frame-h: min(720px, calc(100vh - 150px)); }
+.studio-embed .studio-grid { grid-template-columns: calc(var(--sl-frame-h) * 9 / 16) minmax(0, 1fr); gap: 20px; align-items: start; }
+.studio-embed .preview-column { grid-column: 1; grid-row: 1; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; scrollbar-width: none; }
+.studio-embed .preview-column::-webkit-scrollbar { display: none; }
+.studio-embed .control-stack { grid-column: 2; grid-row: 1; }
+.studio-embed .preview-frame { width: 100%; height: var(--sl-frame-h); aspect-ratio: 9 / 16; max-height: none; }
+.studio-embed .preview-label { margin-top: 0; }
+@media (max-width: 700px) { .studio-embed .studio-grid { grid-template-columns: 1fr; } .studio-embed .preview-column, .studio-embed .control-stack { grid-column: 1; grid-row: auto; position: static; max-height: none; } }
+
+/* Connection is managed on the StudioLive dashboard: keep only the status and the Chơi thử / LIVE switch */
+.studio-embed #connect-form, .studio-embed #disconnect { display: none !important; }
+.studio-embed .connection-actions { margin-top: 0; align-items: center; }
+.studio-embed #follow-live { padding: 9px 14px; font-size: 13px; }
+.studio-embed #live-message { margin-top: 10px; }
+
+/* Compact layout: panels flow in two columns, duplicates of StudioLive's own pages are dropped */
+.studio-embed .dashboard-header, .studio-embed .preview-instructions, .studio-embed .rules-note, .studio-embed .live-window-status { display: none !important; }
+.studio-embed .workspace { padding: 12px 16px 16px; }
+.studio-embed .metrics { margin: 0 0 12px; padding: 10px 0; }
+.studio-embed .metrics > div { padding: 0 16px; }
+.studio-embed .metrics strong { margin: 4px 0 2px; font-size: 18px; }
+.studio-embed .metrics > div:first-child strong, .studio-embed .metrics > div:last-child strong { font-size: 16px; }
+.studio-embed .studio-grid { gap: 14px; }
+.studio-embed .control-stack { display: block; columns: 2 380px; column-gap: 12px; }
+.studio-embed .control-stack > .panel { break-inside: avoid; margin-bottom: 12px; padding: 14px; }
+.studio-embed .panel-heading { margin-bottom: 10px; }
+.studio-embed label { margin-bottom: 6px; font-size: 12px; }
+.studio-embed .form-two, .studio-embed .form-three { gap: 8px; margin-bottom: 10px; }
+.studio-embed input:not([type=checkbox]):not([type=range]):not([type=file]), .studio-embed select { padding: 8px 10px; font-size: 13px; }
+.studio-embed .button { padding: 9px 14px; font-size: 13px; }
+.studio-embed .check-row { margin-top: 8px; font-size: 12px; }
+.studio-embed .subtle { margin-top: 6px; font-size: 11px; line-height: 1.5; }
+.studio-embed .current-question { padding: 12px 14px; margin-bottom: 10px; }
+.studio-embed .current-question strong { font-size: 20px; margin: 6px 0; }
+.studio-embed #stop-class { margin-top: 8px; }
+.studio-embed .action-grid { gap: 8px; margin-top: 8px; }
+.studio-embed .save-row { margin-top: 12px; }
+.studio-embed .comment-feed { max-height: 180px; overflow-y: auto; }
+.studio-embed .activity-log { max-height: 240px; margin: 10px 0; }
+.studio-embed .activity-row { padding: 8px 6px; }
+.studio-embed .import-status { margin: 10px 0; padding: 10px; font-size: 12px; }
+.studio-embed .youtube-music-panel { margin-top: 12px; padding: 14px; }
+.studio-embed .live-window-button { margin-bottom: 10px; }
+.studio-embed .preview-label { margin-bottom: 8px; }
+.studio-embed { --sl-frame-h: min(620px, calc(100vh - 170px)); }
+.studio-embed .control-stack { columns: 2 280px; }

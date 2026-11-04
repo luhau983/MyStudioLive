@@ -24,7 +24,8 @@
   $$('.nav-item').forEach((b) => b.addEventListener('click', () => {
     $$('.nav-item').forEach((x) => x.classList.toggle('active', x === b));
     $$('.view').forEach((v) => v.classList.toggle('active', v.id === 'view-' + b.dataset.view));
-    if (['ma', 'chua', 'rap'].includes(b.dataset.view)) switchScene(b.dataset.view);
+    if (['ma', 'chua', 'rap', 'vua'].includes(b.dataset.view)) switchScene(b.dataset.view);
+    if (b.dataset.view === 'vua') loadVuaControl();
     setPreviewSrc(false);
   }));
 
@@ -223,7 +224,7 @@
     set('golive', live);
     set('connect', live);
     const sc = $('#qs-scene');
-    if (sc) sc.textContent = mode === 'chua' ? 'Đang chọn: 🪷 Đi Chùa Online' : mode === 'rap' ? 'Đang chọn: 🎬 Rạp Phim Online' : 'Đang chọn: 👻 Live Ma Online';
+    if (sc) sc.textContent = mode === 'chua' ? 'Đang chọn: 🪷 Đi Chùa Online' : mode === 'rap' ? 'Đang chọn: 🎬 Rạp Phim Online' : mode === 'vua' ? 'Đang chọn: 👑 Vua Tiếng Việt' : 'Đang chọn: 👻 Live Ma Online';
   }
   $$('[data-goto]').forEach((b) => b.addEventListener('click', () => $(`.nav-item[data-view=${b.dataset.goto}]`).click()));
   $('#qs-copy').addEventListener('click', async () => {
@@ -234,14 +235,14 @@
   // Chấm LIVE cạnh tab đang chạy trên live
   function renderChuaNav(mode) {
     renderQuick();
-    const live = mode === 'chua' ? 'chua' : mode === 'rap' ? 'rap' : 'ma';
+    const live = mode === 'chua' ? 'chua' : mode === 'rap' ? 'rap' : mode === 'vua' ? 'vua' : 'ma';
     $$('[data-live-for]').forEach((d) => d.classList.toggle('on', d.dataset.liveFor === live));
     $$('[data-open-scene]').forEach((b) => {
       const on = b.dataset.openScene === live;
       b.classList.toggle('live', on);
       b.querySelector('small').textContent = on
         ? '● Đang phát cảnh này — bấm để mở màn hình phát'
-        : ({ ma: 'Chuyển live sang Nhà Ma + mở màn hình phát', chua: 'Chuyển live sang chánh điện + mở màn hình phát', rap: 'Chuyển live sang rạp phim + mở màn hình phát' })[b.dataset.openScene];
+        : ({ ma: 'Chuyển live sang Nhà Ma + mở màn hình phát', chua: 'Chuyển live sang chánh điện + mở màn hình phát', rap: 'Chuyển live sang rạp phim + mở màn hình phát', vua: 'Chuyển live sang giảng đường đoán chữ + mở màn hình phát' })[b.dataset.openScene];
     });
   }
   // Nút riêng cho từng cảnh: chuyển cảnh trên live rồi mở màn hình phát
@@ -253,13 +254,33 @@
   // Mở tab nào thì cảnh đó chạy trên live
   function switchScene(view) {
     if (!settings) return;
-    const want = view === 'chua' ? 'chua' : view === 'rap' ? 'rap' : 'game';
+    const want = view === 'chua' ? 'chua' : view === 'rap' ? 'rap' : view === 'vua' ? 'vua' : 'game';
     if (settings.overlay.mode === want) return;
     settings.overlay.mode = want;
     renderSettings();
     save({ overlay: { mode: want } }, true);
-    notify(view === 'chua' ? '🪷 Live đang chạy: Đi Chùa Online' : view === 'rap' ? '🎬 Live đang chạy: Rạp Phim Online' : '👻 Live đang chạy: Live Ma Online');
+    notify(view === 'chua' ? '🪷 Live đang chạy: Đi Chùa Online' : view === 'rap' ? '🎬 Live đang chạy: Rạp Phim Online' : view === 'vua' ? '👑 Live đang chạy: Vua Tiếng Việt' : '👻 Live đang chạy: Live Ma Online');
   }
+
+  // ---------- Vua Tiếng Việt ----------
+  // Bảng điều khiển gốc của game (server riêng) nhúng nguyên trong tab; chỉ nạp lần đầu mở tab để giữ trạng thái form
+  let vua = { running: false, port: 0, error: '' };
+  function loadVuaControl() {
+    const frame = $('#vua-control');
+    const err = $('#vua-error');
+    err.hidden = vua.running;
+    if (!vua.running) {
+      err.textContent = 'Không khởi động được Vua Tiếng Việt: ' + (vua.error || 'lỗi không xác định');
+      return;
+    }
+    const src = `http://127.0.0.1:${vua.port}/control.html`;
+    if (frame.dataset.src !== src) { frame.dataset.src = src; frame.src = src; }
+  }
+  // Bấm "Mở overlay LIVE 9:16" trong bảng Vua Tiếng Việt
+  api.onVuaGoLive(() => {
+    switchScene('vua');
+    api.openOutput();
+  });
   $('#chua-name-save').addEventListener('click', () => {
     const name = $('#chua-name').value.trim();
     settings.overlay.chuaName = name;
@@ -619,6 +640,7 @@
 
   api.init().then((init) => {
     settings = init.settings;
+    vua = init.vua || vua;
     $('#username').value = settings.username;
     $('#ver').textContent = 'v' + init.version;
     renderSettings();

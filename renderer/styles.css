@@ -470,3 +470,12 @@ main:has(.view.scene-view.active) { overflow: hidden; padding-bottom: 0; }
 /* khung xem trước đúng tỉ lệ 9:16, nền đen (không lộ nền ca rô hai bên) */
 .view.scene-view .feature-frame { height: min(720px, calc(100vh - 300px)); width: calc(min(720px, 100vh - 300px) * 9 / 16); aspect-ratio: auto; background: #000; }
 .btn.lights-btn.on { background: rgba(250, 204, 21, .14); border-color: rgba(250, 204, 21, .5); color: #fde68a; }
+
+/* ---------- Vua Tiếng Việt: bảng điều khiển riêng nhúng bằng iframe ---------- */
+.btn.scene-btn.vua:hover { border-color: #e76b3c; }
+.btn.scene-btn.vua.live { background: linear-gradient(90deg, #243d30, #b5532f); border-color: #eabb78; box-shadow: 0 6px 22px rgba(231, 107, 60, .35); }
+.view.vua-view.active { max-width: none; }
+.vua-host { flex: 1; min-height: 0; position: relative; overflow: hidden; background: var(--bg); margin: 0 -18px; }
+.vua-host iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.vua-error { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; background: #141920; color: var(--text); }
+.vua-error[hidden] { display: none; }

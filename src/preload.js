@@ -31,5 +31,6 @@ contextBridge.exposeInMainWorld('studio', {
   onStats: on('live:stats'),
   onEvent: on('live:event'),
   onServer: on('server:state'),
-  onPreviewReload: on('preview:reload')
+  onPreviewReload: on('preview:reload'),
+  onVuaGoLive: on('vua:goLive')
 });
