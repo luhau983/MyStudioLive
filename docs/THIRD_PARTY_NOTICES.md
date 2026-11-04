@@ -32,7 +32,7 @@ Luật chơi (từ khoá vào sàn, lệnh chat, bảng quà theo tên / theo ki
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
 
-Cảnh 3D được viết lại bằng three.js; nhân vật, DJ, sàn LED và hiệu ứng vẽ bằng code. MyStudioLive **không phân phối** bộ GIF nhân vật, model DJ, nhạc hay âm thanh của dự án gốc: bộ GIF lấy từ Weibo và file tiếng pháo hoa không ghi nguồn / giấy phép. Người dùng có thể tự trỏ Live Bar tới các file đó trên máy mình (thư mục nhân vật, file tiếng pháo hoa) và tự chịu trách nhiệm về quyền sử dụng.
+Cảnh 3D được viết lại bằng three.js; nhân vật, DJ, sàn LED và hiệu ứng vẽ bằng code. MyStudioLive **không phân phối** bộ GIF nhân vật, model DJ, nhạc hay âm thanh của dự án gốc: bộ GIF lấy từ Weibo và file tiếng pháo hoa không ghi nguồn / giấy phép. Model DJ (`Megan_DJ.fbx`) là nhân vật Mixamo — Adobe cho phép dùng trong dự án nhưng không cho phân phối lại file gốc riêng lẻ. Người dùng có thể tự trỏ Live Bar tới các file đó trên máy mình (thư mục nhân vật, model DJ, file tiếng pháo hoa) và tự chịu trách nhiệm về quyền sử dụng.
 
 ### Chánh Điện Online — hình ảnh, nhân vật, hiệu ứng, nhạc nền (`overlay/chua-assets/`)
 

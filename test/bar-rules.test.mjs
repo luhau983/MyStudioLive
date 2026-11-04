@@ -192,3 +192,21 @@ test('character pack lists only image files directly in the chosen folder', () =
   assert.ok(!listCharacterFiles(dir).includes('../secret.gif'));
   fs.rmSync(dir, { recursive: true, force: true });
 });
+
+test('DJ model textures are only looked up by name next to the model', () => {
+  const os = require('os'); const fs = require('fs'); const path = require('path');
+  const { findDjResource } = require('../src/server.js');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bar-dj-'));
+  const model = path.join(dir, 'Megan_DJ.fbx');
+  fs.writeFileSync(model, 'x');
+  fs.mkdirSync(path.join(dir, 'Textures')); fs.writeFileSync(path.join(dir, 'Textures', 'skin.png'), 'x');
+  fs.mkdirSync(path.join(dir, 'Megan_DJ.fbm')); fs.writeFileSync(path.join(dir, 'Megan_DJ.fbm', 'eyes.jpg'), 'x');
+  fs.writeFileSync(path.join(dir, 'notes.txt'), 'x');
+  assert.equal(findDjResource(model, 'skin.png'), path.join(dir, 'Textures', 'skin.png'));
+  assert.equal(findDjResource(model, 'eyes.jpg'), path.join(dir, 'Megan_DJ.fbm', 'eyes.jpg'));
+  assert.equal(findDjResource(model, 'notes.txt'), null);
+  assert.equal(findDjResource(model, '../skin.png'), null);
+  assert.equal(findDjResource(model, 'missing.png'), null);
+  assert.equal(findDjResource('', 'skin.png'), null);
+  fs.rmSync(dir, { recursive: true, force: true });
+});

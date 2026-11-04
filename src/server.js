@@ -17,6 +17,21 @@ function resolveThreeModule() {
   return path.join(__dirname, '..', 'node_modules', 'three', 'build', 'three.module.js');
 }
 
+const DJ_MODEL_EXT = /\.(fbx|glb|gltf)$/i;
+const DJ_RESOURCE_EXT = /\.(png|jpe?g|webp|bin)$/i;
+// Textures / buffers of the DJ model: looked up by bare file name next to the model,
+// in Textures/ or in <model>.fbm/ (Mixamo / Unity layouts). Never outside those folders.
+function findDjResource(model, name) {
+  if (typeof model !== 'string' || !model || !DJ_RESOURCE_EXT.test(name) || path.basename(name) !== name) return null;
+  const dir = path.dirname(model);
+  const base = path.basename(model, path.extname(model));
+  for (const d of [dir, path.join(dir, 'Textures'), path.join(dir, base + '.fbm')]) {
+    const f = path.join(d, name);
+    try { if (fs.statSync(f).isFile()) return f; } catch { /* next */ }
+  }
+  return null;
+}
+
 const CHARACTER_EXT = /\.(gif|png|webp)$/i;
 const MAX_CHARACTERS = 60;
 function listCharacterFiles(dir) {
@@ -108,6 +123,22 @@ class OverlayServer {
       res.type('application/javascript').set('Cache-Control', 'public, max-age=86400').send(threeModule);
     });
 
+    // three.js addons (FBXLoader / GLTFLoader cho model DJ), chỉ phục vụ file .js
+    app.use('/three-addons', (req, res, next) => (/\.js$/i.test(req.path) ? next() : res.sendStatus(404)),
+      express.static(path.join(path.dirname(resolveThreeModule()), '..', 'examples', 'jsm'), { fallthrough: false, maxAge: '1d' }));
+
+    // Model DJ 3D (.fbx / .glb / .gltf, như Megan_DJ.fbx của bản gốc) + texture đi kèm, tìm theo tên file
+    app.get('/bar/dj/model', (_req, res) => {
+      const file = this.getConfig().overlay.barDjModel;
+      if (!file || !DJ_MODEL_EXT.test(file) || !fs.existsSync(file)) return res.sendStatus(404);
+      res.sendFile(file, { headers: { 'Content-Type': 'application/octet-stream', 'Cache-Control': 'no-store' } });
+    });
+    app.get('/bar/dj/res/:name', (req, res) => {
+      const file = findDjResource(this.getConfig().overlay.barDjModel, String(req.params.name || ''));
+      if (!file) return res.sendStatus(404);
+      res.sendFile(file, { headers: { 'Content-Type': MEDIA_TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': 'no-store' } });
+    });
+
     // Bộ nhân vật Live Bar (GIF/PNG/WEBP trong thư mục người dùng chọn), giống CharacterLibrary của bản gốc
     app.get('/bar/chars', (_req, res) => {
       res.set('Cache-Control', 'no-store').json({ files: listCharacterFiles(this.getConfig().overlay.barCharDir) });
@@ -194,4 +225,4 @@ class OverlayServer {
   }
 }
 
-module.exports = { OverlayServer, isAvatarUrl, listCharacterFiles };
+module.exports = { OverlayServer, isAvatarUrl, listCharacterFiles, findDjResource };

@@ -690,7 +690,7 @@
       customGiftSound: 'Mặc định: chuông chùa', customChatSound: 'Mặc định: ting', customJumpscare: 'Mặc định: 6 mặt ma ngẫu nhiên',
       customScareSound: 'Mặc định: 4 kiểu tiếng thét ngẫu nhiên', customAmbient: 'Mặc định: gió hú tự tạo',
       barMusic: 'Chưa có nhạc nền', barScreen: 'Mặc định: màn LED nhảy theo nhạc',
-      barCharDir: 'Mặc định: nhân vật vẽ bằng code', barFireworkFile: 'Mặc định: tiếng tự tổng hợp'
+      barCharDir: 'Mặc định: nhân vật vẽ bằng code', barDjModel: 'Mặc định: DJ vẽ bằng code', barFireworkFile: 'Mặc định: tiếng tự tổng hợp'
     };
     for (const k of Object.keys(DEF)) {
       const def = DEF[k];

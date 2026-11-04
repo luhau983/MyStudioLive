@@ -379,12 +379,15 @@ ipcMain.handle('dialog:pickFolder', async () => {
 
 ipcMain.handle('dialog:pickSound', async (_e, kind) => {
   const media = kind === 'media';
+  const model = kind === 'model';
   const r = await dialog.showOpenDialog(win, {
-    title: media ? 'Chọn ảnh / video jumpscare' : 'Chọn file âm thanh',
+    title: model ? 'Chọn model DJ 3D' : media ? 'Chọn ảnh / video' : 'Chọn file âm thanh',
     properties: ['openFile'],
-    filters: media
-      ? [{ name: 'Ảnh hoặc video', extensions: ['png', 'jpg', 'jpeg', 'gif', 'webp', 'mp4', 'webm', 'mov'] }]
-      : [{ name: 'Âm thanh', extensions: ['mp3', 'wav', 'ogg', 'm4a'] }]
+    filters: model
+      ? [{ name: 'Model 3D', extensions: ['fbx', 'glb', 'gltf'] }]
+      : media
+        ? [{ name: 'Ảnh hoặc video', extensions: ['png', 'jpg', 'jpeg', 'gif', 'webp', 'mp4', 'webm', 'mov'] }]
+        : [{ name: 'Âm thanh', extensions: ['mp3', 'wav', 'ogg', 'm4a'] }]
   });
   return r.canceled ? '' : r.filePaths[0];
 });

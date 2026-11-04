@@ -360,6 +360,8 @@ function applyConfig(next) {
     (dir ? fetch('/bar/chars').then((r) => r.json()).then((j) => j.files || []).catch(() => []) : Promise.resolve([]))
       .then((files) => (dir === loadedCharDir ? club.setCharacters(files.map((f) => '/bar/chars/' + encodeURIComponent(f) + '?v=' + encodeURIComponent(dir))) : 0));
   }
+  const djExt = (String(cfg.barDjModel || '').match(/\.(fbx|glb|gltf)$/i) || [])[1];
+  club.setDjModel(djExt ? '/bar/dj/model?v=' + encodeURIComponent(cfg.barDjModel) : '', (djExt || '').toLowerCase());
   club.setScreen(cfg.barScreen ? '/media/barScreen?v=' + encodeURIComponent(cfg.barScreen) : '', /\.(mp4|webm|mov|m4v)$/i.test(cfg.barScreen || ''));
   club.setChroma(!!cfg.barChroma);
   document.body.classList.toggle('chroma', !!cfg.barChroma);

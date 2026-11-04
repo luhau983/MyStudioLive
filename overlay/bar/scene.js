@@ -619,6 +619,8 @@ export function createBarScene(canvas) {
   let wallSub = 'GÕ "hey" ĐỂ VÀO SÀN';
   let energy = 0;
   const eq = Array.from({ length: 32 }, () => Math.random());
+  const djModel = { url: '', obj: null, mixer: null, base: null };
+
   // User media on the LED wall (image or looping muted video), cover-fitted to the 2:1 screen
   const screen = { src: '', tex: null, video: null };
   function coverFit(tex, w, h) {
@@ -748,6 +750,13 @@ export function createBarScene(canvas) {
     disco.rotation.y += dt * 0.6;
     discoGlow.material.opacity = 0.25 + pump * 0.35;
     dj.material.map = djTex[Math.floor(beatT) % 2];
+    if (djModel.obj) {
+      // DjPerformerController of the original: tiny bob + sway on top of the model's own animation
+      djModel.mixer?.update(dt);
+      const b = clock * 2.15;
+      djModel.obj.position.y = djModel.base.y + Math.sin(b) * 0.012;
+      djModel.obj.rotation.y = Math.sin(b * 0.52) * THREE.MathUtils.degToRad(1.2);
+    }
     dj.position.y = 1.55 + pump * 0.06;
     boothStrip.material.color.setHSL((clock * 0.15) % 1, 0.9, 0.55);
     env.children.forEach((o) => { if (o.userData.speaker) o.scale.setScalar(1 + pump * 0.12); });
@@ -845,6 +854,47 @@ export function createBarScene(canvas) {
       if (screen.video) { if (paused) screen.video.pause(); else screen.video.play().catch(() => {}); }
     },
     setScreen,
+    // 3D DJ (.fbx/.glb/.gltf with its own dance animation, like Megan_DJ.fbx of the original); '' = DJ drawn in code
+    async setDjModel(url, kind) {
+      if (url === djModel.url) return !!djModel.obj;
+      djModel.url = url;
+      if (djModel.obj) { env.remove(djModel.obj); djModel.obj = null; djModel.mixer = null; }
+      dj.visible = true;
+      if (!url) return false;
+      try {
+        const manager = new THREE.LoadingManager();
+        // textures referenced by the model (relative or absolute paths) -> served by name from the model's folder
+        manager.setURLModifier((u) => (u === url || /^(blob|data):/.test(u) ? u : '/bar/dj/res/' + encodeURIComponent(u.split(/[\\/]/).pop().split('?')[0])));
+        let root; let clips;
+        if (kind === 'fbx') {
+          const { FBXLoader } = await import('three/addons/loaders/FBXLoader.js');
+          root = await new FBXLoader(manager).loadAsync(url);
+          clips = root.animations;
+        } else {
+          const { GLTFLoader } = await import('three/addons/loaders/GLTFLoader.js');
+          const gltf = await new GLTFLoader(manager).loadAsync(url);
+          root = gltf.scene; clips = gltf.animations;
+        }
+        if (djModel.url !== url) return false;
+        // fit: ~2.5 units tall on a 0.35 riser behind the booth (upper body above the decks), facing the crowd
+        const box = new THREE.Box3().setFromObject(root);
+        const size = box.getSize(new THREE.Vector3());
+        const s = 2.5 / Math.max(0.001, size.y);
+        root.scale.setScalar(s);
+        const box2 = new THREE.Box3().setFromObject(root);
+        root.position.set(-(box2.min.x + box2.max.x) / 2, 0.35 - box2.min.y, -6.1 - (box2.min.z + box2.max.z) / 2);
+        root.traverse((o) => { if (o.isMesh) { o.frustumCulled = false; (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => { if (m && 'shininess' in m) m.shininess = 20; }); } });
+        const holder = new THREE.Group(); holder.add(root);
+        env.add(holder);
+        djModel.obj = holder; djModel.base = holder.position.clone();
+        if (clips && clips.length) { djModel.mixer = new THREE.AnimationMixer(root); djModel.mixer.clipAction(clips[0]).play(); }
+        dj.visible = false;
+        return true;
+      } catch (e) {
+        console.warn('[bar] DJ model failed:', e?.message || e);
+        return false;
+      }
+    },
     // Replace the character pack (empty list = characters drawn in code). Last call wins.
     async setCharacters(urls) {
       const key = (urls || []).join('|');
@@ -904,7 +954,7 @@ export function createBarScene(canvas) {
     fireworks,
     drop() { dropUntil = Math.floor(beatT) + 8; },
     count: () => actors.size,
-    debug: () => ({ shot: shot && { id: shot.actor.id, left: shot.until - clock }, actors: [...actors.values()].map((a) => ({ id: a.id, alpha: +a.alpha.toFixed(2), target: a.alphaTarget, op: +a.body.material.opacity.toFixed(2), entering: a.entering, z: +a.root.position.z.toFixed(2), sz: +a.slot.z.toFixed(2), slot: a.slotIndex, nameVis: a.name.visible })) }),
+    debug: () => ({ pack: charPack.map((c) => [c.frames.length, c.frames[0]?.image?.width, c.frames[0]?.image?.height, Math.round(c.frameMs)]), dj: djModel.obj ? new THREE.Box3().setFromObject(djModel.obj).getSize(new THREE.Vector3()).toArray().map((v) => +v.toFixed(2)) : null, shot: shot && { id: shot.actor.id, left: shot.until - clock }, actors: [...actors.values()].map((a) => ({ id: a.id, alpha: +a.alpha.toFixed(2), target: a.alphaTarget, op: +a.body.material.opacity.toFixed(2), entering: a.entering, z: +a.root.position.z.toFixed(2), sz: +a.slot.z.toFixed(2), slot: a.slotIndex, nameVis: a.name.visible })) }),
     destroy() { cancelAnimationFrame(raf); renderer.dispose(); }
   };
 }
