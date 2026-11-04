@@ -177,6 +177,7 @@ function openOutputWindow() {
     minWidth: 270,
     minHeight: 480,
     title: 'MyStudioLive - Man hinh phat live',
+    icon: APP_ICON,
     backgroundColor: '#000000',
     autoHideMenuBar: true,
     webPreferences: { contextIsolation: true, sandbox: true, backgroundThrottling: false }
@@ -233,6 +234,9 @@ async function startServer(port) {
   return serverState;
 }
 
+// Window / taskbar icon (renderer/logo.png ships in the package; build/icon.png is only for the installer)
+const APP_ICON = path.join(__dirname, '..', 'renderer', 'logo.png');
+
 function createWindow() {
   win = new BrowserWindow({
     width: 1360,
@@ -241,6 +245,7 @@ function createWindow() {
     minHeight: 700,
     backgroundColor: chromeColors().bg,
     title: 'MyStudioLive',
+    icon: APP_ICON,
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
     titleBarOverlay: process.platform === 'darwin' ? false : { color: chromeColors().bg, symbolColor: chromeColors().symbol, height: TITLEBAR_HEIGHT },
     show: false,
