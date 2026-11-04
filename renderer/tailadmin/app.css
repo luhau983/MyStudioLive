@@ -33,6 +33,10 @@
   .nav-item.active { @apply menu-item-active; }
   .nav-item.active svg { @apply menu-item-icon-active; }
   .live-dot { @apply ml-auto rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-medium text-white uppercase; }
+  /* collapsed sidebar: the LIVE badge shrinks to a dot on the icon's top-right (with a ring to cut it from the icon) */
+  body.side-collapsed .nav-item .live-dot.on {
+    @apply absolute top-1 left-[calc(50%+4px)] m-0 size-2.5 p-0 text-[0px] ring-2 ring-white dark:ring-black;
+  }
   .srv { @apply rounded-2xl bg-gray-50 px-4 py-5 dark:bg-white/3; }
   .srv-title { @apply font-semibold text-gray-900 dark:text-white; }
   .srv-sub, .ver { @apply text-sm text-gray-500 dark:text-gray-400; }
