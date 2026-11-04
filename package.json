@@ -2,7 +2,7 @@
   "name": "studio-live",
   "productName": "MyStudioLive",
   "version": "1.0.0",
-  "description": "MyStudioLive — cảnh tương tác cho TikTok LIVE: Live Ma Online, Đi Chùa Online, Rạp Phim Online, Vua Tiếng Việt, Kéo Co Online, Trà Đá Vỉa Hè, Đi Nhậu Online & Đèn Xanh Đèn Đỏ",
+  "description": "MyStudioLive — cảnh tương tác cho TikTok LIVE: Live Ma Online, Đi Chùa Online, Rạp Phim Online, Vua Tiếng Việt, Kéo Co Online, Trà Đá Vỉa Hè, Đi Nhậu Online, Đèn Xanh Đèn Đỏ, Đánh Boss & Thả Bi",
   "main": "src/main.js",
   "scripts": {
     "build:css": "tailwindcss -i renderer/tailadmin/app.css -o renderer/app.css --minify",
@@ -57,6 +57,10 @@
       "!keoco/test/**",
       "denxanh/**/*",
       "!denxanh/test/**",
+      "danhboss/**/*",
+      "!danhboss/test/**",
+      "thabi/**/*",
+      "!thabi/test/**",
       "package.json"
     ],
     "asar": true,

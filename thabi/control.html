@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Điều khiển · Thả Bi</title>
+<link rel="stylesheet" href="control.css">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}</script>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div><small>LIVE GAME</small><h1>🔮 Thả Bi <span>/ điều khiển</span></h1></div>
+    <span id="socket" class="status off">● Chưa kết nối server</span>
+  </header>
+
+  <section class="overview">
+    <div><small>TRẠNG THÁI</small><h2 id="phase">—</h2><p id="live">TikTok: chưa kết nối</p></div>
+    <div class="nums">
+      <div><small>NGƯỜI CHƠI</small><b id="total">0</b></div>
+      <div><small>BI ĐANG RƠI</small><b id="onboard">0</b></div>
+      <div><small>ĐÃ RƠI</small><b id="landed">0</b></div>
+      <div><small>DẪN ĐẦU</small><b id="leader">—</b></div>
+      <div><small>THỜI GIAN</small><b id="timer">--</b></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>Điều khiển ván</h3>
+    <div class="row">
+      <button class="btn primary" data-cmd="start">▶ Bắt đầu</button>
+      <button class="btn" data-cmd="stop">⏹ Kết thúc ván</button>
+      <button class="btn" data-cmd="reset">↺ Ván mới (xoá điểm)</button>
+      <button class="btn" data-cmd="bots">🤖 Thêm bot</button>
+    </div>
+    <p class="hint">Người xem comment <b>THẢ</b> để thả 1 viên bi (có thời gian chờ), hoặc <b>thả tim</b> — đủ số tim là tự thả 1 viên. Bi nảy qua các hàng chốt rồi rơi vào ô điểm, hai ô ngoài cùng là <b>JACKPOT ×50</b>. Quà = <b>bi vàng</b> nhân điểm, quà càng lớn càng nhiều bi. Hết giờ, ai nhiều điểm nhất thắng.</p>
+  </section>
+
+  <section class="panel">
+    <h3>Giả lập (thử không cần live)</h3>
+    <div class="row">
+      <label>Số áo <input id="sim-number" type="number" min="1" placeholder="mới"></label>
+      <button class="btn" data-sim="join">👋 Vào chơi</button>
+      <button class="btn" data-sim="drop">🔮 THẢ</button>
+      <button class="btn" data-sim="tap">❤ Thả 5 tim</button>
+      <button class="btn" data-sim="gift">🎁 Tặng quà 20💎</button>
+    </div>
+    <p class="hint">Để trống số áo = tạo khách mới. Nhập số áo để điều khiển đúng người đó.</p>
+  </section>
+
+  <section class="panel">
+    <h3>Âm thanh</h3>
+    <div class="row">
+      <label>Âm lượng <input id="volume" type="range" min="0" max="100"></label>
+      <label class="check"><input id="muted" type="checkbox"> Tắt tiếng</label>
+      <button class="btn" id="audio-test">🔊 Thử âm thanh</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>Thông số</h3>
+    <form id="config" class="grid">
+      <label>Thời gian 1 ván (giây)<input name="roundSeconds" type="number" min="15" max="1800"></label>
+      <label>Hiện kết quả (giây)<input name="resultSeconds" type="number" min="3" max="120"></label>
+      <label>Số hàng chốt<input name="rows" type="number" min="6" max="16"></label>
+      <label>Điểm gốc mỗi bi<input name="basePoints" type="number" min="1" max="1000"></label>
+      <label>Chờ giữa 2 lần THẢ (ms)<input name="dropCooldownMs" type="number" min="0" max="30000" step="100"></label>
+      <label>Số tim đổi 1 bi<input name="likesPerBall" type="number" min="1" max="500"></label>
+      <label>Bi đang rơi tối đa / người<input name="maxBallsPerPlayer" type="number" min="1" max="20"></label>
+      <label>Bi đang rơi tối đa trên bảng<input name="maxBallsOnBoard" type="number" min="5" max="150"></label>
+      <label>Bi vàng nhân điểm<input name="goldMultiplier" type="number" min="1" max="20"></label>
+      <label>Kim cương / thêm 1 bi vàng<input name="diamondsPerExtraBall" type="number" min="1" max="1000"></label>
+      <label>Bi vàng tối đa / quà<input name="maxGiftBalls" type="number" min="1" max="20"></label>
+      <label>Số người tối đa<input name="maxPlayers" type="number" min="1" max="1000"></label>
+      <label>Số bot mỗi lần thêm<input name="botCount" type="number" min="1" max="50"></label>
+      <label>Tự bắt đầu (0/1)<input name="autoStart" type="number" min="0" max="1"></label>
+      <label>Tự bắt đầu khi đủ (người)<input name="minPlayers" type="number" min="1" max="300"></label>
+      <label>Chờ trước khi tự bắt đầu (giây)<input name="lobbySeconds" type="number" min="5" max="600"></label>
+      <div class="actions"><button class="btn primary" type="submit">Lưu thông số</button></div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h3>Bảng điểm</h3>
+    <div id="players" class="players"></div>
+  </section>
+  <div id="toast" class="toast" hidden></div>
+</div>
+<script src="control.js"></script>
+</body>
+</html>

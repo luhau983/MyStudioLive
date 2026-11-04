@@ -37,6 +37,8 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 | 🧊 **Trà Đá Vỉa Hè** | Gõ `trà đá` / `cà phê` / `coca` / `bò húc` / `hướng dương` / `bánh mì` / `tính tiền` | Quán vỉa hè, mỗi người một nhân vật ngồi ghế nhựa; bà chủ bưng món ra tận bàn; quà lớn thành đại ca bao cả quán |
 | 🍺 **Đi Nhậu Online** | Gõ `bia` / `dzô` / `lạc` / `mực` / `lẩu` / `tính tiền` | Quán nhậu đêm 6 bàn × 4 ghế; cả bàn cụng ly, uống nhiều thì đỏ mặt rồi gục; bảng vàng bợm nhậu; quà lớn bao cả quán |
 | 🚦 **Đèn Xanh Đèn Đỏ** | Thả tim / comment để vào sân, thả tim hoặc `chạy` để tiến | Đèn đỏ mà cử động là bị loại (có ân hạn bù độ trễ TikTok); quà = khiên + lao lên; bot thử nghiệm |
+| ⚔️ **Đánh Boss** | Thả tim = đánh, `đánh` = đòn mạnh, `né` khi boss gồng chiêu | Cả live cùng hạ Quái Vương Đá; không né mất tim, hết tim thì gục; quà = chí mạng / hồi sinh; BXH sát thương |
+| 🔮 **Thả Bi** | Comment `thả` hoặc thả tim để thả bi | Bàn Plinko, bi nảy qua chốt vào ô ×½ đến ×50 (JACKPOT ở mép); quà = bi vàng nhân điểm; BXH điểm theo ván |
 
 | 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
 |---|---|---|---|
@@ -80,6 +82,20 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 - Đủ số tim: bà chủ khao cả quán trà đá + mưa đá lạnh / cả quán dzô 100%.
 - Khi quán vắng có **khách quen giả lập** ngồi gọi món, chém gió cho đỡ trống; người xem thật vào là họ nhường chỗ (tắt được).
 - Tiếng phố (xe máy, còi, chim sẻ) / tiếng quán (rì rầm, cụng ly xa) tự tạo bằng WebAudio, giọng đọc chào khách và cảm ơn quà.
+
+### ⚔️ Đánh Boss
+
+- Co-op: thả tim hoặc comment bất kỳ là vào trận (vào giữa trận cũng được). Mỗi tim = 1 sát thương, comment `đánh` = đòn mạnh (có hồi chiêu).
+- Cứ 9–15 giây boss **gồng chiêu** (cảnh báo 3,5 giây): comment `né` để tránh, có ân hạn 1,5 giây bù độ trễ TikTok. Không né mất 1 tim, hết 3 tim là gục.
+- Quà: đang gục thì **hồi sinh**, còn đứng thì **chí mạng** theo số kim cương. Boss còn 30% máu thì nổi điên, gồng chiêu nhanh hơn.
+- Hạ boss trước khi hết giờ là thắng; bảng xếp hạng sát thương, MVP lên kết quả. Máu boss, nhịp gồng, số tim… chỉnh trong bảng điều khiển; có bot và giả lập.
+
+### 🔮 Thả Bi
+
+- Comment `thả` để thả 1 viên bi (chờ 2 giây giữa 2 lần), hoặc thả tim — đủ 15 tim tự thả 1 viên. Mỗi người tối đa 3 viên đang rơi.
+- Server quyết định đường nảy ngay khi thả (mỗi hàng chốt trái/phải 50/50), overlay chỉ diễn hoạt — điểm cộng đúng lúc bi chạm ô. Hai ô mép là **JACKPOT ×50**.
+- Quà = bi vàng ×3 điểm, thêm 1 viên mỗi 10 kim cương (tối đa 5), không bị giới hạn chờ.
+- Hết giờ (mặc định 3 phút) ai nhiều điểm nhất thắng; bi còn đang rơi vẫn được tính.
 
 ## Tải & cài đặt
 
@@ -162,6 +178,8 @@ cd vua && node --test
 cd keoco && node --test
 npm test             # Live Bar (luật chơi + proxy avatar)
 cd denxanh && node --test
+cd danhboss && node --test
+cd thabi && node --test
 ```
 
 ### Kiến trúc
@@ -179,6 +197,8 @@ overlay/           Cảnh Nhà Ma, Đi Chùa, Rạp Phim; overlay/bar/ là Live 
 vua/               Game Vua Tiếng Việt: server riêng, overlay 3D (Three.js), bảng điều khiển, ngân hàng câu hỏi
 keoco/             Game Kéo Co: server riêng, sân 3D (Three.js), bảng điều khiển
 denxanh/           Game Đèn Xanh Đèn Đỏ: server riêng, sân canvas 2D, bảng điều khiển
+danhboss/          Game Đánh Boss: server riêng, đấu trường canvas 2D, bảng điều khiển
+thabi/             Game Thả Bi (Plinko): server riêng, bàn canvas 2D, bảng điều khiển
 ```
 
 Hai game `vua/` và `keoco/` chạy server riêng ngay trong tiến trình chính và nhận sự kiện qua cầu nối từ `src/live.js`, nên chỉ có một kết nối TikTok cho cả app. Bảng điều khiển của từng game được nhúng vào tab tương ứng; bảng của Vua Tiếng Việt đổi theo giao diện sáng/tối của MyStudioLive (`vua/studio-theme.css`).

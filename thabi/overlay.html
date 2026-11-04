@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thả Bi · Overlay</title>
+<link rel="stylesheet" href="overlay.css">
+</head>
+<body>
+<main id="stage" class="stage">
+  <canvas id="field" width="1080" height="1920" aria-label="Bàn thả bi"></canvas>
+  <header class="hud">
+    <div class="title"><span>🔮 THẢ BI</span><small id="title-sub">COMMENT <b>THẢ</b> ĐỂ THẢ BI</small></div>
+    <div class="hud-row">
+      <div class="stat"><small>NGƯỜI CHƠI</small><b id="total">0</b></div>
+      <div class="stat timer"><small id="timer-label">THỜI GIAN</small><b id="timer">--</b></div>
+      <div class="stat gold"><small>BI ĐÃ RƠI</small><b id="landed">0</b></div>
+    </div>
+  </header>
+  <aside class="board"><h3>🏆 BẢNG ĐIỂM</h3><ol id="board"></ol></aside>
+  <div id="feed" class="feed" aria-live="polite"></div>
+  <div id="center-panel" class="center-panel" hidden></div>
+  <footer class="instruction">💬 <b>THẢ</b> = 1 bi <i>•</i> ❤ <b id="likes-per-ball">15</b> tim = 1 bi <i>•</i> 🎁 Quà = <b class="g">bi vàng ×<span id="gold-x">3</span></b> <i>•</i> Mép = <b class="y">JACKPOT</b></footer>
+  <div id="connection" class="connection" hidden>Đang kết nối lại…</div>
+</main>
+<script src="audio.js"></script>
+<script src="overlay.js"></script>
+</body>
+</html>

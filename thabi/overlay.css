@@ -1,0 +1,50 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Be Vietnam Pro', system-ui, sans-serif; color: #fff; }
+/* Fixed 9:16 stage, scaled to fit whatever window captures it */
+.stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; transform-origin: center; transform: translate(-50%, -50%) scale(var(--s, .5)); overflow: hidden; }
+#field { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.hud { position: absolute; left: 0; right: 0; top: 0; padding: 28px 36px 0; display: grid; gap: 16px; pointer-events: none; }
+.title { justify-self: center; display: grid; place-items: center; min-width: 640px; padding: 12px 40px 14px; border-radius: 28px; border: 5px solid rgba(255,255,255,.9); background: linear-gradient(#06b6d4, #6d28d9); box-shadow: 0 10px 0 rgba(0,0,0,.35), 0 0 60px rgba(34,211,238,.5); }
+.title span { font-size: 72px; font-weight: 900; letter-spacing: 3px; line-height: 1; text-shadow: 0 5px 0 rgba(0,0,0,.35); }
+.title small { font-size: 30px; font-weight: 800; letter-spacing: 2px; margin-top: 6px; }
+.title small b { color: #fde047; }
+.hud-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.stat { background: rgba(8, 10, 30, .72); border: 3px solid rgba(255,255,255,.25); border-radius: 20px; padding: 6px 10px 8px; text-align: center; }
+.stat small { display: block; font-size: 22px; font-weight: 800; opacity: .8; letter-spacing: 1px; }
+.stat b { font-size: 48px; font-weight: 900; line-height: 1.05; }
+.stat.timer b { color: #fde047; }
+.stat.gold b { color: #67e8f9; }
+
+.board { position: absolute; left: 24px; top: 1512px; width: 520px; background: rgba(8, 10, 30, .78); border: 3px solid rgba(255,255,255,.25); border-radius: 22px; padding: 10px 16px; pointer-events: none; }
+.board h3 { font-size: 26px; font-weight: 900; color: #fde047; margin-bottom: 4px; }
+.board ol { list-style: none; display: grid; gap: 2px; }
+.board li { display: flex; gap: 10px; font-size: 24px; font-weight: 800; align-items: center; }
+.board li .n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.board li .d { color: #67e8f9; }
+.board .empty { font-size: 24px; opacity: .7; }
+
+.feed { position: absolute; right: 24px; top: 1512px; width: 500px; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+.feed .item { font-size: 26px; font-weight: 800; padding: 8px 16px; border-radius: 16px; background: rgba(8,10,30,.8); border-left: 9px solid #94a3b8; animation: pop .25s ease-out; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.feed .item.jackpot { border-color: #facc15; background: rgba(120, 80, 0, .85); }
+.feed .item.gold { border-color: #fbbf24; }
+.feed .item.join { border-color: #a78bfa; }
+@keyframes pop { from { transform: translateX(40px); opacity: 0 } to { transform: none; opacity: 1 } }
+
+.center-panel { position: absolute; left: 70px; right: 70px; top: 640px; padding: 40px 36px; border-radius: 36px; text-align: center; background: rgba(8, 10, 30, .9); border: 5px solid rgba(255,255,255,.85); box-shadow: 0 14px 0 rgba(0,0,0,.4); }
+.center-panel[hidden] { display: none; }
+.center-panel h2 { font-size: 72px; font-weight: 900; line-height: 1.05; }
+.center-panel p { font-size: 38px; font-weight: 700; margin-top: 16px; opacity: .92; }
+.center-panel ol { list-style: none; margin-top: 22px; display: grid; gap: 10px; }
+.center-panel li { display: flex; align-items: center; gap: 18px; font-size: 40px; font-weight: 800; background: rgba(255,255,255,.08); border-radius: 18px; padding: 10px 20px; }
+.center-panel li .medal { font-size: 48px; }
+.center-panel li .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; text-align: left; }
+.center-panel li .pts { color: #67e8f9; }
+.center-panel .none { color: #fca5a5; }
+
+.instruction { position: absolute; left: 24px; right: 24px; bottom: 30px; padding: 20px 24px; border-radius: 26px; background: rgba(8,10,30,.85); border: 3px solid rgba(255,255,255,.3); font-size: 27px; font-weight: 700; text-align: center; line-height: 1.35; white-space: nowrap; padding-left: 10px; padding-right: 10px; }
+.instruction i { opacity: .5; font-style: normal; margin: 0 6px; }
+.instruction .g { color: #fbbf24; }
+.instruction .y { color: #fde047; }
+.connection { position: absolute; right: 30px; top: 300px; padding: 10px 20px; border-radius: 14px; background: #b91c1c; font-size: 28px; font-weight: 800; }
+.connection[hidden] { display: none; }

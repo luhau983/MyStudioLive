@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Điều khiển · Đánh Boss</title>
+<link rel="stylesheet" href="control.css">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}</script>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div><small>LIVE GAME</small><h1>🐲 Đánh Boss <span>/ điều khiển</span></h1></div>
+    <span id="socket" class="status off">● Chưa kết nối server</span>
+  </header>
+
+  <section class="overview">
+    <div><small>TRẠNG THÁI</small><h2 id="phase">—</h2><p id="live">TikTok: chưa kết nối</p></div>
+    <div class="nums">
+      <div><small>MÁU BOSS</small><b id="boss">0</b></div>
+      <div><small>NGƯỜI CHƠI</small><b id="total">0</b></div>
+      <div><small>CÒN ĐỨNG</small><b id="alive">0</b></div>
+      <div><small>GỤC</small><b id="down">0</b></div>
+      <div><small>THỜI GIAN</small><b id="timer">--</b></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>Điều khiển trận</h3>
+    <div class="row">
+      <button class="btn primary" data-cmd="start">▶ Bắt đầu</button>
+      <button class="btn" data-cmd="stop">⏹ Kết thúc ván</button>
+      <button class="btn" data-cmd="reset">↺ Ván mới (xoá người chơi)</button>
+      <button class="btn" data-cmd="bots">🤖 Thêm bot</button>
+    </div>
+    <p class="hint">Người xem <b>thả tim</b> hoặc <b>comment bất kỳ</b> để vào trận (vào giữa trận cũng được). Thả tim = đánh, comment <b>ĐÁNH</b> = đòn mạnh. Khi boss <b>gồng chiêu</b>, comment <b>NÉ</b> để tránh — không né thì mất 1 tim, hết tim là gục. Quà = <b>chí mạng</b> theo số kim cương, hoặc <b>hồi sinh</b> nếu đang gục.</p>
+  </section>
+
+  <section class="panel">
+    <h3>Giả lập (thử không cần live)</h3>
+    <div class="row">
+      <label>Số áo <input id="sim-number" type="number" min="1" placeholder="mới"></label>
+      <button class="btn" data-sim="join">👋 Vào trận</button>
+      <button class="btn" data-sim="tap">❤ Thả tim</button>
+      <button class="btn" data-sim="attack">⚔ ĐÁNH</button>
+      <button class="btn" data-sim="dodge">💨 NÉ</button>
+      <button class="btn" data-sim="gift">🎁 Tặng quà</button>
+    </div>
+    <p class="hint">Để trống số áo = tạo khách mới. Nhập số áo để điều khiển đúng người đó.</p>
+  </section>
+
+  <section class="panel">
+    <h3>Âm thanh</h3>
+    <div class="row">
+      <label>Âm lượng <input id="volume" type="range" min="0" max="100"></label>
+      <label class="check"><input id="muted" type="checkbox"> Tắt tiếng</label>
+      <button class="btn" id="audio-test">🔊 Thử âm thanh</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>Thông số</h3>
+    <form id="config" class="grid">
+      <label>Thời gian 1 ván (giây)<input name="roundSeconds" type="number" min="15" max="600"></label>
+      <label>Đếm ngược (giây)<input name="countdownSeconds" type="number" min="1" max="30"></label>
+      <label>Hiện kết quả (giây)<input name="resultSeconds" type="number" min="3" max="120"></label>
+      <label>Máu boss<input name="bossHp" type="number" min="100" max="1000000" step="100"></label>
+      <label>Sát thương mỗi tim<input name="damagePerTap" type="number" min="1" max="100"></label>
+      <label>Sát thương comment ĐÁNH<input name="damagePerCommand" type="number" min="1" max="500"></label>
+      <label>Chí mạng mỗi kim cương<input name="critPerDiamond" type="number" min="1" max="1000"></label>
+      <label>Tim mỗi người chơi<input name="playerHp" type="number" min="1" max="10"></label>
+      <label>Boss gồng chiêu sau tối thiểu (ms)<input name="slamMinMs" type="number" min="3000" max="60000" step="500"></label>
+      <label>Boss gồng chiêu sau tối đa (ms)<input name="slamMaxMs" type="number" min="3000" max="90000" step="500"></label>
+      <label>Thời gian gồng (ms)<input name="slamWarnMs" type="number" min="1000" max="10000" step="100"></label>
+      <label title="Vẫn tính NÉ trong khoảng này sau khi hết gồng — bù độ trễ TikTok">Ân hạn độ trễ (ms)<input name="graceMs" type="number" min="0" max="5000" step="100"></label>
+      <label>Boss nổi điên khi còn (% máu)<input name="enrageAt" type="number" min="0" max="90"></label>
+      <label>Số người tối đa<input name="maxPlayers" type="number" min="1" max="300"></label>
+      <label>Số bot mỗi lần thêm<input name="botCount" type="number" min="1" max="50"></label>
+      <label>Tự bắt đầu (0/1)<input name="autoStart" type="number" min="0" max="1"></label>
+      <label>Tự bắt đầu khi đủ (người)<input name="minPlayers" type="number" min="1" max="300"></label>
+      <label>Chờ trước khi tự bắt đầu (giây)<input name="lobbySeconds" type="number" min="5" max="600"></label>
+      <div class="actions"><button class="btn primary" type="submit">Lưu thông số</button></div>
+    </form>
+    <p class="hint">Máu boss và tim người chơi áp dụng ngay khi đang chờ, hoặc từ ván sau nếu đang đánh.</p>
+  </section>
+
+  <section class="panel">
+    <h3>Người chơi</h3>
+    <div id="players" class="players"></div>
+  </section>
+  <div id="toast" class="toast" hidden></div>
+</div>
+<script src="control.js"></script>
+</body>
+</html>

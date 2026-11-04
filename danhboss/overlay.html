@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đánh Boss · Overlay</title>
+<link rel="stylesheet" href="overlay.css">
+</head>
+<body>
+<main id="stage" class="stage">
+  <canvas id="field" width="1080" height="1920" aria-label="Đấu trường Đánh Boss"></canvas>
+  <header class="hud">
+    <div class="boss-bar">
+      <div class="boss-name"><span id="boss-name">QUÁI VƯƠNG ĐÁ</span><b id="boss-hp-text">0 / 0</b></div>
+      <div class="hp-track"><div id="hp-lag" class="hp-lag"></div><div id="hp-fill" class="hp-fill"></div></div>
+    </div>
+    <div class="hud-row">
+      <div class="stat"><small>CÒN ĐỨNG</small><b id="alive">0</b></div>
+      <div class="stat timer"><small id="timer-label">THỜI GIAN</small><b id="timer">--</b></div>
+      <div class="stat down"><small>GỤC</small><b id="down">0</b></div>
+    </div>
+  </header>
+  <div id="warn" class="warn" hidden><b>⚠ BOSS GỒNG CHIÊU!</b><span>COMMENT <u>NÉ</u> NGAY</span><div class="warn-track"><div id="warn-fill"></div></div></div>
+  <aside class="board"><h3>⚔ TOP SÁT THƯƠNG</h3><ol id="board"></ol></aside>
+  <div id="center-panel" class="center-panel" hidden></div>
+  <div id="feed" class="feed" aria-live="polite"></div>
+  <footer class="instruction">❤ <b>Thả tim</b> = đánh <i>•</i> 💬 <b>ĐÁNH</b> = đòn mạnh <i>•</i> Boss gồng chiêu: 💬 <b class="y">NÉ</b> <i>•</i> 🎁 Quà = <b class="g">chí mạng / hồi sinh</b></footer>
+  <div id="connection" class="connection" hidden>Đang kết nối lại…</div>
+</main>
+<script src="audio.js"></script>
+<script src="overlay.js"></script>
+</body>
+</html>

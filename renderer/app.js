@@ -39,7 +39,14 @@
     bar: { mode: 'bar', name: 'Live Bar', open: 'Chuyển live sang sàn nhảy 3D + mở màn hình phát' },
     trada: { mode: 'trada', name: 'Trà Đá Vỉa Hè', open: 'Chuyển live sang quán trà đá + mở màn hình phát' },
     nhau: { mode: 'nhau', name: 'Đi Nhậu Online', open: 'Chuyển live sang quán nhậu + mở màn hình phát' },
-    denxanh: { mode: 'denxanh', name: 'Đèn Xanh Đèn Đỏ', open: 'Chuyển live sang sân Đèn Xanh Đèn Đỏ + mở màn hình phát' }
+    denxanh: { mode: 'denxanh', name: 'Đèn Xanh Đèn Đỏ', open: 'Chuyển live sang sân Đèn Xanh Đèn Đỏ + mở màn hình phát' },
+    danhboss: { mode: 'danhboss', name: 'Đánh Boss', open: 'Chuyển live sang đấu trường Đánh Boss + mở màn hình phát' },
+    thabi: { mode: 'thabi', name: 'Thả Bi', open: 'Chuyển live sang bàn Thả Bi + mở màn hình phát' }
+  };
+  // Games running their own server; state comes from app:init
+  const CANVAS_GAMES = {
+    danhboss: { name: 'Đánh Boss', state: { running: false, port: 0, error: '' } },
+    thabi: { name: 'Thả Bi', state: { running: false, port: 0, error: '' } }
   };
   const viewOfMode = (mode) => Object.keys(SCENES).find((v) => SCENES[v].mode === mode) || 'ma';
 
@@ -52,6 +59,7 @@
     if (b.dataset.view === 'vua') loadVuaControl();
     if (b.dataset.view === 'keoco') loadKeocoControl();
     if (b.dataset.view === 'denxanh') loadDenxanhControl();
+    if (CANVAS_GAMES[b.dataset.view]) loadCanvasGameControl(b.dataset.view);
     setPreviewSrc(false);
   }));
 
@@ -415,6 +423,20 @@
       return;
     }
     const src = `http://127.0.0.1:${keoco.port}/control.html`;
+    if (frame.dataset.src !== src) { frame.dataset.src = src; frame.src = src; }
+  }
+
+  // ---------- Đánh Boss & Thả Bi (server riêng, bảng điều khiển nhúng trong tab) ----------
+  function loadCanvasGameControl(id) {
+    const game = CANVAS_GAMES[id];
+    const frame = $('#' + id + '-control');
+    const err = $('#' + id + '-error');
+    err.hidden = game.state.running;
+    if (!game.state.running) {
+      err.textContent = `Không khởi động được ${game.name}: ` + (game.state.error || 'lỗi không xác định');
+      return;
+    }
+    const src = `http://127.0.0.1:${game.state.port}/control.html`;
     if (frame.dataset.src !== src) { frame.dataset.src = src; frame.src = src; }
   }
 
@@ -880,6 +902,7 @@
     vua = init.vua || vua;
     keoco = init.keoco || keoco;
     denxanh = init.denxanh || denxanh;
+    for (const id of Object.keys(CANVAS_GAMES)) CANVAS_GAMES[id].state = init[id] || CANVAS_GAMES[id].state;
     renderUiTheme();
     renderSettings();
     renderServer(init.server);
@@ -910,6 +933,7 @@
         $('#' + view + '-control').dataset.src = ''; // ép nạp lại iframe điều khiển
         if (view === 'vua') loadVuaControl(); else if (view === 'keoco') loadKeocoControl(); else loadDenxanhControl();
       }
+      if (CANVAS_GAMES[view]) { $('#' + view + '-control').dataset.src = ''; loadCanvasGameControl(view); }
       setPreviewSrc(true);
       notify('Đã tải lại: ' + $('#hdr-title').textContent);
     } catch (e) {

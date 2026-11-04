@@ -193,11 +193,50 @@ async function startDenxanh() {
   }
 }
 
+// ---- Đánh Boss (danhboss/) & Thả Bi (thabi/): cùng khuôn với Đèn Xanh Đèn Đỏ — server riêng, dùng chung kết nối TikTok ----
+function canvasGame(id, portOffset) {
+  const g = { id, app: null, state: { running: false, port: 0, error: '' } };
+  g.redirect = (req) => {
+    if (!g.app || settings.get().overlay.mode !== id) return null;
+    const host = KEOCO_HOSTS.includes(req.hostname) ? req.hostname : '127.0.0.1';
+    const q = String(req.originalUrl.split('?')[1] || '');
+    const silent = new URLSearchParams(q).get('mute') === '1';
+    return `http://${host}:${g.state.port}/overlay.html?sl=1${silent ? '&silent=1' : ''}${q ? '&' + q : ''}`;
+  };
+  g.start = async () => {
+    const fs = require('fs');
+    const { pathToFileURL } = require('url');
+    const dataDir = path.join(app.getPath('userData'), id);
+    try {
+      fs.mkdirSync(dataDir, { recursive: true });
+      const { createApp } = await import(pathToFileURL(path.join(__dirname, '..', id, 'server.mjs')).href);
+      const bridge = {
+        get studioPort() { return serverState.port; },
+        initialStatus: { status: live.status, username: live.username }
+      };
+      try {
+        g.app = await createApp({ port: settings.get().port + portOffset, dataDir, bridge });
+      } catch (e) {
+        if (e.code !== 'EADDRINUSE') throw e;
+        g.app = await createApp({ port: 0, dataDir, bridge });
+      }
+      g.state = { running: true, port: g.app.server.address().port, error: '' };
+    } catch (e) {
+      console.error(`[${id}]`, e);
+      g.state = { running: false, port: 0, error: e.message };
+    }
+  };
+  return g;
+}
+// cổng StudioLive +4 / +5 (+1 Vua, +2 Kéo Co, +3 Đèn Xanh Đèn Đỏ)
+const canvasGames = [canvasGame('danhboss', 4), canvasGame('thabi', 5)];
+
 const overlay = new OverlayServer({
   getConfig: () => settings.get(),
   getSnapshot: () => live.snapshot(),
   getPaused: () => paused,
   getRedirect: (req) => vuaRedirect(req) || keocoRedirect(req) || denxanhRedirect(req)
+    || canvasGames.reduce((url, g) => url || g.redirect(req), null)
 });
 
 let serverState = { running: false, port: 0, error: '', clients: 0 };
@@ -241,6 +280,7 @@ live.on('status', (s) => {
   if (vua) vua.liveStatus(s);
   if (keoco) keoco.liveStatus(s);
   if (denxanh) denxanh.liveStatus(s);
+  for (const g of canvasGames) if (g.app) g.app.liveStatus(s);
 });
 live.on('stats', (s) => {
   send('live:stats', s);
@@ -255,6 +295,8 @@ live.on('event', (e) => {
   if (keoco && !paused && settings.get().overlay.mode === 'keoco') keoco.ingest(e);
   // chỉ nhận thao tác khi Đèn Xanh Đèn Đỏ đang là cảnh trên live
   if (denxanh && !paused && settings.get().overlay.mode === 'denxanh') denxanh.ingest(e);
+  // Đánh Boss / Thả Bi: chỉ game đang là cảnh trên live nhận thao tác
+  for (const g of canvasGames) if (g.app && !paused && settings.get().overlay.mode === g.id) g.app.ingest(e);
 });
 overlay.onClients = (n) => {
   serverState.clients = n;
@@ -325,6 +367,7 @@ ipcMain.handle('app:init', () => ({
   vua: vuaState,
   keoco: keocoState,
   denxanh: denxanhState,
+  ...Object.fromEntries(canvasGames.map((g) => [g.id, g.state])),
   platform: process.platform,
   version: app.getVersion()
 }));
@@ -342,6 +385,7 @@ ipcMain.handle('settings:update', async (_e, patch) => {
     // các màn hình đang ở cảnh Kéo Co (server riêng) quay về StudioLive
     if (before.overlay.mode === 'keoco' && keoco) keoco.navigateOverlays();
     if (before.overlay.mode === 'denxanh' && denxanh) denxanh.navigateOverlays();
+    for (const g of canvasGames) if (before.overlay.mode === g.id && g.app) g.app.navigateOverlays();
   }
   if (next.port !== before.port) await startServer(next.port);
   return { settings: next, server: serverState };
@@ -554,6 +598,12 @@ function selfTest() {
       await new Promise((ok) => setTimeout(ok, 1500));
       r.ui = await win.webContents.executeJavaScript("!!document.querySelector('#view-dashboard') && document.querySelector('#srv-sub').textContent");
       r.quanUi = await win.webContents.executeJavaScript("['trada','nhau'].every((k) => document.querySelector('#view-' + k) && document.querySelector('.nav-item[data-view=' + k + ']') && document.querySelector('[data-open-scene=' + k + ']'))");
+      r.canvasGames = {};
+      for (const g of canvasGames) {
+        r.canvasGames[g.id] = g.state.running
+          && (await fetch(`http://127.0.0.1:${g.state.port}/control.html`)).ok
+          && await win.webContents.executeJavaScript(`!!document.querySelector('#view-${g.id}') && !!document.querySelector('.nav-item[data-view=${g.id}]') && !!document.querySelector('[data-open-scene=${g.id}]')`);
+      }
       r.decoder = typeof require('tiktok-live-connector').deserializeWebSocketMessage === 'function';
     } catch (e) {
       r.error = String(e.message || e);
@@ -582,6 +632,7 @@ if (!gotLock) {
     await startVua();
     await startKeoco();
     await startDenxanh();
+    for (const g of canvasGames) await g.start();
     createWindow();
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -609,6 +660,7 @@ if (!gotLock) {
     // Kéo Co ghi điểm / lịch sử đồng bộ ngay khi có kết quả nên chỉ cần đóng server
     if (keoco) { const k = keoco; keoco = null; Promise.resolve(k.close()).catch((err) => console.error('[keoco]', err)); }
     if (denxanh) { const d = denxanh; denxanh = null; Promise.resolve(d.close()).catch((err) => console.error('[denxanh]', err)); }
+    for (const g of canvasGames) if (g.app) { const a = g.app; g.app = null; Promise.resolve(a.close()).catch((err) => console.error(`[${g.id}]`, err)); }
     if (!vua || vuaClosed) return;
     e.preventDefault();
     const v = vua;
