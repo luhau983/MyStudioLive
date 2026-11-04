@@ -32,6 +32,7 @@
   // ---------- Điều hướng ----------
   $$('.nav-item').forEach((b) => b.addEventListener('click', () => {
     $$('.nav-item').forEach((x) => x.classList.toggle('active', x === b));
+    $('#hdr-title').textContent = b.querySelector('.nav-label').textContent;
     $$('.view').forEach((v) => v.classList.toggle('active', v.id === 'view-' + b.dataset.view));
     if (['ma', 'chua', 'rap', 'vua', 'keoco'].includes(b.dataset.view)) switchScene(b.dataset.view);
     if (b.dataset.view === 'vua') loadVuaControl();

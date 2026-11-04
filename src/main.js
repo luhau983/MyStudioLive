@@ -12,10 +12,10 @@ app.setPath('userData', path.join(app.getPath('appData'), 'StudioLive'));
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 nativeTheme.themeSource = 'dark';
 
-// Màu khung cửa sổ theo giao diện sáng/tối đang dùng
+// Màu khung cửa sổ theo giao diện sáng/tối đang dùng — trùng nền header (TailAdmin: gray-900 / white)
 const chromeColors = () => (nativeTheme.shouldUseDarkColors
-  ? { bg: '#0b0d10', symbol: '#9ca3af' }
-  : { bg: '#f4f6f9', symbol: '#475569' });
+  ? { bg: '#101828', symbol: '#98a2b3' }
+  : { bg: '#ffffff', symbol: '#667085' });
 function applyUiTheme(mode) {
   nativeTheme.themeSource = ['light', 'dark', 'system'].includes(mode) ? mode : 'dark';
 }

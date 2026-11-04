@@ -746,3 +746,79 @@ details.adv > summary { font-weight: 500; }
 .app-toast { border-radius: var(--radius-md); background: var(--panel); border-color: var(--line); box-shadow: var(--shadow-lg); font-weight: 500; }
 .app-toast.ok { border-color: rgba(18, 183, 106, .4); }
 main::-webkit-scrollbar-thumb { border-radius: 999px; }
+
+/* =====================================================================
+ * TailAdmin app layout: 290px sidebar (90px collapsed) with menu groups and
+ * a bottom widget, sticky 72px header, content capped at 1536px with 24px padding.
+ * ===================================================================== */
+body { grid-template-columns: 290px 1fr; }
+body.side-collapsed { grid-template-columns: 90px 1fr; }
+
+/* Sidebar */
+.sidebar { padding: 12px 20px 0; overflow-y: auto; scrollbar-width: none; }
+.sidebar::-webkit-scrollbar { display: none; }
+.brand { padding: 28px 4px; gap: 10px; }
+.logo { width: 36px; height: 36px; }
+.brand-name { font-size: 18px; }
+.menu-group { display: flex; margin: 20px 0 12px; font-size: 12px; line-height: 20px; font-weight: 400; color: var(--faint); text-transform: uppercase; }
+.menu-group:first-child { margin-top: 0; }
+.menu-group-dots { display: none; width: 100%; justify-content: center; letter-spacing: 2px; }
+.nav-item { padding: 8px 12px; }
+.nav-item svg { width: 22px; height: 22px; }
+.nav-emoji { width: 22px; font-size: 17px; }
+.side-foot { margin-top: auto; padding: 24px 0 20px; }
+.srv { align-items: flex-start; gap: 12px; padding: 16px; border: none; border-radius: var(--radius); background: var(--item); }
+.srv .dot { margin-top: 5px; }
+.srv-title { font-size: 14px; font-weight: 600; color: var(--text); }
+.srv-sub { font-size: 12px; margin-top: 2px; }
+.ver { text-align: left; margin-top: 6px; font-size: 12px; }
+
+/* Collapsed sidebar: icons only, group titles become dots */
+body.side-collapsed .sidebar { padding: 12px 16px 0; }
+body.side-collapsed .brand { padding: 28px 0; justify-content: center; flex-direction: row; }
+body.side-collapsed .menu-group-title { display: none; }
+body.side-collapsed .menu-group-dots { display: flex; }
+body.side-collapsed .nav-item { padding: 10px 0; }
+body.side-collapsed .srv { justify-content: center; padding: 14px 0; }
+body.side-collapsed .srv .dot { margin-top: 0; }
+body.side-collapsed .side-toggle { transform: none; }
+
+/* Header */
+.shell { display: flex; flex-direction: column; min-width: 0; height: 100vh; }
+.app-header {
+  flex: none; height: 72px; display: flex; align-items: center; gap: 16px;
+  padding: 0 24px;
+  background: var(--sidebar-bg); border-bottom: 1px solid var(--line);
+  -webkit-app-region: drag;
+}
+/* Windows titleBarOverlay: leave room for the caption buttons (html.wco is set by theme-init.js) */
+.wco .app-header { padding-right: calc(24px + 100vw - env(titlebar-area-x, 0px) - env(titlebar-area-width, calc(100vw - 140px))); }
+
+/* Metric cards stack icon over value like TailAdmin ecommerce-metrics */
+.stat { flex-direction: column; align-items: flex-start; gap: 16px; }
+.app-header button { -webkit-app-region: no-drag; }
+.hdr-btn {
+  flex: none; width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center;
+  border: 1px solid var(--line-2); background: transparent; color: var(--muted); box-shadow: var(--shadow-xs);
+  transition: background .15s, color .15s;
+}
+.hdr-btn:hover { background: var(--hover); color: var(--text); }
+.hdr-btn svg { width: 22px; height: 22px; }
+@media (prefers-color-scheme: dark) { .hdr-btn { background: var(--line); border-color: var(--line-2); } }
+.crumb { display: flex; align-items: center; gap: 6px; min-width: 0; font-size: 14px; color: var(--muted); }
+.crumb svg { width: 16px; height: 16px; flex: none; }
+.crumb-cur { color: var(--text); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hdr-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.seg.ui-theme, body.side-collapsed .seg.ui-theme { display: inline-flex; flex-direction: row; width: auto; margin: 0; padding: 3px; -webkit-app-region: no-drag; }
+.seg.ui-theme button, body.side-collapsed .seg.ui-theme button { flex: none; padding: 6px 12px; font-size: 13px; }
+body.side-collapsed .seg-label { display: inline; }
+
+/* Content area */
+main { flex: 1; min-height: 0; padding: 24px; border-top: 0; }
+.view { max-width: 1536px; }
+main:has(.view.scene-view.active) { padding-bottom: 0; }
+.page-head { margin-bottom: 24px; }
+.feed-panel { height: calc(100vh - 420px); }
+.view.scene-view .feature-frame { height: min(720px, calc(100vh - 330px)); width: calc(min(720px, 100vh - 330px) * 9 / 16); }
+.view.scene-view .preview-actions, .view.scene-view .preview-wrap > .hint { max-width: calc(min(720px, 100vh - 330px) * 9 / 16 + 40px); }
+.vua-host { margin: 0 -24px; }

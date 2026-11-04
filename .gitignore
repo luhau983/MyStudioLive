@@ -18,3 +18,6 @@ npm-debug.log*
 *.tmp
 .env
 .env.*
+
+# built by npm run build:css
+renderer/app.css

@@ -107,5 +107,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ## Giao diện
 
-- Bảng màu, bóng đổ và kiểu thành phần của dashboard (`renderer/styles.css`, `vua/studio-theme.css`) theo **TailAdmin Free Tailwind Dashboard Template** — MIT, Copyright (c) 2023 TailAdmin. Chỉ dùng lại design tokens, không nhúng mã nguồn của TailAdmin.
+- **TailAdmin Free Tailwind Dashboard Template** — MIT, Copyright (c) 2023 TailAdmin. Theme và utilities nhúng tại `renderer/tailadmin/tailadmin.css`; class của các component (button, input, card, badge, alert, toggle, tab, menu) chép từ các partial của TailAdmin vào `renderer/tailadmin/app.css`. `vua/studio-theme.css` dùng cùng bảng màu.
+- **Tailwind CSS** v4, **@tailwindcss/forms**, **tw-animate-css** — MIT. Chỉ dùng lúc build (`npm run build:css` → `renderer/app.css`).
 - Font **Plus Jakarta Sans** (`renderer/fonts/`, `vua/fonts/`) — SIL Open Font License 1.1, Copyright 2020 The Plus Jakarta Sans Project Authors. Toàn văn giấy phép: `renderer/fonts/OFL.txt`.

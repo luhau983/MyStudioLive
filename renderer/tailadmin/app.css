@@ -1,0 +1,143 @@
+/*
+ * Tailwind entry for the dashboard. Build: `npm run build:css` -> renderer/app.css (git-ignored).
+ *
+ * Layer order: legacy (renderer/styles.css: layout + view specifics) sits *below* components, so the
+ * TailAdmin component recipes below win over it, and Tailwind utilities in markup win over both.
+ * Recipes are copied from TailAdmin partials (buttons/variants, form-elements, badges, alerts,
+ * chart-tab, toggle-switch, ecommerce-metrics, app-layout) and mapped onto the class names that
+ * index.html and app.js already use, so dynamically rendered DOM gets them too.
+ */
+@layer theme, base, legacy, components, utilities;
+
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+@plugin "@tailwindcss/forms";
+@import "./tailadmin.css";
+@import "../styles.css" layer(legacy);
+
+@source "../index.html";
+@source "../app.js";
+
+@layer components {
+  body { @apply bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-white/90; }
+
+  /* ---------- App layout (app-layout/sidebar, app-layout/header) ---------- */
+  .sidebar { @apply border-r border-gray-200 bg-white dark:border-gray-800 dark:bg-black; }
+  .brand-name { @apply text-lg font-semibold text-gray-800 dark:text-white/90; }
+  .brand-sub { @apply text-xs text-gray-500 dark:text-gray-400; }
+  .menu-group { @apply mb-4 text-xs leading-5 text-gray-400 uppercase; }
+  .nav-item { @apply menu-item menu-item-inactive w-full; }
+  .nav-item svg, .nav-item .nav-emoji { @apply menu-item-icon-inactive; }
+  .nav-item.active { @apply menu-item-active; }
+  .nav-item.active svg { @apply menu-item-icon-active; }
+  .live-dot { @apply ml-auto rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-medium text-white uppercase; }
+  .srv { @apply rounded-2xl bg-gray-50 px-4 py-5 dark:bg-white/3; }
+  .srv-title { @apply font-semibold text-gray-900 dark:text-white; }
+  .srv-sub, .ver { @apply text-sm text-gray-500 dark:text-gray-400; }
+
+  .app-header { @apply border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900; }
+  .hdr-btn {
+    @apply inline-flex size-11 shrink-0 items-center justify-center rounded-[10px] border border-gray-300 bg-transparent text-gray-500 shadow-theme-xs transition-all select-none hover:bg-gray-50 hover:text-gray-800 focus-visible:ring-3 focus-visible:ring-gray-300/50 focus-visible:outline-hidden active:translate-y-px dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700/50 dark:hover:text-white;
+  }
+  /* theme-toggler: icon-only header button (legacy .theme-toggle was a full-width sidebar row) */
+  .hdr-btn.theme-toggle { @apply m-0 w-11 p-0 text-gray-700 dark:text-gray-300; }
+  .hdr-btn.theme-toggle .ic { @apply size-5 text-current; }
+  .crumb { @apply text-sm text-gray-500 dark:text-gray-400; }
+  .crumb-cur { @apply text-gray-800 dark:text-white/90; }
+
+  /* ---------- Page breadcrumb (common/page-breadcrumb) ---------- */
+  .page-head h1 { @apply text-xl font-semibold text-gray-800 dark:text-white/90; }
+  .page-head p { @apply text-sm text-gray-500 dark:text-gray-400; }
+
+  /* ---------- Cards (rounded-2xl border bg-white / white-3) ---------- */
+  .panel, .stat, .connect-card {
+    @apply rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/3;
+  }
+  .panel { @apply p-5; }
+  .panel-head h2 { @apply text-lg font-semibold text-gray-800 dark:text-white/90; }
+  .connect-card { @apply p-5 md:p-6; }
+  .connect-glow { @apply hidden; }
+
+  /* ecommerce-metrics */
+  .stat { @apply p-5; }
+  .stat-ico { @apply flex size-12 items-center justify-center rounded-xl bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-white/90; }
+  .stat-val { @apply text-title-sm font-bold text-gray-800 dark:text-white/90; }
+  .stat-lbl { @apply text-sm text-gray-500 dark:text-gray-400; }
+
+  /* ---------- Buttons (ui-elements/buttons/variants) ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-[10px] border border-transparent px-4 py-2.5 text-sm font-medium shadow-theme-xs transition-all outline-none select-none focus-visible:outline-hidden active:translate-y-px disabled:pointer-events-none;
+  }
+  .btn.primary, .btn.output-btn {
+    @apply bg-brand-500 text-white hover:bg-brand-600 focus-visible:ring-3 focus-visible:ring-brand-500/20 disabled:bg-brand-200 dark:bg-brand-500 dark:hover:bg-brand-600 dark:disabled:bg-brand-800 dark:disabled:text-brand-400;
+  }
+  .btn.ghost, .btn.pause-btn, .btn.scene-btn, .btn.output-btn.open {
+    @apply border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-800 focus-visible:ring-3 focus-visible:ring-gray-300/50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700/50 dark:hover:text-white;
+  }
+  .btn.danger {
+    @apply bg-red-500 text-white hover:bg-red-600 focus-visible:ring-3 focus-visible:ring-red-500/20 dark:bg-red-500 dark:hover:bg-red-600;
+  }
+  .btn.sm { @apply px-3 py-2; }
+  .btn.pause-btn.paused, .btn.ghost.paused, .btn.lights-btn.on {
+    @apply border-amber-500 bg-amber-50 text-amber-600 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-orange-400;
+  }
+  .btn.game-btn {
+    @apply border-red-500 bg-red-50 text-red-600 hover:bg-red-100 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-500;
+  }
+
+  /* ---------- Inputs (form-elements/default-inputs) ---------- */
+  .inp, .input-at, .url-box, .file-name {
+    @apply rounded-[10px] border border-gray-300 bg-white text-sm font-normal text-gray-800 shadow-theme-xs transition-colors dark:border-gray-700 dark:bg-gray-900 dark:text-white/90;
+  }
+  .inp { @apply h-11 px-4 py-2.5 placeholder:text-gray-400 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/20 focus:outline-hidden dark:placeholder:text-gray-500 dark:focus:border-brand-500/40; }
+  textarea.inp { @apply h-auto; }
+  .input-at { @apply h-11 focus-within:border-brand-300 focus-within:ring-3 focus-within:ring-brand-500/20 dark:focus-within:border-brand-500/40; }
+  .input-at input { @apply border-0 bg-transparent p-2 text-sm shadow-none ring-0 focus:ring-0 placeholder:text-gray-400 dark:placeholder:text-white/30; }
+  .input-at span { @apply text-sm font-medium text-gray-500 dark:text-gray-400; }
+  .url-box code { @apply text-brand-500 dark:text-brand-400; }
+  .field > label, .lbl { @apply mb-1.5 text-sm font-medium text-gray-700 normal-case tracking-normal dark:text-gray-400; }
+  .hint { @apply text-sm text-gray-500 dark:text-gray-400; }
+  .switch-inline input[type=checkbox] { @apply size-4 rounded border-gray-300 text-brand-500 focus:ring-brand-500/20 dark:border-gray-700 dark:bg-gray-900; }
+
+  /* ---------- Tabs / segmented (statistics-chart/chart-tab) ---------- */
+  .chips, .seg { @apply flex items-center gap-0.5 rounded-lg border-0 bg-gray-100 p-0.5 dark:bg-gray-900; }
+  .chip, .seg button { @apply h-8 rounded-md px-3 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white; }
+  .chip.active, .seg button.active, .seg.ui-theme button.active { @apply bg-white text-gray-900 shadow-theme-xs dark:bg-gray-800 dark:text-white; }
+
+  /* ---------- Toggle switch (form-elements/toggle-switch) ---------- */
+  .toggle { @apply text-sm font-medium text-gray-700 dark:text-gray-400; }
+  .toggle i { @apply relative inline-flex h-5 w-11 shrink-0 items-center rounded-full bg-gray-200 p-[1.5px] transition-colors dark:bg-gray-700; }
+  .toggle i::after { @apply static block h-[17px] w-[26px] shrink-0 rounded-full bg-white shadow-theme-sm transition-transform duration-150 ease-linear; }
+  .toggle input:checked + i { @apply bg-brand-500 dark:bg-brand-500; }
+  .toggle input:checked + i::after { @apply translate-x-[15px] transform-none bg-white; }
+
+  /* ---------- Badges (ui-elements/badges/light-variant) ---------- */
+  .status-pill, .item .who .tag {
+    @apply inline-flex w-fit shrink-0 items-center justify-center gap-1 rounded-lg border-0 font-medium whitespace-nowrap transition-colors select-none;
+  }
+  .status-pill { @apply h-6 bg-gray-100 px-2.5 py-0.5 text-sm text-gray-700 dark:bg-white/5 dark:text-white/80; }
+  .status-pill.live, .status-pill.error { @apply bg-red-50 text-red-600 dark:bg-red-500/15 dark:text-red-500; }
+  .status-pill.busy { @apply bg-amber-50 text-amber-600 dark:bg-amber-500/15 dark:text-orange-400; }
+  .item .who .tag { @apply h-5 px-2 text-xs; }
+  .tag.chat { @apply bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-400; }
+  .tag.gift { @apply bg-amber-50 text-amber-600 dark:bg-amber-500/15 dark:text-orange-400; }
+  .tag.share { @apply bg-sky-50 text-sky-500 dark:bg-sky-500/15 dark:text-sky-500; }
+  .tag.test { @apply bg-gray-100 text-gray-700 dark:bg-white/5 dark:text-white/80; }
+
+  /* ---------- Alerts (ui-elements/alerts/alert-error) ---------- */
+  .warn-bar { @apply rounded-xl border border-red-500 bg-red-50 p-4 text-sm text-gray-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-gray-300; }
+  .warn-bar b { @apply font-medium text-gray-800 dark:text-white/90; }
+  .warn-bar .warn-ico { @apply mt-0.5 text-red-500 dark:text-red-400; }
+
+  /* ---------- Selectable cards ---------- */
+  .mode-cards button, .amb-grid button, .theme-grid button {
+    @apply rounded-xl border border-gray-200 bg-white hover:border-gray-300 dark:border-gray-800 dark:bg-white/3 dark:hover:border-gray-700;
+  }
+  .mode-cards button.active, .amb-grid button.active, .theme-grid button.active {
+    @apply border-brand-500 bg-brand-50 dark:border-brand-500 dark:bg-brand-500/15;
+  }
+
+  /* ---------- Toast (dropdown surface) ---------- */
+  .app-toast { @apply rounded-xl border border-gray-200 bg-white p-4 text-sm font-medium text-gray-800 shadow-theme-lg dark:border-gray-800 dark:bg-gray-900 dark:text-white/90; }
+  .app-toast.err { @apply border-red-500 text-red-600 dark:border-red-500/30 dark:text-red-500; }
+}
