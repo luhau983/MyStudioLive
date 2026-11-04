@@ -11,6 +11,41 @@ const MEDIA_TYPES = {
   '.mp4': 'video/mp4', '.m4v': 'video/mp4', '.webm': 'video/webm', '.mov': 'video/quicktime'
 };
 
+let threeModule = null;
+function resolveThreeModule() {
+  try { return path.join(path.dirname(require.resolve('three')), 'three.module.js'); } catch { /* fall through */ }
+  return path.join(__dirname, '..', 'node_modules', 'three', 'build', 'three.module.js');
+}
+
+// Only TikTok's image CDNs are proxied (no open proxy / SSRF into the LAN); redirects are refused.
+const AVATAR_HOSTS = ['tiktokcdn.com', 'tiktokcdn-us.com', 'tiktokcdn-eu.com', 'ibyteimg.com', 'byteimg.com', 'muscdn.com'];
+const AVATAR_MAX_BYTES = 2 * 1024 * 1024;
+const avatarCache = new Map();
+function isAvatarUrl(raw) {
+  let u;
+  try { u = new URL(raw); } catch { return false; }
+  if (u.protocol !== 'https:' || u.port || u.username || u.password) return false;
+  const host = u.hostname.toLowerCase();
+  return AVATAR_HOSTS.some((h) => host === h || host.endsWith('.' + h));
+}
+async function fetchAvatar(raw) {
+  if (!isAvatarUrl(raw)) return null;
+  if (avatarCache.has(raw)) return avatarCache.get(raw);
+  const job = (async () => {
+    try {
+      const r = await fetch(raw, { redirect: 'error', signal: AbortSignal.timeout(6000) });
+      const type = (r.headers.get('content-type') || '').split(';')[0].trim();
+      if (!r.ok || !/^image\/(jpeg|png|webp|gif)$/.test(type)) return null;
+      const body = Buffer.from(await r.arrayBuffer());
+      return body.length && body.length <= AVATAR_MAX_BYTES ? { type, body } : null;
+    } catch { return null; }
+  })();
+  avatarCache.set(raw, job);
+  job.then((v) => { if (!v) avatarCache.delete(raw); });
+  if (avatarCache.size > 400) avatarCache.delete(avatarCache.keys().next().value);
+  return job;
+}
+
 /*
  * Server overlay nội bộ: chỉ lắng nghe 127.0.0.1 nên không ai ngoài máy truy cập được.
  * OBS / TikTok Live Studio thêm Browser Source trỏ tới http://localhost:<port>
@@ -48,11 +83,25 @@ class OverlayServer {
     });
 
     // Cảnh chạy trên server riêng (Vua Tiếng Việt, Kéo Co): chuyển hướng mọi màn hình phát sang đó
+    // Live Bar chạy trang riêng (bar.html, three.js) trên chính server này
     app.get('/', (req, res, next) => {
-      const to = this.getRedirect(req);
+      const to = this.getRedirect(req) || (this.getConfig().overlay.mode === 'bar' ? '/bar.html' + req.url.slice(1) : null);
       if (!to) return next();
       res.set('Cache-Control', 'no-store');
       res.redirect(302, to);
+    });
+
+    // three.js (ES module) cho cảnh 3D Live Bar
+    app.get('/three.module.js', (_req, res) => {
+      if (!threeModule) threeModule = fs.readFileSync(resolveThreeModule());
+      res.type('application/javascript').set('Cache-Control', 'public, max-age=86400').send(threeModule);
+    });
+
+    // Avatar TikTok cho Live Bar: CDN không bật CORS nên WebGL không dùng trực tiếp được -> tải hộ, cùng origin
+    app.get('/bar/avatar', async (req, res) => {
+      const img = await fetchAvatar(String(req.query.u || ''));
+      if (!img) return res.sendStatus(404);
+      res.set({ 'Content-Type': img.type, 'Cache-Control': 'public, max-age=3600' }).send(img.body);
     });
 
     app.use(express.static(path.join(__dirname, '..', 'overlay'), { index: 'index.html' }));
@@ -62,7 +111,7 @@ class OverlayServer {
       const o = this.getConfig().overlay;
       const file = {
         gift: o.customGiftSound, chat: o.customChatSound, jumpscare: o.customJumpscare,
-        scare: o.customScareSound, ambient: o.customAmbient
+        scare: o.customScareSound, ambient: o.customAmbient, barMusic: o.barMusic
       }[req.params.kind] || '';
       const type = MEDIA_TYPES[path.extname(file).toLowerCase()];
       if (!file || !type || !fs.existsSync(file)) return res.sendStatus(404);
@@ -122,4 +171,4 @@ class OverlayServer {
   }
 }
 
-module.exports = { OverlayServer };
+module.exports = { OverlayServer, isAvatarUrl };

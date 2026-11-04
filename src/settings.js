@@ -18,7 +18,17 @@ const DEFAULTS = {
     showLikeCounter: true,
     showViewerCounter: true,
     showTopGifter: true,
-    mode: 'game',               // game (Nhà Ma) | cards (thẻ bình luận) | chua (Đi Chùa) | rap (Rạp Phim) | vua (Vua Tiếng Việt) | keoco (Kéo Co)
+    mode: 'game',               // game (Nhà Ma) | cards (thẻ bình luận) | chua (Đi Chùa) | rap (Rạp Phim) | vua (Vua Tiếng Việt) | keoco (Kéo Co) | bar (Live Bar)
+    barName: '',                // tên bar (màn LED + tiêu đề)
+    barJoinMode: 'keyword',     // keyword: gõ từ khoá / tặng quà mới vào sàn | all: mọi tương tác đều vào sàn
+    barJoinKeyword: 'hey',      // từ khoá vào sàn
+    barNpc: 5,                  // số khách ảo giữ cho sàn không trống
+    barEnergyGoal: 1000,        // điểm PARTY ENERGY để cả sàn cùng quẩy + pháo hoa
+    barBpm: 128,                // nhịp đèn / sàn LED
+    barChroma: false,           // nền xanh lá (chỉ giữ nhân vật + hiệu ứng) để ghép trong OBS
+    barMusic: '',               // file nhạc nền trên máy (mp3/wav/ogg)
+    barMusicVolume: 0.35,
+    barFireworkSound: true,
     rapName: '',                // tên rạp (tiêu đề + giọng đọc)
     rapVoice: true,
     rapGreet: true,
@@ -106,7 +116,14 @@ class Settings {
     o.ambientVolume = Math.min(1, Math.max(0, o.ambientVolume));
     o.liveBoost = Math.min(40, Math.max(0, Math.round(o.liveBoost)));
     if (!['drone', 'wind', 'rain', 'church', 'heartbeat', 'musicbox', 'whispers', 'forest'].includes(o.ambientPreset)) o.ambientPreset = 'drone';
-    if (!['game', 'cards', 'chua', 'rap', 'vua', 'keoco'].includes(o.mode)) o.mode = 'game';
+    if (!['game', 'cards', 'chua', 'rap', 'vua', 'keoco', 'bar'].includes(o.mode)) o.mode = 'game';
+    o.barName = String(o.barName).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 28);
+    if (!['keyword', 'all'].includes(o.barJoinMode)) o.barJoinMode = 'keyword';
+    o.barJoinKeyword = String(o.barJoinKeyword).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 24) || 'hey';
+    o.barNpc = Math.min(40, Math.max(0, Math.round(o.barNpc) || 0));
+    o.barEnergyGoal = Math.min(100000, Math.max(50, Math.round(o.barEnergyGoal) || 1000));
+    o.barBpm = Math.min(180, Math.max(70, Math.round(o.barBpm) || 128));
+    o.barMusicVolume = Math.min(1, Math.max(0, o.barMusicVolume));
     o.rapName = String(o.rapName).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 40);
     o.rapRate = Math.min(1.3, Math.max(0.6, o.rapRate));
     if (!['classic', 'gold', 'imax', 'home'].includes(o.rapTheme)) o.rapTheme = 'classic';

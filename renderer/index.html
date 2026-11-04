@@ -105,6 +105,9 @@
       <button class="nav-item" data-view="keoco" title="Kéo Co Online">
         <span class="nav-emoji"><svg class="ic"><use href="#i-biceps-flexed"/></svg></span><span class="nav-label">Kéo Co Online</span><span class="live-dot" data-live-for="keoco">LIVE</span>
       </button>
+      <button class="nav-item" data-view="bar" title="Live Bar">
+        <span class="nav-emoji"><svg class="ic"><use href="#i-disc-3"/></svg></span><span class="nav-label">Live Bar</span><span class="live-dot" data-live-for="bar">LIVE</span>
+      </button>
       <h3 class="menu-group"><span class="menu-group-title">Khác</span><span class="menu-group-dots">•••</span></h3>
       <button class="nav-item" data-view="overlay" title="Đưa lên live">
         <svg class="ic"><use href="#i-cast"/></svg><span class="nav-label">Đưa lên live</span>
@@ -247,6 +250,7 @@
         <button class="btn scene-btn rap" data-open-scene="rap"><span class="sb-ico"><svg class="ic"><use href="#i-clapperboard"/></svg></span><span><b>Phát Rạp Phim Online</b><small>Chuyển live sang rạp phim + mở màn hình phát</small></span></button>
         <button class="btn scene-btn vua" data-open-scene="vua"><span class="sb-ico"><svg class="ic"><use href="#i-crown"/></svg></span><span><b>Phát Vua Tiếng Việt</b><small>Chuyển live sang giảng đường đoán chữ + mở màn hình phát</small></span></button>
         <button class="btn scene-btn keoco" data-open-scene="keoco"><span class="sb-ico"><svg class="ic"><use href="#i-biceps-flexed"/></svg></span><span><b>Phát Kéo Co Online</b><small>Chuyển live sang sân kéo co + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn bar" data-open-scene="bar"><span class="sb-ico"><svg class="ic"><use href="#i-disc-3"/></svg></span><span><b>Phát Live Bar</b><small>Chuyển live sang sàn nhảy 3D + mở màn hình phát</small></span></button>
       </div>
 
       <div class="live-guide">
@@ -724,6 +728,117 @@
               <button class="btn ghost" data-test="gift"><svg class="ic"><use href="#i-gift"/></svg> Quà nhỏ</button>
               <button class="btn ghost" data-test="bigGift"><svg class="ic"><use href="#i-gem"/></svg> Quà lớn</button>
               <button class="btn ghost" data-rap="testLikes"><svg class="ic"><use href="#i-heart"/></svg> Thả 100 tim</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LIVE BAR ================= -->
+    <section class="view scene-view" id="view-bar">
+      <header class="page-head">
+        <div>
+          <h1><svg class="ic"><use href="#i-disc-3"/></svg> Live Bar</h1>
+          <p class="muted">Đang mở tab này thì sàn nhảy 3D chạy trên live. Người xem gõ từ khoá để vào sàn nhảy cùng avatar TikTok thật; tặng quà để được zoom camera, đèn rọi, lên bục TOP 3 và bắn pháo hoa.</p>
+        </div>
+      </header>
+      <div class="feature-layout">
+        <div class="preview-wrap">
+          <div class="preview-frame feature-frame">
+            <iframe class="live-preview" data-for="bar" title="Sàn nhảy Live Bar trên live"></iframe>
+          </div>
+          <div class="preview-actions">
+            <div style="display:flex;gap:6px">
+              <button class="btn ghost sm" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output><svg class="ic"><use href="#i-tv"/></svg> Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen"><svg class="ic"><use href="#i-rotate-cw"/></svg></button>
+            </div>
+            <label class="switch-inline"><input type="checkbox" class="preview-safe-cb"> <svg class="ic"><use href="#i-smartphone"/></svg> Vùng bị TikTok che</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> <svg class="ic"><use href="#i-volume-2"/></svg> Nghe</label>
+          </div>
+          <p class="hint" style="max-width:405px">Đây chính là màn hình người xem thấy trên live. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
+        </div>
+        <div class="feature-controls">
+          <div class="panel">
+            <div class="panel-head"><h2>Tên bar &amp; cách vào sàn</h2></div>
+            <div class="field" style="margin-top:0">
+              <label>Tên bar <span class="muted small">(màn LED + tiêu đề)</span></label>
+              <input class="inp" id="bar-name" maxlength="28" placeholder="Ví dụ: Bar Ông Chú">
+            </div>
+            <div class="field">
+              <label>Từ khoá vào sàn</label>
+              <div class="file-row">
+                <input class="inp" id="bar-keyword" maxlength="24" placeholder="hey">
+                <button class="btn primary sm" id="bar-name-save">Lưu</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Ai được vào sàn</label>
+              <div class="seg" id="bar-join-seg">
+                <button data-join="keyword">Gõ từ khoá / tặng quà</button>
+                <button data-join="all">Mọi người tương tác</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Khách ảo giữ sàn không trống <span class="val" id="v-barNpc"></span></label>
+              <input type="range" min="0" max="20" step="1" data-o="barNpc" data-num>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Âm nhạc &amp; ánh sáng</h2></div>
+            <div class="field" style="margin-top:0">
+              <label>Nhạc nền</label>
+              <div class="file-row">
+                <span class="file-name" id="f-barMusic">Chưa có nhạc nền</span>
+                <button class="btn ghost sm" data-pick="barMusic">Chọn file</button>
+                <button class="btn ghost sm" data-clear="barMusic">Bỏ</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Âm lượng nhạc <span class="val" id="v-barMusicVolume"></span></label>
+              <input type="range" min="0" max="1" step="0.05" data-o="barMusicVolume" data-num>
+            </div>
+            <div class="field">
+              <label>Nhịp đèn &amp; sàn LED <span class="val" id="v-barBpm"></span></label>
+              <input type="range" min="70" max="180" step="1" data-o="barBpm" data-num>
+            </div>
+            <div class="field">
+              <label>Điểm PARTY ENERGY để cả sàn quẩy</label>
+              <input type="number" class="inp" min="50" data-o="barEnergyGoal" data-num>
+              <p class="hint">Bình luận +2, mỗi 💎 quà +2, theo dõi / chia sẻ +5, 100 tim +8. Đầy thanh: cả sàn nhảy, drop đèn laser và bắn pháo hoa.</p>
+            </div>
+            <div class="toggles" style="margin-top:8px">
+              <label class="toggle"><span>Tiếng pháo hoa</span><input type="checkbox" data-o="barFireworkSound"><i></i></label>
+              <label class="toggle"><span>Nền xanh lá (chroma key cho OBS)</span><input type="checkbox" data-o="barChroma"><i></i></label>
+            </div>
+            <p class="hint warn-hint"><svg class="ic"><use href="#i-triangle-alert"/></svg> Chỉ phát nhạc bạn có quyền sử dụng. Nhạc có bản quyền dễ bị TikTok tắt tiếng hoặc tắt live.</p>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Điều khiển</h2></div>
+            <div class="test-grid">
+              <button class="btn ghost" data-bar="party"><svg class="ic"><use href="#i-party-popper"/></svg> Cả sàn cùng quẩy</button>
+              <button class="btn ghost" data-bar="fireworks"><svg class="ic"><use href="#i-sparkles"/></svg> Bắn pháo hoa</button>
+              <button class="btn ghost" data-bar="drop"><svg class="ic"><use href="#i-audio-lines"/></svg> Drop đèn laser</button>
+              <button class="btn ghost" data-bar="reset"><svg class="ic"><use href="#i-rotate-ccw"/></svg> Đặt lại sàn &amp; bảng</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Gửi thử</h2></div>
+            <div class="test-grid">
+              <button class="btn ghost" data-test="barHey"><svg class="ic"><use href="#i-door-open"/></svg> Gõ từ khoá vào sàn</button>
+              <button class="btn ghost" data-test="barDance"><svg class="ic"><use href="#i-music"/></svg> Gõ “dance”</button>
+              <button class="btn ghost" data-test="barJump"><svg class="ic"><use href="#i-sparkles"/></svg> Gõ “nhảy”</button>
+              <button class="btn ghost" data-test="barWalk"><svg class="ic"><use href="#i-disc-3"/></svg> Gõ “đi vòng”</button>
+              <button class="btn ghost" data-test="barChange"><svg class="ic"><use href="#i-rotate-cw"/></svg> Gõ “đổi nv”</button>
+              <button class="btn ghost" data-test="barRose"><svg class="ic"><use href="#i-flower"/></svg> Hoa hồng (zoom)</button>
+              <button class="btn ghost" data-test="barMedal"><svg class="ic"><use href="#i-flame"/></svg> Quà 50💎 (danh hiệu)</button>
+              <button class="btn ghost" data-test="barGrow"><svg class="ic"><use href="#i-biceps-flexed"/></svg> Portal (khổng lồ)</button>
+              <button class="btn ghost" data-test="barVip"><svg class="ic"><use href="#i-gem"/></svg> Quà 100💎 (VIP)</button>
+              <button class="btn ghost" data-test="barFireworks"><svg class="ic"><use href="#i-sparkles"/></svg> Quà 500💎 (pháo hoa)</button>
+              <button class="btn ghost" data-test="barGalaxy"><svg class="ic"><use href="#i-crown"/></svg> Galaxy (TOP DJ)</button>
+              <button class="btn ghost" data-test="follow"><svg class="ic"><use href="#i-user-plus"/></svg> Theo dõi</button>
+              <button class="btn ghost" data-bar="crowd" data-n="30"><svg class="ic"><use href="#i-user-plus"/></svg> Thêm 30 khách</button>
+              <button class="btn ghost" data-bar="crowd" data-n="200"><svg class="ic"><use href="#i-user-plus"/></svg> Thêm 200 khách</button>
             </div>
           </div>
         </div>

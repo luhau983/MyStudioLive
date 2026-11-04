@@ -10,6 +10,7 @@
     "prestart": "npm run build:css",
     "start": "electron .",
     "predist:mac": "npm run build:css",
+    "test": "node --test test/*.test.mjs",
     "dist:mac": "electron-builder --mac",
     "predist:win": "npm run build:css",
     "dist:win": "electron-builder --win"

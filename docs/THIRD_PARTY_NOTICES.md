@@ -13,7 +13,7 @@ StudioLive sử dụng các thư viện và tài nguyên sau. Mọi thư viện 
 | tiktok-live-connector **2.0.0** | MIT | Copyright (c) 2022 zerodytrash |
 | protobufjs | BSD-3-Clause | Copyright (c) 2016, Daniel Wirtz |
 | axios | MIT | Copyright (c) 2014-present Matt Zabriskie & Collaborators |
-| three (Kéo Co Online) | MIT | Copyright (c) 2010-2023 three.js authors |
+| three (Kéo Co Online, Live Bar) | MIT | Copyright (c) 2010-2023 three.js authors |
 | ws (Kéo Co Online) | MIT | Copyright (c) 2011 Einar Otto Stangvik and contributors |
 
 Lưu ý: các phiên bản `tiktok-live-connector` **mới hơn 2.0.0** và `tiktok-live-proto` dùng giấy phép **AGPL-3.0**. Không nâng cấp lên các bản đó để StudioLive giữ được giấy phép MIT.
@@ -23,6 +23,16 @@ Lưu ý: các phiên bản `tiktok-live-connector` **mới hơn 2.0.0** và `tik
 ### Kéo Co Online — âm thanh sân đấu (`keoco/assets/`)
 
 Nguồn và giấy phép từng file ghi trong `keoco/assets/match-audio-SOURCES.md` và `keoco/assets/crowd-cheer-SOURCE.md` (CC0 và Mixkit Sound Effects Free License — tiếng còi chỉ dùng trong game, không phân phối lại thành gói âm thanh riêng). Kéo Co trong StudioLive dùng chung kết nối TikTok của app (`tiktok-live-connector` 2.0.0), không kèm bản 2.5.0 (AGPL) mà game bản độc lập dùng.
+
+### Live Bar — luật chơi & cấu hình quà (`overlay/bar/`)
+
+Luật chơi (từ khoá vào sàn, lệnh chat, bảng quà theo tên / theo kim cương, cấp tiến hoá, PARTY ENERGY, combo, bục TOP 3, bố trí đám đông) được chuyển thể từ [tiktok-live-bar](https://github.com/cherry9001/tiktok-live-bar), giấy phép MIT:
+
+> Copyright (c) 2025 ÔNG CHÚ MMO — https://ongchummo.com
+>
+> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+Cảnh 3D được viết lại bằng three.js; nhân vật, DJ, sàn LED và hiệu ứng vẽ bằng code. Không dùng lại bộ GIF nhân vật, model DJ, nhạc hay âm thanh của dự án gốc (bộ GIF lấy từ Weibo, không ghi giấy phép).
 
 ### Chánh Điện Online — hình ảnh, nhân vật, hiệu ứng, nhạc nền (`overlay/chua-assets/`)
 

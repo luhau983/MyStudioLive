@@ -33,6 +33,7 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 | 🎬 **Rạp Phim Online** | Gõ `vỗ tay` / `haha` / `wow` / `bắp` | Chiếu playlist YouTube, link .mp4/.webm hoặc file trên máy; quà = ghế VIP; 4 kiểu phòng |
 | 👑 **Vua Tiếng Việt** | Comment đáp án ô chữ bị xáo | Giảng đường 3D, cô giáo đọc lời dẫn; ai đúng đầu tiên là MVP; 550+ câu, import thêm được |
 | 🪢 **Kéo Co Online** | Comment `ĐỎ` / `XANH` để vào đội, thả tim để kéo | Sân kéo co 3D, 5 người mỗi đội, bot bù chỗ; quà cộng điểm kéo và nạp mana |
+| 🪩 **Live Bar** | Gõ `hey` để vào sàn, `dance` / `nhảy` / `đi vòng` / `đổi nv` | Sàn nhảy 3D với avatar TikTok thật; quà zoom camera, đèn rọi, danh hiệu, pháo hoa; TOP 3 lên bục DJ |
 
 | 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
 |---|---|---|---|
@@ -46,6 +47,15 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 - Độ khó **Thường / Khó / Trộn**; import thêm câu hỏi bằng file JSON (có file mẫu trong bảng điều khiển).
 - Có **chế độ chơi thử**: giả lập người vào, bình luận, tặng quà mà không cần lên live.
 - Nhạc nền khi làm bài (link YouTube hoặc nhạc mặc định), tự giảm khi cô giáo nói.
+
+### 🪩 Live Bar
+
+- Người xem gõ từ khoá (mặc định `hey`) hoặc tặng quà để bước lên sàn nhảy; chế độ "mọi người tương tác" cho ai bình luận cũng vào sàn. Tối đa 400 người, im lặng 10 phút thì rời sàn; khách ảo giữ sàn không trống.
+- Lệnh chat: `dance` nhảy, `nhảy` bật nhảy, `đi vòng` dạo quanh sàn, `đổi nv` đổi nhân vật.
+- Quà theo tên: Hoa hồng zoom camera, TikTok đổi nhân vật, Finger Heart đi vòng, Portal hoá khổng lồ, Galaxy lên TOP DJ + pháo hoa. Quà khác theo kim cương: 20 camera, 50 danh hiệu VUA SÀN NHẢY, 100–200 VIP camera + đèn rọi, 500+ mưa pháo hoa.
+- Tặng nhiều thì nhân vật tiến hoá (10 / 50 / 200 / 1000 💎); TOP 3 người tặng đứng trên bục trước bàn DJ, hạng nhất có vương miện.
+- Thanh PARTY ENERGY đầy: cả sàn cùng quẩy, drop đèn laser, bắn pháo hoa. Có nền xanh lá để ghép trong OBS.
+- Chuyển thể luật chơi từ [tiktok-live-bar](https://github.com/cherry9001/tiktok-live-bar) (MIT); cảnh 3D viết lại bằng three.js, chạy như các cảnh khác (một link cho LIVE Studio / OBS).
 
 ### 🪢 Kéo Co Online
 
@@ -133,6 +143,7 @@ Chạy test của hai game:
 ```bash
 cd vua && node --test
 cd keoco && node --test
+npm test             # Live Bar (luật chơi + proxy avatar)
 ```
 
 ### Kiến trúc
@@ -146,7 +157,7 @@ src/server.js      Server overlay Express + Socket.IO (chỉ 127.0.0.1), giọng
 src/tts.js         Giọng đọc tiếng Việt (Microsoft Edge, dự phòng Google)
 src/settings.js    Lưu cài đặt trong thư mục userData
 renderer/          Giao diện điều khiển (sáng / tối / theo hệ thống)
-overlay/           Cảnh Nhà Ma, Đi Chùa, Rạp Phim
+overlay/           Cảnh Nhà Ma, Đi Chùa, Rạp Phim; overlay/bar/ là Live Bar (three.js)
 vua/               Game Vua Tiếng Việt: server riêng, overlay 3D (Three.js), bảng điều khiển, ngân hàng câu hỏi
 keoco/             Game Kéo Co: server riêng, sân 3D (Three.js), bảng điều khiển
 ```

@@ -1,0 +1,66 @@
+/* LIVE BAR overlay — 1080×1920 stage, HUD kept inside the TikTok safe area
+   (top 240px, bottom 480px and 110px side strips are covered on phones). */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: transparent; }
+body { font-family: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif; color: #fff; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; overflow: hidden; }
+#club { position: absolute; inset: 0; width: 1080px; height: 1920px; display: block; }
+#hud { position: absolute; inset: 0; pointer-events: none; }
+body.chroma #hud .b-guide { display: none; }
+
+.b-head { position: absolute; left: 120px; right: 120px; top: 252px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.b-energy { display: flex; align-items: center; gap: 14px; }
+.b-energy-label { font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #a5f3fc; text-shadow: 0 2px 6px #000; }
+.b-energy-bar { width: 420px; height: 18px; border-radius: 10px; background: rgba(8, 6, 24, .75); border: 2px solid rgba(165, 243, 252, .45); overflow: hidden; }
+.b-energy-fill { height: 100%; width: 0; background: linear-gradient(90deg, #22d3ee, #a855f7, #ec4899); box-shadow: 0 0 18px #ec4899; transition: width .4s ease; }
+.b-energy.full .b-energy-bar { animation: pulse .5s ease-in-out 6; }
+
+.b-top { position: absolute; right: 120px; top: 380px; width: 330px; padding: 14px 16px; border-radius: 18px;
+  background: rgba(8, 6, 24, .72); border: 2px solid rgba(250, 204, 21, .45); box-shadow: 0 8px 30px rgba(0, 0, 0, .45); }
+.bt-title { font-size: 22px; font-weight: 900; color: #fde68a; letter-spacing: 1px; margin-bottom: 8px; }
+.bt-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.bt-list li { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; }
+.bt-list li .rk { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; color: #1e1b4b; flex: none; }
+.bt-list li:nth-child(1) .rk { background: #facc15; }
+.bt-list li:nth-child(2) .rk { background: #cbd5e1; }
+.bt-list li:nth-child(3) .rk { background: #fb923c; }
+.bt-list li .nm { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.bt-list li .sc { color: #f0abfc; font-size: 20px; }
+.bt-empty { font-size: 19px; color: #cbd5e1; }
+.b-top.has .bt-empty { display: none; }
+
+.b-banner { position: absolute; left: 50%; top: 520px; transform: translate(-50%, -20px) scale(.9); opacity: 0; max-width: 840px;
+  padding: 18px 34px; border-radius: 22px; text-align: center; font-size: 34px; font-weight: 900; line-height: 1.25;
+  background: linear-gradient(90deg, rgba(131, 24, 67, .95), rgba(76, 29, 149, .95)); border: 3px solid #f0abfc;
+  box-shadow: 0 0 40px rgba(236, 72, 153, .6); transition: opacity .3s, transform .3s; }
+.b-banner.on { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.b-banner .bb-combo { display: block; font-size: 28px; color: #fde68a; }
+.b-banner .bb-combo:empty { display: none; }
+
+.b-feed { position: absolute; left: 120px; bottom: 500px; width: 620px; display: flex; flex-direction: column; gap: 8px; }
+.b-feed .it { align-self: flex-start; max-width: 100%; padding: 8px 16px; border-radius: 16px; font-size: 24px; font-weight: 700;
+  background: rgba(8, 6, 24, .7); border-left: 5px solid var(--c, #fff); animation: feedIn .35s ease-out; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.b-feed .it.out { opacity: 0; transition: opacity .6s; }
+.b-feed .it b { color: var(--c, #fff); }
+
+.b-guide { position: absolute; left: 120px; top: 380px; padding: 12px 16px; border-radius: 18px; background: rgba(8, 6, 24, .72);
+  border: 2px solid rgba(103, 232, 249, .45); display: flex; flex-direction: column; gap: 8px; min-width: 300px; }
+.b-guide .bg-label { font-size: 18px; font-weight: 800; color: #a5f3fc; letter-spacing: 1px; }
+.b-guide .bg-row { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 10px; transition: opacity .35s; }
+.b-guide .bg-row.swap { opacity: 0; }
+.b-guide .key { padding: 3px 12px; border-radius: 10px; background: #22d3ee; color: #082f49; font-weight: 900; }
+.b-guide .key.gift { background: #f472b6; color: #500724; }
+
+#offline { position: absolute; left: 50%; bottom: 520px; transform: translateX(-50%); padding: 12px 22px; border-radius: 14px; background: rgba(0, 0, 0, .7); font-size: 24px; }
+#offline.hidden { display: none; }
+#paused-badge { display: none; position: absolute; top: 250px; right: 120px; padding: 8px 16px; border-radius: 12px; background: rgba(0, 0, 0, .7); font-size: 24px; font-weight: 800; }
+body.paused #paused-badge { display: block; }
+#safe-guide { position: absolute; inset: 0; z-index: 50; pointer-events: none; display: none; }
+body.show-safe #safe-guide { display: block; }
+#safe-guide div { position: absolute; left: 0; right: 0; background: rgba(239, 68, 68, .28); border: 3px dashed rgba(239, 68, 68, .85);
+  display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; color: #fff; text-shadow: 0 2px 6px #000; }
+#safe-guide .sg-top { top: 0; height: 240px; }
+#safe-guide .sg-bottom { bottom: 0; height: 480px; }
+
+@keyframes feedIn { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: none; } }
+@keyframes pulse { 50% { box-shadow: 0 0 30px #f0abfc; transform: scale(1.04); } }

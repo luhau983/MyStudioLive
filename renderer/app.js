@@ -29,12 +29,23 @@
     setTimeout(() => t.remove(), 3000);
   }
 
+  // ---------- Cảnh live: tab (view) -> overlay.mode ----------
+  const SCENES = {
+    ma: { mode: 'game', name: 'Live Ma Online', open: 'Chuyển live sang Nhà Ma + mở màn hình phát' },
+    chua: { mode: 'chua', name: 'Đi Chùa Online', open: 'Chuyển live sang chánh điện + mở màn hình phát' },
+    rap: { mode: 'rap', name: 'Rạp Phim Online', open: 'Chuyển live sang rạp phim + mở màn hình phát' },
+    vua: { mode: 'vua', name: 'Vua Tiếng Việt', open: 'Chuyển live sang giảng đường đoán chữ + mở màn hình phát' },
+    keoco: { mode: 'keoco', name: 'Kéo Co Online', open: 'Chuyển live sang sân kéo co + mở màn hình phát' },
+    bar: { mode: 'bar', name: 'Live Bar', open: 'Chuyển live sang sàn nhảy 3D + mở màn hình phát' }
+  };
+  const viewOfMode = (mode) => Object.keys(SCENES).find((v) => SCENES[v].mode === mode) || 'ma';
+
   // ---------- Điều hướng ----------
   $$('.nav-item').forEach((b) => b.addEventListener('click', () => {
     $$('.nav-item').forEach((x) => x.classList.toggle('active', x === b));
     $('#hdr-title').textContent = b.querySelector('.nav-label').textContent;
     $$('.view').forEach((v) => v.classList.toggle('active', v.id === 'view-' + b.dataset.view));
-    if (['ma', 'chua', 'rap', 'vua', 'keoco'].includes(b.dataset.view)) switchScene(b.dataset.view);
+    if (SCENES[b.dataset.view]) switchScene(b.dataset.view);
     if (b.dataset.view === 'vua') loadVuaControl();
     if (b.dataset.view === 'keoco') loadKeocoControl();
     setPreviewSrc(false);
@@ -233,7 +244,7 @@
     set('golive', live);
     set('connect', live);
     const sc = $('#qs-scene');
-    if (sc) sc.textContent = mode === 'chua' ? 'Đang chọn: Đi Chùa Online' : mode === 'rap' ? 'Đang chọn: Rạp Phim Online' : mode === 'vua' ? 'Đang chọn: Vua Tiếng Việt' : mode === 'keoco' ? 'Đang chọn: Kéo Co Online' : 'Đang chọn: Live Ma Online';
+    if (sc) sc.textContent = 'Đang chọn: ' + SCENES[viewOfMode(mode)].name;
   }
   $$('[data-goto]').forEach((b) => b.addEventListener('click', () => $(`.nav-item[data-view=${b.dataset.goto}]`).click()));
   $('#qs-copy').addEventListener('click', async () => {
@@ -244,14 +255,14 @@
   // Chấm LIVE cạnh tab đang chạy trên live
   function renderChuaNav(mode) {
     renderQuick();
-    const live = mode === 'chua' ? 'chua' : mode === 'rap' ? 'rap' : mode === 'vua' ? 'vua' : mode === 'keoco' ? 'keoco' : 'ma';
+    const live = viewOfMode(mode);
     $$('[data-live-for]').forEach((d) => d.classList.toggle('on', d.dataset.liveFor === live));
     $$('[data-open-scene]').forEach((b) => {
       const on = b.dataset.openScene === live;
       b.classList.toggle('live', on);
       b.querySelector('small').textContent = on
         ? '● Đang phát cảnh này — bấm để mở màn hình phát'
-        : ({ ma: 'Chuyển live sang Nhà Ma + mở màn hình phát', chua: 'Chuyển live sang chánh điện + mở màn hình phát', rap: 'Chuyển live sang rạp phim + mở màn hình phát', vua: 'Chuyển live sang giảng đường đoán chữ + mở màn hình phát', keoco: 'Chuyển live sang sân kéo co + mở màn hình phát' })[b.dataset.openScene];
+        : SCENES[b.dataset.openScene].open;
     });
   }
   // Nút riêng cho từng cảnh: chuyển cảnh trên live rồi mở màn hình phát
@@ -263,13 +274,32 @@
   // Mở tab nào thì cảnh đó chạy trên live
   function switchScene(view) {
     if (!settings) return;
-    const want = view === 'chua' ? 'chua' : view === 'rap' ? 'rap' : view === 'vua' ? 'vua' : view === 'keoco' ? 'keoco' : 'game';
+    const want = (SCENES[view] || SCENES.ma).mode;
     if (settings.overlay.mode === want) return;
     settings.overlay.mode = want;
     renderSettings();
     save({ overlay: { mode: want } }, true);
-    notify(view === 'chua' ? 'Live đang chạy: Đi Chùa Online' : view === 'rap' ? 'Live đang chạy: Rạp Phim Online' : view === 'vua' ? 'Live đang chạy: Vua Tiếng Việt' : view === 'keoco' ? 'Live đang chạy: Kéo Co Online' : 'Live đang chạy: Live Ma Online');
+    notify('Live đang chạy: ' + (SCENES[view] || SCENES.ma).name);
   }
+
+  // ---------- Live Bar ----------
+  $$('[data-bar]').forEach((b) => b.addEventListener('click', () => {
+    const a = b.dataset.bar;
+    api.bar(a, { n: Number(b.dataset.n) || 0 });
+    if (a === 'reset') notify('Đã đặt lại sàn nhảy');
+  }));
+  $('#bar-name-save').addEventListener('click', () => {
+    const barName = $('#bar-name').value.trim();
+    const barJoinKeyword = $('#bar-keyword').value.trim() || 'hey';
+    Object.assign(settings.overlay, { barName, barJoinKeyword });
+    save({ overlay: { barName, barJoinKeyword } }, true);
+    notify(barName ? 'Đã lưu tên bar: ' + barName : 'Đã lưu (dùng tên mặc định LIVE BAR)');
+  });
+  $$('#bar-join-seg button').forEach((b) => b.addEventListener('click', () => {
+    settings.overlay.barJoinMode = b.dataset.join;
+    renderSettings();
+    save({ overlay: { barJoinMode: b.dataset.join } }, true);
+  }));
 
   // ---------- Kéo Co Online ----------
   // Bảng điều khiển gốc của game (server riêng) nhúng nguyên trong tab; chỉ nạp lần đầu mở tab để giữ trạng thái form
@@ -560,7 +590,8 @@
     $('#accent-custom').value = o.accent;
     const DEF = {
       customGiftSound: 'Mặc định: chuông chùa', customChatSound: 'Mặc định: ting', customJumpscare: 'Mặc định: 6 mặt ma ngẫu nhiên',
-      customScareSound: 'Mặc định: 4 kiểu tiếng thét ngẫu nhiên', customAmbient: 'Mặc định: gió hú tự tạo'
+      customScareSound: 'Mặc định: 4 kiểu tiếng thét ngẫu nhiên', customAmbient: 'Mặc định: gió hú tự tạo',
+      barMusic: 'Chưa có nhạc nền'
     };
     for (const k of Object.keys(DEF)) {
       const def = DEF[k];
@@ -592,6 +623,12 @@
     if (document.activeElement !== $('#chua-name')) $('#chua-name').value = o.chuaName || '';
     $('#v-tutorialEvery').textContent = o.tutorialEvery ? o.tutorialEvery + ' phút' : 'Tắt';
     $('#v-ambientVolume').textContent = Math.round(o.ambientVolume * 100) + '%';
+    $('#v-barNpc').textContent = o.barNpc ? o.barNpc + ' người' : 'Tắt';
+    $('#v-barBpm').textContent = o.barBpm + ' BPM';
+    $('#v-barMusicVolume').textContent = Math.round(o.barMusicVolume * 100) + '%';
+    if (document.activeElement !== $('#bar-name')) $('#bar-name').value = o.barName || '';
+    if (document.activeElement !== $('#bar-keyword')) $('#bar-keyword').value = o.barJoinKeyword || 'hey';
+    $$('#bar-join-seg button').forEach((b) => b.classList.toggle('active', b.dataset.join === o.barJoinMode));
   }
 
   $$('[data-o]').forEach((el) => {

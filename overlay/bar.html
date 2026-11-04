@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyStudioLive · Live Bar</title>
+  <link rel="stylesheet" href="bar/bar.css">
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="club" width="1080" height="1920"></canvas>
+    <div id="hud">
+      <div class="b-head">
+        <div class="b-energy"><span class="b-energy-label">PARTY ENERGY</span><div class="b-energy-bar"><div class="b-energy-fill"></div></div></div>
+      </div>
+      <div class="b-top">
+        <div class="bt-title">TOP 3 TẶNG QUÀ</div>
+        <ol class="bt-list"></ol>
+        <div class="bt-empty">Tặng quà để lên bục DJ</div>
+      </div>
+      <div class="b-banner"><span class="bb-text"></span><span class="bb-combo"></span></div>
+      <div class="b-feed"></div>
+      <div class="b-guide">
+        <div class="bg-label">💬 GÕ VÀO BÌNH LUẬN</div>
+        <div class="bg-row"><span class="key" id="guide-join">hey</span>vào sàn</div>
+        <div class="bg-row rot"></div>
+      </div>
+    </div>
+    <div id="offline" class="hidden">Đang chờ kết nối MyStudioLive…</div>
+    <div id="paused-badge">⏸ Tạm dừng</div>
+    <div id="safe-guide">
+      <div class="sg-top">Thanh trên của TikTok che</div>
+      <div class="sg-bottom">Bình luận + nút quà của TikTok che</div>
+    </div>
+  </div>
+  <script type="module" src="bar/app.js"></script>
+</body>
+</html>

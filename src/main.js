@@ -339,6 +339,14 @@ ipcMain.handle('rap:command', (_e, c) => {
   return true;
 });
 
+// Lệnh điều khiển cảnh Live Bar: quẩy cả sàn, pháo hoa, drop, thêm khách thử, đặt lại
+ipcMain.handle('bar:command', (_e, c) => {
+  const actions = ['party', 'fireworks', 'drop', 'crowd', 'reset'];
+  if (!c || !actions.includes(c.action)) return false;
+  overlay.broadcast('bar', { action: c.action, n: Math.min(400, Math.max(0, Number(c.n) || 0)) });
+  return true;
+});
+
 ipcMain.handle('dialog:pickVideos', async () => {
   const r = await dialog.showOpenDialog(win, {
     title: 'Chọn phim để chiếu',
@@ -441,6 +449,18 @@ function demoEvent(type) {
       const g = DEMO_GIFTS[3];
       return { type: 'gift', user, ...g, total: g.diamonds * g.repeatCount, giftImage: '', ts };
     }
+    // Live Bar
+    case 'barHey': return { type: 'chat', user, text: settings.get().overlay.barJoinKeyword || 'hey', ts };
+    case 'barDance': return { type: 'chat', user, text: 'dance', ts };
+    case 'barJump': return { type: 'chat', user, text: 'nhảy', ts };
+    case 'barWalk': return { type: 'chat', user, text: 'đi vòng', ts };
+    case 'barChange': return { type: 'chat', user, text: 'đổi nv', ts };
+    case 'barRose': return { type: 'gift', user, giftName: 'Rose', diamonds: 1, repeatCount: 1, total: 1, giftImage: '', ts };
+    case 'barMedal': return { type: 'gift', user, giftName: 'Mũ Neon', diamonds: 50, repeatCount: 1, total: 50, giftImage: '', ts };
+    case 'barVip': return { type: 'gift', user, giftName: 'Siêu Xe', diamonds: 100, repeatCount: 1, total: 100, giftImage: '', ts };
+    case 'barGrow': return { type: 'gift', user, giftName: 'Portal', diamonds: 99, repeatCount: 1, total: 99, giftImage: '', ts };
+    case 'barFireworks': return { type: 'gift', user, giftName: 'Pháo Hoa', diamonds: 500, repeatCount: 1, total: 500, giftImage: '', ts };
+    case 'barGalaxy': return { type: 'gift', user, giftName: 'Galaxy', diamonds: 1000, repeatCount: 1, total: 1000, giftImage: '', ts };
     case 'follow': return { type: 'follow', user, ts };
     case 'share': return { type: 'share', user, ts };
     case 'join': return { type: 'join', user, ts };
