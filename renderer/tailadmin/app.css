@@ -59,19 +59,75 @@
   .page-head p { @apply text-sm text-gray-500 dark:text-gray-400; }
 
   /* ---------- Cards (rounded-2xl border bg-white / white-3) ---------- */
-  .panel, .stat, .connect-card {
+  .panel, .stats, .connect-card {
     @apply rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/3;
   }
   .panel { @apply p-5; }
-  .panel-head h2 { @apply text-lg font-semibold text-gray-800 dark:text-white/90; }
-  .connect-card { @apply bg-none p-5 md:p-6; }
-  .connect-glow { @apply hidden; }
+  .panel-head h2 { @apply text-lg font-semibold whitespace-nowrap text-gray-800 dark:text-white/90; }
+  /* narrow panels: chips drop to their own line instead of squeezing the title / labels */
+  .panel-head { @apply flex-wrap gap-y-3; }
+  /* connect card: status pill rides on the label row, metrics align with the input row */
+  .connect-card { @apply items-end gap-6 bg-none p-5; }
+  .connect-card .connect-glow { @apply hidden; }
+  .connect-left { @apply grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3; }
+  .connect-left > .lbl { @apply col-start-1 row-start-1 mb-2; }
+  .connect-left > .status-line { @apply col-start-2 row-start-1 mt-0 mb-2 min-h-0 gap-2 overflow-hidden; }
+  .connect-left > .status-line #status-msg { @apply truncate; }
+  .connect-left > .connect-row { @apply col-span-2 row-start-2; }
+  .connect-right { @apply h-11 items-center gap-6 border-l border-gray-200 pl-6 dark:border-gray-800; }
+  .meta { @apply min-w-0 gap-0; }
+  .meta span { @apply text-xs whitespace-nowrap; }
+  .meta strong { @apply text-base leading-6 tabular-nums; }
+  /* dashboard: tighter vertical rhythm, same content */
+  #view-dashboard .page-head { @apply mb-4; }
+  #view-dashboard .page-head p { @apply mt-0; }
 
-  /* ecommerce-metrics */
-  .stat { @apply p-5; }
-  .stat-ico { @apply flex size-12 items-center justify-center rounded-xl bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-white/90; }
-  .stat-val { @apply text-title-sm font-bold text-gray-800 dark:text-white/90; }
-  .stat-lbl { @apply text-sm text-gray-500 dark:text-gray-400; }
+  /* ecommerce-metrics, grouped into one strip (metric-group) */
+  /* always one row: narrow widths drop the icon instead of wrapping to a second row */
+  .stats { @apply my-4 grid grid-cols-6 gap-0 overflow-hidden; container-type: inline-size; }
+  .stat { @apply relative min-w-0 flex-row items-center gap-2.5 rounded-none border-0 border-gray-200 bg-transparent px-4 py-3 dark:border-gray-800; }
+  .stat:not(:first-child) { @apply border-l; }
+  .stat::before { @apply hidden; }
+  .stat > div:last-child { @apply min-w-0; }
+  .stat-ico { @apply flex size-8 items-center justify-center rounded-lg; color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); }
+  .stat-ico .ic { @apply size-4; }
+  .stat-val { @apply text-lg leading-6 font-bold text-gray-800 tabular-nums dark:text-white/90; }
+  .stat-lbl { @apply truncate text-xs text-gray-500 dark:text-gray-400; }
+  @container (max-width: 860px) {
+    .stat { @apply px-3; }
+    .stat-ico { @apply hidden; }
+  }
+
+  /* quick start: compact rows; scene buttons keep their own line */
+  .qs { @apply gap-2; }
+  .qs li { @apply gap-x-2.5 gap-y-2 px-3 py-2.5; }
+  /* 5 scenes: 3 per row on the first line, the rest share the second */
+  .qs li > .qs-actions { @apply flex-wrap; }
+  .qs-actions .btn { @apply min-w-[30%] grow basis-0 gap-1.5 px-2 py-1.5; }
+  /* scene accent colours, same hues as the scene buttons on the "Đưa lên live" tab;
+     shared by the sidebar scene items and the quick-start scene buttons */
+  :is(.qs-actions [data-goto], .nav-item[data-view]):is([data-goto=ma], [data-view=ma]) { --c: #7c3aed; }
+  :is(.qs-actions [data-goto], .nav-item[data-view]):is([data-goto=chua], [data-view=chua]) { --c: #d97706; }
+  :is(.qs-actions [data-goto], .nav-item[data-view]):is([data-goto=rap], [data-view=rap]) { --c: #e11d48; }
+  :is(.qs-actions [data-goto], .nav-item[data-view]):is([data-goto=vua], [data-view=vua]) { --c: #e76b3c; }
+  :is(.qs-actions [data-goto], .nav-item[data-view]):is([data-goto=keoco], [data-view=keoco]) { --c: #3b82f6; }
+  /* sidebar: tinted icon chip per scene (only scene items carry .nav-emoji) */
+  .nav-item .nav-emoji {
+    @apply -mx-0.5 size-7 rounded-lg; /* 28px chip, -2px each side keeps labels aligned with 24px icons */
+    background: color-mix(in srgb, var(--c) 14%, transparent);
+  }
+  .nav-item .nav-emoji, .nav-item.active .nav-emoji svg, .nav-item .nav-emoji svg { color: var(--c); }
+  .nav-item.active[data-view] .nav-emoji { background: color-mix(in srgb, var(--c) 24%, transparent); }
+  .qs-actions .btn[data-goto] {
+    border-color: color-mix(in srgb, var(--c) 35%, transparent);
+    background: color-mix(in srgb, var(--c) 8%, transparent);
+  }
+  .qs-actions .btn[data-goto]:hover {
+    border-color: var(--c);
+    background: color-mix(in srgb, var(--c) 16%, transparent);
+  }
+  .qs-actions .btn[data-goto] .ic { color: var(--c); }
+  .quick .hint { @apply mt-3 text-xs; }
 
   /* ---------- Buttons (ui-elements/buttons/variants) ---------- */
   .btn {
@@ -110,7 +166,7 @@
 
   /* ---------- Tabs / segmented (statistics-chart/chart-tab) ---------- */
   .chips, .seg { @apply flex items-center gap-0.5 rounded-lg border-0 bg-gray-100 p-0.5 dark:bg-gray-900; }
-  .chip, .seg button { @apply h-8 rounded-md px-3 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white; }
+  .chip, .seg button { @apply h-8 rounded-md px-3 text-sm whitespace-nowrap font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white; }
   .chip.active, .seg button.active, .seg.ui-theme button.active { @apply bg-white text-gray-900 shadow-theme-xs dark:bg-gray-800 dark:text-white; }
 
   /* ---------- Toggle switch (form-elements/toggle-switch) ---------- */
@@ -134,7 +190,7 @@
   .tag.test { @apply bg-gray-100 text-gray-700 dark:bg-white/5 dark:text-white/80; }
 
   /* ---------- Alerts (ui-elements/alerts/alert-error) ---------- */
-  .warn-bar { @apply rounded-xl border border-red-500 bg-red-50 p-4 text-sm text-gray-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-gray-300; }
+  .warn-bar { @apply mb-4 items-center rounded-xl border border-red-500/40 bg-red-50 px-4 py-2.5 text-sm text-gray-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-gray-300; }
   .warn-bar b { @apply font-medium text-gray-800 dark:text-white/90; }
   .warn-bar .warn-ico { @apply mt-0.5 text-red-500 dark:text-red-400; }
 

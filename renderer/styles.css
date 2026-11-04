@@ -265,7 +265,7 @@ main::-webkit-scrollbar-thumb { background: var(--scroll); border-radius: 10px; 
 .chip.active { background: var(--panel-2); color: var(--text); box-shadow: 0 1px 0 var(--line-2) inset; }
 
 /* ---------- Feed ---------- */
-.feed-panel { display: flex; flex-direction: column; height: calc(100vh - 360px); min-height: 380px; }
+.feed-panel { display: flex; flex-direction: column; height: calc(100vh - 330px); min-height: 360px; }
 .feed { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; }
 .feed::-webkit-scrollbar { width: 6px; }
 .feed::-webkit-scrollbar-thumb { background: var(--scroll); border-radius: 6px; }
