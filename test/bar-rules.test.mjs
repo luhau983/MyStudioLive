@@ -179,3 +179,16 @@ test('settings keep the bar scene and its rules valid', () => {
   assert.equal(o.barRules[0].trigger, 'quẩy');
   fs.rmSync(dir, { recursive: true, force: true });
 });
+
+test('character pack lists only image files directly in the chosen folder', () => {
+  const os = require('os'); const fs = require('fs'); const path = require('path');
+  const { listCharacterFiles } = require('../src/server.js');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bar-chars-'));
+  for (const f of ['b.gif', 'a.PNG', 'c.webp', 'notes.txt', 'x.mp4']) fs.writeFileSync(path.join(dir, f), 'x');
+  fs.mkdirSync(path.join(dir, 'sub.gif'));
+  assert.deepEqual(listCharacterFiles(dir), ['a.PNG', 'b.gif', 'c.webp']);
+  assert.deepEqual(listCharacterFiles(''), []);
+  assert.deepEqual(listCharacterFiles(path.join(dir, 'missing')), []);
+  assert.ok(!listCharacterFiles(dir).includes('../secret.gif'));
+  fs.rmSync(dir, { recursive: true, force: true });
+});

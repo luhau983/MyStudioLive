@@ -372,6 +372,11 @@ ipcMain.handle('overlay:reload', () => {
 
 ipcMain.handle('server:restart', () => startServer(settings.get().port));
 
+ipcMain.handle('dialog:pickFolder', async () => {
+  const r = await dialog.showOpenDialog(win, { title: 'Chọn thư mục nhân vật (GIF / PNG / WEBP)', properties: ['openDirectory'] });
+  return r.canceled ? '' : r.filePaths[0];
+});
+
 ipcMain.handle('dialog:pickSound', async (_e, kind) => {
   const media = kind === 'media';
   const r = await dialog.showOpenDialog(win, {

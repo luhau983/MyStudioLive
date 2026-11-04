@@ -162,6 +162,70 @@ function avatarTexture(url) {
   return p;
 }
 
+// ---------------------------------------------------------------- character pack (GIF / PNG / WEBP from a folder the user picks)
+// Animated GIFs are decoded frame by frame with WebCodecs ImageDecoder (frames come out fully composited);
+// frames are downscaled and capped so a big pack stays cheap on the GPU.
+const PACK_MAX_H = 160;
+const PACK_MAX_FRAMES = 24;
+// Many dance GIFs have a solid (often white) background. When all four corners are opaque and the
+// same colour, flood-fill that colour from the edges to transparent; already transparent GIFs are untouched.
+function keyBackground(g, w, h) {
+  const img = g.getImageData(0, 0, w, h); const d = img.data;
+  const at = (x, y) => (y * w + x) * 4;
+  const corners = [at(0, 0), at(w - 1, 0), at(0, h - 1), at(w - 1, h - 1)];
+  if (corners.some((i) => d[i + 3] < 250)) return;
+  const [r0, g0, b0] = [d[corners[0]], d[corners[0] + 1], d[corners[0] + 2]];
+  const near = (i, tol) => Math.abs(d[i] - r0) + Math.abs(d[i + 1] - g0) + Math.abs(d[i + 2] - b0) <= tol;
+  if (!corners.every((i) => near(i, 60))) return;
+  const seen = new Uint8Array(w * h); const stack = [];
+  for (let x = 0; x < w; x++) stack.push(x, (h - 1) * w + x);
+  for (let y = 0; y < h; y++) stack.push(y * w, y * w + w - 1);
+  while (stack.length) {
+    const p = stack.pop();
+    if (seen[p]) continue;
+    seen[p] = 1;
+    if (!near(p * 4, 90)) continue;
+    d[p * 4 + 3] = 0;
+    const x = p % w; const y = (p / w) | 0;
+    if (x > 0) stack.push(p - 1); if (x < w - 1) stack.push(p + 1);
+    if (y > 0) stack.push(p - w); if (y < h - 1) stack.push(p + w);
+  }
+  g.putImageData(img, 0, 0);
+}
+async function decodeCharacter(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const type = (res.headers.get('content-type') || '').split(';')[0];
+    const buf = await res.arrayBuffer();
+    const toTex = (src, w, h) => {
+      const s = Math.min(1, PACK_MAX_H / h);
+      return canvasTex(Math.max(1, Math.round(w * s)), Math.max(1, Math.round(h * s)), (g, cw, ch) => { g.drawImage(src, 0, 0, cw, ch); keyBackground(g, cw, ch); });
+    };
+    if (type === 'image/gif' && 'ImageDecoder' in window) {
+      const dec = new ImageDecoder({ data: buf, type });
+      await dec.tracks.ready;
+      const n = dec.tracks.selectedTrack.frameCount || 1;
+      const step = Math.max(1, Math.ceil(n / PACK_MAX_FRAMES));
+      const frames = []; let total = 0; let w = 1; let h = 1;
+      for (let i = 0; i < n; i += step) {
+        const { image } = await dec.decode({ frameIndex: i });
+        w = image.displayWidth; h = image.displayHeight;
+        total += ((image.duration || 100000) / 1000) * step;
+        frames.push(toTex(image, w, h));
+        image.close();
+      }
+      dec.close();
+      return { frames, frameMs: Math.max(30, total / frames.length), aspect: w / h };
+    }
+    const bmp = await createImageBitmap(new Blob([buf], { type }));
+    const tex = toTex(bmp, bmp.width, bmp.height);
+    const aspect = bmp.width / bmp.height;
+    bmp.close();
+    return { frames: [tex], frameMs: 1000, aspect };
+  } catch { return null; }
+}
+
 // ---------------------------------------------------------------- scene
 export function createBarScene(canvas) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
@@ -333,6 +397,8 @@ export function createBarScene(canvas) {
   }
 
   // ---------------------------------------------------------------- crowd
+  let charPack = []; // [{ frames: CanvasTexture[], frameMs, aspect }] from the user's character folder
+  let charKey = '';
   const lookTex = [];
   for (let i = 0; i < LOOK_COUNT; i++) {
     const L = makeLook(i);
@@ -350,6 +416,7 @@ export function createBarScene(canvas) {
       this.id = user.key;
       this.npc = !!opts.npc;
       this.look = Math.floor(Math.random() * LOOK_COUNT);
+      this.charIdx = Math.floor(Math.random() * 1e6);
       this.root = new THREE.Group();
       this.aura = new THREE.Sprite(new THREE.SpriteMaterial({ map: auraTex.aura, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0 }));
       this.aura.scale.set(1.5, 1.9, 1); this.aura.position.y = CHAR_H * 0.5;
@@ -409,6 +476,7 @@ export function createBarScene(canvas) {
     }
     change() {
       this.look = (this.look + 1 + Math.floor(Math.random() * (LOOK_COUNT - 1))) % LOOK_COUNT;
+      this.charIdx += 1 + Math.floor(Math.random() * Math.max(1, charPack.length - 1));
       this.flash = clock + 0.5;
     }
     act(action, seconds) {
@@ -460,14 +528,23 @@ export function createBarScene(canvas) {
       this.root.position.y = lerp(this.root.position.y, target.y || 0, Math.min(1, dt * 6));
       if (this.entering && this.root.position.distanceToSquared(target) < 0.01) this.entering = false;
       if (this.entering) { y = Math.abs(Math.sin(clock * 10)) * 0.08; frame = Math.floor(clock * 4) % 2; }
-      this.body.material.map = lookTex[this.look][frame];
+      // GIF character pack (like CharacterLibrary/GifPlayer of the original): the GIF itself is the dance
+      const ch = charPack.length ? charPack[this.charIdx % charPack.length] : null;
+      let aspect = 128 / 176;
+      if (ch) {
+        const n = ch.frames.length;
+        this.body.material.map = ch.frames[n > 1 ? Math.floor((clock + this.phase) * 1000 / ch.frameMs) % n : 0];
+        aspect = ch.aspect;
+        rot *= 0.5;
+      } else this.body.material.map = lookTex[this.look][frame];
       this.body.material.rotation = rot;
       this.body.position.y = y;
-      this.body.scale.set(CHAR_H * 128 / 176 * k * (2 - sq), CHAR_H * k * sq, 1);
-      this.avatar.position.set(0, y + CHAR_H * k * 0.97, 0);
+      this.body.scale.set(CHAR_H * aspect * k * (2 - sq), CHAR_H * k * sq, 1);
+      // own character drawn in code: avatar sits on the face; GIF character: avatar badge above the head
+      this.avatar.position.set(0, y + CHAR_H * k * (ch ? 1.12 : 0.97), 0);
       this.avatar.scale.set(0.36 * k, 0.36 * k, 1);
       this.avatar.visible = !!this.hasAvatar;
-      const top = y + CHAR_H * k * (this.hasAvatar ? 1.22 : 1.04);
+      const top = y + CHAR_H * k * (this.hasAvatar ? (ch ? 1.36 : 1.22) : 1.04);
       this.name.position.set(0, top, 0);
       this.name.visible = crowdSize <= 25 || !!this.rank || !!this.focused || this.entering || act !== 'idle' || clock < this.titleUntil;
       const titled = clock < this.titleUntil;
@@ -768,6 +845,18 @@ export function createBarScene(canvas) {
       if (screen.video) { if (paused) screen.video.pause(); else screen.video.play().catch(() => {}); }
     },
     setScreen,
+    // Replace the character pack (empty list = characters drawn in code). Last call wins.
+    async setCharacters(urls) {
+      const key = (urls || []).join('|');
+      if (key === charKey) return charPack.length;
+      charKey = key;
+      const loaded = (await Promise.all((urls || []).map(decodeCharacter))).filter(Boolean);
+      if (charKey !== key) { loaded.forEach((c) => c.frames.forEach((t) => t.dispose())); return charPack.length; }
+      const old = charPack;
+      charPack = loaded;
+      old.forEach((c) => c.frames.forEach((t) => t.dispose()));
+      return charPack.length;
+    },
     setChroma(on) {
       chroma = !!on;
       env.visible = !chroma;

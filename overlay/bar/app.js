@@ -62,8 +62,17 @@ function crackle(delay = 0) {
   o.connect(og).connect(a.destination); o.start(a.currentTime + delay); o.stop(a.currentTime + delay + 0.7);
 }
 club.setSfx((name) => {
-  if (name === 'fireworks' && !muted() && cfg.barFireworkSound) for (let i = 0; i < 4; i++) crackle(i * 0.72);
+  if (name !== 'fireworks' || muted() || !cfg.barFireworkSound) return;
+  if (cfg.barFireworkFile) {
+    // the user's own firework sound (e.g. the one shipped with tiktok-live-bar); synth as fallback
+    const src = '/media/barFirework?v=' + encodeURIComponent(cfg.barFireworkFile);
+    if (!fwSound.src.endsWith(src)) fwSound.src = src;
+    fwSound.volume = Math.min(1, cfg.volume);
+    fwSound.currentTime = 0;
+    fwSound.play().catch(() => { for (let i = 0; i < 4; i++) crackle(i * 0.72); });
+  } else for (let i = 0; i < 4; i++) crackle(i * 0.72);
 });
+const fwSound = new Audio();
 const music = new Audio();
 music.loop = true;
 function syncMusic() {
@@ -337,6 +346,7 @@ function onCommand(c) {
 }
 
 // ---------------------------------------------------------------- config
+let loadedCharDir = null;
 function applyConfig(next) {
   const prevNpc = cfg.barNpc;
   cfg = { ...cfg, ...next };
@@ -344,6 +354,12 @@ function applyConfig(next) {
   $('#guide-join').textContent = cfg.barJoinMode === 'all' ? 'bình luận' : (cfg.barJoinKeyword || 'hey');
   club.setTitle(title, cfg.barJoinMode === 'all' ? 'BÌNH LUẬN ĐỂ VÀO SÀN' : `GÕ "${cfg.barJoinKeyword || 'hey'}" ĐỂ VÀO SÀN`);
   club.setBpm(cfg.barBpm);
+  if (cfg.barCharDir !== loadedCharDir) {
+    loadedCharDir = cfg.barCharDir;
+    const dir = loadedCharDir;
+    (dir ? fetch('/bar/chars').then((r) => r.json()).then((j) => j.files || []).catch(() => []) : Promise.resolve([]))
+      .then((files) => (dir === loadedCharDir ? club.setCharacters(files.map((f) => '/bar/chars/' + encodeURIComponent(f) + '?v=' + encodeURIComponent(dir))) : 0));
+  }
   club.setScreen(cfg.barScreen ? '/media/barScreen?v=' + encodeURIComponent(cfg.barScreen) : '', /\.(mp4|webm|mov|m4v)$/i.test(cfg.barScreen || ''));
   club.setChroma(!!cfg.barChroma);
   document.body.classList.toggle('chroma', !!cfg.barChroma);

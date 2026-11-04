@@ -17,6 +17,17 @@ function resolveThreeModule() {
   return path.join(__dirname, '..', 'node_modules', 'three', 'build', 'three.module.js');
 }
 
+const CHARACTER_EXT = /\.(gif|png|webp)$/i;
+const MAX_CHARACTERS = 60;
+function listCharacterFiles(dir) {
+  if (typeof dir !== 'string' || !dir) return [];
+  try {
+    return fs.readdirSync(dir, { withFileTypes: true })
+      .filter((d) => d.isFile() && CHARACTER_EXT.test(d.name) && path.basename(d.name) === d.name)
+      .map((d) => d.name).sort((a, b) => a.localeCompare(b)).slice(0, MAX_CHARACTERS);
+  } catch { return []; }
+}
+
 // Only TikTok's image CDNs are proxied (no open proxy / SSRF into the LAN); redirects are refused.
 const AVATAR_HOSTS = ['tiktokcdn.com', 'tiktokcdn-us.com', 'tiktokcdn-eu.com', 'ibyteimg.com', 'byteimg.com', 'muscdn.com'];
 const AVATAR_MAX_BYTES = 2 * 1024 * 1024;
@@ -97,6 +108,18 @@ class OverlayServer {
       res.type('application/javascript').set('Cache-Control', 'public, max-age=86400').send(threeModule);
     });
 
+    // Bộ nhân vật Live Bar (GIF/PNG/WEBP trong thư mục người dùng chọn), giống CharacterLibrary của bản gốc
+    app.get('/bar/chars', (_req, res) => {
+      res.set('Cache-Control', 'no-store').json({ files: listCharacterFiles(this.getConfig().overlay.barCharDir) });
+    });
+    app.get('/bar/chars/:name', (req, res) => {
+      const dir = this.getConfig().overlay.barCharDir;
+      const name = String(req.params.name || '');
+      // chỉ phục vụ đúng tên file có trong danh sách (không cho ../ ra ngoài thư mục)
+      if (!listCharacterFiles(dir).includes(name)) return res.sendStatus(404);
+      res.sendFile(path.join(dir, name), { headers: { 'Content-Type': MEDIA_TYPES[path.extname(name).toLowerCase()], 'Cache-Control': 'no-store' } });
+    });
+
     // Avatar TikTok cho Live Bar: CDN không bật CORS nên WebGL không dùng trực tiếp được -> tải hộ, cùng origin
     app.get('/bar/avatar', async (req, res) => {
       const img = await fetchAvatar(String(req.query.u || ''));
@@ -111,7 +134,7 @@ class OverlayServer {
       const o = this.getConfig().overlay;
       const file = {
         gift: o.customGiftSound, chat: o.customChatSound, jumpscare: o.customJumpscare,
-        scare: o.customScareSound, ambient: o.customAmbient, barMusic: o.barMusic, barScreen: o.barScreen
+        scare: o.customScareSound, ambient: o.customAmbient, barMusic: o.barMusic, barScreen: o.barScreen, barFirework: o.barFireworkFile
       }[req.params.kind] || '';
       const type = MEDIA_TYPES[path.extname(file).toLowerCase()];
       if (!file || !type || !fs.existsSync(file)) return res.sendStatus(404);
@@ -171,4 +194,4 @@ class OverlayServer {
   }
 }
 
-module.exports = { OverlayServer, isAvatarUrl };
+module.exports = { OverlayServer, isAvatarUrl, listCharacterFiles };

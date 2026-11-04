@@ -367,6 +367,14 @@
     setTimeout(() => $('#bar-rules').lastElementChild?.scrollIntoView({ block: 'nearest' }), 150);
   }
   $('#bar-rule-add').addEventListener('click', () => addBarRule());
+  $('#bar-chardir-pick').addEventListener('click', async () => {
+    const dir = await api.pickFolder();
+    if (!dir) return;
+    settings.overlay.barCharDir = dir;
+    renderSettings();
+    save({ overlay: { barCharDir: dir } }, true);
+    notify('Đã chọn bộ nhân vật: ' + dir.split(/[\\/]/).pop());
+  });
   $('#bar-rules-reset').addEventListener('click', async () => {
     const r = await api.updateSettings({ overlay: { barRules: null } });
     settings = r.settings;
@@ -681,7 +689,8 @@
     const DEF = {
       customGiftSound: 'Mặc định: chuông chùa', customChatSound: 'Mặc định: ting', customJumpscare: 'Mặc định: 6 mặt ma ngẫu nhiên',
       customScareSound: 'Mặc định: 4 kiểu tiếng thét ngẫu nhiên', customAmbient: 'Mặc định: gió hú tự tạo',
-      barMusic: 'Chưa có nhạc nền', barScreen: 'Mặc định: màn LED nhảy theo nhạc'
+      barMusic: 'Chưa có nhạc nền', barScreen: 'Mặc định: màn LED nhảy theo nhạc',
+      barCharDir: 'Mặc định: nhân vật vẽ bằng code', barFireworkFile: 'Mặc định: tiếng tự tổng hợp'
     };
     for (const k of Object.keys(DEF)) {
       const def = DEF[k];

@@ -22,6 +22,7 @@ contextBridge.exposeInMainWorld('studio', {
   onPause: on('pause:state'),
   restartServer: () => ipcRenderer.invoke('server:restart'),
   pickSound: (kind) => ipcRenderer.invoke('dialog:pickSound', kind),
+  pickFolder: () => ipcRenderer.invoke('dialog:pickFolder'),
   openOutput: () => ipcRenderer.invoke('output:open'),
   onOutput: on('output:state'),
   tiktokLogin: () => ipcRenderer.invoke('tiktok:login'),

@@ -780,6 +780,15 @@
               </div>
             </div>
             <div class="field">
+              <label>Bộ nhân vật <span class="muted small">(thư mục GIF / PNG / WEBP)</span></label>
+              <div class="file-row">
+                <span class="file-name" id="f-barCharDir">Mặc định: nhân vật vẽ bằng code</span>
+                <button class="btn ghost sm" id="bar-chardir-pick">Chọn thư mục</button>
+                <button class="btn ghost sm" data-clear="barCharDir">Mặc định</button>
+              </div>
+              <p class="hint">Mỗi người xem nhận ngẫu nhiên 1 nhân vật động trong thư mục, gõ “đổi nv” để đổi. Dùng được thư mục <code>TikTokBridge/assets/gifs</code> của tiktok-live-bar — tự kiểm tra quyền sử dụng các ảnh đó trước khi lên live.</p>
+            </div>
+            <div class="field">
               <label>Khách ảo giữ sàn không trống <span class="val" id="v-barNpc"></span></label>
               <input type="range" min="0" max="20" step="1" data-o="barNpc" data-num>
             </div>
@@ -828,6 +837,16 @@
             </div>
             <div class="toggles" style="margin-top:8px">
               <label class="toggle"><span>Tiếng pháo hoa</span><input type="checkbox" data-o="barFireworkSound"><i></i></label>
+            </div>
+            <div class="field">
+              <label>File tiếng pháo hoa</label>
+              <div class="file-row">
+                <span class="file-name" id="f-barFireworkFile">Mặc định: tiếng tự tổng hợp</span>
+                <button class="btn ghost sm" data-pick="barFireworkFile">Chọn file</button>
+                <button class="btn ghost sm" data-clear="barFireworkFile">Mặc định</button>
+              </div>
+            </div>
+            <div class="toggles" style="margin-top:8px">
               <label class="toggle"><span>Nền xanh lá (chroma key cho OBS)</span><input type="checkbox" data-o="barChroma"><i></i></label>
             </div>
             <p class="hint warn-hint"><svg class="ic"><use href="#i-triangle-alert"/></svg> Chỉ phát nhạc bạn có quyền sử dụng. Nhạc có bản quyền dễ bị TikTok tắt tiếng hoặc tắt live.</p>
