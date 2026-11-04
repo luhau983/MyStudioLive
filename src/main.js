@@ -357,6 +357,14 @@ ipcMain.handle('dialog:pickVideos', async () => {
   return r.canceled ? [] : r.filePaths;
 });
 
+// Lệnh điều khiển Trà Đá Vỉa Hè / Đi Nhậu: đọc ngay, khao / dzô cả quán, dọn quán, đặt lại bảng…
+ipcMain.handle('quan:command', (_e, c) => {
+  const actions = ['speak', 'share', 'reset', 'clear', 'testLikes', 'event', 'treat', 'cheerAll'];
+  if (!c || !['trada', 'nhau'].includes(c.scene) || !actions.includes(c.action)) return false;
+  overlay.broadcast(c.scene, { action: c.action, text: typeof c.text === 'string' ? c.text.slice(0, 400) : undefined, n: Number(c.n) || undefined });
+  return true;
+});
+
 // Lệnh điều khiển cảnh chùa: đọc ngay, thỉnh chuông, gõ mõ, nhắc chia sẻ, mưa hoa sen, đặt lại điểm
 ipcMain.handle('chua:command', (_e, c) => {
   const actions = ['speak', 'bell', 'mo', 'share', 'rain', 'reset', 'testLikes'];
@@ -450,6 +458,14 @@ function demoEvent(type) {
     case 'laugh': return { type: 'chat', user, text: 'cười', ts };
     case 'cry': return { type: 'chat', user, text: 'khóc', ts };
     case 'hug': return { type: 'chat', user, text: 'ôm', ts };
+    case 'trada': return { type: 'chat', user, text: rand(['trà đá', 'cho cốc trà đá', 'trà đá bà ơi']), ts };
+    case 'cafe': return { type: 'chat', user, text: rand(['cà phê', 'nâu đá', 'bạc xỉu']), ts };
+    case 'huongduong': return { type: 'chat', user, text: 'hướng dương', ts };
+    case 'bia': return { type: 'chat', user, text: rand(['bia', 'cho cốc bia', 'thêm bia em ơi']), ts };
+    case 'dzo': return { type: 'chat', user, text: rand(['dzô', 'dzô dzô', '100%', 'một hai ba dzô']), ts };
+    case 'moi': return { type: 'chat', user, text: rand(['lạc rang', 'mực nướng', 'nem', 'chân gà', 'ốc luộc']), ts };
+    case 'lau': return { type: 'chat', user, text: 'lẩu', ts };
+    case 'tinhtien': return { type: 'chat', user, text: 'tính tiền', ts };
     case 'gift': {
       const g = rand(DEMO_GIFTS);
       return { type: 'gift', user, ...g, total: g.diamonds * g.repeatCount, giftImage: '', ts };
@@ -489,8 +505,12 @@ function selfTest() {
       r.overlay = html.includes('temple.js') && html.includes('game.js');
       const img = await fetch(`http://127.0.0.1:${serverState.port}/chua-assets/hall.jpg`);
       r.chuaAssets = img.ok;
+      r.quan = html.includes('quan.js')
+        && (await fetch(`http://127.0.0.1:${serverState.port}/trada-assets/street.jpg`)).ok
+        && (await fetch(`http://127.0.0.1:${serverState.port}/nhau-assets/street.jpg`)).ok;
       await new Promise((ok) => setTimeout(ok, 1500));
       r.ui = await win.webContents.executeJavaScript("!!document.querySelector('#view-dashboard') && document.querySelector('#srv-sub').textContent");
+      r.quanUi = await win.webContents.executeJavaScript("['trada','nhau'].every((k) => document.querySelector('#view-' + k) && document.querySelector('.nav-item[data-view=' + k + ']') && document.querySelector('[data-open-scene=' + k + ']'))");
       r.decoder = typeof require('tiktok-live-connector').deserializeWebSocketMessage === 'function';
     } catch (e) {
       r.error = String(e.message || e);

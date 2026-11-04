@@ -190,7 +190,7 @@
   const ambientEl = new Audio();
   ambientEl.loop = true;
   function syncAmbientFile() {
-    const want = cfg.mode !== 'chua' && cfg.customAmbient && cfg.ambient && cfg.sound && !isPreview;
+    const want = !['chua', 'trada', 'nhau'].includes(cfg.mode) && cfg.customAmbient && cfg.ambient && cfg.sound && !isPreview;
     if (want) {
       const src = '/media/ambient?v=' + encodeURIComponent(cfg.customAmbient);
       if (!ambientEl.src.endsWith(src)) ambientEl.src = src;
@@ -467,12 +467,15 @@
     document.body.classList.toggle('game', cfg.mode === 'game');
     document.body.classList.toggle('mode-chua', cfg.mode === 'chua');
     document.body.classList.toggle('mode-rap', cfg.mode === 'rap');
+    document.body.classList.toggle('mode-quan', cfg.mode === 'trada' || cfg.mode === 'nhau');
     // Bù màu: TikTok nén video làm màu nhạt và tối đi, tăng nhẹ độ tươi / tương phản / sáng
     const b = Math.max(0, Math.min(40, Number(cfg.liveBoost ?? 15))) / 100;
     stage.style.filter = b ? `saturate(${(1 + b).toFixed(3)}) contrast(${(1 + b * 0.3).toFixed(3)}) brightness(${(1 + b * 0.25).toFixed(3)})` : '';
     window.HauntGame.setConfig(cfg);
     window.TempleScene.setConfig(cfg);
     window.RapScene.setConfig(cfg);
+    window.TraDaScene.setConfig(cfg);
+    window.NhauScene.setConfig(cfg);
     window.HauntAudio.update();
     syncAmbientFile();
     ensureFx();
@@ -522,6 +525,8 @@
     window.HauntGame.setPaused(p);
     window.TempleScene.setPaused(p);
     window.RapScene.setPaused(p);
+    window.TraDaScene.setPaused(p);
+    window.NhauScene.setPaused(p);
     window.HauntAudio.setPaused(p);
     if (p) ambientEl.pause(); else syncAmbientFile();
     ensureFx();
@@ -576,12 +581,21 @@
     }
   });
 
+  // ---------- Trà Đá Vỉa Hè & Đi Nhậu (chung engine quan.js) ----------
+  const quanSfx = {
+    play: (n, ...a) => window.HauntAudio.play(n, ...a),
+    duck: (d) => window.HauntAudio.duck(d),
+    muted: () => !cfg.sound || isPreview
+  };
+  window.TraDaScene.init({ stage, before: $('hud'), sfx: quanSfx });
+  window.NhauScene.init({ stage, before: $('hud'), sfx: quanSfx });
+
   // ---------- Kết nối tới app MyStudioLive ----------
   const socket = io({ reconnectionDelayMax: 3000 });
   socket.on('connect', () => $('offline').classList.add('hidden'));
   socket.on('disconnect', () => $('offline').classList.remove('hidden'));
   socket.on('config', applyConfig);
-  socket.on('stats', (st) => { updateStats(st); window.HauntGame.onStats(st); window.TempleScene.onStats(st); window.RapScene.onStats(st); });
+  socket.on('stats', (st) => { updateStats(st); window.HauntGame.onStats(st); window.TempleScene.onStats(st); window.RapScene.onStats(st); window.TraDaScene.onStats(st); window.NhauScene.onStats(st); });
   socket.on('game', (a) => window.HauntGame.command(a));
   socket.on('reload', () => location.reload());
 
@@ -594,12 +608,19 @@
   socket.on('pause', (p) => setPausedAll(!!p));
   socket.on('chua', (c) => window.TempleScene.command(c));
   socket.on('rap', (c) => window.RapScene.command(c));
+  socket.on('trada', (c) => window.TraDaScene.command(c));
+  socket.on('nhau', (c) => window.NhauScene.command(c));
 
   socket.on('live', (ev) => {
     if (!ev || !ev.type || paused) return; // đang tạm dừng: bỏ qua sự kiện
     if (cfg.mode === 'rap') {
       if (ev.type === 'chat' && blocked(ev.text)) return;
       window.RapScene.onEvent(ev);
+      return;
+    }
+    if (cfg.mode === 'trada' || cfg.mode === 'nhau') {
+      if (ev.type === 'chat' && blocked(ev.text)) return;
+      (cfg.mode === 'trada' ? window.TraDaScene : window.NhauScene).onEvent(ev);
       return;
     }
     if (cfg.mode === 'chua') {

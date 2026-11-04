@@ -88,6 +88,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+### Trà Đá Vỉa Hè & Đi Nhậu Online — ảnh nền đường phố (`overlay/trada-assets/`, `overlay/nhau-assets/`)
+
+Ảnh lấy từ Wikimedia Commons, bản thu nhỏ 1280px, nội dung file không chỉnh sửa. Khi hiển thị, cảnh cắt khung, làm mờ (Đi Nhậu làm mờ mạnh + tối màu) và vẽ bàn ghế, nhân vật lên trên.
+
+| File | Ảnh gốc | Tác giả | Giấy phép |
+|---|---|---|---|
+| `overlay/trada-assets/street.jpg` | [Quán trà đá, Giang Văn Minh, Hà Nội 001.JPG](https://commons.wikimedia.org/wiki/File:Qu%C3%A1n_tr%C3%A0_%C4%91%C3%A1,_Giang_V%C4%83n_Minh,_H%C3%A0_N%E1%BB%99i_001.JPG) | Phan Minh Tuấn | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `overlay/nhau-assets/street.jpg` | [Bia hoi outlet in Hanoi.jpg](https://commons.wikimedia.org/wiki/File:Bia_hoi_outlet_in_Hanoi.jpg) | ben klocek | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+
+Hai file ảnh này giữ giấy phép gốc ở trên (không thuộc giấy phép MIT của mã nguồn). Nhân vật, bàn ghế, đồ uống, hiệu ứng và âm thanh của hai cảnh được vẽ / tổng hợp bằng code trong `overlay/quan.js` và `overlay/audio.js`.
+
 ### Icon giao diện — Lucide (`renderer/index.html`, sprite SVG nhúng)
 
 Nguồn: https://lucide.dev (lucide-static 1.68.0). Giấy phép ISC.

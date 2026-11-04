@@ -19,7 +19,7 @@ const DEFAULTS = {
     showLikeCounter: true,
     showViewerCounter: true,
     showTopGifter: true,
-    mode: 'game',               // game (Nhà Ma) | cards (thẻ bình luận) | chua (Đi Chùa) | rap (Rạp Phim) | vua (Vua Tiếng Việt) | keoco (Kéo Co) | bar (Live Bar)
+    mode: 'game',               // game (Nhà Ma) | cards (thẻ bình luận) | chua (Đi Chùa) | rap (Rạp Phim) | vua (Vua Tiếng Việt) | keoco (Kéo Co) | bar (Live Bar) | trada (Trà Đá) | nhau (Đi Nhậu)
     barName: '',                // tên bar (màn LED + tiêu đề)
     barJoinMode: 'keyword',     // keyword: gõ từ khoá / tặng quà mới vào sàn | all: mọi tương tác đều vào sàn
     barJoinKeyword: 'hey',      // từ khoá vào sàn
@@ -54,6 +54,17 @@ const DEFAULTS = {
     chuaLikeGoal: 666,          // số tim để mưa hoa sen
     chuaMusic: true,            // nhạc nền thiền (mp3)
     chuaMusicVolume: 0.45,
+    tradaName: '',              // Trà Đá Vỉa Hè: tên quán (bảng hiệu + giọng đọc)
+    tradaVoice: true,
+    tradaGreet: true,
+    tradaBots: true,            // khách quen giả lập khi quán vắng
+    tradaLikeGoal: 500,         // số tim để bà chủ khao cả quán
+    nhauName: '',               // Đi Nhậu: tên quán
+    nhauVoice: true,
+    nhauGreet: true,
+    nhauBots: true,
+    nhauLikeGoal: 500,          // số tim để cả quán dzô 100%
+    quanAmbient: true,          // tiếng phố / tiếng quán cho 2 cảnh trên
     roundEvery: 3,              // phút giữa các vòng TRỐN TÌM, 0 = tắt
     bots: true,                 // ma NPC đi hù người xem
     background: 'haunted',      // transparent | haunted
@@ -123,7 +134,7 @@ class Settings {
     o.ambientVolume = Math.min(1, Math.max(0, o.ambientVolume));
     o.liveBoost = Math.min(40, Math.max(0, Math.round(o.liveBoost)));
     if (!['drone', 'wind', 'rain', 'church', 'heartbeat', 'musicbox', 'whispers', 'forest'].includes(o.ambientPreset)) o.ambientPreset = 'drone';
-    if (!['game', 'cards', 'chua', 'rap', 'vua', 'keoco', 'bar'].includes(o.mode)) o.mode = 'game';
+    if (!['game', 'cards', 'chua', 'rap', 'vua', 'keoco', 'bar', 'trada', 'nhau'].includes(o.mode)) o.mode = 'game';
     o.barName = String(o.barName).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 28);
     if (!['keyword', 'all'].includes(o.barJoinMode)) o.barJoinMode = 'keyword';
     o.barJoinKeyword = String(o.barJoinKeyword).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 24) || 'hey';
@@ -132,6 +143,10 @@ class Settings {
     o.barBpm = Math.min(180, Math.max(70, Math.round(o.barBpm) || 128));
     o.barMusicVolume = Math.min(1, Math.max(0, o.barMusicVolume));
     o.barRules = sanitizeBarRules(o.barRules);
+    for (const k of ['trada', 'nhau']) {
+      o[k + 'Name'] = String(o[k + 'Name']).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 40);
+      o[k + 'LikeGoal'] = Math.min(100000, Math.max(10, Math.round(o[k + 'LikeGoal']) || 500));
+    }
     o.rapName = String(o.rapName).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 40);
     o.rapRate = Math.min(1.3, Math.max(0.6, o.rapRate));
     if (!['classic', 'gold', 'imax', 'home'].includes(o.rapTheme)) o.rapTheme = 'classic';

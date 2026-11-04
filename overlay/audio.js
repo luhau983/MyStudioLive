@@ -68,7 +68,7 @@
     const c = getCfg();
     const on = c.sound && !muted;
     master.gain.setTargetAtTime(on ? c.volume : 0, ac.currentTime, 0.05);
-    const ambOn = c.mode === 'chua' ? c.chuaMusic : c.ambient;
+    const ambOn = c.mode === 'chua' ? c.chuaMusic : (c.mode === 'trada' || c.mode === 'nhau') ? c.quanAmbient : c.ambient;
     ambGain.gain.setTargetAtTime(on && ambOn ? c.volume * c.ambientVolume * 0.6 * (ducked ? 0.35 : 1) : 0, ac.currentTime, 0.6);
   }
 
@@ -286,6 +286,39 @@
       }
     },
     templeBell() { S.gong(); },
+    // ---- Trà đá / Đi nhậu ----
+    clink(n = 1) { // cụng ly thủy tinh: vài tiếng "keng" cao, lệch nhau một chút
+      const t = ac.currentTime, d = out(0.35);
+      for (let i = 0; i < Math.min(6, n); i++) {
+        const s = t + i * rnd(0.03, 0.08), f = rnd(2300, 3400);
+        [1, 2.76, 5.4].forEach((m, k) => osc('sine', f * m, s, 0.5 - k * 0.12, [0.11, 0.05, 0.025][k], d));
+        noise(s, 0.02, 0.08, d, { type: 'highpass', f: 5000, q: 0.7, a: 0.001, rel: 0.02 });
+      }
+    },
+    ice() { // đá lạnh lắc trong cốc
+      const t = ac.currentTime, d = out(0.2);
+      for (let i = 0; i < 7; i++) {
+        const s = t + i * rnd(0.04, 0.09);
+        osc('sine', rnd(1800, 3200), s, 0.08, 0.05, d);
+        noise(s, 0.03, 0.1, d, { type: 'bandpass', f: rnd(3000, 6000), q: 3, a: 0.001, rel: 0.03 });
+      }
+    },
+    pour() { // rót nước / bia
+      const t = ac.currentTime, d = out(0.25);
+      noise(t, 1.1, 0.16, d, { type: 'bandpass', f: 900, to: 1900, q: 2.5, a: 0.08 });
+      for (let i = 0; i < 10; i++) osc('sine', rnd(500, 900), t + i * 0.1, 0.06, 0.03, d, { to: rnd(900, 1400) });
+    },
+    dzo(level = 1) { // cả bàn hô "dzô!"
+      const t = ac.currentTime, d = out(0.5);
+      const voices = 2 + level * 2;
+      for (let v = 0; v < voices; v++) {
+        const f = rnd(140, 330), s = rnd(0, 0.12);
+        voice(t + s, 0.5, f * 1.15, f * 0.85, 'o', 0.2 / Math.sqrt(voices) * 2, d, { a: 0.02, hold: 0.25, rel: 0.2, breath: 0.4 });
+      }
+      setTimeout(() => S.clink(2 + level), 380);
+    },
+    hiccup() { const t = ac.currentTime; voice(t, 0.12, 320, 520, 'i', 0.22, out(0.3), { a: 0.005, hold: 0.04, rel: 0.06, breath: 0.6 }); },
+    cash() { const t = ac.currentTime, d = out(0.4); osc('sine', 1568, t, 0.25, 0.12, d); osc('sine', 2093, t + 0.08, 0.5, 0.12, d); },
     // ---- Rạp phim ----
     applause(level = 1) { // tiếng vỗ tay: nhiều cú vỗ ngẫu nhiên, càng đông càng dày
       const t = ac.currentTime, d = out(0.45);
@@ -381,6 +414,22 @@
       a.timers.push(setTimeout(tick, rnd(minMs, maxMs)));
     };
     a.timers.push(setTimeout(tick, rnd(minMs, maxMs)));
+  }
+
+  // Xe máy chạy ngang: tiếng máy răng cưa lọc thấp, to dần rồi nhỏ dần, lệch trái/phải
+  function motorbike(a, vol = 1) {
+    const t = ac.currentTime, dur = rnd(2.2, 3.6), f = rnd(55, 85);
+    const pan = ac.createStereoPanner(); pan.pan.setValueAtTime(rnd(-1, -0.4), t); pan.pan.linearRampToValueAtTime(rnd(0.4, 1), t + dur); pan.connect(a.bus);
+    const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 520; lp.connect(pan);
+    const o = ac.createOscillator(); o.type = 'sawtooth';
+    o.frequency.setValueAtTime(f, t); o.frequency.linearRampToValueAtTime(f * 1.15, t + dur * 0.5); o.frequency.linearRampToValueAtTime(f * 0.92, t + dur);
+    const g = ac.createGain(); g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.09 * vol, t + dur * 0.5); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g).connect(lp); o.start(t); o.stop(t + dur + 0.1);
+  }
+  function honk(a) { // còi xe máy "bíp bíp" xa
+    const t = ac.currentTime, dest = ambOut(a, 0.6), f = rnd(380, 470);
+    [0, 0.22].forEach((s) => { osc('square', f, t + s, 0.14, 0.025, dest); osc('square', f * 1.26, t + s, 0.14, 0.018, dest); });
   }
 
   // Phát một tiếng ngắn vào bus nhạc nền (đi qua vang phòng)
@@ -572,6 +621,40 @@
       every(a, 9000, 16000, flute);
       every(a, 40000, 70000, () => S.gong());
     },
+    street(a) { // Vỉa hè ban ngày: xe cộ ù ù, xe máy chạy qua, còi xa, chim sẻ
+      const hum = loopNoise(a.bus, 'lowpass', 260, 0.6, 0.22);
+      lfo(hum.g.gain, 0.07, 0.08, a);
+      loopNoise(a.bus, 'bandpass', 1200, 0.4, 0.025);
+      every(a, 2500, 7000, () => motorbike(a));
+      every(a, 9000, 22000, () => honk(a));
+      every(a, 5000, 14000, () => { // chim sẻ ríu rít
+        const t = ac.currentTime, dest = ambOut(a, 0.3);
+        for (let i = 0; i < 4; i++) {
+          const s = t + i * rnd(0.08, 0.14), f = rnd(3600, 5200);
+          const o = ac.createOscillator(); o.type = 'sine';
+          o.frequency.setValueAtTime(f, s); o.frequency.exponentialRampToValueAtTime(f * 1.25, s + 0.05);
+          const g = ac.createGain(); env(g, s, 0.005, 0.02, 0.02, 0.04);
+          o.connect(g).connect(dest); o.start(s); o.stop(s + 0.1);
+        }
+      });
+    },
+    pub(a) { // Quán nhậu buổi tối: tiếng người rì rầm, xe xa, cụng ly lác đác
+      const hum = loopNoise(a.bus, 'lowpass', 220, 0.6, 0.16);
+      lfo(hum.g.gain, 0.05, 0.05, a);
+      const chatter = loopNoise(a.bus, 'bandpass', 700, 1.8, 0.07); // tiếng nói chuyện lẫn lộn
+      lfo(chatter.fl.frequency, 0.3, 220, a);
+      lfo(chatter.g.gain, 0.4, 0.035, a);
+      every(a, 5000, 12000, () => motorbike(a, 0.5));
+      every(a, 4000, 11000, () => { // bàn khác cụng ly
+        const t = ac.currentTime, dest = ambOut(a, 0.5);
+        const n = Math.floor(rnd(2, 5));
+        for (let i = 0; i < n; i++) osc('sine', rnd(2300, 3300), t + i * rnd(0.03, 0.07), 0.35, 0.025, dest);
+      });
+      every(a, 8000, 18000, () => { // tiếng cười xa
+        const t = ac.currentTime, dest = ambOut(a, 0.8), f = rnd(180, 300);
+        for (let i = 0; i < 3; i++) voice(t + i * 0.2, 0.13, f, f * 0.9, 'a', 0.03, dest, { a: 0.01, hold: 0.05, rel: 0.07, breath: 0.7 });
+      });
+    },
     none() {}
   };
   const clampI = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -593,6 +676,7 @@
     const c = getCfg();
     let key;
     if (c.mode === 'chua' || c.mode === 'rap') key = 'none'; // chùa: nhạc mp3 riêng; rạp: tiếng của phim
+    else if (c.mode === 'trada' || c.mode === 'nhau') key = !c.sound || muted || !c.quanAmbient ? 'none' : c.mode === 'trada' ? 'street' : 'pub';
     else key = !c.sound || muted || !c.ambient || c.customAmbient ? 'none' : (AMBIENTS[c.ambientPreset] ? c.ambientPreset : 'drone');
     if ((amb?.key || 'none') === key) return;
     stopAmbient();
@@ -613,7 +697,7 @@
 
   // ---------- API ----------
   // Giới hạn tần suất mỗi tiếng để không ồn khi người xem spam lệnh
-  const MIN_GAP = { applause: 700, crowdLaugh: 900, wow: 500, crunch: 300, scream: 350, boo: 500, whoosh: 300, footsteps: 600, pop: 150, creak: 800, jumpscare: 1500, thunder: 3000 };
+  const MIN_GAP = { clink: 120, ice: 250, pour: 500, dzo: 600, hiccup: 400, cash: 150, applause: 700, crowdLaugh: 900, wow: 500, crunch: 300, scream: 350, boo: 500, whoosh: 300, footsteps: 600, pop: 150, creak: 800, jumpscare: 1500, thunder: 3000 };
 
   function play(name, ...args) {
     const c = getCfg();
@@ -637,7 +721,7 @@
     },
     update() {
       const c = getCfg();
-      if (!ac && c.sound && !muted && (c.mode === 'chua' ? c.chuaMusic : c.ambient)) { try { ctx(); } catch { return; } }
+      if (!ac && c.sound && !muted && (c.mode === 'chua' ? c.chuaMusic : (c.mode === 'trada' || c.mode === 'nhau') ? c.quanAmbient : c.ambient)) { try { ctx(); } catch { return; } }
       if (ac) { applyVolume(); syncAmbient(); }
     },
     play,

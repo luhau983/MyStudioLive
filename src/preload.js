@@ -18,6 +18,7 @@ contextBridge.exposeInMainWorld('studio', {
   chua: (action, extra) => ipcRenderer.invoke('chua:command', { action, ...extra }),
   rap: (action, extra) => ipcRenderer.invoke('rap:command', { action, ...extra }),
   bar: (action, extra) => ipcRenderer.invoke('bar:command', { action, ...extra }),
+  quan: (scene, action, extra) => ipcRenderer.invoke('quan:command', { scene, action, ...extra }),
   pickVideos: () => ipcRenderer.invoke('dialog:pickVideos'),
   onPause: on('pause:state'),
   restartServer: () => ipcRenderer.invoke('server:restart'),

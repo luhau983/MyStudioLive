@@ -34,6 +34,8 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 | 👑 **Vua Tiếng Việt** | Comment đáp án ô chữ bị xáo | Giảng đường 3D, cô giáo đọc lời dẫn; ai đúng đầu tiên là MVP; 550+ câu, import thêm được |
 | 🪢 **Kéo Co Online** | Comment `ĐỎ` / `XANH` để vào đội, thả tim để kéo | Sân kéo co 3D, 5 người mỗi đội, bot bù chỗ; quà cộng điểm kéo và nạp mana |
 | 🪩 **Live Bar** | Gõ `hey` để vào sàn, `dance` / `nhảy` / `đi vòng` / `đổi nv` | Sàn nhảy 3D với avatar TikTok thật; quà zoom camera, đèn rọi, danh hiệu, pháo hoa; TOP 3 lên bục DJ |
+| 🧊 **Trà Đá Vỉa Hè** | Gõ `trà đá` / `cà phê` / `coca` / `bò húc` / `hướng dương` / `bánh mì` / `tính tiền` | Quán vỉa hè, mỗi người một nhân vật ngồi ghế nhựa; bà chủ bưng món ra tận bàn; quà lớn thành đại ca bao cả quán |
+| 🍺 **Đi Nhậu Online** | Gõ `bia` / `dzô` / `lạc` / `mực` / `lẩu` / `tính tiền` | Quán nhậu đêm 6 bàn × 4 ghế; cả bàn cụng ly, uống nhiều thì đỏ mặt rồi gục; bảng vàng bợm nhậu; quà lớn bao cả quán |
 
 | 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
 |---|---|---|---|
@@ -67,6 +69,16 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 - Mỗi tim = 1 điểm kéo (×2 trong 10 giây cuối hiệp chính); quà cộng thẳng điểm kéo theo số kim cương và nạp mana cho đội.
 - Vòng mặc định: sắp đội 5s → đếm ngược 3s → kéo 45s → kết quả 10s; hòa thì có hiệp phụ. Chỉnh được trong bảng điều khiển.
 - Người im lặng lâu trên sân tự xuống khán đài; comment hoặc thả tim là quay lại.
+
+### 🧊 Trà Đá Vỉa Hè & 🍺 Đi Nhậu Online
+
+- Người bình luận lần đầu được xếp một ghế (Trà Đá 20 chỗ, Đi Nhậu 24 chỗ) với nhân vật chibi cố định theo tài khoản; hết chỗ thì khách giả lập, rồi người im lặng lâu nhất nhường ghế.
+- Gõ tên món là gọi: bà chủ / anh phục vụ bưng ra tận bàn, khách tự nhấp từng ngụm. Bình luận thường hiện thành bong bóng thoại trên đầu nhân vật. Gõ `tính tiền` để đứng dậy về.
+- **Đi Nhậu**: `dzô` (hoặc `100%`, `cạn ly`…) làm cả bàn cụng ly, ai có bia thì uống cạn; mỗi cốc cạn +1 vào **Bảng vàng bợm nhậu**. Uống nhiều thì đỏ mặt, nấc, lắc lư, quá chén thì gục xuống bàn một lúc. Màn hình luôn có dòng nhắc *Đã uống rượu bia — không lái xe*.
+- Quà nhỏ: món + đồ uống miễn phí; quà từ 10 💎: cả bàn được mời (bò húc + bánh mì / lẩu); quà từ ngưỡng **quà lớn**: người tặng thành đại ca (kính râm, dây chuyền vàng), cả quán được bao, máy quay áp sát người tặng.
+- Đủ số tim: bà chủ khao cả quán trà đá + mưa đá lạnh / cả quán dzô 100%.
+- Khi quán vắng có **khách quen giả lập** ngồi gọi món, chém gió cho đỡ trống; người xem thật vào là họ nhường chỗ (tắt được).
+- Tiếng phố (xe máy, còi, chim sẻ) / tiếng quán (rì rầm, cụng ly xa) tự tạo bằng WebAudio, giọng đọc chào khách và cảm ơn quà.
 
 ## Tải & cài đặt
 
@@ -161,7 +173,7 @@ src/server.js      Server overlay Express + Socket.IO (chỉ 127.0.0.1), giọng
 src/tts.js         Giọng đọc tiếng Việt (Microsoft Edge, dự phòng Google)
 src/settings.js    Lưu cài đặt trong thư mục userData
 renderer/          Giao diện điều khiển (sáng / tối / theo hệ thống)
-overlay/           Cảnh Nhà Ma, Đi Chùa, Rạp Phim; overlay/bar/ là Live Bar (three.js)
+overlay/           Cảnh Nhà Ma, Đi Chùa, Rạp Phim; overlay/bar/ là Live Bar (three.js); quan.js = engine chung cho Trà Đá Vỉa Hè & Đi Nhậu
 vua/               Game Vua Tiếng Việt: server riêng, overlay 3D (Three.js), bảng điều khiển, ngân hàng câu hỏi
 keoco/             Game Kéo Co: server riêng, sân 3D (Three.js), bảng điều khiển
 ```

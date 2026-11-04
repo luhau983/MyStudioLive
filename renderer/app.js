@@ -36,7 +36,9 @@
     rap: { mode: 'rap', name: 'Rạp Phim Online', open: 'Chuyển live sang rạp phim + mở màn hình phát' },
     vua: { mode: 'vua', name: 'Vua Tiếng Việt', open: 'Chuyển live sang giảng đường đoán chữ + mở màn hình phát' },
     keoco: { mode: 'keoco', name: 'Kéo Co Online', open: 'Chuyển live sang sân kéo co + mở màn hình phát' },
-    bar: { mode: 'bar', name: 'Live Bar', open: 'Chuyển live sang sàn nhảy 3D + mở màn hình phát' }
+    bar: { mode: 'bar', name: 'Live Bar', open: 'Chuyển live sang sàn nhảy 3D + mở màn hình phát' },
+    trada: { mode: 'trada', name: 'Trà Đá Vỉa Hè', open: 'Chuyển live sang quán trà đá + mở màn hình phát' },
+    nhau: { mode: 'nhau', name: 'Đi Nhậu Online', open: 'Chuyển live sang quán nhậu + mở màn hình phát' }
   };
   const viewOfMode = (mode) => Object.keys(SCENES).find((v) => SCENES[v].mode === mode) || 'ma';
 
@@ -450,6 +452,26 @@
     api.chua(a, a === 'testLikes' ? { n: 100 } : {});
   }));
 
+  // ---------- Trà Đá Vỉa Hè & Đi Nhậu Online ----------
+  $$('[data-quan-name-save]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.quanNameSave;
+    const name = $('#' + k + '-name').value.trim();
+    settings.overlay[k + 'Name'] = name;
+    save({ overlay: { [k + 'Name']: name } }, true);
+    notify(name ? `Đã lưu tên quán: ${name}` : 'Đã xoá tên quán (dùng tên mặc định)');
+  }));
+  $$('[data-quan-speak]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.quanSpeak;
+    const text = $('#' + k + '-speak').value.trim();
+    if (!text) return notify('Nhập câu cần đọc trước', 'err');
+    api.quan(k, 'speak', { text });
+    notify('Đã gửi câu cần đọc lên live');
+  }));
+  $$('[data-quan]').forEach((b) => b.addEventListener('click', () => {
+    const a = b.dataset.quan;
+    api.quan(b.dataset.scene, a, a === 'testLikes' ? { n: 100 } : {});
+  }));
+
   // ---------- Rạp Phim Online ----------
   const ytIdOf = (u) => (String(u).match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/|embed\/)|youtu\.be\/)([\w-]{11})/i) || [])[1] || '';
   const movieName = (p) => {
@@ -722,6 +744,7 @@
     $('#v-liveBoost').textContent = o.liveBoost ? '+' + o.liveBoost + '%' : 'Tắt';
     $('#v-chuaMusicVolume').textContent = Math.round(o.chuaMusicVolume * 100) + '%';
     if (document.activeElement !== $('#chua-name')) $('#chua-name').value = o.chuaName || '';
+    for (const k of ['trada', 'nhau']) if (document.activeElement !== $('#' + k + '-name')) $('#' + k + '-name').value = o[k + 'Name'] || '';
     $('#v-tutorialEvery').textContent = o.tutorialEvery ? o.tutorialEvery + ' phút' : 'Tắt';
     $('#v-ambientVolume').textContent = Math.round(o.ambientVolume * 100) + '%';
     $('#v-barNpc').textContent = o.barNpc ? o.barNpc + ' người' : 'Tắt';

@@ -35,6 +35,8 @@ Whichever tab is open in the left menu is the scene shown on the live stream. Al
 | 🎬 **Rạp Phim Online** (Movie Theater) | Type `vỗ tay` (clap) / `haha` / `wow` / `bắp` (popcorn) | Plays a YouTube, .mp4/.webm or local-file playlist; gifts = VIP seats; 4 room styles |
 | 👑 **Vua Tiếng Việt** (Word King) | Comment the answer to a scrambled word | 3D lecture hall with a narrating teacher; first correct answer is MVP; 550+ questions, import more |
 | 🪢 **Kéo Co Online** (Tug of War) | Comment `ĐỎ` (red) / `XANH` (blue) to join, send likes to pull | 3D arena, 5 per team with bots filling gaps; gifts add pull points and team mana |
+| 🧊 **Trà Đá Vỉa Hè** (Sidewalk Iced Tea) | Type `trà đá` / `cà phê` / `coca` / `bò húc` / `hướng dương` / `bánh mì` / `tính tiền` (pay & leave) | Hanoi sidewalk stall where every viewer gets a chibi on a plastic stool; the owner serves orders to the table; big gifts make the gifter the "đại ca" who treats everyone |
+| 🍺 **Đi Nhậu Online** (Night Pub) | Type `bia` (beer) / `dzô` (cheers) / `lạc` / `mực` / `lẩu` / `tính tiền` | 6 tables × 4 seats; whole tables clink glasses, heavy drinkers turn red and doze off; drinking leaderboard; big gifts buy a round for the house |
 
 | 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
 |---|---|---|---|
@@ -55,6 +57,15 @@ Whichever tab is open in the left menu is the scene shown on the live stream. Al
 - Each like = 1 pull point (×2 in the last 10 seconds of regulation); gifts add pull points by diamond value and charge team mana.
 - Default round: line-up 5s → countdown 3s → pull 45s → result 10s, with overtime on a tie. All adjustable in the control panel.
 - Players who stay silent on the field go back to the stands; a comment or like brings them back.
+
+### 🧊 Trà Đá Vỉa Hè & 🍺 Đi Nhậu Online
+
+- A viewer's first comment seats them (20 seats / 24 seats) as a chibi whose look is fixed per account; when full, simulated regulars leave first, then the longest-silent viewer.
+- Typing a menu item orders it; staff carry it to the table and the customer sips over time. Other comments appear as speech bubbles. `tính tiền` makes the customer pay and leave.
+- **Đi Nhậu**: `dzô` (or `100%`, `cạn ly`…) makes the whole table clink and down their beer; each finished beer counts on the leaderboard. Drunk customers blush, hiccup, sway and eventually doze on the table. A "don't drink and drive" ticker is always on screen.
+- Gifts: free items for small gifts, a treat for the whole table from 10 💎, and from the **big gift** threshold the gifter becomes the boss (sunglasses, gold chain) and treats the whole place while the camera zooms in.
+- Like goals: free iced tea for everyone with falling ice / a house-wide 100% cheers.
+- Optional simulated regulars keep an empty stall lively and give up their seats to real viewers. Street / pub ambience is synthesized with WebAudio.
 
 ## Download & install
 
@@ -148,7 +159,7 @@ src/server.js      Express + Socket.IO overlay server (127.0.0.1 only), /api/tts
 src/tts.js         Vietnamese voice (Microsoft Edge, Google fallback)
 src/settings.js    Settings stored in the userData folder
 renderer/          Control UI (light / dark / system)
-overlay/           Haunted House, Temple and Movie Theater scenes
+overlay/           Haunted House, Temple and Movie Theater scenes; quan.js = shared engine for Iced Tea & Night Pub
 vua/               Vua Tiếng Việt: own server, 3D overlay (Three.js), control panel, question bank
 keoco/             Kéo Co: own server, 3D arena (Three.js), control panel
 ```

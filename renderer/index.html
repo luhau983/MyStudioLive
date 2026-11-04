@@ -12,6 +12,8 @@
   <!-- Icons: Lucide (ISC License, https://lucide.dev) -->
   <svg class="icon-sprite" aria-hidden="true">
     <symbol id="i-audio-lines" viewBox="0 0 24 24"><path d="M2 10v3" /><path d="M6 6v11" /><path d="M10 3v18" /><path d="M14 8v7" /><path d="M18 5v13" /><path d="M22 10v3" /></symbol>
+    <symbol id="i-beer" viewBox="0 0 24 24"><path d="M17 11h1a3 3 0 0 1 0 6h-1" /><path d="M9 12v6" /><path d="M13 12v6" /><path d="M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5S9.44 2 11 2s2 1.5 3 1.5 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5Z" /><path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8" /></symbol>
+    <symbol id="i-cup-soda" viewBox="0 0 24 24"><path d="m6 8 1.75 12.28a2 2 0 0 0 2 1.72h4.54a2 2 0 0 0 2-1.72L18 8" /><path d="M5 8h14" /><path d="M7 15a6.47 6.47 0 0 1 5 0 6.47 6.47 0 0 0 5 0" /><path d="m12 8 1-6h2" /></symbol>
     <symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol>
     <symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 5v16" /><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></symbol>
     <symbol id="i-cast" viewBox="0 0 24 24"><path d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6" /><path d="M2 12a9 9 0 0 1 8 8" /><path d="M2 16a5 5 0 0 1 4 4" /><line x1="2" x2="2.01" y1="20" y2="20" /></symbol>
@@ -109,6 +111,12 @@
         <span class="nav-emoji"><svg class="ic"><use href="#i-disc-3"/></svg></span><span class="nav-label">Live Bar</span><span class="live-dot" data-live-for="bar">LIVE</span>
       </button>
       <h3 class="menu-group"><span class="menu-group-title">Khác</span><span class="menu-group-dots">•••</span></h3>
+      <button class="nav-item" data-view="trada" title="Trà Đá Vỉa Hè">
+        <span class="nav-emoji"><svg class="ic"><use href="#i-cup-soda"/></svg></span><span class="nav-label">Trà Đá Vỉa Hè</span><span class="live-dot" data-live-for="trada">LIVE</span>
+      </button>
+      <button class="nav-item" data-view="nhau" title="Đi Nhậu Online">
+        <span class="nav-emoji"><svg class="ic"><use href="#i-beer"/></svg></span><span class="nav-label">Đi Nhậu Online</span><span class="live-dot" data-live-for="nhau">LIVE</span>
+      </button>
       <button class="nav-item" data-view="overlay" title="Đưa lên live">
         <svg class="ic"><use href="#i-cast"/></svg><span class="nav-label">Đưa lên live</span>
       </button>
@@ -217,7 +225,7 @@
           <div class="panel quick">
             <div class="panel-head"><h2>Bắt đầu nhanh</h2></div>
             <ol class="qs">
-              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><div class="qs-actions"><button class="btn ghost sm" data-goto="ma"><svg class="ic"><use href="#i-ghost"/></svg> Ma</button><button class="btn ghost sm" data-goto="chua"><svg class="ic"><use href="#i-flower-2"/></svg> Chùa</button><button class="btn ghost sm" data-goto="rap"><svg class="ic"><use href="#i-clapperboard"/></svg> Rạp</button><button class="btn ghost sm" data-goto="vua"><svg class="ic"><use href="#i-crown"/></svg> Vua</button><button class="btn ghost sm" data-goto="keoco"><svg class="ic"><use href="#i-biceps-flexed"/></svg> Kéo Co</button></div></li>
+              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><div class="qs-actions"><button class="btn ghost sm" data-goto="ma"><svg class="ic"><use href="#i-ghost"/></svg> Ma</button><button class="btn ghost sm" data-goto="chua"><svg class="ic"><use href="#i-flower-2"/></svg> Chùa</button><button class="btn ghost sm" data-goto="rap"><svg class="ic"><use href="#i-clapperboard"/></svg> Rạp</button><button class="btn ghost sm" data-goto="vua"><svg class="ic"><use href="#i-crown"/></svg> Vua</button><button class="btn ghost sm" data-goto="keoco"><svg class="ic"><use href="#i-biceps-flexed"/></svg> Kéo Co</button><button class="btn ghost sm" data-goto="trada"><svg class="ic"><use href="#i-cup-soda"/></svg> Trà đá</button><button class="btn ghost sm" data-goto="nhau"><svg class="ic"><use href="#i-beer"/></svg> Nhậu</button></div></li>
               <li data-qs="link"><span class="qs-n">2</span><div><b>Thêm vào TikTok LIVE Studio</b><small>Nguồn <b>Link</b>: <code id="qs-link">http://lvh.me:3000</code> · 1080×1920</small></div><button class="btn ghost sm" id="qs-copy">Sao chép</button></li>
               <li data-qs="golive"><span class="qs-n">3</span><div><b>Bấm Go LIVE trên TikTok</b><small>Bật live trước khi kết nối ở bước 4</small></div></li>
               <li data-qs="connect"><span class="qs-n">4</span><div><b>Kết nối username</b><small>Nhập @username ở trên và bấm Kết nối</small></div></li>
@@ -237,7 +245,7 @@
       <header class="page-head">
         <div>
           <h1>Đưa lên live</h1>
-          <p class="muted">Cách để người xem TikTok nhìn thấy cảnh đang chạy (Live Ma Online, Đi Chùa Online hoặc Rạp Phim Online).</p>
+          <p class="muted">Cách để người xem TikTok nhìn thấy cảnh đang chạy (chọn cảnh bên dưới).</p>
         </div>
         <div class="head-actions">
           <button class="btn ghost" id="btn-reload-overlay"><svg class="ic"><use href="#i-rotate-cw"/></svg> Tải lại cảnh</button>
@@ -251,6 +259,8 @@
         <button class="btn scene-btn vua" data-open-scene="vua"><span class="sb-ico"><svg class="ic"><use href="#i-crown"/></svg></span><span><b>Phát Vua Tiếng Việt</b><small>Chuyển live sang giảng đường đoán chữ + mở màn hình phát</small></span></button>
         <button class="btn scene-btn keoco" data-open-scene="keoco"><span class="sb-ico"><svg class="ic"><use href="#i-biceps-flexed"/></svg></span><span><b>Phát Kéo Co Online</b><small>Chuyển live sang sân kéo co + mở màn hình phát</small></span></button>
         <button class="btn scene-btn bar" data-open-scene="bar"><span class="sb-ico"><svg class="ic"><use href="#i-disc-3"/></svg></span><span><b>Phát Live Bar</b><small>Chuyển live sang sàn nhảy 3D + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn trada" data-open-scene="trada"><span class="sb-ico"><svg class="ic"><use href="#i-cup-soda"/></svg></span><span><b>Phát Trà Đá Vỉa Hè</b><small>Chuyển live sang quán trà đá + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn nhau" data-open-scene="nhau"><span class="sb-ico"><svg class="ic"><use href="#i-beer"/></svg></span><span><b>Phát Đi Nhậu Online</b><small>Chuyển live sang quán nhậu + mở màn hình phát</small></span></button>
       </div>
 
       <div class="live-guide">
@@ -896,6 +906,174 @@
     </section>
 
     <!-- ================= VUA TIẾNG VIỆT ================= -->
+    <!-- ================= TRÀ ĐÁ VỈA HÈ ================= -->
+    <section class="view scene-view" id="view-trada">
+      <header class="page-head">
+        <div>
+          <h1><svg class="ic"><use href="#i-cup-soda"/></svg> Trà Đá Vỉa Hè</h1>
+          <p class="muted">Đang mở tab này thì quán trà đá chạy trên live. Người xem gõ “trà đá”, “cà phê”, “hướng dương”… để gọi món, bà chủ bưng ra tận bàn. Quà lớn biến người tặng thành đại ca bao cả quán.</p>
+        </div>
+      </header>
+      <div class="feature-layout">
+        <div class="preview-wrap">
+          <div class="preview-frame feature-frame">
+            <iframe class="live-preview" data-for="trada" title="Quán trà đá trên live"></iframe>
+          </div>
+          <div class="preview-actions">
+            <div style="display:flex;gap:6px">
+              <button class="btn ghost sm" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output><svg class="ic"><use href="#i-tv"/></svg> Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen"><svg class="ic"><use href="#i-rotate-cw"/></svg></button>
+            </div>
+            <label class="switch-inline"><input type="checkbox" class="preview-safe-cb"> <svg class="ic"><use href="#i-smartphone"/></svg> Vùng bị TikTok che</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> <svg class="ic"><use href="#i-volume-2"/></svg> Nghe</label>
+          </div>
+          <p class="hint" style="max-width:405px">Đây chính là màn hình người xem thấy trên live. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
+        </div>
+      <div class="feature-controls">
+        <div class="panel">
+          <div class="panel-head"><h2>Tên quán &amp; âm thanh</h2></div>
+          <div class="field" style="margin-top:0">
+            <label>Tên quán <span class="muted small">(bảng hiệu trên màn hình + giọng đọc)</span></label>
+            <div class="file-row">
+              <input class="inp" id="trada-name" data-quan-name="trada" maxlength="40" placeholder="Ví dụ: Trà Đá Chú Tư">
+              <button class="btn primary sm" data-quan-name-save="trada">Lưu</button>
+            </div>
+          </div>
+          <div class="toggles" style="margin-top:8px">
+            <label class="toggle"><span>Giọng đọc (cảm ơn quà, chào khách)</span><input type="checkbox" data-o="tradaVoice"><i></i></label>
+            <label class="toggle"><span>Chào người mới vào quán</span><input type="checkbox" data-o="tradaGreet"><i></i></label>
+            <label class="toggle"><span>Khách quen giả lập khi quán vắng</span><input type="checkbox" data-o="tradaBots"><i></i></label>
+            <label class="toggle"><span>Tiếng phố (xe cộ, còi, chim sẻ)</span><input type="checkbox" data-o="quanAmbient"><i></i></label>
+          </div>
+          <div class="field">
+            <label>Số tim để bà chủ khao cả quán</label>
+            <input type="number" class="inp" min="10" data-o="tradaLikeGoal" data-num>
+          </div>
+          <p class="hint">Quà từ <b>10 💎</b>: bò húc + bánh mì, cả bàn được mời trà. Quà từ ngưỡng <b>quà lớn</b> (Cài đặt): người tặng thành <b>đại ca</b> đeo kính râm, bao cả quán.</p>
+        </div>
+
+        <div class="col">
+          <div class="panel">
+            <div class="panel-head"><h2>Đọc ngay</h2></div>
+            <textarea class="inp" id="trada-speak" rows="3" maxlength="400" placeholder="Ví dụ: Trà đá miễn phí cho ai follow kênh nhé!"></textarea>
+            <div class="file-row" style="margin-top:8px">
+              <button class="btn primary sm" data-quan-speak="trada"><svg class="ic"><use href="#i-volume-2"/></svg> Đọc ngay</button>
+              <span class="muted small">Được đọc trước mọi câu khác.</span>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Điều khiển</h2></div>
+            <div class="test-grid">
+              <button class="btn ghost" data-quan="treat" data-scene="trada"><svg class="ic"><use href="#i-party-popper"/></svg> Bà chủ khao cả quán</button>
+              <button class="btn ghost" data-quan="share" data-scene="trada"><svg class="ic"><use href="#i-megaphone"/></svg> Nhắc chia sẻ</button>
+              <button class="btn ghost" data-quan="clear" data-scene="trada"><svg class="ic"><use href="#i-door-open"/></svg> Dọn quán (mời khách về)</button>
+              <button class="btn ghost" data-quan="reset" data-scene="trada"><svg class="ic"><use href="#i-rotate-ccw"/></svg> Đặt lại bảng &amp; số ly</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Gửi thử</h2></div>
+            <div class="test-grid">
+              <button class="btn ghost" data-test="trada"><svg class="ic"><use href="#i-cup-soda"/></svg> Gõ “trà đá”</button>
+              <button class="btn ghost" data-test="cafe"><svg class="ic"><use href="#i-cup-soda"/></svg> Gõ “cà phê”</button>
+              <button class="btn ghost" data-test="huongduong"><svg class="ic"><use href="#i-flower"/></svg> Gõ “hướng dương”</button>
+              <button class="btn ghost" data-test="join"><svg class="ic"><use href="#i-door-open"/></svg> Vào quán</button>
+              <button class="btn ghost" data-test="chat"><svg class="ic"><use href="#i-message-circle"/></svg> Bình luận thường</button>
+              <button class="btn ghost" data-test="tinhtien"><svg class="ic"><use href="#i-door-open"/></svg> Gõ “tính tiền”</button>
+              <button class="btn ghost" data-test="gift"><svg class="ic"><use href="#i-gift"/></svg> Quà nhỏ</button>
+              <button class="btn ghost" data-test="bigGift"><svg class="ic"><use href="#i-crown"/></svg> Quà lớn (đại ca)</button>
+              <button class="btn ghost" data-quan="testLikes" data-scene="trada"><svg class="ic"><use href="#i-heart"/></svg> Thả 100 tim</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- ================= ĐI NHẬU ONLINE ================= -->
+    <section class="view scene-view" id="view-nhau">
+      <header class="page-head">
+        <div>
+          <h1><svg class="ic"><use href="#i-beer"/></svg> Đi Nhậu Online</h1>
+          <p class="muted">Đang mở tab này thì quán nhậu chạy trên live. Người xem gõ “bia” để vào bàn, “dzô” để cả bàn cụng ly, gọi mồi “lạc”, “mực”, “lẩu”… Uống nhiều thì đỏ mặt, lắc lư, gục xuống bàn. Quà lớn bao cả quán.</p>
+        </div>
+      </header>
+      <div class="feature-layout">
+        <div class="preview-wrap">
+          <div class="preview-frame feature-frame">
+            <iframe class="live-preview" data-for="nhau" title="Quán nhậu trên live"></iframe>
+          </div>
+          <div class="preview-actions">
+            <div style="display:flex;gap:6px">
+              <button class="btn ghost sm" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output><svg class="ic"><use href="#i-tv"/></svg> Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen"><svg class="ic"><use href="#i-rotate-cw"/></svg></button>
+            </div>
+            <label class="switch-inline"><input type="checkbox" class="preview-safe-cb"> <svg class="ic"><use href="#i-smartphone"/></svg> Vùng bị TikTok che</label>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> <svg class="ic"><use href="#i-volume-2"/></svg> Nghe</label>
+          </div>
+          <p class="hint" style="max-width:405px">Đây chính là màn hình người xem thấy trên live. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
+        </div>
+      <div class="feature-controls">
+        <div class="panel">
+          <div class="panel-head"><h2>Tên quán &amp; âm thanh</h2></div>
+          <div class="field" style="margin-top:0">
+            <label>Tên quán <span class="muted small">(bảng hiệu trên màn hình + giọng đọc)</span></label>
+            <div class="file-row">
+              <input class="inp" id="nhau-name" data-quan-name="nhau" maxlength="40" placeholder="Ví dụ: Quán Nhậu Bờ Hồ">
+              <button class="btn primary sm" data-quan-name-save="nhau">Lưu</button>
+            </div>
+          </div>
+          <div class="toggles" style="margin-top:8px">
+            <label class="toggle"><span>Giọng đọc (cảm ơn quà, chào khách)</span><input type="checkbox" data-o="nhauVoice"><i></i></label>
+            <label class="toggle"><span>Chào người mới vào quán</span><input type="checkbox" data-o="nhauGreet"><i></i></label>
+            <label class="toggle"><span>Khách quen giả lập khi quán vắng</span><input type="checkbox" data-o="nhauBots"><i></i></label>
+            <label class="toggle"><span>Tiếng quán (rì rầm, cụng ly xa)</span><input type="checkbox" data-o="quanAmbient"><i></i></label>
+          </div>
+          <div class="field">
+            <label>Số tim để cả quán dzô 100%</label>
+            <input type="number" class="inp" min="10" data-o="nhauLikeGoal" data-num>
+          </div>
+          <p class="hint">Quà nhỏ: đĩa mồi + bia, cả bàn cụng ly. Quà từ <b>10 💎</b>: lẩu cho cả bàn. Quà từ ngưỡng <b>quà lớn</b> (Cài đặt): bao cả quán, dzô 100%. Màn hình luôn có dòng nhắc “Đã uống rượu bia — không lái xe”.</p>
+        </div>
+
+        <div class="col">
+          <div class="panel">
+            <div class="panel-head"><h2>Đọc ngay</h2></div>
+            <textarea class="inp" id="nhau-speak" rows="3" maxlength="400" placeholder="Ví dụ: Bàn nào gõ dzô to nhất tối nay được lên bảng vàng!"></textarea>
+            <div class="file-row" style="margin-top:8px">
+              <button class="btn primary sm" data-quan-speak="nhau"><svg class="ic"><use href="#i-volume-2"/></svg> Đọc ngay</button>
+              <span class="muted small">Được đọc trước mọi câu khác.</span>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Điều khiển</h2></div>
+            <div class="test-grid">
+              <button class="btn ghost" data-quan="cheerAll" data-scene="nhau"><svg class="ic"><use href="#i-beer"/></svg> Dzô cả quán</button>
+              <button class="btn ghost" data-quan="share" data-scene="nhau"><svg class="ic"><use href="#i-megaphone"/></svg> Nhắc chia sẻ</button>
+              <button class="btn ghost" data-quan="clear" data-scene="nhau"><svg class="ic"><use href="#i-door-open"/></svg> Dọn quán (mời khách về)</button>
+              <button class="btn ghost" data-quan="reset" data-scene="nhau"><svg class="ic"><use href="#i-rotate-ccw"/></svg> Đặt lại bảng vàng</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Gửi thử</h2></div>
+            <div class="test-grid">
+              <button class="btn ghost" data-test="bia"><svg class="ic"><use href="#i-beer"/></svg> Gõ “bia”</button>
+              <button class="btn ghost" data-test="dzo"><svg class="ic"><use href="#i-party-popper"/></svg> Gõ “dzô”</button>
+              <button class="btn ghost" data-test="moi"><svg class="ic"><use href="#i-flame"/></svg> Gọi mồi</button>
+              <button class="btn ghost" data-test="lau"><svg class="ic"><use href="#i-flame"/></svg> Gõ “lẩu”</button>
+              <button class="btn ghost" data-test="join"><svg class="ic"><use href="#i-door-open"/></svg> Vào quán</button>
+              <button class="btn ghost" data-test="tinhtien"><svg class="ic"><use href="#i-door-open"/></svg> Gõ “tính tiền”</button>
+              <button class="btn ghost" data-test="gift"><svg class="ic"><use href="#i-gift"/></svg> Quà nhỏ</button>
+              <button class="btn ghost" data-test="bigGift"><svg class="ic"><use href="#i-crown"/></svg> Quà lớn (bao quán)</button>
+              <button class="btn ghost" data-quan="testLikes" data-scene="nhau"><svg class="ic"><use href="#i-heart"/></svg> Thả 100 tim</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
     <section class="view scene-view vua-view" id="view-vua">
       <header class="page-head">
         <div>

@@ -606,3 +606,64 @@ body.mode-rap #toasts, body.mode-rap #streak-zone, body.mode-rap #bg, body.mode-
 .r-cmd { gap: 7px; padding: 6px 12px; }
 .r-cmd .cmd { font-size: 20px; gap: 3px; }
 .r-cmd .key { font-size: 21px; padding: 2px 9px; }
+
+/* ================= TRÀ ĐÁ VỈA HÈ & ĐI NHẬU (quan.js) ================= */
+.quan-canvas { position: absolute; inset: 0; width: 1080px; height: 1920px; display: none; }
+body.mode-quan #hud, body.mode-quan #top-gifter, body.mode-quan #game-ui, body.mode-quan #chat-zone, body.mode-quan #gift-zone,
+body.mode-quan #toasts, body.mode-quan #streak-zone, body.mode-quan #bg, body.mode-quan #game { display: none !important; }
+.quan-ui { position: absolute; inset: 0; pointer-events: none; display: none; font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  --q-bg: rgba(8, 47, 73, .82); --q-line: rgba(125, 211, 252, .85); --q-key: #38bdf8; --q-key-ink: #082f49; --q-gold: #fde68a; --q-text: #f0f9ff; }
+.quan-ui.q-nhau { --q-bg: rgba(35, 10, 4, .84); --q-line: rgba(251, 191, 36, .85); --q-key: #fbbf24; --q-key-ink: #3b0d07; --q-text: #fff7ed; }
+
+.q-head { position: absolute; top: 248px; left: 40px; right: 40px; text-align: center; }
+.q-title { display: inline-block; max-width: 980px; padding: 6px 34px; border-radius: 18px; font-size: 58px; font-weight: 900; letter-spacing: 3px;
+  color: #fff; background: linear-gradient(180deg, #0369a1, #075985); border: 4px solid #e0f2fe; box-shadow: 0 6px 0 #0c4a6e, 0 10px 30px rgba(0, 0, 0, .45);
+  text-shadow: 0 3px 0 rgba(0, 0, 0, .35); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.q-nhau .q-title { background: linear-gradient(180deg, #991b1b, #7f1d1d); border-color: #fbbf24; box-shadow: 0 6px 0 #450a0a, 0 0 40px rgba(251, 191, 36, .45);
+  color: #fef08a; text-shadow: 0 0 18px rgba(251, 191, 36, .8), 0 3px 0 #450a0a; }
+.q-stats { display: flex; justify-content: center; gap: 12px; margin-top: 14px; }
+.q-chip { padding: 6px 18px; border-radius: 999px; font-size: 26px; font-weight: 800; color: var(--q-text); background: var(--q-bg); border: 2px solid var(--q-line);
+  white-space: nowrap; font-variant-numeric: tabular-nums; }
+.q-like { position: relative; margin: 12px auto 0; width: 760px; height: 44px; border-radius: 999px; overflow: hidden; background: var(--q-bg); border: 2px solid var(--q-line); }
+.q-like-fill { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg, #be123c, #f472b6, #fbcfe8); transition: width .6s; }
+.q-like-text { position: relative; line-height: 40px; font-size: 23px; font-weight: 800; color: #fff; text-shadow: 0 1px 4px #000; }
+
+.q-menu, .q-board { position: absolute; top: 484px; width: 300px; padding: 12px 14px; border-radius: 20px; background: var(--q-bg); border: 2px solid var(--q-line); color: var(--q-text); }
+.q-menu { left: 18px; }
+.q-board { right: 18px; width: 290px; }
+.qm-title, .qb-title { font-size: 21px; font-weight: 900; color: var(--q-gold); margin-bottom: 8px; text-align: center; letter-spacing: .5px; }
+.qm-row { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 20px; }
+.qm-key { flex: none; padding: 2px 10px; border-radius: 10px; font-weight: 900; font-size: 19px; background: var(--q-key); color: var(--q-key-ink); white-space: nowrap; }
+.qm-desc { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
+.qm-row.gift .qm-key { background: #f472b6; color: #500724; }
+.qb-row { display: flex; gap: 8px; align-items: center; font-size: 21px; padding: 3px 0; }
+.qb-rank { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, .15); color: var(--q-gold); font-weight: 900; font-size: 16px; display: grid; place-items: center; flex: none; }
+.qb-row:nth-child(1) .qb-rank { background: #facc15; color: #422006; }
+.qb-row:nth-child(2) .qb-rank { background: #e5e7eb; color: #1f2937; }
+.qb-row:nth-child(3) .qb-rank { background: #d97706; color: #fff7ed; }
+.qb-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 700; }
+.qb-pts { font-weight: 900; color: var(--q-gold); white-space: nowrap; }
+.qb-empty { font-size: 18px; opacity: .75; text-align: center; }
+
+.q-plate { position: absolute; left: 50%; top: 820px; transform: translate(-50%, -20px) scale(.9); opacity: 0;
+  display: flex; align-items: center; gap: 18px; padding: 14px 34px 14px 14px; border-radius: 999px;
+  background: linear-gradient(90deg, rgba(120, 53, 15, .95), rgba(40, 10, 4, .95)); border: 3px solid #fbbf24;
+  box-shadow: 0 0 50px rgba(251, 191, 36, .6); transition: opacity .5s, transform .5s cubic-bezier(.2, 1.4, .4, 1); z-index: 3; }
+.q-plate.on { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.q-plate .np-name { font-family: "Be Vietnam Pro", system-ui, sans-serif; font-weight: 900; }
+
+.q-banner { position: absolute; left: 40px; right: 40px; top: 600px; text-align: center; opacity: 0; transform: scale(.6); z-index: 4; }
+.q-banner.on { animation: qBanner 4.4s cubic-bezier(.2, 1.3, .4, 1) forwards; }
+@keyframes qBanner { 0% { opacity: 0; transform: scale(.5) rotate(-4deg); } 12% { opacity: 1; transform: scale(1.08) rotate(1deg); }
+  20% { transform: scale(1) rotate(0); } 85% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.1); } }
+.qbn-title { font-size: 76px; font-weight: 900; line-height: 1.05; color: #fef08a; -webkit-text-stroke: 3px #7c2d12;
+  text-shadow: 0 6px 0 #7c2d12, 0 0 40px rgba(251, 191, 36, .9); }
+.qbn-sub { display: inline-block; margin-top: 12px; padding: 8px 26px; border-radius: 999px; font-size: 32px; font-weight: 800; color: #fff; background: rgba(0, 0, 0, .6); }
+.q-caption { position: absolute; left: 60px; right: 60px; bottom: 500px; text-align: center; font-size: 29px; font-weight: 700; color: #fff;
+  padding: 12px 20px; border-radius: 18px; background: rgba(0, 0, 0, .6); opacity: 0; transition: opacity .4s; z-index: 2; }
+.q-caption.on { opacity: 1; }
+.q-ticker { position: absolute; left: 60px; right: 60px; top: 480px; overflow: hidden; white-space: nowrap; border-radius: 999px;
+  background: rgba(0, 0, 0, .55); font-size: 19px; font-weight: 700; color: #fde68a; padding: 3px 0; display: none; }
+.q-nhau .q-ticker { display: block; }
+.q-nhau .q-menu, .q-nhau .q-board { top: 524px; }
+.q-ticker span { display: inline-block; padding-left: 100%; animation: tTick 24s linear infinite; }
