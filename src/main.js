@@ -155,11 +155,49 @@ async function startKeoco() {
   }
 }
 
+// ---- Đèn Xanh Đèn Đỏ: game chạy server riêng (denxanh/server.mjs), dùng chung kết nối TikTok ----
+let denxanh = null;
+let denxanhState = { running: false, port: 0, error: '' };
+
+function denxanhRedirect(req) {
+  if (!denxanh || settings.get().overlay.mode !== 'denxanh') return null;
+  const host = KEOCO_HOSTS.includes(req.hostname) ? req.hostname : '127.0.0.1';
+  const q = String(req.originalUrl.split('?')[1] || '');
+  const silent = new URLSearchParams(q).get('mute') === '1';
+  return `http://${host}:${denxanhState.port}/overlay.html?sl=1${silent ? '&silent=1' : ''}${q ? '&' + q : ''}`;
+}
+
+async function startDenxanh() {
+  const fs = require('fs');
+  const { pathToFileURL } = require('url');
+  const root = path.join(__dirname, '..', 'denxanh');
+  const dataDir = path.join(app.getPath('userData'), 'denxanh');
+  try {
+    fs.mkdirSync(dataDir, { recursive: true });
+    const { createApp } = await import(pathToFileURL(path.join(root, 'server.mjs')).href);
+    const bridge = {
+      get studioPort() { return serverState.port; },
+      initialStatus: { status: live.status, username: live.username }
+    };
+    // cổng StudioLive +3 (+1 Vua, +2 Kéo Co); bận thì lấy cổng trống bất kỳ
+    try {
+      denxanh = await createApp({ port: settings.get().port + 3, dataDir, bridge });
+    } catch (e) {
+      if (e.code !== 'EADDRINUSE') throw e;
+      denxanh = await createApp({ port: 0, dataDir, bridge });
+    }
+    denxanhState = { running: true, port: denxanh.server.address().port, error: '' };
+  } catch (e) {
+    console.error('[denxanh]', e);
+    denxanhState = { running: false, port: 0, error: e.message };
+  }
+}
+
 const overlay = new OverlayServer({
   getConfig: () => settings.get(),
   getSnapshot: () => live.snapshot(),
   getPaused: () => paused,
-  getRedirect: (req) => vuaRedirect(req) || keocoRedirect(req)
+  getRedirect: (req) => vuaRedirect(req) || keocoRedirect(req) || denxanhRedirect(req)
 });
 
 let serverState = { running: false, port: 0, error: '', clients: 0 };
@@ -202,6 +240,7 @@ live.on('status', (s) => {
   send('live:status', s);
   if (vua) vua.liveStatus(s);
   if (keoco) keoco.liveStatus(s);
+  if (denxanh) denxanh.liveStatus(s);
 });
 live.on('stats', (s) => {
   send('live:stats', s);
@@ -214,6 +253,8 @@ live.on('event', (e) => {
   if (vua && !paused && settings.get().overlay.mode === 'vua') vua.ingest(e);
   // chỉ tính điểm khi Kéo Co đang là cảnh trên live
   if (keoco && !paused && settings.get().overlay.mode === 'keoco') keoco.ingest(e);
+  // chỉ nhận thao tác khi Đèn Xanh Đèn Đỏ đang là cảnh trên live
+  if (denxanh && !paused && settings.get().overlay.mode === 'denxanh') denxanh.ingest(e);
 });
 overlay.onClients = (n) => {
   serverState.clients = n;
@@ -283,6 +324,7 @@ ipcMain.handle('app:init', () => ({
   paused,
   vua: vuaState,
   keoco: keocoState,
+  denxanh: denxanhState,
   platform: process.platform,
   version: app.getVersion()
 }));
@@ -299,6 +341,7 @@ ipcMain.handle('settings:update', async (_e, patch) => {
     if (before.overlay.mode === 'vua' && vua) vua.navigateOverlays();
     // các màn hình đang ở cảnh Kéo Co (server riêng) quay về StudioLive
     if (before.overlay.mode === 'keoco' && keoco) keoco.navigateOverlays();
+    if (before.overlay.mode === 'denxanh' && denxanh) denxanh.navigateOverlays();
   }
   if (next.port !== before.port) await startServer(next.port);
   return { settings: next, server: serverState };
@@ -538,6 +581,7 @@ if (!gotLock) {
     await startServer(settings.get().port);
     await startVua();
     await startKeoco();
+    await startDenxanh();
     createWindow();
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -564,6 +608,7 @@ if (!gotLock) {
     overlay.stop();
     // Kéo Co ghi điểm / lịch sử đồng bộ ngay khi có kết quả nên chỉ cần đóng server
     if (keoco) { const k = keoco; keoco = null; Promise.resolve(k.close()).catch((err) => console.error('[keoco]', err)); }
+    if (denxanh) { const d = denxanh; denxanh = null; Promise.resolve(d.close()).catch((err) => console.error('[denxanh]', err)); }
     if (!vua || vuaClosed) return;
     e.preventDefault();
     const v = vua;

@@ -623,6 +623,8 @@ body.side-collapsed .srv { justify-content: center; padding: 12px 0; }
 .bar-seen-list .chip { font-size: 12px; }
 .btn.scene-btn.bar:hover { border-color: #a855f7; }
 .btn.scene-btn.bar.live { background: linear-gradient(90deg, #4c1d95, #831843); border-color: #f0abfc; color: #fff; box-shadow: 0 6px 22px rgba(168, 85, 247, .4); }
+.btn.scene-btn.denxanh:hover { border-color: #16a34a; }
+.btn.scene-btn.denxanh.live { background: linear-gradient(90deg, #15803d, #b91c1c); border-color: #86efac; box-shadow: 0 6px 22px rgba(22, 163, 74, .35); }
 .keoco-host { position: relative; min-height: 0; height: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); }
 .keoco-host iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
 .keoco-error { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; background: var(--panel-3); color: var(--text); }

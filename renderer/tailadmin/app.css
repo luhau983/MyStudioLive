@@ -111,6 +111,7 @@
   :is(.qs-actions [data-goto], .nav-item[data-view]):is([data-goto=rap], [data-view=rap]) { --c: #e11d48; }
   :is(.qs-actions [data-goto], .nav-item[data-view]):is([data-goto=vua], [data-view=vua]) { --c: #e76b3c; }
   :is(.qs-actions [data-goto], .nav-item[data-view]):is([data-goto=keoco], [data-view=keoco]) { --c: #3b82f6; }
+  :is(.qs-actions [data-goto], .nav-item[data-view]):is([data-goto=denxanh], [data-view=denxanh]) { --c: #16a34a; }
   /* sidebar: tinted icon chip per scene (only scene items carry .nav-emoji) */
   .nav-item .nav-emoji {
     @apply -mx-0.5 size-7 rounded-lg; /* 28px chip, -2px each side keeps labels aligned with 24px icons */

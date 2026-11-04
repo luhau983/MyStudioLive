@@ -75,6 +75,7 @@
     <symbol id="i-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol>
     <symbol id="i-biceps-flexed" viewBox="0 0 24 24"><path d="M12.409 13.017A5 5 0 0 1 22 15c0 3.866-4 7-9 7-4.077 0-8.153-.82-10.371-2.462-.426-.316-.631-.832-.62-1.362C2.118 12.723 2.627 2 10 2a3 3 0 0 1 3 3 2 2 0 0 1-2 2c-1.105 0-1.64-.444-2-1" /><path d="M15 14a5 5 0 0 0-7.584 2" /><path d="M9.964 6.825C8.019 7.977 9.5 13 8 15" /></symbol>
+    <symbol id="i-traffic-light" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="3" /><circle cx="12" cy="7" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="12" cy="17" r="1.6" /></symbol>
   </svg>
 
   <aside class="sidebar">
@@ -109,6 +110,9 @@
       </button>
       <button class="nav-item" data-view="bar" title="Live Bar">
         <span class="nav-emoji"><svg class="ic"><use href="#i-disc-3"/></svg></span><span class="nav-label">Live Bar</span><span class="live-dot" data-live-for="bar">LIVE</span>
+      </button>
+      <button class="nav-item" data-view="denxanh" title="Đèn Xanh Đèn Đỏ">
+        <span class="nav-emoji"><svg class="ic"><use href="#i-traffic-light"/></svg></span><span class="nav-label">Đèn Xanh Đèn Đỏ</span><span class="live-dot" data-live-for="denxanh">LIVE</span>
       </button>
       <h3 class="menu-group"><span class="menu-group-title">Khác</span><span class="menu-group-dots">•••</span></h3>
       <button class="nav-item" data-view="trada" title="Trà Đá Vỉa Hè">
@@ -225,7 +229,7 @@
           <div class="panel quick">
             <div class="panel-head"><h2>Bắt đầu nhanh</h2></div>
             <ol class="qs">
-              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><div class="qs-actions"><button class="btn ghost sm" data-goto="ma"><svg class="ic"><use href="#i-ghost"/></svg> Ma</button><button class="btn ghost sm" data-goto="chua"><svg class="ic"><use href="#i-flower-2"/></svg> Chùa</button><button class="btn ghost sm" data-goto="rap"><svg class="ic"><use href="#i-clapperboard"/></svg> Rạp</button><button class="btn ghost sm" data-goto="vua"><svg class="ic"><use href="#i-crown"/></svg> Vua</button><button class="btn ghost sm" data-goto="keoco"><svg class="ic"><use href="#i-biceps-flexed"/></svg> Kéo Co</button><button class="btn ghost sm" data-goto="trada"><svg class="ic"><use href="#i-cup-soda"/></svg> Trà đá</button><button class="btn ghost sm" data-goto="nhau"><svg class="ic"><use href="#i-beer"/></svg> Nhậu</button></div></li>
+              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><div class="qs-actions"><button class="btn ghost sm" data-goto="ma"><svg class="ic"><use href="#i-ghost"/></svg> Ma</button><button class="btn ghost sm" data-goto="chua"><svg class="ic"><use href="#i-flower-2"/></svg> Chùa</button><button class="btn ghost sm" data-goto="rap"><svg class="ic"><use href="#i-clapperboard"/></svg> Rạp</button><button class="btn ghost sm" data-goto="vua"><svg class="ic"><use href="#i-crown"/></svg> Vua</button><button class="btn ghost sm" data-goto="keoco"><svg class="ic"><use href="#i-biceps-flexed"/></svg> Kéo Co</button><button class="btn ghost sm" data-goto="trada"><svg class="ic"><use href="#i-cup-soda"/></svg> Trà đá</button><button class="btn ghost sm" data-goto="nhau"><svg class="ic"><use href="#i-beer"/></svg> Nhậu</button><button class="btn ghost sm" data-goto="denxanh"><svg class="ic"><use href="#i-traffic-light"/></svg> Đèn</button></div></li>
               <li data-qs="link"><span class="qs-n">2</span><div><b>Thêm vào TikTok LIVE Studio</b><small>Nguồn <b>Link</b>: <code id="qs-link">http://lvh.me:3000</code> · 1080×1920</small></div><button class="btn ghost sm" id="qs-copy">Sao chép</button></li>
               <li data-qs="golive"><span class="qs-n">3</span><div><b>Bấm Go LIVE trên TikTok</b><small>Bật live trước khi kết nối ở bước 4</small></div></li>
               <li data-qs="connect"><span class="qs-n">4</span><div><b>Kết nối username</b><small>Nhập @username ở trên và bấm Kết nối</small></div></li>
@@ -261,6 +265,7 @@
         <button class="btn scene-btn bar" data-open-scene="bar"><span class="sb-ico"><svg class="ic"><use href="#i-disc-3"/></svg></span><span><b>Phát Live Bar</b><small>Chuyển live sang sàn nhảy 3D + mở màn hình phát</small></span></button>
         <button class="btn scene-btn trada" data-open-scene="trada"><span class="sb-ico"><svg class="ic"><use href="#i-cup-soda"/></svg></span><span><b>Phát Trà Đá Vỉa Hè</b><small>Chuyển live sang quán trà đá + mở màn hình phát</small></span></button>
         <button class="btn scene-btn nhau" data-open-scene="nhau"><span class="sb-ico"><svg class="ic"><use href="#i-beer"/></svg></span><span><b>Phát Đi Nhậu Online</b><small>Chuyển live sang quán nhậu + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn denxanh" data-open-scene="denxanh"><span class="sb-ico"><svg class="ic"><use href="#i-traffic-light"/></svg></span><span><b>Phát Đèn Xanh Đèn Đỏ</b><small>Chuyển live sang sân Đèn Xanh Đèn Đỏ + mở màn hình phát</small></span></button>
       </div>
 
       <div class="live-guide">
@@ -1113,6 +1118,36 @@
         <div class="keoco-host">
           <iframe id="keoco-control" title="Bảng điều khiển Kéo Co" allow="autoplay"></iframe>
           <div class="keoco-error" id="keoco-error" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ĐÈN XANH ĐÈN ĐỎ ================= -->
+    <section class="view scene-view keoco-view" id="view-denxanh">
+      <header class="page-head">
+        <div>
+          <h1><svg class="ic"><use href="#i-traffic-light"/></svg> Đèn Xanh Đèn Đỏ</h1>
+          <p class="muted">Đang mở tab này thì sân Đèn Xanh Đèn Đỏ chạy trên live. Người xem thả tim hoặc comment để vào sân, <b>thả tim để chạy</b> khi đèn xanh, cử động lúc đèn đỏ là bị loại. Quà = khiên. Dùng chung kết nối TikTok với StudioLive.</p>
+        </div>
+      </header>
+      <div class="feature-layout">
+        <div class="preview-wrap">
+          <div class="preview-frame feature-frame">
+            <iframe class="live-preview" data-for="denxanh" title="Sân Đèn Xanh Đèn Đỏ trên live"></iframe>
+          </div>
+          <div class="preview-actions">
+            <div style="display:flex;gap:6px">
+              <button class="btn ghost sm" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output><svg class="ic"><use href="#i-tv"/></svg> Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen"><svg class="ic"><use href="#i-rotate-cw"/></svg></button>
+            </div>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> <svg class="ic"><use href="#i-volume-2"/></svg> Nghe</label>
+          </div>
+          <p class="hint" style="max-width:405px">Thông số ván, âm thanh và giả lập chỉnh ở bảng bên phải. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
+        </div>
+        <div class="keoco-host">
+          <iframe id="denxanh-control" title="Bảng điều khiển Đèn Xanh Đèn Đỏ" allow="autoplay"></iframe>
+          <div class="keoco-error" id="denxanh-error" hidden></div>
         </div>
       </div>
     </section>

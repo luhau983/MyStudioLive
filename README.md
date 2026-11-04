@@ -36,6 +36,7 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 | 🪩 **Live Bar** | Gõ `hey` để vào sàn, `dance` / `nhảy` / `đi vòng` / `đổi nv` | Sàn nhảy 3D với avatar TikTok thật; quà zoom camera, đèn rọi, danh hiệu, pháo hoa; TOP 3 lên bục DJ |
 | 🧊 **Trà Đá Vỉa Hè** | Gõ `trà đá` / `cà phê` / `coca` / `bò húc` / `hướng dương` / `bánh mì` / `tính tiền` | Quán vỉa hè, mỗi người một nhân vật ngồi ghế nhựa; bà chủ bưng món ra tận bàn; quà lớn thành đại ca bao cả quán |
 | 🍺 **Đi Nhậu Online** | Gõ `bia` / `dzô` / `lạc` / `mực` / `lẩu` / `tính tiền` | Quán nhậu đêm 6 bàn × 4 ghế; cả bàn cụng ly, uống nhiều thì đỏ mặt rồi gục; bảng vàng bợm nhậu; quà lớn bao cả quán |
+| 🚦 **Đèn Xanh Đèn Đỏ** | Thả tim / comment để vào sân, thả tim hoặc `chạy` để tiến | Đèn đỏ mà cử động là bị loại (có ân hạn bù độ trễ TikTok); quà = khiên + lao lên; bot thử nghiệm |
 
 | 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
 |---|---|---|---|
@@ -160,6 +161,7 @@ Chạy test của hai game:
 cd vua && node --test
 cd keoco && node --test
 npm test             # Live Bar (luật chơi + proxy avatar)
+cd denxanh && node --test
 ```
 
 ### Kiến trúc
@@ -176,6 +178,7 @@ renderer/          Giao diện điều khiển (sáng / tối / theo hệ thốn
 overlay/           Cảnh Nhà Ma, Đi Chùa, Rạp Phim; overlay/bar/ là Live Bar (three.js); quan.js = engine chung cho Trà Đá Vỉa Hè & Đi Nhậu
 vua/               Game Vua Tiếng Việt: server riêng, overlay 3D (Three.js), bảng điều khiển, ngân hàng câu hỏi
 keoco/             Game Kéo Co: server riêng, sân 3D (Three.js), bảng điều khiển
+denxanh/           Game Đèn Xanh Đèn Đỏ: server riêng, sân canvas 2D, bảng điều khiển
 ```
 
 Hai game `vua/` và `keoco/` chạy server riêng ngay trong tiến trình chính và nhận sự kiện qua cầu nối từ `src/live.js`, nên chỉ có một kết nối TikTok cho cả app. Bảng điều khiển của từng game được nhúng vào tab tương ứng; bảng của Vua Tiếng Việt đổi theo giao diện sáng/tối của MyStudioLive (`vua/studio-theme.css`).

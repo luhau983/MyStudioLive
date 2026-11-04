@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đèn Xanh Đèn Đỏ · Overlay</title>
+<link rel="stylesheet" href="overlay.css">
+</head>
+<body>
+<main id="stage" class="stage">
+  <canvas id="field" width="1080" height="1920" aria-label="Sân chơi Đèn Xanh Đèn Đỏ"></canvas>
+  <header class="hud">
+    <div id="light-banner" class="light-banner green"><span id="light-text">ĐÈN XANH</span><small id="light-sub">THẢ TIM ĐỂ CHẠY!</small></div>
+    <div class="hud-row">
+      <div class="stat"><small>CÒN SỐNG</small><b id="alive">0</b></div>
+      <div class="stat timer"><small id="timer-label">THỜI GIAN</small><b id="timer">--</b></div>
+      <div class="stat"><small>VỀ ĐÍCH</small><b id="finished">0</b></div>
+      <div class="stat out"><small>BỊ LOẠI</small><b id="out">0</b></div>
+    </div>
+  </header>
+  <div id="center-panel" class="center-panel" hidden></div>
+  <div id="feed" class="feed" aria-live="polite"></div>
+  <footer class="instruction" id="instruction">❤ <b>Thả tim</b> hoặc comment <b>CHẠY</b> để tiến <i>•</i> Đèn đỏ mà cử động là <b class="r">BỊ LOẠI</b> <i>•</i> 🎁 Quà = <b class="g">khiên</b></footer>
+  <div id="connection" class="connection" hidden>Đang kết nối lại…</div>
+</main>
+<script src="audio.js"></script>
+<script src="overlay.js"></script>
+</body>
+</html>

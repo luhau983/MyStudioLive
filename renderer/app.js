@@ -38,7 +38,8 @@
     keoco: { mode: 'keoco', name: 'Kéo Co Online', open: 'Chuyển live sang sân kéo co + mở màn hình phát' },
     bar: { mode: 'bar', name: 'Live Bar', open: 'Chuyển live sang sàn nhảy 3D + mở màn hình phát' },
     trada: { mode: 'trada', name: 'Trà Đá Vỉa Hè', open: 'Chuyển live sang quán trà đá + mở màn hình phát' },
-    nhau: { mode: 'nhau', name: 'Đi Nhậu Online', open: 'Chuyển live sang quán nhậu + mở màn hình phát' }
+    nhau: { mode: 'nhau', name: 'Đi Nhậu Online', open: 'Chuyển live sang quán nhậu + mở màn hình phát' },
+    denxanh: { mode: 'denxanh', name: 'Đèn Xanh Đèn Đỏ', open: 'Chuyển live sang sân Đèn Xanh Đèn Đỏ + mở màn hình phát' }
   };
   const viewOfMode = (mode) => Object.keys(SCENES).find((v) => SCENES[v].mode === mode) || 'ma';
 
@@ -50,6 +51,7 @@
     if (SCENES[b.dataset.view]) switchScene(b.dataset.view);
     if (b.dataset.view === 'vua') loadVuaControl();
     if (b.dataset.view === 'keoco') loadKeocoControl();
+    if (b.dataset.view === 'denxanh') loadDenxanhControl();
     setPreviewSrc(false);
   }));
 
@@ -413,6 +415,20 @@
       return;
     }
     const src = `http://127.0.0.1:${keoco.port}/control.html`;
+    if (frame.dataset.src !== src) { frame.dataset.src = src; frame.src = src; }
+  }
+
+  // ---------- Đèn Xanh Đèn Đỏ ----------
+  let denxanh = { running: false, port: 0, error: '' };
+  function loadDenxanhControl() {
+    const frame = $('#denxanh-control');
+    const err = $('#denxanh-error');
+    err.hidden = denxanh.running;
+    if (!denxanh.running) {
+      err.textContent = 'Không khởi động được Đèn Xanh Đèn Đỏ: ' + (denxanh.error || 'lỗi không xác định');
+      return;
+    }
+    const src = `http://127.0.0.1:${denxanh.port}/control.html`;
     if (frame.dataset.src !== src) { frame.dataset.src = src; frame.src = src; }
   }
 
@@ -863,6 +879,7 @@
     settings = Object.keys(pending).length ? deepMerge(init.settings, pending) : init.settings;
     vua = init.vua || vua;
     keoco = init.keoco || keoco;
+    denxanh = init.denxanh || denxanh;
     renderUiTheme();
     renderSettings();
     renderServer(init.server);
@@ -889,9 +906,9 @@
     const view = ($('.view.active') || {}).id?.replace('view-', '');
     try {
       applyInit(await api.init());
-      if (view === 'vua' || view === 'keoco') {
+      if (view === 'vua' || view === 'keoco' || view === 'denxanh') {
         $('#' + view + '-control').dataset.src = ''; // ép nạp lại iframe điều khiển
-        if (view === 'vua') loadVuaControl(); else loadKeocoControl();
+        if (view === 'vua') loadVuaControl(); else if (view === 'keoco') loadKeocoControl(); else loadDenxanhControl();
       }
       setPreviewSrc(true);
       notify('Đã tải lại: ' + $('#hdr-title').textContent);
