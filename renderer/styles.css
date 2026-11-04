@@ -631,7 +631,6 @@ body.side-collapsed .srv { justify-content: center; padding: 12px 0; }
 .mv-n .ic { width: 11px; height: 11px; fill: currentColor; }
 .item .av .ic { width: 18px; height: 18px; color: var(--muted); }
 .mv-del .ic { width: 14px; height: 14px; vertical-align: -.2em; }
-||||||| parent of a433ad2 (feat: apply TailAdmin design system to dashboard)
 /* =====================================================================
  * TailAdmin component layer: shapes, weights and states from TailAdmin
  * utilities (menu-item, card, btn, input, badge, segmented control).
