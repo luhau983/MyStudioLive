@@ -16,6 +16,9 @@ nativeTheme.themeSource = 'dark';
 const chromeColors = () => (nativeTheme.shouldUseDarkColors
   ? { bg: '#101828', symbol: '#98a2b3' }
   : { bg: '#ffffff', symbol: '#667085' });
+// Windows caption buttons span the header (renderer .app-header: 72px incl. 1px bottom border) so they line up
+// with its buttons; 71 keeps the header's bottom border visible under them
+const TITLEBAR_HEIGHT = 71;
 function applyUiTheme(mode) {
   nativeTheme.themeSource = ['light', 'dark', 'system'].includes(mode) ? mode : 'dark';
 }
@@ -23,7 +26,7 @@ nativeTheme.on('updated', () => {
   if (!win || win.isDestroyed()) return;
   const c = chromeColors();
   win.setBackgroundColor(c.bg);
-  if (process.platform !== 'darwin') win.setTitleBarOverlay({ color: c.bg, symbolColor: c.symbol, height: 40 });
+  if (process.platform !== 'darwin') win.setTitleBarOverlay({ color: c.bg, symbolColor: c.symbol, height: TITLEBAR_HEIGHT });
 });
 
 let win = null;
@@ -239,7 +242,7 @@ function createWindow() {
     backgroundColor: chromeColors().bg,
     title: 'MyStudioLive',
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
-    titleBarOverlay: process.platform === 'darwin' ? false : { color: chromeColors().bg, symbolColor: chromeColors().symbol, height: 40 },
+    titleBarOverlay: process.platform === 'darwin' ? false : { color: chromeColors().bg, symbolColor: chromeColors().symbol, height: TITLEBAR_HEIGHT },
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

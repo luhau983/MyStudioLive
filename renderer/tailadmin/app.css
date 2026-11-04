@@ -39,11 +39,12 @@
 
   .app-header { @apply border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900; }
   .hdr-btn {
-    @apply inline-flex size-11 shrink-0 items-center justify-center rounded-[10px] border border-gray-300 bg-transparent text-gray-500 shadow-theme-xs transition-all select-none hover:bg-gray-50 hover:text-gray-800 focus-visible:ring-3 focus-visible:ring-gray-300/50 focus-visible:outline-hidden active:translate-y-px dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700/50 dark:hover:text-white;
+    @apply inline-flex size-10 shrink-0 items-center justify-center rounded-[10px] border border-gray-300 bg-transparent text-gray-500 shadow-theme-xs transition-all select-none hover:bg-gray-50 hover:text-gray-800 focus-visible:ring-3 focus-visible:ring-gray-300/50 focus-visible:outline-hidden active:translate-y-px dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700/50 dark:hover:text-white;
   }
   /* theme-toggler: icon-only header button (legacy .theme-toggle was a full-width sidebar row) */
-  .hdr-btn.theme-toggle { @apply m-0 w-11 p-0 text-gray-700 dark:text-gray-300; }
-  .hdr-btn.theme-toggle .ic { @apply size-5 text-current; }
+  .hdr-btn svg { @apply size-5; }
+  .hdr-btn.theme-toggle { @apply m-0 w-10 p-0 text-gray-700 dark:text-gray-300; }
+  .hdr-btn.theme-toggle .ic { @apply size-[18px] text-current; }
   .crumb { @apply text-sm text-gray-500 dark:text-gray-400; }
   .crumb-cur { @apply text-gray-800 dark:text-white/90; }
   /* page-breadcrumb: the root crumb is a link back to the dashboard */
