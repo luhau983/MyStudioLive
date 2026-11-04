@@ -782,56 +782,55 @@
         </div>
       </header>
 
-      <div class="settings-grid">
-        <div class="panel">
-          <div class="panel-head"><h2>Hình ảnh khi live</h2></div>
-          <div class="field" style="margin-top:0">
-            <label>Độ tươi màu khi live <span class="val" id="v-liveBoost"></span></label>
-            <input type="range" min="0" max="40" step="5" data-o="liveBoost" data-num>
-            <p class="hint">TikTok nén video làm màu nhạt và tối đi. Tăng mức này để bù lại; 10–20% là vừa. Đặt 0% nếu thấy màu bị gắt.</p>
+      <div class="settings-stack">
+        <div class="panel set-card">
+          <div class="set-head"><h2>Hình ảnh khi live</h2><p>Bù màu cho video sau khi TikTok nén.</p></div>
+          <div class="set-row">
+            <div class="set-info"><b>Độ tươi màu khi live</b><p>TikTok nén video làm màu nhạt và tối đi. Tăng mức này để bù lại; 10–20% là vừa. Đặt 0% nếu thấy màu bị gắt.</p></div>
+            <div class="set-ctl set-range"><input type="range" min="0" max="40" step="5" data-o="liveBoost" data-num><span class="val" id="v-liveBoost"></span></div>
           </div>
-          <p class="hint">Mọi chữ, bảng điểm, nhân vật đã được đặt trong <b>vùng an toàn</b>: chừa phần trên (thanh TikTok), phần dưới (bình luận) và hai mép (bị cắt trên điện thoại dài). Bật ô <b><svg class="ic"><use href="#i-smartphone"/></svg> Vùng bị TikTok che</b> dưới khung xem cảnh để kiểm tra.</p>
-        </div>
-
-        <div class="panel">
-          <div class="panel-head"><h2>Âm thanh chung</h2></div>
-          <div class="toggles">
-            <label class="toggle"><span>Bật âm thanh hiệu ứng</span><input type="checkbox" data-o="sound"><i></i></label>
-          </div>
-<div class="field">
-            <label>Âm lượng <span class="val" id="v-volume"></span></label>
-            <input type="range" min="0" max="1" step="0.05" data-o="volume" data-num>
-          </div>
-<div class="field">
-            <label>Ẩn bình luận chứa từ (ngăn cách bằng dấu phẩy)</label>
-            <input type="text" class="inp" data-o="filterWords" placeholder="vd: link, spam, quảng cáo">
+          <div class="set-note">
+            <svg class="ic"><use href="#i-smartphone"/></svg>
+            <p>Mọi chữ, bảng điểm, nhân vật đã được đặt trong <b>vùng an toàn</b>: chừa phần trên (thanh TikTok), phần dưới (bình luận) và hai mép (bị cắt trên điện thoại dài). Bật ô <b>Vùng bị TikTok che</b> dưới khung xem cảnh để kiểm tra.</p>
           </div>
         </div>
 
-        <div class="panel">
-          <div class="panel-head"><h2>Kết nối TikTok</h2></div>
-          <label class="toggle"><span>Tự động kết nối lại khi rớt mạng</span><input type="checkbox" id="autoReconnect"><i></i></label>
-          <div class="field">
-            <label>Tài khoản TikTok <span class="muted small">(không bắt buộc)</span></label>
-            <p class="hint" style="margin:0 0 8px">App tự mở trang live TikTok trong trình duyệt ẩn và đọc bình luận/quà ngay trên máy. Dữ liệu chỉ đi giữa máy bạn và TikTok.</p>
-            <div class="file-row" id="login-row">
-              <button class="btn ghost sm" id="btn-tt-login">Đăng nhập TikTok</button>
+        <div class="panel set-card">
+          <div class="set-head"><h2>Âm thanh chung</h2><p>Áp dụng cho mọi cảnh.</p></div>
+          <label class="set-row toggle">
+            <div class="set-info"><b>Bật âm thanh hiệu ứng</b></div>
+            <input type="checkbox" data-o="sound"><i></i>
+          </label>
+          <div class="set-row">
+            <div class="set-info"><b>Âm lượng</b></div>
+            <div class="set-ctl set-range"><input type="range" min="0" max="1" step="0.05" data-o="volume" data-num><span class="val" id="v-volume"></span></div>
+          </div>
+          <div class="set-row">
+            <div class="set-info"><b>Ẩn bình luận chứa từ</b><p>Ngăn cách bằng dấu phẩy.</p></div>
+            <div class="set-ctl"><input type="text" class="inp" data-o="filterWords" placeholder="vd: link, spam, quảng cáo"></div>
+          </div>
+        </div>
+
+        <div class="panel set-card">
+          <div class="set-head"><h2>Kết nối TikTok</h2><p>App tự mở trang live TikTok trong trình duyệt ẩn và đọc bình luận/quà ngay trên máy. Dữ liệu chỉ đi giữa máy bạn và TikTok.</p></div>
+          <label class="set-row toggle">
+            <div class="set-info"><b>Tự động kết nối lại khi rớt mạng</b></div>
+            <input type="checkbox" id="autoReconnect"><i></i>
+          </label>
+          <div class="set-row">
+            <div class="set-info"><b>Tài khoản TikTok <span class="set-badge">Không bắt buộc</span></b><p>Chỉ cần khi TikTok đòi xác minh.</p></div>
+            <div class="set-ctl" id="login-row">
               <button class="btn ghost sm" id="btn-tt-logout">Đăng xuất</button>
-              <span class="muted small">Không bắt buộc — chỉ cần khi TikTok đòi xác minh.</span>
+              <button class="btn primary sm" id="btn-tt-login">Đăng nhập TikTok</button>
             </div>
           </div>
-          <details class="adv">
-            <summary>Nâng cao</summary>
-            
-            <div class="field">
-            <label>Cổng server overlay</label>
-            <div class="file-row">
-              <input type="number" class="inp" id="port" min="1024" max="65535" style="max-width:140px">
+          <div class="set-row">
+            <div class="set-info"><b>Cổng server overlay</b><p>Cổng của màn hình phát, mặc định 3000. Chỉ đổi khi cổng này bị app khác dùng.</p></div>
+            <div class="set-ctl">
+              <input type="number" class="inp set-port" id="port" min="1024" max="65535">
               <button class="btn ghost sm" id="btn-apply-port">Áp dụng</button>
             </div>
           </div>
-            
-          </details>
         </div>
       </div>
     </section>
