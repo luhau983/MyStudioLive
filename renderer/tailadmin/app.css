@@ -20,6 +20,8 @@
 
 @layer components {
   body { @apply bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-white/90; }
+  /* Tailwind preflight makes svg display:block; Lucide icons (.ic) sit inline in headings and text */
+  .ic { @apply inline-block; }
 
   /* ---------- App layout (app-layout/sidebar, app-layout/header) ---------- */
   .sidebar { @apply border-r border-gray-200 bg-white dark:border-gray-800 dark:bg-black; }
