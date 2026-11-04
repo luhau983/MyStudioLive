@@ -632,6 +632,25 @@
     if (r.server.running) notify(`Overlay chạy ở cổng ${port}. Nhớ cập nhật URL trong OBS.`);
   });
 
+  // ---------- Thu gọn menu bên trái ----------
+  const setSideCollapsed = (on) => {
+    document.body.classList.toggle('side-collapsed', on);
+    const tip = on ? 'Mở rộng menu' : 'Thu gọn menu';
+    $('#side-toggle').title = tip;
+    $('#side-toggle').setAttribute('aria-label', tip);
+    try { localStorage.setItem('sideCollapsed', on ? '1' : '0'); } catch { /* storage có thể bị chặn */ }
+  };
+  try { setSideCollapsed(localStorage.getItem('sideCollapsed') === '1'); } catch { setSideCollapsed(false); }
+  $('#side-toggle').addEventListener('click', () => setSideCollapsed(!document.body.classList.contains('side-collapsed')));
+
+  // ---------- Giao diện sáng / tối ----------
+  const renderUiTheme = () => $$('#ui-theme button').forEach((b) => b.classList.toggle('active', b.dataset.ui === settings.uiTheme));
+  $$('#ui-theme button').forEach((b) => b.addEventListener('click', () => {
+    settings.uiTheme = b.dataset.ui;
+    renderUiTheme();
+    save({ uiTheme: b.dataset.ui }, true);
+  }));
+
   // ---------- Khởi động ----------
   api.onStatus(renderStatus);
   api.onStats(renderStats);
@@ -641,6 +660,7 @@
   api.init().then((init) => {
     settings = init.settings;
     vua = init.vua || vua;
+    renderUiTheme();
     $('#username').value = settings.username;
     $('#ver').textContent = 'v' + init.version;
     renderSettings();

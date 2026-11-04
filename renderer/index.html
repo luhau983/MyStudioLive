@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src http://127.0.0.1:* http://localhost:*; connect-src 'self'">
-  <title>StudioLive</title>
+  <title>MyStudioLive</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,43 +12,49 @@
 
   <aside class="sidebar">
     <div class="brand">
-      <div class="logo">
-        <svg viewBox="0 0 100 100"><path d="M50 6C29 6 16 22 16 44v44l9-7 8 8 9-8 8 8 8-8 9 8 8-8 9 7V44C84 22 71 6 50 6z" fill="currentColor"/><ellipse cx="38" cy="42" rx="6" ry="9" fill="#0b0d10"/><ellipse cx="62" cy="42" rx="6" ry="9" fill="#0b0d10"/></svg>
-      </div>
-      <div>
-        <div class="brand-name">StudioLive</div>
+      <img class="logo" src="logo.png" alt="MyStudioLive">
+      <div class="brand-text">
+        <div class="brand-name">MyStudioLive</div>
         <div class="brand-sub">TikTok Live Overlay</div>
       </div>
+      <button class="side-toggle" id="side-toggle" title="Thu gọn menu" aria-label="Thu gọn menu">
+        <svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>
+      </button>
     </div>
 
     <nav>
-      <button class="nav-item active" data-view="dashboard">
-        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3zm0 8h8v-6H3zm10 0h8V11h-8zm0-18v6h8V3z"/></svg>Bảng điều khiển
+      <button class="nav-item active" data-view="dashboard" title="Bảng điều khiển">
+        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3zm0 8h8v-6H3zm10 0h8V11h-8zm0-18v6h8V3z"/></svg><span class="nav-label">Bảng điều khiển</span>
       </button>
-      <button class="nav-item" data-view="ma">
-        <span class="nav-emoji">👻</span>Live Ma Online<span class="live-dot" data-live-for="ma">LIVE</span>
+      <button class="nav-item" data-view="ma" title="Live Ma Online">
+        <span class="nav-emoji">👻</span><span class="nav-label">Live Ma Online</span><span class="live-dot" data-live-for="ma">LIVE</span>
       </button>
-      <button class="nav-item" data-view="chua" id="nav-chua">
-        <span class="nav-emoji">🪷</span>Đi Chùa Online<span class="live-dot" data-live-for="chua">LIVE</span>
+      <button class="nav-item" data-view="chua" id="nav-chua" title="Đi Chùa Online">
+        <span class="nav-emoji">🪷</span><span class="nav-label">Đi Chùa Online</span><span class="live-dot" data-live-for="chua">LIVE</span>
       </button>
-      <button class="nav-item" data-view="rap">
-        <span class="nav-emoji">🎬</span>Rạp Phim Online<span class="live-dot" data-live-for="rap">LIVE</span>
+      <button class="nav-item" data-view="rap" title="Rạp Phim Online">
+        <span class="nav-emoji">🎬</span><span class="nav-label">Rạp Phim Online</span><span class="live-dot" data-live-for="rap">LIVE</span>
       </button>
-      <button class="nav-item" data-view="vua">
-        <span class="nav-emoji">👑</span>Vua Tiếng Việt<span class="live-dot" data-live-for="vua">LIVE</span>
+      <button class="nav-item" data-view="vua" title="Vua Tiếng Việt">
+        <span class="nav-emoji">👑</span><span class="nav-label">Vua Tiếng Việt</span><span class="live-dot" data-live-for="vua">LIVE</span>
       </button>
-      <button class="nav-item" data-view="overlay">
-        <svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5v2h8v-2h5a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 14H3V5h18z"/></svg>Đưa lên live
+      <button class="nav-item" data-view="overlay" title="Đưa lên live">
+        <svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5v2h8v-2h5a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 14H3V5h18z"/></svg><span class="nav-label">Đưa lên live</span>
       </button>
-      <button class="nav-item" data-view="settings">
-        <svg viewBox="0 0 24 24"><path d="M19.14 12.94a7.1 7.1 0 0 0 0-1.88l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7 7 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.49.42l-.36 2.54a7.3 7.3 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.66 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.2 7.2 0 0 0 0 1.88l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.12.22.38.3.6.22l2.39-.96c.5.38 1.05.7 1.63.94l.36 2.54c.05.24.25.42.49.42h3.84c.25 0 .45-.18.5-.42l.36-2.54a7 7 0 0 0 1.63-.94l2.39.96c.22.08.48 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></svg>Cài đặt
+      <button class="nav-item" data-view="settings" title="Cài đặt">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94a7.1 7.1 0 0 0 0-1.88l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7 7 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.49.42l-.36 2.54a7.3 7.3 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.66 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.2 7.2 0 0 0 0 1.88l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.12.22.38.3.6.22l2.39-.96c.5.38 1.05.7 1.63.94l.36 2.54c.05.24.25.42.49.42h3.84c.25 0 .45-.18.5-.42l.36-2.54a7 7 0 0 0 1.63-.94l2.39.96c.22.08.48 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></svg><span class="nav-label">Cài đặt</span>
       </button>
     </nav>
 
     <div class="side-foot">
+      <div class="seg ui-theme" id="ui-theme" title="Giao diện">
+        <button data-ui="light" title="Sáng">☀️<span class="seg-label"> Sáng</span></button>
+        <button data-ui="dark" title="Tối">🌙<span class="seg-label"> Tối</span></button>
+        <button data-ui="system" title="Theo hệ thống">💻<span class="seg-label"> Hệ thống</span></button>
+      </div>
       <div class="srv" id="srv-box">
         <span class="dot" id="srv-dot"></span>
-        <div>
+        <div class="srv-text">
           <div class="srv-title">Server overlay</div>
           <div class="srv-sub" id="srv-sub">Đang khởi động…</div>
         </div>
@@ -129,7 +135,7 @@
           <div class="panel quick">
             <div class="panel-head"><h2>Bắt đầu nhanh</h2></div>
             <ol class="qs">
-              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><button class="btn ghost sm" data-goto="ma">👻 Ma</button><button class="btn ghost sm" data-goto="chua">🪷 Chùa</button><button class="btn ghost sm" data-goto="rap">🎬 Rạp</button></li>
+              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><div class="qs-actions"><button class="btn ghost sm" data-goto="ma">👻 Ma</button><button class="btn ghost sm" data-goto="chua">🪷 Chùa</button><button class="btn ghost sm" data-goto="rap">🎬 Rạp</button></div></li>
               <li data-qs="link"><span class="qs-n">2</span><div><b>Thêm vào TikTok LIVE Studio</b><small>Nguồn <b>Link</b>: <code id="qs-link">http://lvh.me:3000</code> · 1080×1920</small></div><button class="btn ghost sm" id="qs-copy">Sao chép</button></li>
               <li data-qs="golive"><span class="qs-n">3</span><div><b>Bấm Go LIVE trên TikTok</b><small>Bật live trước khi kết nối ở bước 4</small></div></li>
               <li data-qs="connect"><span class="qs-n">4</span><div><b>Kết nối username</b><small>Nhập @username ở trên và bấm Kết nối</small></div></li>
@@ -212,7 +218,7 @@
               <ol class="steps">
                 <li>Bấm nút <b>Phát …</b> của cảnh muốn live ở trên. Một cửa sổ dọc chỉ có cảnh đó hiện ra. <b>Đừng thu nhỏ</b> cửa sổ này (có thể để phía sau cửa sổ khác).</li>
                 <li>Mở <b>TikTok LIVE Studio</b>, chọn khung <b>dọc</b> (Portrait).</li>
-                <li>Thêm nguồn → <b>Chụp cửa sổ</b> (Window capture) → chọn cửa sổ <b>“StudioLive - Man hinh phat live”</b>. Kéo cho phủ kín khung hình.</li>
+                <li>Thêm nguồn → <b>Chụp cửa sổ</b> (Window capture) → chọn cửa sổ <b>“MyStudioLive - Man hinh phat live”</b>. Kéo cho phủ kín khung hình.</li>
                 <li>Muốn mặt bạn hiện lên: thêm nguồn <b>Camera</b>, đặt nhỏ ở một góc.</li>
                 <li>Để người xem nghe âm thanh: bật nguồn <b>âm thanh máy tính</b> (Speaker / Desktop audio) trong LIVE Studio.</li>
                 <li>Bấm <b>Go LIVE</b>, rồi quay lại tab <b>Bảng điều khiển</b>, nhập username của bạn và bấm <b>Kết nối</b>.</li>
@@ -228,7 +234,7 @@
             <div class="guide" data-guide="phone" hidden>
               <p class="steps-p">App TikTok trên điện thoại <b>không cho chèn màn hình khác</b> vào buổi live, nên người xem sẽ không thấy cảnh nhà ma / chánh điện nếu bạn chỉ live bằng điện thoại.</p>
               <p class="steps-p">Cách làm: cài <b>TikTok LIVE Studio</b> trên máy tính này và live từ máy tính (xem tab đầu). Điện thoại có thể dùng làm camera cho LIVE Studio.</p>
-              <p class="steps-p muted">Nếu bạn vẫn live bằng điện thoại, StudioLive vẫn đọc được bình luận để chơi, nhưng chỉ bạn nhìn thấy màn hình trên máy tính.</p>
+              <p class="steps-p muted">Nếu bạn vẫn live bằng điện thoại, MyStudioLive vẫn đọc được bình luận để chơi, nhưng chỉ bạn nhìn thấy màn hình trên máy tính.</p>
             </div>
           </div>
 
@@ -367,6 +373,7 @@
           <div class="field">
             <label>Màu chủ đạo</label>
             <div class="swatches" id="swatches">
+              <button style="--s:#3b82f6" data-c="#3b82f6"></button>
               <button style="--s:#a3e635" data-c="#a3e635"></button>
               <button style="--s:#22d3ee" data-c="#22d3ee"></button>
               <button style="--s:#c084fc" data-c="#c084fc"></button>

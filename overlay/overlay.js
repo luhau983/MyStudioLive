@@ -11,7 +11,7 @@
   let cfg = {
     showChat: true, showGifts: true, showFollows: true, showShares: true, showJoins: false,
     showLikeCounter: true, showViewerCounter: true, showTopGifter: true,
-    background: 'transparent', accent: '#a3e635', chatDuration: 4.5, maxCards: 6,
+    background: 'transparent', accent: '#3b82f6', chatDuration: 4.5, maxCards: 6,
     bigGiftDiamonds: 30, sound: true, volume: 0.7, chatSound: false,
     customGiftSound: '', customChatSound: '', customJumpscare: '', filterWords: '',
     mode: 'game', roundEvery: 3, bots: true, chuaName: '', chuaVoice: true, chuaRate: 1, chuaLikeGoal: 666, chuaMusic: true, chuaMusicVolume: 0.45, chuaGreet: true, rapName: '', rapVoice: true, rapGreet: true, rapRate: 1, rapVolume: 0.8, rapLikeGoal: 500, rapVideos: [], rapIndex: 0, rapLoop: true, rapTheme: 'classic', rapLightsOff: false, rapIdleMin: 0, ambient: true, ambientVolume: 0.5, ambientPreset: 'drone',
@@ -424,7 +424,7 @@
   }
 
   // ---------- HUD ----------
-  let accentRgb = '163, 230, 53';
+  let accentRgb = '59, 130, 246';
   let lastLikes = -1;
   let lastViewers = -1;
   let lastTop = '';
@@ -576,7 +576,7 @@
     }
   });
 
-  // ---------- Kết nối tới app StudioLive ----------
+  // ---------- Kết nối tới app MyStudioLive ----------
   const socket = io({ reconnectionDelayMax: 3000 });
   socket.on('connect', () => $('offline').classList.add('hidden'));
   socket.on('disconnect', () => $('offline').classList.remove('hidden'));

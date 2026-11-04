@@ -1,5 +1,5 @@
 /*
- * ĐI CHÙA ONLINE — không gian thư giãn tương tác cho StudioLive.
+ * ĐI CHÙA ONLINE — không gian thư giãn tương tác cho MyStudioLive.
  * Hình ảnh chánh điện, nhân vật, hiệu ứng và nhạc nền lấy từ dự án "Chánh Điện Online" (MIT; ảnh tạo bằng Google Flow,
  * nhạc tạo bằng Gemini — xem README dự án gốc trước khi dùng thương mại).
  *

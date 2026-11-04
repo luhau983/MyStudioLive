@@ -1,8 +1,8 @@
 {
   "name": "studio-live",
-  "productName": "StudioLive",
+  "productName": "MyStudioLive",
   "version": "1.0.0",
-  "description": "StudioLive — cảnh tương tác cho TikTok LIVE: Live Ma Online, Đi Chùa Online, Rạp Phim Online & Vua Tiếng Việt",
+  "description": "MyStudioLive — cảnh tương tác cho TikTok LIVE: Live Ma Online, Đi Chùa Online, Rạp Phim Online & Vua Tiếng Việt",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
@@ -25,7 +25,7 @@
   },
   "build": {
     "appId": "vn.studiolive.app",
-    "productName": "StudioLive",
+    "productName": "MyStudioLive",
     "copyright": "© 2026 Tanthuan031",
     "directories": {
       "output": "dist",
@@ -61,10 +61,10 @@
       "identity": "-",
       "hardenedRuntime": false,
       "gatekeeperAssess": false,
-      "artifactName": "StudioLive-${version}-mac-${arch}.${ext}"
+      "artifactName": "MyStudioLive-${version}-mac-${arch}.${ext}"
     },
     "dmg": {
-      "title": "StudioLive ${version}"
+      "title": "MyStudioLive ${version}"
     },
     "win": {
       "target": [
@@ -83,8 +83,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "StudioLive",
-      "artifactName": "StudioLive-Setup-${version}-win-x64.${ext}"
+      "shortcutName": "MyStudioLive",
+      "artifactName": "MyStudioLive-Setup-${version}-win-x64.${ext}"
     },
     "npmRebuild": false,
     "extraResources": [

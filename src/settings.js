@@ -8,6 +8,7 @@ const DEFAULTS = {
   autoReconnect: true,
   previewSound: true,       // nghe âm thanh overlay ngay trong app
   maStyle: 'game',          // kiểu của Live Ma Online: game | cards
+  uiTheme: 'dark',          // giao diện app: dark | light | system
   overlay: {
     showChat: true,
     showGifts: true,
@@ -40,7 +41,7 @@ const DEFAULTS = {
     roundEvery: 3,              // phút giữa các vòng TRỐN TÌM, 0 = tắt
     bots: true,                 // ma NPC đi hù người xem
     background: 'haunted',      // transparent | haunted
-    accent: '#a3e635',
+    accent: '#3b82f6',
     chatDuration: 4.5,          // giây
     maxCards: 6,                // số thẻ chat tối đa cùng lúc
     bigGiftDiamonds: 30,        // quà >= số kim cương này: jumpscare + Bà Ma
@@ -117,6 +118,7 @@ class Settings {
       .map((x) => x.trim().slice(0, 2000)).slice(0, 100);
     o.rapIndex = Math.max(0, Math.min(Math.max(0, o.rapVideos.length - 1), Math.round(o.rapIndex) || 0));
     if (!['game', 'cards'].includes(this.data.maStyle)) this.data.maStyle = 'game';
+    if (!['dark', 'light', 'system'].includes(this.data.uiTheme)) this.data.uiTheme = 'dark';
     if (o.mode === 'game' || o.mode === 'cards') this.data.maStyle = o.mode;
     if (!/^#[0-9a-f]{6}$/i.test(o.accent)) o.accent = DEFAULTS.overlay.accent;
     try {

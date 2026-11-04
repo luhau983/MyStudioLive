@@ -5,10 +5,26 @@ const { Settings } = require('./settings');
 const { LiveService, friendlyError } = require('./live');
 const { OverlayServer } = require('./server');
 
-app.setName('StudioLive');
+app.setName('MyStudioLive');
+// Giữ nguyên thư mục dữ liệu cũ (settings.json, phiên TikTok) sau khi đổi tên app
+app.setPath('userData', path.join(app.getPath('appData'), 'StudioLive'));
 // Cho phép phát âm thanh hiệu ứng mà không cần bấm vào trang trước
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 nativeTheme.themeSource = 'dark';
+
+// Màu khung cửa sổ theo giao diện sáng/tối đang dùng
+const chromeColors = () => (nativeTheme.shouldUseDarkColors
+  ? { bg: '#0b0d10', symbol: '#9ca3af' }
+  : { bg: '#f4f6f9', symbol: '#475569' });
+function applyUiTheme(mode) {
+  nativeTheme.themeSource = ['light', 'dark', 'system'].includes(mode) ? mode : 'dark';
+}
+nativeTheme.on('updated', () => {
+  if (!win || win.isDestroyed()) return;
+  const c = chromeColors();
+  win.setBackgroundColor(c.bg);
+  if (process.platform !== 'darwin') win.setTitleBarOverlay({ color: c.bg, symbolColor: c.symbol, height: 40 });
+});
 
 let win = null;
 let settings;
@@ -109,7 +125,7 @@ function openOutputWindow() {
     height: 960,
     minWidth: 270,
     minHeight: 480,
-    title: 'StudioLive - Man hinh phat live',
+    title: 'MyStudioLive - Man hinh phat live',
     backgroundColor: '#000000',
     autoHideMenuBar: true,
     webPreferences: { contextIsolation: true, sandbox: true, backgroundThrottling: false }
@@ -169,10 +185,10 @@ function createWindow() {
     height: 860,
     minWidth: 1100,
     minHeight: 700,
-    backgroundColor: '#0b0d10',
-    title: 'StudioLive',
+    backgroundColor: chromeColors().bg,
+    title: 'MyStudioLive',
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
-    titleBarOverlay: process.platform === 'darwin' ? false : { color: '#0b0d10', symbolColor: '#9ca3af', height: 40 },
+    titleBarOverlay: process.platform === 'darwin' ? false : { color: chromeColors().bg, symbolColor: chromeColors().symbol, height: 40 },
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -213,6 +229,7 @@ ipcMain.handle('app:init', () => ({
 ipcMain.handle('settings:update', async (_e, patch) => {
   const before = settings.get();
   const next = settings.update(patch || {});
+  if (next.uiTheme !== before.uiTheme) applyUiTheme(next.uiTheme);
   overlay.broadcast('config', next.overlay);
   if (next.overlay.mode !== before.overlay.mode) {
     // đổi chế độ: mọi trang đang hiện cảnh (LIVE Studio, OBS, xem trước) tải lại để sang cảnh mới
@@ -406,6 +423,7 @@ if (!gotLock) {
 
   app.whenReady().then(async () => {
     settings = new Settings(app.getPath('userData'));
+    applyUiTheme(settings.get().uiTheme);
     await startServer(settings.get().port);
     await startVua();
     createWindow();
