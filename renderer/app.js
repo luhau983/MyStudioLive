@@ -691,17 +691,51 @@
   api.onEvent(addFeed);
   api.onServer(renderServer);
 
-  api.init().then((init) => {
-    settings = init.settings;
+  function applyInit(init) {
+    // còn thay đổi chưa kịp lưu thì giữ lại, không để dữ liệu cũ từ main ghi đè
+    settings = Object.keys(pending).length ? deepMerge(init.settings, pending) : init.settings;
     vua = init.vua || vua;
-    renderUiTheme();
     keoco = init.keoco || keoco;
-    $('#username').value = settings.username;
-    $('#ver').textContent = 'v' + init.version;
+    renderUiTheme();
     renderSettings();
     renderServer(init.server);
     renderStatus({ status: init.live.status, username: init.live.username });
     renderPause(init.paused);
     renderStats({ ...init.live.stats, topGifters: init.live.topGifters });
+  }
+
+  api.init().then((init) => {
+    applyInit(init);
+    $('#username').value = settings.username;
+    $('#ver').textContent = 'v' + init.version;
+  });
+
+  // ---------- Tải lại tab đang mở ----------
+  // Lấy lại trạng thái từ main + nạp lại khung xem / bảng điều khiển nhúng của tab hiện tại.
+  // Không ngắt kết nối TikTok, không đụng tới màn hình phát.
+  let refreshing = false;
+  async function refreshCurrentTab() {
+    if (refreshing) return;
+    refreshing = true;
+    const btn = $('#refresh-tab');
+    btn.classList.add('spinning');
+    const view = ($('.view.active') || {}).id?.replace('view-', '');
+    try {
+      applyInit(await api.init());
+      if (view === 'vua' || view === 'keoco') {
+        $('#' + view + '-control').dataset.src = ''; // ép nạp lại iframe điều khiển
+        if (view === 'vua') loadVuaControl(); else loadKeocoControl();
+      }
+      setPreviewSrc(true);
+      notify('Đã tải lại: ' + $('#hdr-title').textContent);
+    } catch (e) {
+      notify('Không tải lại được: ' + (e && e.message ? e.message : e), 'err');
+    } finally {
+      setTimeout(() => { btn.classList.remove('spinning'); refreshing = false; }, 500);
+    }
+  }
+  $('#refresh-tab').addEventListener('click', refreshCurrentTab);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'F5' && !e.ctrlKey && !e.metaKey) { e.preventDefault(); refreshCurrentTab(); }
   });
 })();

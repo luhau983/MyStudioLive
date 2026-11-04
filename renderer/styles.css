@@ -821,3 +821,7 @@ main:has(.view.scene-view.active) { padding-bottom: 0; }
 .view.scene-view .feature-frame { height: min(720px, calc(100vh - 330px)); width: calc(min(720px, 100vh - 330px) * 9 / 16); }
 .view.scene-view .preview-actions, .view.scene-view .preview-wrap > .hint { max-width: calc(min(720px, 100vh - 330px) * 9 / 16 + 40px); }
 .vua-host { margin: 0 -24px; }
+
+/* ===== Nút tải lại tab đang mở ===== */
+.refresh-btn.spinning svg { animation: refresh-spin .6s linear infinite; }
+@keyframes refresh-spin { to { transform: rotate(360deg); } }
