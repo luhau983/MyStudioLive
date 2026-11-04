@@ -55,7 +55,7 @@
   }
   .panel { @apply p-5; }
   .panel-head h2 { @apply text-lg font-semibold text-gray-800 dark:text-white/90; }
-  .connect-card { @apply p-5 md:p-6; }
+  .connect-card { @apply bg-none p-5 md:p-6; }
   .connect-glow { @apply hidden; }
 
   /* ecommerce-metrics */
