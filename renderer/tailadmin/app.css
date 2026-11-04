@@ -44,6 +44,8 @@
   .hdr-btn.theme-toggle .ic { @apply size-5 text-current; }
   .crumb { @apply text-sm text-gray-500 dark:text-gray-400; }
   .crumb-cur { @apply text-gray-800 dark:text-white/90; }
+  /* page-breadcrumb: the root crumb is a link back to the dashboard */
+  .crumb-root { @apply rounded-md text-gray-500 transition-colors hover:text-brand-500 focus-visible:ring-3 focus-visible:ring-brand-500/20 focus-visible:outline-hidden dark:text-gray-400 dark:hover:text-brand-400; }
 
   /* ---------- Page breadcrumb (common/page-breadcrumb) ---------- */
   .page-head h1 { @apply text-xl font-semibold text-gray-800 dark:text-white/90; }
