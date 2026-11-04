@@ -1,0 +1,218 @@
+/* Kéo co broadcast overlay · 1080×1920. The stage fills the whole frame: no transparent dead space. */
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a1124}
+:root{--red:#e8423f;--red-hi:#ff6a5c;--red-lo:#a3201f;--blue:#2f7fe8;--blue-hi:#5aa4ff;--blue-lo:#174a9e;--gold:#ffd23f;--cream:#fff4d6;--ink:#0d1630;--font:"Be Vietnam Pro","Nunito","Montserrat","Segoe UI","Noto Sans","Helvetica Neue",Arial,sans-serif}
+.stage{position:absolute;left:50%;top:0;width:1080px;height:1920px;transform-origin:top center;color:#fff;font-family:var(--font);
+ display:grid;grid-template-rows:150px 40px 1290px 290px 1fr;gap:10px;padding:18px 14px 14px;
+ background:radial-gradient(120% 60% at 50% 0%,#24346a 0%,#111b3d 45%,#0a1124 100%);overflow:hidden}
+.stage::before{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(135deg,#ffffff05 0 14px,transparent 14px 28px)}
+
+/* ---------- Scoreboard ---------- */
+.scoreboard{position:relative;display:grid;grid-template-columns:1fr 236px 1fr;align-items:stretch;filter:drop-shadow(0 8px 0 #050a1a) drop-shadow(0 14px 18px #0009)}
+.team-score{position:relative;display:flex;flex-direction:column;justify-content:center;padding:0 46px;overflow:hidden;border:4px solid var(--cream)}
+.team-score::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#ffffff38 0,#ffffff00 46%,#0000 54%,#0000002a 100%);pointer-events:none}
+.team-score.red{background:linear-gradient(100deg,var(--red-lo),var(--red) 55%,var(--red-hi));border-radius:30px 0 0 30px;border-right:0;text-align:left}
+.team-score.blue{background:linear-gradient(260deg,var(--blue-lo),var(--blue) 55%,var(--blue-hi));border-radius:0 30px 30px 0;border-left:0;text-align:right}
+.eyebrow{font-size:28px;font-weight:900;letter-spacing:4px;text-shadow:0 3px 0 #0005}
+.team-score strong{font-size:92px;line-height:.98;font-weight:900;font-variant-numeric:tabular-nums;text-shadow:0 5px 0 #0004}
+.clock{position:relative;z-index:1;margin:-8px -16px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#1c2b57,#0c1532);border:5px solid var(--gold);border-radius:28px;box-shadow:0 0 0 4px #0c1532,inset 0 2px 0 #ffffff30}
+.clock span{font-size:19px;font-weight:900;letter-spacing:2px;color:var(--gold);white-space:nowrap}
+.clock strong{font-size:84px;line-height:1;font-weight:900;font-variant-numeric:tabular-nums;text-shadow:0 4px 0 #0007}
+.clock small{font-size:16px;font-weight:800;letter-spacing:2px;color:#a9c0e8;white-space:nowrap}
+.stage.double .clock{border-color:#ff5c5c;animation:clock-alarm .5s ease-in-out infinite alternate}
+@keyframes clock-alarm{to{box-shadow:0 0 0 4px #0c1532,0 0 30px #ff4b4b}}
+
+/* ---------- Tug meter: #rope translates by -position×50% of the track, so the knot moves toward the winning side. ---------- */
+.tug-meter{display:grid;grid-template-columns:96px 1fr 96px;align-items:center;gap:10px;font-weight:900;font-size:20px;letter-spacing:2px}
+.meter-end.red{color:var(--red-hi);text-align:right}.meter-end.blue{color:var(--blue-hi)}
+.meter-track{position:relative;height:26px;border-radius:14px;overflow:hidden;border:3px solid var(--cream);background:#0c1532;box-shadow:0 4px 0 #050a1a}
+.rope{position:absolute;inset:0;transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
+.rope::before{content:'';position:absolute;top:0;bottom:0;left:-100%;right:-100%;background:linear-gradient(90deg,var(--red-lo),var(--red) 49.9%,var(--blue) 50.1%,var(--blue-lo))}
+.rope::after{content:'';position:absolute;top:0;bottom:0;left:-100%;right:-100%;background:repeating-linear-gradient(115deg,#ffffff26 0 10px,transparent 10px 20px)}
+.rope-knot{position:absolute;z-index:1;left:50%;top:50%;width:30px;height:30px;transform:translate(-50%,-50%) rotate(45deg);background:var(--gold);border:4px solid var(--ink);border-radius:6px;box-shadow:0 0 12px #ffd23faa}
+.win-mark{position:absolute;top:2px;bottom:2px;width:3px;border-radius:2px;background:#fff9}.win-mark.left{left:30%}.win-mark.mid{left:50%;background:#fff}.win-mark.right{left:70%}
+
+/* ---------- Arena (3D) ---------- */
+.arena{position:relative;overflow:hidden;border-radius:30px;border:5px solid var(--cream);background:#0f1830;box-shadow:0 0 0 4px #050a1a,0 18px 30px #000a}
+.arena::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:25px;box-shadow:inset 0 0 70px #050a1acc;background:linear-gradient(180deg,#050a1a99 0,transparent 16%,transparent 86%,#050a1a88 100%)}
+#webgl-stage{position:absolute;inset:0;z-index:1}#webgl-stage canvas{display:block;width:100%;height:100%}
+#webgl-fallback{position:absolute;z-index:8;top:42%;left:10%;right:10%;padding:25px;text-align:center;color:#fff;background:#8b2222;font-weight:bold;font-size:25px;border-radius:16px}
+.arena-top{position:absolute;z-index:5;top:20px;left:0;right:0;display:flex;justify-content:center}
+.arena-title{font-size:17px;font-weight:900;letter-spacing:4px;color:#d7e4ff;background:#0b1430b3;border:2px solid #ffffff40;border-radius:20px;padding:5px 16px}
+.notice{position:absolute;z-index:5;top:66px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:46px;font-weight:900;letter-spacing:1px;color:var(--ink);background:linear-gradient(180deg,#fff2a8,var(--gold) 55%,#ffad1f);border:4px solid var(--ink);border-radius:22px;padding:6px 30px 8px;box-shadow:0 6px 0 var(--ink),0 12px 24px #0008}
+.stage.countdown .notice{font-size:110px;line-height:1;padding:8px 46px 14px;top:220px;animation:count-pop 1s ease-out infinite}
+@keyframes count-pop{from{transform:translateX(-50%) scale(1.25)}35%{transform:translateX(-50%) scale(1)}}
+.stage.double .notice{color:#fff;background:linear-gradient(180deg,#ff7a6b,#e8233a);animation:double-pulse .5s ease-in-out infinite alternate}
+@keyframes double-pulse{to{transform:translateX(-50%) scale(1.05)}}
+.stage.result .notice{font-size:56px}
+.stage.red-wins .notice{color:#fff;background:linear-gradient(180deg,var(--red-hi),var(--red-lo))}
+.stage.blue-wins .notice{color:#fff;background:linear-gradient(180deg,var(--blue-hi),var(--blue-lo))}
+.stage.paused .notice{color:#fff;background:#4a5470;animation:none}
+.gift-notice{position:absolute;z-index:6;top:150px;left:50%;transform:translateX(-50%);white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis;font-size:28px;font-weight:900;color:var(--ink);background:linear-gradient(90deg,#ffc6dd,#fff,#ffc6dd);border:3px solid var(--ink);border-radius:30px;padding:8px 28px;box-shadow:0 5px 0 var(--ink);animation:gift-in .4s cubic-bezier(.3,1.6,.5,1)}
+.gift-notice::before{content:'🎁 '}
+@keyframes gift-in{from{transform:translateX(-50%) scale(.4);opacity:0}}
+.connection{position:absolute;z-index:7;bottom:24px;left:50%;transform:translateX(-50%);font-size:24px;font-weight:900;color:#ffe19b;background:#0b1430e6;border:2px solid #ffe19b;border-radius:14px;padding:10px 22px}
+
+/* In-scene labels: positioned by stage3d.js (translate px), so they keep left/top at 0. */
+.camera-tag,.referee-tag,.waiting-sign,.captain-tag,.name-tag{pointer-events:none}
+.referee-tag,.waiting-sign,.captain-tag,.name-tag{position:absolute;left:0;top:0;z-index:2;white-space:nowrap}
+.camera-tag{position:absolute;z-index:4;left:22px;bottom:22px;display:flex;align-items:center;gap:10px;padding:6px 16px 6px 8px;background:#0b1430e6;border:3px solid var(--cream);border-radius:12px;font-size:22px;font-weight:900;letter-spacing:2px;box-shadow:0 4px 0 #050a1a}
+.camera-tag.red{border-color:var(--red-hi)}.camera-tag.blue{border-color:var(--blue-hi)}
+.live-dot{background:#ff2d55;color:#fff;border-radius:7px;padding:2px 9px;font-size:16px;letter-spacing:1px}
+.live-dot::before{content:'';display:inline-block;width:10px;height:10px;margin-right:6px;border-radius:50%;background:#fff;vertical-align:0;animation:live-blink 1.2s steps(2,start) infinite}
+@keyframes live-blink{to{visibility:hidden}}
+.referee-tag{background:var(--gold);color:var(--ink);border:2px solid var(--ink);border-radius:7px;padding:1px 8px;font-size:15px;font-weight:900;letter-spacing:1px}
+/* 3D name tags: rank chip + sanitized name (textContent only); positions come from the declutter pass. */
+.name-tag{display:flex;align-items:center;gap:4px;max-width:190px;padding:2px 9px 2px 2px;border:2px solid #fff;border-radius:14px;font-size:17px;font-weight:900;line-height:20px;color:#fff;text-shadow:0 1px 2px #0009;box-shadow:0 2px 0 #050a1a}
+.name-tag.red{background:#c8302df0}.name-tag.blue{background:#2160c4f0}
+.name-tag i{flex:none;min-width:20px;height:20px;display:grid;place-items:center;border-radius:10px;background:#fff;color:var(--ink);font-size:13px;font-style:normal;text-shadow:none}
+.name-tag span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.name-tag.waiting{padding:1px 7px;border-width:1.5px;font-size:14px;line-height:17px;opacity:.94}.name-tag.waiting i{display:none}
+/* Donor: gold fill + gift icon (not colour alone) + soft glow; pulse is slow and disabled for reduced motion. */
+.name-tag.donor{z-index:3;color:var(--ink);background:linear-gradient(180deg,#fff6c4,var(--gold));border-color:#fff;text-shadow:none;opacity:1;box-shadow:0 0 0 2px #ff9f1c,0 0 16px 5px #ffd23fcc;animation:donor-glow 1.25s ease-in-out infinite alternate}
+.name-tag.donor::before{content:'🎁';flex:none}.name-tag.donor.waiting{font-size:16px}
+.captain-tag.donor{box-shadow:0 0 0 3px var(--gold),0 0 22px 8px #ffd23fcc}.captain-tag.donor b::before{content:'🎁 '}
+.player.donor{border-color:var(--gold);background:#ffd23f33;box-shadow:0 0 14px 3px #ffd23f99}
+@keyframes donor-glow{from{box-shadow:0 0 0 2px #ff9f1c,0 0 8px 2px #ffd23f99}to{box-shadow:0 0 0 2px #ff9f1c,0 0 20px 7px #ffd23fdd}}
+.captain-tag{display:flex;align-items:center;gap:8px;max-width:290px;padding:4px 12px 4px 4px;border:3px solid #fff;border-radius:22px;box-shadow:0 4px 0 #050a1a,0 8px 14px #0007;font-weight:900}
+.captain-tag::after{content:'';position:absolute;left:88%;bottom:-11px;margin-left:-8px;border:8px solid transparent;border-top-color:#fff;border-bottom:0}
+.captain-tag.blue::after{left:12%}.captain-tag.red{background:linear-gradient(180deg,var(--red-hi),var(--red-lo))}.captain-tag.blue{background:linear-gradient(180deg,var(--blue-hi),var(--blue-lo))}
+.cap-rank{flex:none;min-width:34px;height:30px;padding:0 6px;display:grid;place-items:center;border-radius:16px;background:var(--gold);color:var(--ink);font-size:17px}
+.captain-tag b{min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:21px}
+.captain-tag small{flex:none;font-size:16px;color:#fff3c4}
+.waiting-sign{display:flex;flex-direction:column;align-items:center;padding:6px 16px 7px;border:3px solid var(--cream);border-radius:14px;box-shadow:0 4px 0 #050a1a,0 8px 16px #0008}
+.waiting-sign.red{background:linear-gradient(180deg,#d8322f,#8c1b1b)}.waiting-sign.blue{background:linear-gradient(180deg,#2a6fd6,#123e8a)}
+.waiting-sign b{font-size:24px;font-weight:900;letter-spacing:1px}
+.waiting-sign small{max-width:300px;overflow:hidden;text-overflow:ellipsis;font-size:16px;font-weight:700;color:#ffe9b8}
+
+/* ---------- Team rosters: twelve numbered chips per side match the 3D rank bubbles. ---------- */
+.rosters{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-height:0}
+.roster{position:relative;display:flex;flex-direction:column;gap:8px;min-width:0;padding:10px;border-radius:22px;border:4px solid var(--cream);box-shadow:0 6px 0 #050a1a}
+.roster.red{background:linear-gradient(180deg,#5a1626,#2a0e1d)}.roster.blue{background:linear-gradient(180deg,#14306b,#0c1a3f)}
+.roster-head{display:flex;align-items:center;gap:10px;height:58px;padding-right:66px;min-width:0}
+.roster-head>b{flex:none;font-size:22px;font-weight:900;letter-spacing:2px;padding:7px 14px;border-radius:12px;border:2px solid #fff}
+.roster.red .roster-head>b{background:var(--red)}.roster.blue .roster-head>b{background:var(--blue)}
+.mvp{min-width:0;line-height:1.1}
+.mvp small,.mvp strong,.mvp span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mvp small{font-size:14px;font-weight:900;letter-spacing:2px;color:var(--gold)}
+.mvp strong{font-size:22px;font-weight:900}
+.mvp span{font-size:14px;font-weight:700;color:#c9d6f0}
+.players{counter-reset:rank;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:44px;gap:6px}
+.player{counter-increment:rank;position:relative;display:flex;align-items:center;gap:6px;min-width:0;padding:0 8px 0 4px;border-radius:12px;background:#ffffff14;border:2px solid #ffffff22;font-size:19px;font-weight:800;color:#fff}
+.player::before{content:counter(rank);flex:none;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;font-size:16px;font-weight:900;border:2px solid #fff}
+.red-players .player::before{background:var(--red)}.blue-players .player::before{background:var(--blue)}
+.player:first-child{background:#ffd23f2e;border-color:var(--gold)}
+.player:first-child::before{background:var(--gold);color:var(--ink);border-color:var(--ink)}
+.avatar{flex:none;display:flex;align-items:center}
+.avatar .meme-body{display:none}
+.avatar img.profile-badge{width:28px;height:28px;border-radius:50%;border:2px solid #fff;object-fit:cover;background:#fff}
+.player-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.player:has(>.avatar.join-drop){animation:player-join-drop .6s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes player-join-drop{from{transform:scale(.3) translateY(-20px);opacity:0}}
+.extra{position:absolute;top:18px;right:12px;font-size:20px;font-weight:900;color:var(--ink);background:var(--gold);border:2px solid var(--ink);border-radius:12px;padding:4px 10px}
+.players:empty::after{grid-column:1/-1;grid-row:1/span 2;display:grid;place-items:center;border:2px dashed #ffffff40;border-radius:14px;font-size:22px;font-weight:800;color:#d5def5}
+.red-players:empty::after{content:'Comment “Đỏ” để vào đội'}.blue-players:empty::after{content:'Comment “Xanh” để vào đội'}
+
+/* ---------- Call to action ---------- */
+.instruction{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-radius:20px;background:linear-gradient(180deg,#fff8e4,#ffe9b0);border:4px solid var(--ink);color:var(--ink);box-shadow:0 5px 0 #050a1a}
+.instruction b{font-size:13px;line-height:1;letter-spacing:4px;color:#d02f2f}
+.instruction span{font-size:26px;line-height:1.25;font-weight:900}
+.instruction em{font-style:normal;padding:0 8px;border-radius:8px;color:#fff}.instruction em.r{background:var(--red)}.instruction em.b{background:var(--blue)}
+.instruction i{color:#d02f2f;font-style:normal}
+.instruction .heart-hint{font-size:20px;line-height:1.1;letter-spacing:1px;color:#fff;background:#e8364a;border:2px solid var(--ink);border-radius:12px;padding:1px 12px;margin-bottom:2px;animation:heart-hint 1.4s ease-in-out infinite}.instruction .heart-hint[hidden]{display:none}
+@keyframes heart-hint{50%{transform:scale(1.06)}}
+.instruction small{font-size:14px;line-height:1.1;font-weight:700;color:#5b6378}
+
+@media(prefers-reduced-motion:reduce){.rope{transition:none}.stage .notice,.stage .clock,.live-dot::before,.gift-notice,.player:has(>.avatar.join-drop),.name-tag.donor{animation:none!important}}
+
+/* One restrained entrance, never a flashing countdown. */
+.stage.tension .notice{border:3px solid #ffe3a2;box-shadow:0 4px 0 #1a1020,0 0 22px #f6b93b88;animation:tension-enter .5s ease-out both}
+@keyframes tension-enter{from{transform:translateX(-50%) scale(.94);opacity:.7}to{transform:translateX(-50%) scale(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){.stage.tension .notice{animation:none!important}}
+
+/* LIVE exclusion zones in the 1080×1920 design space, measured on the TikTok LIVE Studio mobile preview:
+   the host header and widget pills end near y=280; comments and gift banners cover y≈1240–1890 across ~85% of the width.
+   Platform overlays vary by device; adjust these for the actual broadcast. */
+:root{--live-safe-left:40px;--live-safe-right:40px;--live-safe-top:280px;--live-safe-bottom:500px;--arena-chat-cover:190px}
+.stage{padding:var(--live-safe-top) var(--live-safe-right) var(--live-safe-bottom) var(--live-safe-left);grid-template-rows:150px 40px 80px 64px minmax(0,1fr);gap:10px}
+.scoreboard{grid-row:1;grid-template-columns:minmax(0,1fr) 190px minmax(0,1fr)}
+.team-score{padding:0 24px}.eyebrow{font-size:23px;letter-spacing:2px}.team-score strong{font-size:80px}.clock span{font-size:16px;letter-spacing:1px}
+.tug-meter{grid-row:2}.instruction{grid-row:3;padding:5px 12px}.instruction span{font-size:22px}.instruction em{padding:0 4px}
+/* Rosters collapse to one MVP strip above the arena; player names stay on the 3D tags. The bottom of the arena sits under the comment feed. */
+.rosters{grid-row:4}.arena{grid-row:5}
+.roster{flex-direction:row;align-items:center;padding:6px 12px;border-width:3px;border-radius:16px}.roster-head{flex:1;height:auto;padding-right:0}.roster-head>b{font-size:16px;padding:5px 10px}
+.mvp{flex:1;display:flex;align-items:baseline;gap:8px}.mvp small{flex:none;font-size:13px;letter-spacing:1px}.mvp strong{flex:1;min-width:0;font-size:20px}.mvp span{flex:none;font-size:14px}.players{display:none}
+.notice{max-width:95%;overflow:hidden;text-overflow:ellipsis;font-size:30px}.stage.result .notice{font-size:34px}.stage.countdown .notice{top:120px;font-size:80px}
+.gift-notice{top:120px;max-width:85%;font-size:18px;padding:4px 14px;border-width:2px}
+.camera-tag{font-size:16px}
+
+.mana{font-size:16px;font-weight:900;line-height:1.1;text-shadow:0 2px #000;position:relative;z-index:1}.mana-label{display:flex;justify-content:space-between;gap:4px;white-space:nowrap}.mana-track{height:10px;background:#09132c;border:1px solid #fff;border-radius:8px;overflow:hidden}.mana-track i{display:block;height:100%;width:0;background:#ffe459}
+
+/* Tug position is independent of the two mana meters. */
+.meter-track{overflow:visible}
+.rope{border-radius:12px;clip-path:none}
+.rope::before,.rope::after{left:0;right:0;border-radius:10px}
+.rope-knot{z-index:4;width:64px;height:64px;border:0;background:none;transform:translate(-50%,-53%);font-size:58px;line-height:64px;text-align:center;filter:drop-shadow(0 0 7px #ffad00) drop-shadow(0 2px 2px #391200);box-shadow:none}
+.win-mark{z-index:3;width:5px;top:-7px;bottom:-7px;background:#fff;box-shadow:0 0 0 2px #111b35}.win-mark.mid{width:3px;background:#ffdd48}
+@media(prefers-reduced-motion:reduce){.rope{transition:none}}
+
+/* Arrival card sits below the match banner. */
+.join-notice{position:absolute;z-index:8;left:50%;top:166px;transform:translateX(-50%);width:92%;padding:10px 14px;border:3px solid #fff;border-radius:14px;box-shadow:0 4px 0 #050a1a;background:#12213def;color:#fff;font:800 23px/1.3 var(--font);text-align:center;overflow-wrap:anywhere;pointer-events:none}
+.join-notice.red{border-color:#ff8989;background:#751d2bf2}.join-notice.blue{border-color:#87c3ff;background:#133f79f2}
+.join-notice[hidden]{display:none}
+
+/* Speech follows the actual speaker, matching the white cards above the cast. */
+.comment-bubble{position:absolute;top:0;left:0;z-index:9;width:206px;max-width:85%;padding:9px 12px 11px;border:1px solid #eadfbf;border-radius:7px;background:#fffdf4;color:#252820;box-shadow:0 4px 12px #0005;font-family:var(--font);line-height:1.28;pointer-events:none;white-space:normal;visibility:hidden;animation:comment-enter .16s ease-out}
+.comment-bubble::after{content:'';position:absolute;left:50%;bottom:-11px;border-left:10px solid transparent;border-right:10px solid transparent;border-top:11px solid #fffdf4;transform:translateX(-50%);filter:drop-shadow(0 2px 1px #0002)}
+.comment-bubble b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:800;color:#737052;margin-bottom:4px}
+.comment-bubble span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;overflow-wrap:anywhere;font-size:19px;font-weight:600}
+.comment-bubble.red{border-top:3px solid #e8423f}.comment-bubble.blue{border-top:3px solid #2f7fe8}
+.comment-bubble.detached::after{display:none}
+@keyframes comment-enter{from{opacity:0;scale:.94}to{opacity:1;scale:1}}
+@media(prefers-reduced-motion:reduce){.comment-bubble{animation:none}}
+
+/* Result stays inside the LIVE safe area, leaving the dancers visible above. */
+.result-banner{position:absolute;z-index:7;bottom:18px;left:50%;transform:translateX(-50%);width:92%;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 18px 16px;border:3px solid var(--gold);border-radius:22px;background:linear-gradient(145deg,#18233cf5,#080e20f5);box-shadow:0 6px 0 #050a1a,0 0 30px #ffd23f30;text-align:center;pointer-events:none;animation:result-enter .45s cubic-bezier(.2,1.3,.4,1) both}
+.result-call{font-size:64px;font-weight:1000;font-style:italic;line-height:1;color:var(--gold);text-shadow:3px 4px #050a1a;letter-spacing:5px}
+.result-banner strong{font-size:32px;line-height:1.2;font-weight:900;overflow-wrap:anywhere}
+.result-caption{font-size:13px;font-weight:800;letter-spacing:3px;color:#e0e8ff}
+.result-score{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums;color:#fff}
+.result-banner.red{background:linear-gradient(145deg,#a3201ff5,#310d1cf5)}
+.result-banner.blue{background:linear-gradient(145deg,#174a9ef5,#0a173af5)}
+.result-banner.draw{border-color:#e0e8ff}.result-banner.draw .result-call{color:#e0e8ff;font-size:48px}
+@keyframes result-enter{from{opacity:0;transform:translate(-50%,18px) scale(.9)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.result-banner{animation:none}}
+
+.name-tag.ready{border-color:#ffe066;background:#202b46f5;color:#fff3a8;opacity:1}
+.name-tag.ready i{display:grid;min-width:48px;padding:0 4px;background:#ffe066;font-size:11px;color:#17213b}
+.name-tag.away{opacity:.72;filter:saturate(.45)}
+.name-tag.away i{display:grid;min-width:34px;padding:0 4px;background:#d7dbe4;font-size:11px;color:#17213b}
+
+/* Arena-bottom furniture clears the TikTok comment feed. */
+.camera-tag{bottom:calc(var(--arena-chat-cover) + 22px)}.connection{bottom:calc(var(--arena-chat-cover) + 24px)}.result-banner{bottom:calc(var(--arena-chat-cover) - 70px)}
+
+/* Join feed: comment-style rows in the strip below the arena, newest at the bottom. */
+.join-feed{position:absolute;z-index:4;left:var(--live-safe-left);right:var(--live-safe-right);top:1690px;bottom:40px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:10px;overflow:hidden;pointer-events:none}
+.join-row{max-width:100%;padding:10px 18px;border-radius:22px;background:#0b1430d9;border:2px solid #ffffff33;font:700 26px/1.25 var(--font);color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;animation:join-row-in .3s ease-out both}
+.join-row b{font-weight:900}.join-row.red b{color:#ff8a80}.join-row.blue b{color:#8fc4ff}
+@keyframes join-row-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.join-row{animation:none}}
+
+/* Player names must stay readable on a phone at stream scale; match the captain card size. */
+.name-tag{max-width:250px;padding:3px 12px 3px 3px;border-width:2.5px;border-radius:18px;font-size:22px;line-height:26px}
+.name-tag i{min-width:26px;height:26px;border-radius:13px;font-size:16px}
+.name-tag.waiting{padding:2px 9px;font-size:18px;line-height:22px}.name-tag.donor.waiting{font-size:19px}
+.name-tag.ready i{min-width:56px;font-size:13px}
+
+/* Team list: who is playing, in the strip right under the arena; the join feed follows below it. */
+.team-list{position:absolute;z-index:4;left:var(--live-safe-left);right:var(--live-safe-right);top:1440px;height:236px;display:grid;grid-template-columns:1fr 1fr;gap:12px;pointer-events:none}
+.team-col{display:flex;flex-direction:column;gap:4px;min-width:0;padding:8px 12px;border-radius:16px;border:3px solid var(--cream);box-shadow:0 4px 0 #050a1a}
+.team-col.red{background:linear-gradient(180deg,#5a1626f2,#2a0e1df2)}.team-col.blue{background:linear-gradient(180deg,#14306bf2,#0c1a3ff2)}
+.team-col>b{font-size:20px;font-weight:900;letter-spacing:1px}.team-col.red>b{color:#ffb3ad}.team-col.blue>b{color:#b5d6ff}
+.team-col ol{margin:0;padding:0;list-style:none;counter-reset:member;display:flex;flex-direction:column;gap:2px}
+.team-col li{counter-increment:member;display:flex;align-items:center;gap:8px;min-width:0;font-size:22px;line-height:30px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.team-col li::before{content:counter(member);flex:none;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;border:2px solid #fff;font-size:14px;font-weight:900}
+.team-col.red li::before{background:var(--red)}.team-col.blue li::before{background:var(--blue)}
+.team-col li.empty{color:#d5def5;font-weight:700}.team-col li.empty::before{display:none}
+.team-col small{font-size:17px;font-weight:800;color:#ffe066}

@@ -204,18 +204,24 @@ class LiveService extends EventEmitter {
       const user = normUser(d.user);
       const key = `${user.id}:${d.giftId}:${d.groupId || ''}`;
       const streaking = giftType === 1 && !d.repeatEnd;
+      const unit = num(g.diamondCount ?? d.diamondCount);
+      // Định danh gốc của quà (chuỗi, không ép Number vì là số 64-bit): Kéo Co dùng để chống cộng điểm trùng
+      const str = (v) => (v === undefined || v === null || v === '' ? undefined : String(v));
+      const ids = {
+        giftId: str(d.giftId), groupId: str(d.groupId),
+        msgId: str(d.common?.msgId ?? d.event?.msgId ?? d.msgId), streakable: giftType === 1
+      };
 
       if (streaking) {
         // Quà combo đang chạy: chỉ báo tạm thời, chưa cộng thống kê
         this.giftStreaks.set(key, repeatCount);
         this.emit('event', {
-          type: 'giftStreak', user, giftName: g.name || 'Quà', repeatCount,
+          type: 'giftStreak', user, giftName: g.name || 'Quà', repeatCount, diamonds: unit, ...ids,
           giftImage: pickUrl(g.image) || pickUrl(g.icon), ts: Date.now()
         });
         return;
       }
       this.giftStreaks.delete(key);
-      const unit = num(g.diamondCount ?? d.diamondCount);
       const total = unit * repeatCount;
       this.stats.gifts += repeatCount;
       this.stats.diamonds += total;
@@ -226,7 +232,7 @@ class LiveService extends EventEmitter {
       this.gifters.set(user.id || user.nickname, prev);
       this.emit('event', {
         type: 'gift', user, giftName: g.name || d.giftName || 'Quà', repeatCount,
-        diamonds: unit, total, giftImage: pickUrl(g.image) || pickUrl(g.icon), ts: Date.now()
+        diamonds: unit, total, ...ids, giftImage: pickUrl(g.image) || pickUrl(g.icon), ts: Date.now()
       });
       this.emitStats();
     }));

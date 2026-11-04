@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kéo co online · Overlay</title><link rel="stylesheet" href="overlay.css"></head>
+<body><main id="stage" class="stage">
+  <header class="scoreboard">
+    <div class="team-score red"><span class="eyebrow">ĐỘI ĐỎ</span><strong id="red-score">0</strong><div class="mana" aria-label="Mana đội đỏ"><div class="mana-label"><span id="red-mana-text">MANA 0/100</span><span id="red-buff"></span></div><div class="mana-track" role="progressbar" aria-label="Mana đội đỏ" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="red-mana-bar"><i id="red-mana-fill"></i></div></div></div>
+    <div class="clock"><span id="phase">CHỜ VÀO TRẬN</span><strong id="timer">--</strong><small id="mode">KÉO CO ONLINE</small></div>
+    <div class="team-score blue"><span class="eyebrow" id="blue-name">ĐỘI XANH</span><strong id="blue-score">0</strong><div class="mana" aria-label="Mana đội xanh"><div class="mana-label"><span id="blue-mana-text">MANA 0/100</span><span id="blue-buff"></span></div><div class="mana-track" role="progressbar" aria-label="Mana đội xanh" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="blue-mana-bar"><i id="blue-mana-fill"></i></div></div></div>
+  </header>
+  <div class="tug-meter" aria-label="Vị trí dây kéo"><span class="meter-end red">◂ ĐỎ</span><div class="meter-track"><div id="rope" class="rope"><div class="rope-knot" aria-hidden="true">🔥</div></div><i class="win-mark left"></i><i class="win-mark mid"></i><i class="win-mark right"></i></div><span class="meter-end blue">XANH ▸</span></div>
+  <section class="arena" aria-label="Sân kéo co">
+    <div id="webgl-stage" aria-label="Sân kéo co 3D"></div><div id="webgl-fallback">Không hỗ trợ WebGL — không thể hiển thị sân 3D.</div>
+    <div class="arena-top"><span class="arena-title">TRỰC TIẾP · NHÀ THI ĐẤU KÉO CO</span></div>
+    <div id="notice" class="notice">Comment để vào đội!</div>
+    <div id="result-banner" class="result-banner" role="status" aria-live="polite" hidden><span id="result-call" class="result-call">KO!</span><strong id="result-team"></strong><span class="result-caption">KẾT QUẢ TRẬN ĐẤU</span><span id="result-score" class="result-score"></span></div>
+    <div id="gift-notice" class="gift-notice" hidden></div><div id="join-notice" class="join-notice" role="status" aria-live="polite" hidden></div><div id="connection" class="connection" hidden>Đang kết nối lại…</div>
+  </section>
+  <section class="rosters">
+    <div class="roster red"><div class="roster-head"><b>ĐỘI ĐỎ</b><div class="mvp red-mvp"><small>★ MVP ĐỘI ĐỎ</small><strong id="red-mvp">Chưa có</strong><span id="red-mvp-points"></span></div></div><div id="red-players" class="players red-players"></div></div>
+    <div class="roster blue"><div class="roster-head"><b id="blue-label">ĐỘI XANH</b><div class="mvp blue-mvp"><small id="blue-mvp-title">★ MVP ĐỘI XANH</small><strong id="blue-mvp">Chưa có</strong><span id="blue-mvp-points"></span></div></div><div id="blue-players" class="players blue-players"></div></div>
+  </section>
+  <div class="instruction"><span id="position-notice" hidden></span><b id="heart-hint" class="heart-hint" hidden>❤ THẢ 1 TIM LÀ VÀO TRẬN ❤</b><span id="instruction-default">Comment <em class="r">ĐỎ</em>/<em class="b">XANH</em> để vào đội <i>•</i> Comment VỊ TRÍ để tìm mình <i>•</i> Thả tim kéo <i>•</i> Quà hỗ trợ</span></div>
+  <div id="team-list" class="team-list" aria-label="Thành viên hai đội"></div>
+  <div id="join-feed" class="join-feed" aria-hidden="true"></div>
+</main><script type="module" src="crowd-ui.js"></script><script src="overlay.js"></script><script type="module" src="stage3d.js"></script></body></html>

@@ -103,11 +103,59 @@ async function startVua() {
   }
 }
 
+// ---- Kéo Co: game kéo co 3D chạy server riêng (keoco/server.mjs), dùng chung kết nối TikTok ----
+let keoco = null;
+let keocoState = { running: false, port: 0, error: '' };
+const KEOCO_HOSTS = ['127.0.0.1', 'localhost', 'lvh.me'];
+
+function keocoRedirect(req) {
+  if (!keoco || settings.get().overlay.mode !== 'keoco') return null;
+  const host = KEOCO_HOSTS.includes(req.hostname) ? req.hostname : '127.0.0.1';
+  const q = String(req.originalUrl.split('?')[1] || '');
+  const silent = new URLSearchParams(q).get('mute') === '1';
+  return `http://${host}:${keocoState.port}/overlay.html?sl=1${silent ? '&silent=1' : ''}${q ? '&' + q : ''}`;
+}
+
+async function startKeoco() {
+  const fs = require('fs');
+  const { pathToFileURL } = require('url');
+  const root = path.join(__dirname, '..', 'keoco');
+  const dataDir = path.join(app.getPath('userData'), 'keoco');
+  try {
+    fs.mkdirSync(dataDir, { recursive: true });
+    const { createApp } = await import(pathToFileURL(path.join(root, 'server.mjs')).href);
+    const bridge = {
+      get studioPort() { return serverState.port; },
+      initialStatus: { status: live.status, username: live.username },
+      async connect(username) {
+        const s = live.snapshot();
+        if (s.status === 'live' && s.username.toLowerCase() === username.toLowerCase()) {
+          keoco.liveStatus({ status: 'live', username: s.username });
+          return { ok: true };
+        }
+        return connectLive(username);
+      },
+      disconnect: () => live.stop()
+    };
+    // cạnh cổng StudioLive (+2, chừa +1 cho cảnh khác); bận thì lấy cổng trống bất kỳ
+    try {
+      keoco = await createApp({ port: settings.get().port + 2, dataDir, bridge });
+    } catch (e) {
+      if (e.code !== 'EADDRINUSE') throw e;
+      keoco = await createApp({ port: 0, dataDir, bridge });
+    }
+    keocoState = { running: true, port: keoco.server.address().port, error: '' };
+  } catch (e) {
+    console.error('[keoco]', e);
+    keocoState = { running: false, port: 0, error: e.message };
+  }
+}
+
 const overlay = new OverlayServer({
   getConfig: () => settings.get(),
   getSnapshot: () => live.snapshot(),
   getPaused: () => paused,
-  getRedirect: vuaRedirect
+  getRedirect: (req) => vuaRedirect(req) || keocoRedirect(req)
 });
 
 let serverState = { running: false, port: 0, error: '', clients: 0 };
@@ -148,6 +196,7 @@ const send = (channel, payload) => {
 live.on('status', (s) => {
   send('live:status', s);
   if (vua) vua.liveStatus(s);
+  if (keoco) keoco.liveStatus(s);
 });
 live.on('stats', (s) => {
   send('live:stats', s);
@@ -158,6 +207,8 @@ live.on('event', (e) => {
   overlay.broadcast('live', e);
   // chỉ chấm điểm khi Vua Tiếng Việt đang là cảnh trên live
   if (vua && !paused && settings.get().overlay.mode === 'vua') vua.ingest(e);
+  // chỉ tính điểm khi Kéo Co đang là cảnh trên live
+  if (keoco && !paused && settings.get().overlay.mode === 'keoco') keoco.ingest(e);
 });
 overlay.onClients = (n) => {
   serverState.clients = n;
@@ -222,6 +273,7 @@ ipcMain.handle('app:init', () => ({
   live: live.snapshot(),
   paused,
   vua: vuaState,
+  keoco: keocoState,
   platform: process.platform,
   version: app.getVersion()
 }));
@@ -236,6 +288,8 @@ ipcMain.handle('settings:update', async (_e, patch) => {
     overlay.broadcast('reload');
     // các màn hình đang ở cảnh Vua Tiếng Việt (server riêng) quay về StudioLive
     if (before.overlay.mode === 'vua' && vua) vua.navigateOverlays();
+    // các màn hình đang ở cảnh Kéo Co (server riêng) quay về StudioLive
+    if (before.overlay.mode === 'keoco' && keoco) keoco.navigateOverlays();
   }
   if (next.port !== before.port) await startServer(next.port);
   return { settings: next, server: serverState };
@@ -426,6 +480,7 @@ if (!gotLock) {
     applyUiTheme(settings.get().uiTheme);
     await startServer(settings.get().port);
     await startVua();
+    await startKeoco();
     createWindow();
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -450,6 +505,8 @@ if (!gotLock) {
   app.on('before-quit', (e) => {
     live.stop(true);
     overlay.stop();
+    // Kéo Co ghi điểm / lịch sử đồng bộ ngay khi có kết quả nên chỉ cần đóng server
+    if (keoco) { const k = keoco; keoco = null; Promise.resolve(k.close()).catch((err) => console.error('[keoco]', err)); }
     if (!vua || vuaClosed) return;
     e.preventDefault();
     const v = vua;

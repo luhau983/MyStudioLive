@@ -47,7 +47,7 @@ class OverlayServer {
       }
     });
 
-    // Cảnh chạy trên server riêng (Vua Tiếng Việt): chuyển hướng mọi màn hình phát sang đó
+    // Cảnh chạy trên server riêng (Vua Tiếng Việt, Kéo Co): chuyển hướng mọi màn hình phát sang đó
     app.get('/', (req, res, next) => {
       const to = this.getRedirect(req);
       if (!to) return next();

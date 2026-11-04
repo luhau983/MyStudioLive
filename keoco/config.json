@@ -1,0 +1,20 @@
+{
+  "inactivitySeconds": 300,
+  "lobbySeconds": 5,
+  "countdownSeconds": 3,
+  "pullSeconds": 20,
+  "resultSeconds": 10,
+  "overtimeSeconds": 10,
+  "pvpThreshold": 6,
+  "giftMultiplier": 50,
+  "likesPerSecond": 15,
+  "earlyWinPercent": 70,
+  "transitionSeconds": 2,
+  "audioVolume": 76,
+  "audioMuted": 0,
+  "idleSeconds": 90,
+  "minPlayers": 2,
+  "autoJoinLimit": 50,
+  "autoStart": 0,
+  "botsEnabled": 0
+}

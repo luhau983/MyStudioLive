@@ -13,10 +13,16 @@ StudioLive sử dụng các thư viện và tài nguyên sau. Mọi thư viện 
 | tiktok-live-connector **2.0.0** | MIT | Copyright (c) 2022 zerodytrash |
 | protobufjs | BSD-3-Clause | Copyright (c) 2016, Daniel Wirtz |
 | axios | MIT | Copyright (c) 2014-present Matt Zabriskie & Collaborators |
+| three (Kéo Co Online) | MIT | Copyright (c) 2010-2023 three.js authors |
+| ws (Kéo Co Online) | MIT | Copyright (c) 2011 Einar Otto Stangvik and contributors |
 
 Lưu ý: các phiên bản `tiktok-live-connector` **mới hơn 2.0.0** và `tiktok-live-proto` dùng giấy phép **AGPL-3.0**. Không nâng cấp lên các bản đó để StudioLive giữ được giấy phép MIT.
 
 ## Tài nguyên & mã tham khảo
+
+### Kéo Co Online — âm thanh sân đấu (`keoco/assets/`)
+
+Nguồn và giấy phép từng file ghi trong `keoco/assets/match-audio-SOURCES.md` và `keoco/assets/crowd-cheer-SOURCE.md` (CC0 và Mixkit Sound Effects Free License — tiếng còi chỉ dùng trong game, không phân phối lại thành gói âm thanh riêng). Kéo Co trong StudioLive dùng chung kết nối TikTok của app (`tiktok-live-connector` 2.0.0), không kèm bản 2.5.0 (AGPL) mà game bản độc lập dùng.
 
 ### Chánh Điện Online — hình ảnh, nhân vật, hiệu ứng, nhạc nền (`overlay/chua-assets/`)
 

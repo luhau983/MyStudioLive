@@ -2,7 +2,7 @@
   "name": "studio-live",
   "productName": "MyStudioLive",
   "version": "1.0.0",
-  "description": "MyStudioLive — cảnh tương tác cho TikTok LIVE: Live Ma Online, Đi Chùa Online, Rạp Phim Online & Vua Tiếng Việt",
+  "description": "MyStudioLive — cảnh tương tác cho TikTok LIVE: Live Ma Online, Đi Chùa Online, Rạp Phim Online, Vua Tiếng Việt & Kéo Co Online",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
@@ -37,6 +37,8 @@
       "overlay/**/*",
       "vua/**/*",
       "!vua/test/**",
+      "keoco/**/*",
+      "!keoco/test/**",
       "package.json"
     ],
     "asar": true,

@@ -38,6 +38,9 @@
       <button class="nav-item" data-view="vua" title="Vua Tiếng Việt">
         <span class="nav-emoji">👑</span><span class="nav-label">Vua Tiếng Việt</span><span class="live-dot" data-live-for="vua">LIVE</span>
       </button>
+      <button class="nav-item" data-view="keoco" title="Kéo Co Online">
+        <span class="nav-emoji">🪢</span><span class="nav-label">Kéo Co Online</span><span class="live-dot" data-live-for="keoco">LIVE</span>
+      </button>
       <button class="nav-item" data-view="overlay" title="Đưa lên live">
         <svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5v2h8v-2h5a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 14H3V5h18z"/></svg><span class="nav-label">Đưa lên live</span>
       </button>
@@ -167,6 +170,7 @@
         <button class="btn scene-btn chua" data-open-scene="chua"><span class="sb-ico">🪷</span><span><b>Phát Đi Chùa Online</b><small>Chuyển live sang chánh điện + mở màn hình phát</small></span></button>
         <button class="btn scene-btn rap" data-open-scene="rap"><span class="sb-ico">🎬</span><span><b>Phát Rạp Phim Online</b><small>Chuyển live sang rạp phim + mở màn hình phát</small></span></button>
         <button class="btn scene-btn vua" data-open-scene="vua"><span class="sb-ico">👑</span><span><b>Phát Vua Tiếng Việt</b><small>Chuyển live sang giảng đường đoán chữ + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn keoco" data-open-scene="keoco"><span class="sb-ico">🪢</span><span><b>Phát Kéo Co Online</b><small>Chuyển live sang sân kéo co + mở màn hình phát</small></span></button>
       </div>
 
       <div class="live-guide">
@@ -661,6 +665,36 @@
       <div class="vua-host">
         <iframe id="vua-control" title="Bảng điều khiển Vua Tiếng Việt" allow="clipboard-write; autoplay"></iframe>
         <div class="vua-error" id="vua-error" hidden></div>
+      </div>
+    </section>
+
+    <!-- ================= KÉO CO ONLINE ================= -->
+    <section class="view scene-view keoco-view" id="view-keoco">
+      <header class="page-head">
+        <div>
+          <h1>🪢 Kéo Co Online</h1>
+          <p class="muted">Đang mở tab này thì sân kéo co 3D chạy trên live. Người xem comment <b>ĐỎ</b>/<b>XANH</b> để vào đội, thả tim để kéo, tặng quà để cộng điểm. Dùng chung kết nối TikTok với StudioLive.</p>
+        </div>
+      </header>
+      <div class="feature-layout">
+        <div class="preview-wrap">
+          <div class="preview-frame feature-frame">
+            <iframe class="live-preview" data-for="keoco" title="Sân kéo co trên live"></iframe>
+          </div>
+          <div class="preview-actions">
+            <div style="display:flex;gap:6px">
+              <button class="btn ghost sm" data-pause>⏸ Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output>📺 Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen">↻</button>
+            </div>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> 🔊 Nghe</label>
+          </div>
+          <p class="hint" style="max-width:405px">Âm thanh, thông số trận và giả lập chỉnh ở bảng bên phải. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
+        </div>
+        <div class="keoco-host">
+          <iframe id="keoco-control" title="Bảng điều khiển Kéo Co" allow="autoplay"></iframe>
+          <div class="keoco-error" id="keoco-error" hidden></div>
+        </div>
       </div>
     </section>
 
