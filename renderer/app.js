@@ -42,13 +42,15 @@
     denxanh: { mode: 'denxanh', name: 'Đèn Xanh Đèn Đỏ', open: 'Chuyển live sang sân Đèn Xanh Đèn Đỏ + mở màn hình phát' },
     danhboss: { mode: 'danhboss', name: 'Đánh Boss', open: 'Chuyển live sang đấu trường Đánh Boss + mở màn hình phát' },
     thabi: { mode: 'thabi', name: 'Thả Bi', open: 'Chuyển live sang bàn Thả Bi + mở màn hình phát' },
-    dao: { mode: 'dao', name: 'Đảo Sinh Tồn', open: 'Chuyển live sang đảo sinh tồn + mở màn hình phát' }
+    dao: { mode: 'dao', name: 'Đảo Sinh Tồn', open: 'Chuyển live sang đảo sinh tồn + mở màn hình phát' },
+    cuoi: { mode: 'cuoi', name: 'Cưới Liền Tay', open: 'Chuyển live sang tiệc cưới + mở màn hình phát' }
   };
   // Games running their own server; state comes from app:init
   const CANVAS_GAMES = {
     danhboss: { name: 'Đánh Boss', state: { running: false, port: 0, error: '' } },
     thabi: { name: 'Thả Bi', state: { running: false, port: 0, error: '' } },
-    dao: { name: 'Đảo Sinh Tồn', state: { running: false, port: 0, error: '' } }
+    dao: { name: 'Đảo Sinh Tồn', state: { running: false, port: 0, error: '' } },
+    cuoi: { name: 'Cưới Liền Tay', state: { running: false, port: 0, error: '' } }
   };
   const viewOfMode = (mode) => Object.keys(SCENES).find((v) => SCENES[v].mode === mode) || 'ma';
 

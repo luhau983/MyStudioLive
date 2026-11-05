@@ -15,6 +15,7 @@ StudioLive sử dụng các thư viện và tài nguyên sau. Mọi thư viện 
 | axios | MIT | Copyright (c) 2014-present Matt Zabriskie & Collaborators |
 | three (Kéo Co Online, Live Bar) | MIT | Copyright (c) 2010-2023 three.js authors |
 | ws (Kéo Co Online) | MIT | Copyright (c) 2011 Einar Otto Stangvik and contributors |
+| react, react-dom (Cưới Liền Tay, đóng gói vào `cuoi/dist`) | MIT | Copyright (c) Meta Platforms, Inc. and affiliates |
 
 Lưu ý: các phiên bản `tiktok-live-connector` **mới hơn 2.0.0** và `tiktok-live-proto` dùng giấy phép **AGPL-3.0**. Không nâng cấp lên các bản đó để StudioLive giữ được giấy phép MIT.
 
@@ -120,6 +121,10 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ```
+
+### Cưới Liền Tay (`cuoi/`)
+
+Mã nguồn cảnh lấy từ [workaipvlinh-byte/cuoi-lien-tay](https://github.com/workaipvlinh-byte/cuoi-lien-tay), giấy phép MIT, Copyright (c) 2026 PVLinh-workingAI; bản giấy phép gốc đi kèm ở `cuoi/LICENSE`. MyStudioLive thay server riêng bằng `cuoi/server.mjs` dùng chung kết nối TikTok của app. Sảnh, nhân vật, chó mèo và nhạc nền đều dựng bằng code, không có file ảnh / âm thanh.
 
 ## Dịch vụ trực tuyến
 

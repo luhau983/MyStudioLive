@@ -38,6 +38,7 @@ Whichever tab is open in the left menu is the scene shown on the live stream. Al
 | 🧊 **Trà Đá Vỉa Hè** (Sidewalk Iced Tea) | Type `trà đá` / `cà phê` / `coca` / `bò húc` / `hướng dương` / `bánh mì` / `tính tiền` (pay & leave) | Hanoi sidewalk stall where every viewer gets a chibi on a plastic stool; the owner serves orders to the table; big gifts make the gifter the "đại ca" who treats everyone |
 | 🍺 **Đi Nhậu Online** (Night Pub) | Type `bia` (beer) / `dzô` (cheers) / `lạc` / `mực` / `lẩu` / `tính tiền` | 6 tables × 4 seats; whole tables clink glasses, heavy drinkers turn red and doze off; drinking leaderboard; big gifts buy a round for the house |
 | 🏝️ **Đảo Sinh Tồn** (Survival Island) | Comment to parachute in, command `trốn` (hide) / `xông` (charge) / `hồi` (heal), send likes to heal | 3D battle royale: a storm shrinks over 4 stages, eliminated viewers comment `bão 1/2/3` to pick the next storm centre; gifts = shield, supply crate, revive, meteor shower |
+| 💍 **Cưới Liền Tay** (Wedding Party) | Comment to enter the wedding hall, `cưới vợ @name` / `cưới chồng @name` to propose, `đồng ý` / `không` to answer | 3D wedding party hosted by two TTS MCs; a 30-coin gift steals the bride / groom; `se duyên`, `đấm @name`, `quẩy`, `zô`; 300 likes make the whole hall dance |
 
 | 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
 |---|---|---|---|
@@ -77,6 +78,17 @@ Whichever tab is open in the left menu is the scene shown on the live stream. Al
 - Likes heal (capped per second) and fill a hype meter that drops supply crates for everyone. Gifts come in 5 diamond tiers (heal → shield → supply crate → revive → meteor shower) and weaken as the storm closes, so viewers who never gift can still win; "Gift power" is adjustable in the control panel.
 - Empty rooms get zombies so the island never looks dead; zombies can never win. The season leaderboard is for bragging rights only, no prizes.
 - Practice mode simulates viewers when you are not live.
+
+### 💍 Cưới Liền Tay
+
+Ported from [cuoi-lien-tay](https://github.com/workaipvlinh-byte/cuoi-lien-tay) (MIT); it uses the app's shared TikTok connection.
+
+- Any comment walks the viewer into the hall with their TikTok name, avatar and a chat bubble.
+- `cưới vợ @name` (you are the groom), `cưới chồng @name` (you are the bride), `cưới @name` (the MC picks). The target has 60 seconds to type `đồng ý` / `không`; extra proposals queue (max 5).
+- While waiting for an answer or walking the aisle, a gift of 30+ coins steals the bride / groom (always 30, no bidding).
+- `se duyên` while the matchmaker god is on stage, `đấm @name` / `trêu @name`, `quẩy` to join the dance floor, `zô` to raise a glass. Accents are optional.
+- The control panel in the tab covers instant speech, voice speed, channel name, background music and test buttons. The 3D hall is heavy on weak machines.
+- The client is React + Vite: `npm start` / `npm run dist:*` build it into `cuoi/dist`; after editing the scene run `npm run build:cuoi`.
 
 ## Download & install
 
@@ -132,6 +144,7 @@ Full guide (Vietnamese; picture quality, audio, troubleshooting): **[docs/HUONG-
 | Vua Tiếng Việt (questions, scores, config) | `%APPDATA%\StudioLive\vua\` | `~/Library/Application Support/StudioLive/vua/` |
 | Kéo Co (config, stats, match history) | `%APPDATA%\StudioLive\keoco\` | `~/Library/Application Support/StudioLive/keoco/` |
 | Đảo Sinh Tồn (config, season leaderboard) | `%APPDATA%\StudioLive\dao\` | `~/Library/Application Support/StudioLive/dao/` |
+| Cưới Liền Tay (channel name) | `%APPDATA%\StudioLive\cuoi\` | `~/Library/Application Support/StudioLive/cuoi/` |
 
 The data folder keeps the `StudioLive` name so existing settings survive the rename. If the standalone **Vua Tiếng Việt** app was installed before, MyStudioLive copies its imported questions, scores and config on first launch.
 
@@ -159,6 +172,7 @@ Run the game test suites:
 cd vua && node --test
 cd keoco && node --test
 cd dao && node --test
+cd cuoi && node --test
 ```
 
 ### Architecture
@@ -176,6 +190,7 @@ overlay/           Haunted House, Temple and Movie Theater scenes; quan.js = sha
 vua/               Vua Tiếng Việt: own server, 3D overlay (Three.js), control panel, question bank
 keoco/             Kéo Co: own server, 3D arena (Three.js), control panel
 dao/               Đảo Sinh Tồn: own server, battle royale simulation, 3D island (Three.js), control panel
+cuoi/              Cưới Liền Tay: own server (SSE + two-MC TTS), React + Three.js client built into cuoi/dist
 ```
 
 The `vua/` and `keoco/` games run their own servers inside the main process and receive events through a bridge from `src/live.js`, so the whole app keeps a single TikTok connection. Each game's control panel is embedded in its tab; the Vua Tiếng Việt panel follows MyStudioLive's light/dark theme (`vua/studio-theme.css`).

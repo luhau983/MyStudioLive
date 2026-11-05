@@ -1,0 +1,491 @@
+/* Màn hình Cưới Liền Tay: kem, hồng phấn, vàng nhạt. CSS thường, không Tailwind. */
+.dc-stage {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #5a2a36;
+  background: #f6e6d8;
+}
+.dc-canvas {
+  position: absolute;
+  inset: 0;
+  /* luôn phủ kín khung 1080x1920 kể cả khi game tự giảm độ nét (máy chậm) */
+  width: 100%;
+  height: 100%;
+}
+
+.dc-title {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 1.05;
+  color: #ffffff;
+  -webkit-text-stroke: 3px #e05780;
+  paint-order: stroke fill;
+  text-shadow: 0 0 24px rgba(255, 170, 200, 0.7), 0 6px 18px rgba(5, 10, 30, 0.6);
+}
+
+/* Vùng an toàn bản mobile: TikTok cắt ~100px mỗi bên, góc trên trái có huy hiệu kênh + xếp hạng tới ~y 255 */
+.dc-bar {
+  position: absolute;
+  top: 214px;
+  left: 105px;
+  right: 105px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  border-radius: 22px;
+  background: rgba(255, 250, 245, 0.94);
+  border: 3px solid #c4cad4;
+  box-shadow: 0 8px 24px rgba(5, 10, 30, 0.45);
+}
+.dc-pill {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #f6d58e;
+  color: #7a4a10;
+  font-weight: 800;
+  font-size: 20px;
+  white-space: nowrap;
+}
+.dc-pill-live {
+  background: #d4566b;
+  color: #fff;
+  animation: dc-pulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes dc-pulse {
+  to {
+    transform: scale(1.06);
+  }
+}
+.dc-ava {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #f2b8c6;
+  flex: none;
+}
+.dc-ava-empty {
+  display: grid;
+  place-items: center;
+  background: #fde3ea;
+  color: #d4566b;
+  font-size: 30px;
+}
+.dc-who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.dc-who b {
+  font-size: 24px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dc-who span {
+  font-size: 18px;
+  color: #9a6470;
+}
+.dc-side {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-end;
+  flex: none;
+}
+.dc-queue {
+  font-size: 19px;
+}
+.dc-queue b {
+  font-size: 23px;
+  color: #c2415d;
+}
+.dc-like {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 17px;
+}
+.dc-like-bar {
+  width: 70px;
+  height: 10px;
+  border-radius: 999px;
+  background: #f3dde3;
+  overflow: hidden;
+}
+.dc-like-bar div {
+  height: 100%;
+  background: linear-gradient(90deg, #f6b26b, #d4566b);
+  transition: width 0.4s;
+}
+
+/* 1 dòng hướng dẫn dính ngay dưới thanh trạng thái, tự đổi nội dung mỗi 4 giây */
+.dc-guide {
+  position: absolute;
+  top: 287px;
+  left: 105px;
+  right: 105px;
+  padding: 6px 12px;
+  border-radius: 8px 8px 18px 18px;
+  background: rgba(253, 227, 234, 0.92);
+  border: 3px solid #c4cad4;
+  border-top: none;
+  box-shadow: 0 6px 16px rgba(5, 10, 30, 0.4);
+  text-align: center;
+  font-size: 21px;
+  font-weight: 700;
+  color: #7a2e43;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: dc-hint-in 0.4s ease-out both;
+}
+.dc-guide b {
+  color: #c2415d;
+}
+@keyframes dc-hint-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+.dc-guide-h {
+  font-weight: 800;
+  font-size: 22px;
+  color: #9a6470;
+}
+.dc-chip {
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #fde3ea;
+  color: #c2415d;
+  font-weight: 800;
+  font-size: 21px;
+}
+@keyframes dc-card-in {
+  from {
+    opacity: 0;
+    transform: rotate(-8deg) scale(0.6);
+  }
+}
+.dc-gift {
+  position: absolute;
+  top: 1450px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 16px 32px;
+  border-radius: 28px;
+  background: linear-gradient(90deg, #f49ab2, #f6d58e);
+  color: #5a2a36;
+  font-size: 34px;
+  white-space: nowrap;
+  box-shadow: 0 10px 26px rgba(150, 60, 80, 0.3);
+  animation: dc-card-in 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+.dc-gift-big {
+  font-size: 40px;
+  background: linear-gradient(90deg, #d4566b, #f6b26b);
+  color: #fff;
+}
+.dc-canvas-2d {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Cặp đôi trên thanh trạng thái: 2 avatar + tim */
+.dc-pair {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+.dc-heart {
+  font-size: 34px;
+  color: #d4566b;
+  animation: dc-pulse 0.7s ease-in-out infinite alternate;
+}
+.dc-count {
+  font-size: 30px;
+  font-weight: 800;
+  color: #c2415d;
+}
+
+/* Banner cướp dâu: đỏ, nhấp nháy, nằm dưới 2 hàng hướng dẫn */
+.dc-steal {
+  position: absolute;
+  top: 300px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  max-width: 870px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #b5179e, #d62828);
+  color: #fff;
+  font-size: 36px;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 10px 26px rgba(120, 20, 60, 0.35);
+  animation: dc-pulse 0.8s ease-in-out infinite alternate;
+}
+.dc-steal b {
+  color: #ffe066;
+}
+.dc-queue-pill {
+  position: absolute;
+  top: 1560px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 10px 24px;
+  border-radius: 999px;
+  background: rgba(255, 250, 245, 0.92);
+  border: 3px solid #f2b8c6;
+  font-size: 28px;
+  color: #9a6470;
+}
+.dc-queue-pill b {
+  color: #c2415d;
+}
+
+/* Nguyệt Lão: banner đỏ + thẻ lời nguyện */
+.dc-duyen {
+  background: linear-gradient(90deg, #c8102e, #ff4d6d);
+}
+.dc-nguyen {
+  position: absolute;
+  top: 524px;
+  left: 120px;
+  right: 120px;
+  padding: 22px 30px 26px;
+  border-radius: 26px;
+  background: rgba(255, 250, 245, 0.95);
+  border: 4px solid #c8102e;
+  box-shadow: 0 14px 34px rgba(5, 10, 30, 0.45);
+  text-align: center;
+  animation: dc-card-in 0.6s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+.dc-nguyen-h {
+  font-size: 26px;
+  font-weight: 800;
+  color: #c8102e;
+}
+.dc-nguyen-ten {
+  margin-top: 6px;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: 56px;
+  color: #c8102e;
+}
+.dc-nguyen p {
+  margin: 10px 0 0;
+  font-size: 28px;
+  line-height: 1.45;
+  color: #4a2a33;
+}
+
+.dc-guide2 {
+  top: 374px;
+  padding: 5px 12px;
+}
+
+.dc-vote {
+  background: linear-gradient(90deg, #e05780, #b388ff);
+}
+
+/* PK cướp dâu: 2 phe, thanh điểm đỏ (cướp) / xanh (giữ), nằm dưới 2 hàng hướng dẫn */
+.dc-pk {
+  position: absolute;
+  top: 300px;
+  left: 120px;
+  right: 120px;
+  padding: 12px 18px 14px;
+  border-radius: 24px;
+  background: rgba(20, 10, 30, 0.82);
+  border: 3px solid #ffd166;
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(5, 10, 30, 0.5);
+}
+.dc-pk-head {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  color: #ffd166;
+}
+.dc-pk-bar {
+  display: flex;
+  height: 48px;
+  margin-top: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  font-size: 28px;
+  font-weight: 800;
+}
+.dc-pk-atk,
+.dc-pk-def {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  transition: width 0.35s;
+}
+.dc-pk-atk {
+  background: linear-gradient(90deg, #d62828, #ff5d8f);
+}
+.dc-pk-def {
+  flex: 1;
+  justify-content: flex-end;
+  background: linear-gradient(90deg, #4cc9f0, #3a86ff);
+}
+.dc-pk-sub {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 22px;
+}
+.dc-pk-sub b {
+  color: #ffd166;
+}
+.dc-pk-note {
+  margin-top: 4px;
+  text-align: center;
+  font-size: 19px;
+  opacity: 0.8;
+}
+.dc-parents {
+  position: absolute;
+  top: 1640px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  max-width: 860px;
+  padding: 10px 24px;
+  border-radius: 22px;
+  background: rgba(255, 250, 245, 0.92);
+  border: 3px solid #f6d58e;
+  font-size: 26px;
+  font-weight: 800;
+  color: #7a4a10;
+  text-align: center;
+}
+.dc-parents small {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #9a6470;
+}
+.dc-dark {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+.dc-dark.on {
+  opacity: 0.93;
+}
+
+/* Top đại gia mừng cưới: góc dưới bên phải (né vùng comment bên trái của TikTok, né mép phải bị cắt) */
+.dc-top {
+  padding: 10px 14px 12px;
+  border-radius: 20px;
+  background: rgba(20, 10, 30, 0.72);
+  border: 2px solid #ffd166;
+  color: #fff;
+  font-size: 20px;
+}
+.dc-top-h {
+  margin-bottom: 6px;
+  text-align: center;
+  font-weight: 800;
+  color: #ffd166;
+}
+.dc-top-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+}
+.dc-top-rank {
+  width: 30px;
+  text-align: center;
+  font-weight: 800;
+}
+.dc-top-name {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dc-top-row b {
+  color: #ffd166;
+  white-space: nowrap;
+}.dc-top-empty {
+  padding: 6px 0 2px;
+  text-align: center;
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+/* Cột bên phải: Luật chơi ngay trên Top đại gia, luôn hiện cho người mới vào live */
+.dc-side-col {
+  position: absolute;
+  top: 760px;
+  right: 105px;
+  width: 330px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dc-rules {
+  padding: 10px 14px 12px;
+  border-radius: 20px;
+  background: rgba(255, 250, 245, 0.93);
+  border: 2px solid #f2b8c6;
+  color: #5a2a36;
+  font-size: 19px;
+  line-height: 1.35;
+}
+.dc-rules-h {
+  margin-bottom: 4px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #c2415d;
+}
+.dc-rules ol {
+  margin: 0;
+  padding-left: 24px;
+}
+.dc-rules li {
+  margin: 3px 0;
+}
+.dc-rules b {
+  color: #c2415d;
+}.dc-side-col {
+  transition: opacity 0.5s;
+}
+.dc-side-col.off {
+  opacity: 0;
+  pointer-events: none;
+}

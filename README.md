@@ -40,6 +40,7 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 | ⚔️ **Đánh Boss** | Thả tim = đánh, `đánh` = đòn mạnh, `né` khi boss gồng chiêu | Cả live cùng hạ Quái Vương Đá; không né mất tim, hết tim thì gục; quà = chí mạng / hồi sinh; BXH sát thương |
 | 🔮 **Thả Bi** | Comment `thả` hoặc thả tim để thả bi | Bàn Plinko, bi nảy qua chốt vào ô ×½ đến ×50 (JACKPOT ở mép); quà = bi vàng nhân điểm; BXH điểm theo ván |
 | 🏝️ **Đảo Sinh Tồn** | Comment để nhảy dù lên đảo, ra lệnh `trốn` / `xông` / `hồi`, thả tim hồi máu | Battle royale 3D: bão thu hẹp 4 vòng, người bị loại comment `bão 1/2/3` chọn tâm bão; quà = khiên, hòm tiếp tế, hồi sinh, mưa thiên thạch |
+| 💍 **Cưới Liền Tay** | Comment để vào sảnh cưới, `cưới vợ @tên` / `cưới chồng @tên` để cầu hôn, `đồng ý` / `không` để trả lời | Tiệc cưới 3D, 2 MC dẫn bằng giọng đọc; tặng từ 30 xu = cướp dâu / cướp rể; `se duyên`, `đấm @tên`, `quẩy`, `zô`; 300 tim cả sảnh quẩy |
 
 | 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
 |---|---|---|---|
@@ -108,6 +109,18 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 - Phòng vắng thì đảo thả zombie để không trống; zombie không bao giờ thắng. Bảng xếp hạng mùa chỉ để vinh danh, không có giải thưởng.
 - Có chế độ luyện tập tự sinh người xem ảo khi chưa live.
 
+### 💍 Cưới Liền Tay
+
+Chuyển từ dự án [cuoi-lien-tay](https://github.com/workaipvlinh-byte/cuoi-lien-tay) (MIT), chạy bằng kết nối TikTok chung của app.
+
+- Comment bất kỳ là vào sảnh, hiện bong bóng chat trên đầu nhân vật mang tên + avatar TikTok.
+- `cưới vợ @tên` (mình làm chú rể), `cưới chồng @tên` (mình làm cô dâu), `cưới @tên` (MC bốc vai). Người được hỏi có 60 giây gõ `đồng ý` / `không`; đang có đám thì xếp hàng (tối đa 5).
+- Đang chờ trả lời hoặc đang đi thảm đỏ, ai tặng từ 30 xu là cướp dâu / cướp rể (lần nào cũng 30 xu, không đấu giá).
+- `se duyên` lúc Nguyệt Lão xuất hiện, `đấm @tên` / `trêu @tên`, `quẩy` ra sàn nhảy, `zô` nâng ly. Lệnh có dấu hay không dấu đều được.
+- Mốc tim 100 / 300 / 1000; quà 6 cấp; phòng vắng thì "dàn khách quen" tự cầu hôn nhau cho sảnh không trống.
+- Bảng điều khiển trong tab: đọc ngay, tốc độ giọng, tên kênh, nhạc nền, nút thử khách / quà khi chưa live. Cảnh 3D khá nặng, máy yếu có thể giật.
+- Giao diện viết bằng React + Vite: `npm start` / `npm run dist:*` tự build vào `cuoi/dist`; sửa cảnh xong chạy lại `npm run build:cuoi`.
+
 ## Tải & cài đặt
 
 Tải bản cài mới nhất ở trang **[Releases](https://github.com/luhau983/MyStudioLive/releases)**. Chưa có bản phù hợp thì [tự đóng gói từ mã nguồn](#chạy-từ-mã-nguồn).
@@ -162,6 +175,7 @@ Hướng dẫn chi tiết (chất lượng hình, âm thanh, xử lý lỗi): **
 | Vua Tiếng Việt (câu hỏi, điểm, cấu hình) | `%APPDATA%\StudioLive\vua\` | `~/Library/Application Support/StudioLive/vua/` |
 | Kéo Co (cấu hình, thống kê, lịch sử trận) | `%APPDATA%\StudioLive\keoco\` | `~/Library/Application Support/StudioLive/keoco/` |
 | Đảo Sinh Tồn (cấu hình, bảng xếp hạng mùa) | `%APPDATA%\StudioLive\dao\` | `~/Library/Application Support/StudioLive/dao/` |
+| Cưới Liền Tay (tên kênh) | `%APPDATA%\StudioLive\cuoi\` | `~/Library/Application Support/StudioLive/cuoi/` |
 
 Thư mục dữ liệu vẫn tên `StudioLive` để giữ cài đặt cũ sau khi đổi tên app. Nếu máy đã từng cài app **Vua Tiếng Việt** riêng, lần đầu mở MyStudioLive sẽ tự chép câu hỏi đã import, điểm và cấu hình sang.
 
@@ -193,6 +207,7 @@ cd denxanh && node --test
 cd danhboss && node --test
 cd thabi && node --test
 cd dao && node --test
+cd cuoi && node --test
 ```
 
 ### Kiến trúc
@@ -213,6 +228,7 @@ denxanh/           Game Đèn Xanh Đèn Đỏ: server riêng, sân canvas 2D, b
 danhboss/          Game Đánh Boss: server riêng, đấu trường canvas 2D, bảng điều khiển
 thabi/             Game Thả Bi (Plinko): server riêng, bàn canvas 2D, bảng điều khiển
 dao/               Game Đảo Sinh Tồn: server riêng, mô phỏng battle royale, đảo 3D (Three.js), bảng điều khiển
+cuoi/              Game Cưới Liền Tay: server riêng (SSE + giọng 2 MC), client React + Three.js build vào cuoi/dist
 ```
 
 Hai game `vua/` và `keoco/` chạy server riêng ngay trong tiến trình chính và nhận sự kiện qua cầu nối từ `src/live.js`, nên chỉ có một kết nối TikTok cho cả app. Bảng điều khiển của từng game được nhúng vào tab tương ứng; bảng của Vua Tiếng Việt đổi theo giao diện sáng/tối của MyStudioLive (`vua/studio-theme.css`).
