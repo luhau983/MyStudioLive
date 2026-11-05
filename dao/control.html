@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đảo Sinh Tồn · Điều khiển</title>
+<link rel="stylesheet" href="control.css">
+</head>
+<body>
+<main class="wrap">
+  <section class="card status">
+    <div class="row between">
+      <div><h1>🏝️ Đảo Sinh Tồn</h1><p class="muted" id="live">Chưa kết nối live</p></div>
+      <div class="pill" id="phase">—</div>
+    </div>
+    <div class="stats">
+      <div><b id="s-round">1</b><small>Ván</small></div>
+      <div><b id="s-timer">--</b><small>Còn lại</small></div>
+      <div><b id="s-enrolled">0</b><small>Đăng ký</small></div>
+      <div><b id="s-alive">0</b><small>Còn sống</small></div>
+      <div><b id="s-zombies">0</b><small>Zombie</small></div>
+      <div><b id="s-queued">0</b><small>Chờ ván sau</small></div>
+    </div>
+    <div class="row wrap-btns">
+      <button data-cmd="start" class="primary">▶ Bắt đầu ngay</button>
+      <button data-cmd="skip">⏭ Bỏ qua giai đoạn</button>
+      <button data-cmd="end">⏹ Kết thúc ván</button>
+      <button data-cmd="reset">↺ Ván mới</button>
+    </div>
+    <p class="error" id="error" hidden></p>
+  </section>
+
+  <section class="card">
+    <h2>Luyện tập &amp; giả lập</h2>
+    <p class="muted">Chỉ dùng khi chưa kết nối live. Kết quả luyện tập không tính vào bảng xếp hạng.</p>
+    <label class="switch"><input type="checkbox" id="practice"> Chế độ luyện tập (tự sinh người xem ảo)</label>
+    <div class="sim">
+      <span>Người vào</span><button data-sim="join" data-n="5">+5</button><button data-sim="join" data-n="30">+30</button><button data-sim="join" data-n="100">+100</button>
+      <span>Hành động</span><button data-sim="like" data-n="30">❤ ×30</button><button data-sim="stance" data-n="10">Tư thế ×10</button><button data-sim="vote" data-n="10">Vote bão ×10</button>
+      <span>Quà</span><button data-sim="gift1" data-n="5">T1 hồi máu</button><button data-sim="gift2" data-n="5">T2 khiên</button><button data-sim="gift3" data-n="1">T3 tiếp tế</button><button data-sim="gift4" data-n="1">T4 hồi sinh</button><button data-sim="gift5" data-n="1">T5 thiên thạch</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Thông số trận</h2>
+    <form id="config" class="grid">
+      <label>Chờ nhảy dù (giây)<input type="number" name="lobbySeconds" min="5" max="600"></label>
+      <label>Nhảy dù (giây)<input type="number" name="dropSeconds" min="3" max="60"></label>
+      <label>Nhặt đồ (giây)<input type="number" name="lootSeconds" min="10" max="600"></label>
+      <label>Bão chờ (giây)<input type="number" name="stormWaitSeconds" min="5" max="300"></label>
+      <label>Bão ép (giây)<input type="number" name="stormShrinkSeconds" min="5" max="300"></label>
+      <label>Chung kết (giây)<input type="number" name="finalSeconds" min="10" max="300"></label>
+      <label>Màn kết quả (giây)<input type="number" name="resultSeconds" min="5" max="120"></label>
+      <label>Tối đa người/ván<input type="number" name="maxPlayers" min="2" max="1000"></label>
+      <label>Ít hơn số này thì thả zombie<input type="number" name="minPlayers" min="0" max="50"></label>
+      <label>Sức mạnh quà (0–100)<input type="number" name="giftPower" min="0" max="100"></label>
+      <label>Tim để đầy hype<input type="number" name="hypeLikes" min="50" max="100000"></label>
+      <label>Hồi máu/giây từ tim<input type="number" name="likeHealPerSecond" min="0" max="20"></label>
+      <label>Tự giữ chỗ ván sau (giây)<input type="number" name="rejoinSeconds" min="0" max="3600"></label>
+      <label class="switch"><input type="checkbox" name="autoJoin"> Comment bất kỳ là vào</label>
+      <label class="switch"><input type="checkbox" name="zombies"> Zombie khi phòng vắng</label>
+      <label class="switch"><input type="checkbox" name="tts"> Giọng bình luận (TTS)</label>
+      <div class="full row"><button type="submit" class="primary">Lưu thông số</button><span class="muted" id="saved"></span></div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Người chơi ván này <small class="muted" id="p-count"></small></h2>
+    <table class="table"><thead><tr><th>Tên</th><th>Lớp</th><th>Nơi đáp</th><th>HP</th><th>Hạ</th><th></th></tr></thead><tbody id="players"></tbody></table>
+  </section>
+
+  <section class="card two">
+    <div>
+      <h2>🏆 Bảng xếp hạng mùa</h2>
+      <p class="muted" id="season-since"></p>
+      <ol id="board" class="board"></ol>
+      <button id="season-reset" class="danger">Reset mùa</button>
+    </div>
+    <div>
+      <h2>Nhật ký</h2>
+      <ul id="log" class="log"></ul>
+    </div>
+  </section>
+</main>
+<script src="control.js"></script>
+</body>
+</html>

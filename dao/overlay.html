@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đảo Sinh Tồn · Overlay</title>
+<link rel="stylesheet" href="overlay.css">
+</head>
+<body>
+<main id="stage" class="stage">
+  <div id="gl" class="gl" aria-label="Đảo 3D"></div>
+  <canvas id="labels" class="labels" aria-hidden="true"></canvas>
+  <div id="no-webgl" class="no-webgl" hidden>Máy không hỗ trợ WebGL — không hiển thị được đảo 3D.</div>
+
+  <header class="hud">
+    <div class="brand"><span class="brand-ico">🏝️</span><div><b>ĐẢO SINH TỒN</b><small id="round">Ván 1</small></div></div>
+    <div class="clock"><span id="phase">CHỜ NGƯỜI CHƠI</span><strong id="timer">--</strong><small id="stage-label"></small></div>
+    <div class="alive"><b id="alive">0</b><small>CÒN SỐNG</small><span id="zombies" class="zombies" hidden>🧟 0</span></div>
+  </header>
+
+  <section id="lobby" class="lobby" hidden>
+    <h2>NHẢY DÙ LÊN ĐẢO</h2>
+    <p class="lobby-count"><b id="lobby-count">0</b> người đã đăng ký</p>
+    <div class="lobby-grid">
+      <div class="lobby-card"><h3>NƠI ĐÁP</h3><ul id="lobby-zones" class="bars"></ul></div>
+      <div class="lobby-card"><h3>LỚP NHÂN VẬT</h3><ul id="lobby-classes" class="bars"></ul></div>
+    </div>
+    <div id="lobby-recent" class="chips"></div>
+    <div class="lobby-card board"><h3>🏆 CAO THỦ MÙA NÀY</h3><ol id="board"></ol></div>
+  </section>
+
+  <aside id="feed" class="feed" aria-live="polite"></aside>
+  <div id="banner" class="banner" hidden></div>
+  <div id="gift-toast" class="gift-toast" hidden></div>
+
+  <section id="result" class="result" hidden>
+    <div class="result-call" id="result-call">VÔ ĐỊCH!</div>
+    <div class="podium" id="podium"></div>
+    <div class="mvp" id="mvp"></div>
+  </section>
+
+  <footer class="bottom">
+    <div class="hype"><span>🔥 HYPE</span><div class="hype-track"><i id="hype-fill"></i></div><small id="hype-text">0/3000 ❤ → hòm tiếp tế</small></div>
+    <div id="help" class="help"></div>
+  </footer>
+  <div id="connection" class="connection" hidden>Đang kết nối lại…</div>
+</main>
+<script type="module" src="overlay.js"></script>
+</body>
+</html>

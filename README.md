@@ -39,6 +39,7 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 | 🚦 **Đèn Xanh Đèn Đỏ** | Thả tim / comment để vào sân, thả tim hoặc `chạy` để tiến | Đèn đỏ mà cử động là bị loại (có ân hạn bù độ trễ TikTok); quà = khiên + lao lên; bot thử nghiệm |
 | ⚔️ **Đánh Boss** | Thả tim = đánh, `đánh` = đòn mạnh, `né` khi boss gồng chiêu | Cả live cùng hạ Quái Vương Đá; không né mất tim, hết tim thì gục; quà = chí mạng / hồi sinh; BXH sát thương |
 | 🔮 **Thả Bi** | Comment `thả` hoặc thả tim để thả bi | Bàn Plinko, bi nảy qua chốt vào ô ×½ đến ×50 (JACKPOT ở mép); quà = bi vàng nhân điểm; BXH điểm theo ván |
+| 🏝️ **Đảo Sinh Tồn** | Comment để nhảy dù lên đảo, ra lệnh `trốn` / `xông` / `hồi`, thả tim hồi máu | Battle royale 3D: bão thu hẹp 4 vòng, người bị loại comment `bão 1/2/3` chọn tâm bão; quà = khiên, hòm tiếp tế, hồi sinh, mưa thiên thạch |
 
 | 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
 |---|---|---|---|
@@ -97,6 +98,16 @@ Mở tab nào ở menu trái thì cảnh đó chạy trên live. Mọi cảnh d�
 - Quà = bi vàng ×3 điểm, thêm 1 viên mỗi 10 kim cương (tối đa 5), không bị giới hạn chờ.
 - Hết giờ (mặc định 3 phút) ai nhiều điểm nhất thắng; bi còn đang rơi vẫn được tính.
 
+### 🏝️ Đảo Sinh Tồn
+
+- Comment bất kỳ (hoặc `vào`) là nhảy dù lên đảo; trong lúc chờ comment `chiến` / `cung` / `ninja` chọn lớp, `bắc` / `nam` / `đông` / `tây` chọn nơi đáp. Không dấu cũng được.
+- Nhân vật tự đánh; người xem chỉ chọn chiến thuật: `trốn` (khó bị phát hiện), `xông` (+25% sát thương), `hồi` (hồi máu), mỗi lệnh có hồi chiêu.
+- Vòng mặc định ~5 phút: chờ 30s → nhảy dù 8s → nhặt đồ 45s → 4 vòng bão (chờ 25s + ép 20s) → chung kết 30s → kết quả 15s.
+- Bị loại vẫn chơi tiếp: comment `bão 1` / `bão 2` / `bão 3` để chọn tâm bão tiếp theo.
+- Tim hồi máu (có giới hạn mỗi giây) và nạp thanh hype; đầy thanh là thả hòm tiếp tế cho cả đảo. Quà chia 5 tầng theo kim cương (hồi máu → khiên → hòm tiếp tế → hồi sinh → mưa thiên thạch), yếu dần theo vòng bão để người không tặng quà vẫn thắng được; "Sức mạnh quà" chỉnh trong bảng điều khiển.
+- Phòng vắng thì đảo thả zombie để không trống; zombie không bao giờ thắng. Bảng xếp hạng mùa chỉ để vinh danh, không có giải thưởng.
+- Có chế độ luyện tập tự sinh người xem ảo khi chưa live.
+
 ## Tải & cài đặt
 
 Tải bản cài mới nhất ở trang **[Releases](https://github.com/luhau983/MyStudioLive/releases)**. Chưa có bản phù hợp thì [tự đóng gói từ mã nguồn](#chạy-từ-mã-nguồn).
@@ -150,6 +161,7 @@ Hướng dẫn chi tiết (chất lượng hình, âm thanh, xử lý lỗi): **
 | Cài đặt app | `%APPDATA%\StudioLive\settings.json` | `~/Library/Application Support/StudioLive/settings.json` |
 | Vua Tiếng Việt (câu hỏi, điểm, cấu hình) | `%APPDATA%\StudioLive\vua\` | `~/Library/Application Support/StudioLive/vua/` |
 | Kéo Co (cấu hình, thống kê, lịch sử trận) | `%APPDATA%\StudioLive\keoco\` | `~/Library/Application Support/StudioLive/keoco/` |
+| Đảo Sinh Tồn (cấu hình, bảng xếp hạng mùa) | `%APPDATA%\StudioLive\dao\` | `~/Library/Application Support/StudioLive/dao/` |
 
 Thư mục dữ liệu vẫn tên `StudioLive` để giữ cài đặt cũ sau khi đổi tên app. Nếu máy đã từng cài app **Vua Tiếng Việt** riêng, lần đầu mở MyStudioLive sẽ tự chép câu hỏi đã import, điểm và cấu hình sang.
 
@@ -180,6 +192,7 @@ npm test             # Live Bar (luật chơi + proxy avatar)
 cd denxanh && node --test
 cd danhboss && node --test
 cd thabi && node --test
+cd dao && node --test
 ```
 
 ### Kiến trúc
@@ -199,6 +212,7 @@ keoco/             Game Kéo Co: server riêng, sân 3D (Three.js), bảng đi�
 denxanh/           Game Đèn Xanh Đèn Đỏ: server riêng, sân canvas 2D, bảng điều khiển
 danhboss/          Game Đánh Boss: server riêng, đấu trường canvas 2D, bảng điều khiển
 thabi/             Game Thả Bi (Plinko): server riêng, bàn canvas 2D, bảng điều khiển
+dao/               Game Đảo Sinh Tồn: server riêng, mô phỏng battle royale, đảo 3D (Three.js), bảng điều khiển
 ```
 
 Hai game `vua/` và `keoco/` chạy server riêng ngay trong tiến trình chính và nhận sự kiện qua cầu nối từ `src/live.js`, nên chỉ có một kết nối TikTok cho cả app. Bảng điều khiển của từng game được nhúng vào tab tương ứng; bảng của Vua Tiếng Việt đổi theo giao diện sáng/tối của MyStudioLive (`vua/studio-theme.css`).

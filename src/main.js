@@ -228,8 +228,8 @@ function canvasGame(id, portOffset) {
   };
   return g;
 }
-// cổng StudioLive +4 / +5 (+1 Vua, +2 Kéo Co, +3 Đèn Xanh Đèn Đỏ)
-const canvasGames = [canvasGame('danhboss', 4), canvasGame('thabi', 5)];
+// cổng StudioLive +4 / +5 / +6 (+1 Vua, +2 Kéo Co, +3 Đèn Xanh Đèn Đỏ); dao = Đảo Sinh Tồn
+const canvasGames = [canvasGame('danhboss', 4), canvasGame('thabi', 5), canvasGame('dao', 6)];
 
 const overlay = new OverlayServer({
   getConfig: () => settings.get(),

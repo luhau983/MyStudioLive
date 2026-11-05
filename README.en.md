@@ -37,6 +37,7 @@ Whichever tab is open in the left menu is the scene shown on the live stream. Al
 | 🪢 **Kéo Co Online** (Tug of War) | Comment `ĐỎ` (red) / `XANH` (blue) to join, send likes to pull | 3D arena, 5 per team with bots filling gaps; gifts add pull points and team mana |
 | 🧊 **Trà Đá Vỉa Hè** (Sidewalk Iced Tea) | Type `trà đá` / `cà phê` / `coca` / `bò húc` / `hướng dương` / `bánh mì` / `tính tiền` (pay & leave) | Hanoi sidewalk stall where every viewer gets a chibi on a plastic stool; the owner serves orders to the table; big gifts make the gifter the "đại ca" who treats everyone |
 | 🍺 **Đi Nhậu Online** (Night Pub) | Type `bia` (beer) / `dzô` (cheers) / `lạc` / `mực` / `lẩu` / `tính tiền` | 6 tables × 4 seats; whole tables clink glasses, heavy drinkers turn red and doze off; drinking leaderboard; big gifts buy a round for the house |
+| 🏝️ **Đảo Sinh Tồn** (Survival Island) | Comment to parachute in, command `trốn` (hide) / `xông` (charge) / `hồi` (heal), send likes to heal | 3D battle royale: a storm shrinks over 4 stages, eliminated viewers comment `bão 1/2/3` to pick the next storm centre; gifts = shield, supply crate, revive, meteor shower |
 
 | 👻 Live Ma Online | 🪷 Đi Chùa Online | 🎬 Rạp Phim Online | 👑 Vua Tiếng Việt |
 |---|---|---|---|
@@ -66,6 +67,16 @@ Whichever tab is open in the left menu is the scene shown on the live stream. Al
 - Gifts: free items for small gifts, a treat for the whole table from 10 💎, and from the **big gift** threshold the gifter becomes the boss (sunglasses, gold chain) and treats the whole place while the camera zooms in.
 - Like goals: free iced tea for everyone with falling ice / a house-wide 100% cheers.
 - Optional simulated regulars keep an empty stall lively and give up their seats to real viewers. Street / pub ambience is synthesized with WebAudio.
+
+### 🏝️ Đảo Sinh Tồn
+
+- Any comment (or `vào`) drops the viewer onto the island; in the lobby `chiến` / `cung` / `ninja` picks a class and `bắc` / `nam` / `đông` / `tây` a landing zone. Accents are optional.
+- Avatars fight on their own; viewers only pick tactics: `trốn` (harder to spot), `xông` (+25% damage), `hồi` (heal), each with a cooldown.
+- Default round ~5 minutes: lobby 30s → drop 8s → loot 45s → 4 storm stages (25s wait + 20s shrink) → final 30s → result 15s.
+- Eliminated viewers stay in the game: commenting `bão 1` / `bão 2` / `bão 3` votes for the next storm centre.
+- Likes heal (capped per second) and fill a hype meter that drops supply crates for everyone. Gifts come in 5 diamond tiers (heal → shield → supply crate → revive → meteor shower) and weaken as the storm closes, so viewers who never gift can still win; "Gift power" is adjustable in the control panel.
+- Empty rooms get zombies so the island never looks dead; zombies can never win. The season leaderboard is for bragging rights only, no prizes.
+- Practice mode simulates viewers when you are not live.
 
 ## Download & install
 
@@ -120,6 +131,7 @@ Full guide (Vietnamese; picture quality, audio, troubleshooting): **[docs/HUONG-
 | App settings | `%APPDATA%\StudioLive\settings.json` | `~/Library/Application Support/StudioLive/settings.json` |
 | Vua Tiếng Việt (questions, scores, config) | `%APPDATA%\StudioLive\vua\` | `~/Library/Application Support/StudioLive/vua/` |
 | Kéo Co (config, stats, match history) | `%APPDATA%\StudioLive\keoco\` | `~/Library/Application Support/StudioLive/keoco/` |
+| Đảo Sinh Tồn (config, season leaderboard) | `%APPDATA%\StudioLive\dao\` | `~/Library/Application Support/StudioLive/dao/` |
 
 The data folder keeps the `StudioLive` name so existing settings survive the rename. If the standalone **Vua Tiếng Việt** app was installed before, MyStudioLive copies its imported questions, scores and config on first launch.
 
@@ -146,6 +158,7 @@ Run the game test suites:
 ```bash
 cd vua && node --test
 cd keoco && node --test
+cd dao && node --test
 ```
 
 ### Architecture
@@ -162,6 +175,7 @@ renderer/          Control UI (light / dark / system)
 overlay/           Haunted House, Temple and Movie Theater scenes; quan.js = shared engine for Iced Tea & Night Pub
 vua/               Vua Tiếng Việt: own server, 3D overlay (Three.js), control panel, question bank
 keoco/             Kéo Co: own server, 3D arena (Three.js), control panel
+dao/               Đảo Sinh Tồn: own server, battle royale simulation, 3D island (Three.js), control panel
 ```
 
 The `vua/` and `keoco/` games run their own servers inside the main process and receive events through a bridge from `src/live.js`, so the whole app keeps a single TikTok connection. Each game's control panel is embedded in its tab; the Vua Tiếng Việt panel follows MyStudioLive's light/dark theme (`vua/studio-theme.css`).

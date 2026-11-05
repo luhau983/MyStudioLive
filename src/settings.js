@@ -19,7 +19,7 @@ const DEFAULTS = {
     showLikeCounter: true,
     showViewerCounter: true,
     showTopGifter: true,
-    mode: 'game',               // game (Nhà Ma) | cards (thẻ bình luận) | chua (Đi Chùa) | rap (Rạp Phim) | vua (Vua Tiếng Việt) | keoco (Kéo Co) | bar (Live Bar) | trada (Trà Đá) | nhau (Đi Nhậu) | denxanh (Đèn Xanh Đèn Đỏ) | danhboss (Đánh Boss) | thabi (Thả Bi)
+    mode: 'game',               // game (Nhà Ma) | cards (thẻ bình luận) | chua (Đi Chùa) | rap (Rạp Phim) | vua (Vua Tiếng Việt) | keoco (Kéo Co) | bar (Live Bar) | trada (Trà Đá) | nhau (Đi Nhậu) | denxanh (Đèn Xanh Đèn Đỏ) | danhboss (Đánh Boss) | thabi (Thả Bi) | dao (Đảo Sinh Tồn)
     barName: '',                // tên bar (màn LED + tiêu đề)
     barJoinMode: 'keyword',     // keyword: gõ từ khoá / tặng quà mới vào sàn | all: mọi tương tác đều vào sàn
     barJoinKeyword: 'hey',      // từ khoá vào sàn
@@ -134,7 +134,7 @@ class Settings {
     o.ambientVolume = Math.min(1, Math.max(0, o.ambientVolume));
     o.liveBoost = Math.min(40, Math.max(0, Math.round(o.liveBoost)));
     if (!['drone', 'wind', 'rain', 'church', 'heartbeat', 'musicbox', 'whispers', 'forest'].includes(o.ambientPreset)) o.ambientPreset = 'drone';
-    if (!['game', 'cards', 'chua', 'rap', 'vua', 'keoco', 'bar', 'trada', 'nhau', 'denxanh', 'danhboss', 'thabi'].includes(o.mode)) o.mode = 'game';
+    if (!['game', 'cards', 'chua', 'rap', 'vua', 'keoco', 'bar', 'trada', 'nhau', 'denxanh', 'danhboss', 'thabi', 'dao'].includes(o.mode)) o.mode = 'game';
     o.barName = String(o.barName).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 28);
     if (!['keyword', 'all'].includes(o.barJoinMode)) o.barJoinMode = 'keyword';
     o.barJoinKeyword = String(o.barJoinKeyword).replace(/[\x00-\x1f\x7f]/g, '').trim().slice(0, 24) || 'hey';

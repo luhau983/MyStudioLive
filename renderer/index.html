@@ -122,6 +122,9 @@
       <button class="nav-item" data-view="thabi" title="Thả Bi">
         <span class="nav-emoji"><svg class="ic"><use href="#i-plinko"/></svg></span><span class="nav-label">Thả Bi</span><span class="live-dot" data-live-for="thabi">LIVE</span>
       </button>
+      <button class="nav-item" data-view="dao" title="Đảo Sinh Tồn">
+        <span class="nav-emoji"><svg class="ic"><use href="#i-trees"/></svg></span><span class="nav-label">Đảo Sinh Tồn</span><span class="live-dot" data-live-for="dao">LIVE</span>
+      </button>
       <h3 class="menu-group"><span class="menu-group-title">Khác</span><span class="menu-group-dots">•••</span></h3>
       <button class="nav-item" data-view="trada" title="Trà Đá Vỉa Hè">
         <span class="nav-emoji"><svg class="ic"><use href="#i-cup-soda"/></svg></span><span class="nav-label">Trà Đá Vỉa Hè</span><span class="live-dot" data-live-for="trada">LIVE</span>
@@ -237,7 +240,7 @@
           <div class="panel quick">
             <div class="panel-head"><h2>Bắt đầu nhanh</h2></div>
             <ol class="qs">
-              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><div class="qs-actions"><button class="btn ghost sm" data-goto="ma"><svg class="ic"><use href="#i-ghost"/></svg> Ma</button><button class="btn ghost sm" data-goto="chua"><svg class="ic"><use href="#i-flower-2"/></svg> Chùa</button><button class="btn ghost sm" data-goto="rap"><svg class="ic"><use href="#i-clapperboard"/></svg> Rạp</button><button class="btn ghost sm" data-goto="vua"><svg class="ic"><use href="#i-crown"/></svg> Vua</button><button class="btn ghost sm" data-goto="keoco"><svg class="ic"><use href="#i-biceps-flexed"/></svg> Kéo Co</button><button class="btn ghost sm" data-goto="trada"><svg class="ic"><use href="#i-cup-soda"/></svg> Trà đá</button><button class="btn ghost sm" data-goto="nhau"><svg class="ic"><use href="#i-beer"/></svg> Nhậu</button><button class="btn ghost sm" data-goto="denxanh"><svg class="ic"><use href="#i-traffic-light"/></svg> Đèn</button><button class="btn ghost sm" data-goto="danhboss"><svg class="ic"><use href="#i-swords"/></svg> Boss</button><button class="btn ghost sm" data-goto="thabi"><svg class="ic"><use href="#i-plinko"/></svg> Thả Bi</button></div></li>
+              <li data-qs="scene"><span class="qs-n">1</span><div><b>Chọn cảnh</b><small id="qs-scene"></small></div><div class="qs-actions"><button class="btn ghost sm" data-goto="ma"><svg class="ic"><use href="#i-ghost"/></svg> Ma</button><button class="btn ghost sm" data-goto="chua"><svg class="ic"><use href="#i-flower-2"/></svg> Chùa</button><button class="btn ghost sm" data-goto="rap"><svg class="ic"><use href="#i-clapperboard"/></svg> Rạp</button><button class="btn ghost sm" data-goto="vua"><svg class="ic"><use href="#i-crown"/></svg> Vua</button><button class="btn ghost sm" data-goto="keoco"><svg class="ic"><use href="#i-biceps-flexed"/></svg> Kéo Co</button><button class="btn ghost sm" data-goto="trada"><svg class="ic"><use href="#i-cup-soda"/></svg> Trà đá</button><button class="btn ghost sm" data-goto="nhau"><svg class="ic"><use href="#i-beer"/></svg> Nhậu</button><button class="btn ghost sm" data-goto="denxanh"><svg class="ic"><use href="#i-traffic-light"/></svg> Đèn</button><button class="btn ghost sm" data-goto="danhboss"><svg class="ic"><use href="#i-swords"/></svg> Boss</button><button class="btn ghost sm" data-goto="thabi"><svg class="ic"><use href="#i-plinko"/></svg> Thả Bi</button><button class="btn ghost sm" data-goto="dao"><svg class="ic"><use href="#i-trees"/></svg> Đảo</button></div></li>
               <li data-qs="link"><span class="qs-n">2</span><div><b>Thêm vào TikTok LIVE Studio</b><small>Nguồn <b>Link</b>: <code id="qs-link">http://lvh.me:3000</code> · 1080×1920</small></div><button class="btn ghost sm" id="qs-copy">Sao chép</button></li>
               <li data-qs="golive"><span class="qs-n">3</span><div><b>Bấm Go LIVE trên TikTok</b><small>Bật live trước khi kết nối ở bước 4</small></div></li>
               <li data-qs="connect"><span class="qs-n">4</span><div><b>Kết nối username</b><small>Nhập @username ở trên và bấm Kết nối</small></div></li>
@@ -276,6 +279,7 @@
         <button class="btn scene-btn denxanh" data-open-scene="denxanh"><span class="sb-ico"><svg class="ic"><use href="#i-traffic-light"/></svg></span><span><b>Phát Đèn Xanh Đèn Đỏ</b><small>Chuyển live sang sân Đèn Xanh Đèn Đỏ + mở màn hình phát</small></span></button>
         <button class="btn scene-btn danhboss" data-open-scene="danhboss"><span class="sb-ico"><svg class="ic"><use href="#i-swords"/></svg></span><span><b>Phát Đánh Boss</b><small>Chuyển live sang đấu trường Đánh Boss + mở màn hình phát</small></span></button>
         <button class="btn scene-btn thabi" data-open-scene="thabi"><span class="sb-ico"><svg class="ic"><use href="#i-plinko"/></svg></span><span><b>Phát Thả Bi</b><small>Chuyển live sang bàn Thả Bi + mở màn hình phát</small></span></button>
+        <button class="btn scene-btn dao" data-open-scene="dao"><span class="sb-ico"><svg class="ic"><use href="#i-trees"/></svg></span><span><b>Phát Đảo Sinh Tồn</b><small>Chuyển live sang đảo sinh tồn + mở màn hình phát</small></span></button>
       </div>
 
       <div class="live-guide">
@@ -1218,6 +1222,36 @@
         <div class="keoco-host">
           <iframe id="thabi-control" title="Bảng điều khiển Thả Bi" allow="autoplay"></iframe>
           <div class="keoco-error" id="thabi-error" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ĐẢO SINH TỒN ================= -->
+    <section class="view scene-view keoco-view" id="view-dao">
+      <header class="page-head">
+        <div>
+          <h1><svg class="ic"><use href="#i-trees"/></svg> Đảo Sinh Tồn</h1>
+          <p class="muted">Đang mở tab này thì đảo battle royale chạy trên live. Người xem comment để nhảy dù lên đảo, chọn lớp <b>CHIẾN</b>/<b>CUNG</b>/<b>NINJA</b>, ra lệnh <b>TRỐN</b>/<b>XÔNG</b>/<b>HỒI</b>; người bị loại comment <b>BÃO 1/2/3</b> chọn tâm bão. Tim hồi máu, quà = khiên, tiếp tế, hồi sinh.</p>
+        </div>
+      </header>
+      <div class="feature-layout">
+        <div class="preview-wrap">
+          <div class="preview-frame feature-frame">
+            <iframe class="live-preview" data-for="dao" title="Đảo sinh tồn trên live"></iframe>
+          </div>
+          <div class="preview-actions">
+            <div style="display:flex;gap:6px">
+              <button class="btn ghost sm" data-pause><svg class="ic"><use href="#i-pause"/></svg> Tạm dừng</button>
+              <button class="btn ghost sm" data-open-output><svg class="ic"><use href="#i-tv"/></svg> Mở màn hình phát live</button>
+              <button class="btn ghost sm" data-reload-preview title="Tải lại khung xem nếu bị đen"><svg class="ic"><use href="#i-rotate-cw"/></svg></button>
+            </div>
+            <label class="switch-inline"><input type="checkbox" class="preview-sound-cb"> <svg class="ic"><use href="#i-volume-2"/></svg> Nghe</label>
+          </div>
+          <p class="hint" style="max-width:405px">Thông số trận, luyện tập và bảng xếp hạng chỉnh ở bảng bên phải. Đưa lên TikTok: tab <b>Đưa lên live</b>.</p>
+        </div>
+        <div class="keoco-host">
+          <iframe id="dao-control" title="Bảng điều khiển Đảo Sinh Tồn" allow="autoplay"></iframe>
+          <div class="keoco-error" id="dao-error" hidden></div>
         </div>
       </div>
     </section>
