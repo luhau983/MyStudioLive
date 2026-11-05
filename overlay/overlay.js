@@ -78,8 +78,10 @@
     node.classList.add('bump');
   }
 
+  // Từ cấm: tách sẵn một lần mỗi khi config đổi, không tách lại với từng bình luận
+  let filterWords = [];
   function blocked(text) {
-    const words = cfg.filterWords.split(',').map((w) => w.trim().toLowerCase()).filter(Boolean);
+    const words = filterWords;
     if (!words.length) return false;
     const t = String(text || '').toLowerCase();
     return words.some((w) => t.includes(w));
@@ -385,7 +387,14 @@
       streakZone.appendChild(node);
       s = { node, count, timer: 0 };
       streaks.set(key, s);
-      while (streakZone.children.length > 4) streakZone.firstChild.remove();
+      // quá 4 combo: bỏ combo cũ nhất, xoá luôn khỏi Map để combo đó tặng tiếp thì hiện lại
+      // (trước đây node bị gỡ nhưng Map vẫn giữ -> cập nhật vào node đã tháo, combo vô hình tới 3.5s)
+      for (const [k, old] of streaks) {
+        if (streaks.size <= 4) break;
+        clearTimeout(old.timer);
+        old.node.remove();
+        streaks.delete(k);
+      }
     }
     s.count.textContent = 'x' + ev.repeatCount;
     s.node.classList.remove('pop');
@@ -393,9 +402,9 @@
     s.node.classList.add('pop');
     clearTimeout(s.timer);
     s.timer = setTimeout(() => {
+      streaks.delete(key);
       s.node.style.opacity = '0';
       setTimeout(() => s.node.remove(), 400);
-      streaks.delete(key);
     }, 3500);
   }
 
@@ -446,6 +455,7 @@
 
   function applyConfig(next) {
     cfg = { ...cfg, ...next };
+    filterWords = String(cfg.filterWords || '').split(',').map((w) => w.trim().toLowerCase()).filter(Boolean);
     const hex = cfg.accent.replace('#', '');
     const rgb = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(', ');
     document.documentElement.style.setProperty('--accent', cfg.accent);

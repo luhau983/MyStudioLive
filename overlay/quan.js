@@ -1829,14 +1829,15 @@
       rg.addColorStop(0, `rgba(255,190,90,${0.35 * fl})`); rg.addColorStop(1, 'rgba(255,140,40,0)');
       g.fillStyle = rg; g.fillRect(x - 340, y - 340, 680, 680);
       g.restore();
-      g.fillStyle = '#3b0d07'; rr(g, x - 215, y - 62, 430, 124, 14); g.fill();
+      // rộng 360 (x 360–720): chừa chỗ cho bảng lệnh / bảng vàng hai bên trong lề an toàn 110px
+      g.fillStyle = '#3b0d07'; rr(g, x - 180, y - 62, 360, 124, 14); g.fill();
       g.strokeStyle = `rgba(250,204,21,${fl})`; g.lineWidth = 6; g.stroke();
       g.fillStyle = `rgba(254,240,138,${fl})`;
       g.font = `900 66px ${FONT}`; g.textAlign = 'center'; g.textBaseline = 'middle';
       g.shadowColor = 'rgba(251,191,36,.9)'; g.shadowBlur = 18 * fl;
       g.fillText('BIA HƠI', x, y - 10);
       g.shadowBlur = 0;
-      g.fillStyle = '#fed7aa'; g.font = `800 24px ${FONT}`;
+      g.fillStyle = '#fed7aa'; g.font = `800 21px ${FONT}`;
       g.fillText('MỒI NGON · LẨU NÓNG · NƯỚNG', x, y + 40);
       // dây đèn bóng tròn chăng ngang
       const strands = [[[-20, 640], [1100, 610], 70], [[-20, 760], [1100, 790], 60]];
