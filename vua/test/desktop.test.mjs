@@ -22,7 +22,11 @@ test('first launch seeds data; later launches preserve imports and scores; corru
     await writeFile(paths.questionsPath,'[{"answer":"ĐÃ IMPORT","hint":"Câu của user"}]');
     await writeFile(join(paths.dataDir,'scores.json'),'[{"id":"alice","score":100}]');
     await initializeData(paths,bank);
-    assert.equal(JSON.parse(await readFile(paths.questionsPath,'utf8'))[0].answer,'ĐÃ IMPORT');
+    assert.deepEqual(JSON.parse(await readFile(paths.questionsPath,'utf8')).map(q=>q.answer),['ĐÃ IMPORT','MỚI']);
+    // An app update ships more bundled questions: only unseen ones are appended (accent/case-insensitive, aliases count).
+    await writeFile(bank,'[{"answer":"MỚI","hint":"Gợi ý"},{"answer":"Da import","hint":"Trùng"},{"answer":"CÂU KHÁC","hint":"Trùng alias","aliases":["MOI"]},{"answer":"CÂU MỚI","hint":"Mới thật"}]');
+    await initializeData(paths,bank);
+    assert.deepEqual(JSON.parse(await readFile(paths.questionsPath,'utf8')).map(q=>q.answer),['ĐÃ IMPORT','MỚI','CÂU MỚI']);
     assert.equal(JSON.parse(await readFile(join(paths.dataDir,'scores.json'),'utf8'))[0].score,100);
     await writeFile(join(paths.dataDir,'config.json'),'broken');
     await assert.rejects(initializeData(paths,bank),SyntaxError);
