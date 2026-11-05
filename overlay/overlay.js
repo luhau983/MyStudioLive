@@ -199,20 +199,8 @@
     } else ambientEl.pause();
   }
 
-  // Bảng CÁCH CHƠI
-  const HOWTO = [
-    ['👻', 'hù', 'Hù một con ma khác', '+1 điểm · gõ “hù tên” để hù đúng người'],
-    ['🤫', 'trốn', 'Nấp sau mộ, cây, quan tài', 'Bà Ma đi tìm sẽ không thấy bạn'],
-    ['🔦', 'tìm', 'Soi đèn pin tìm ma đang trốn', '+2 điểm mỗi con tìm ra'],
-    ['📜', 'bùa', 'Dán bùa đóng băng người khác', 'gõ “bùa tên” để chọn người'],
-    ['🕯️', 'gọi hồn', 'Gọi một con ma hiện về', 'cả phòng sẽ giật mình'],
-    ['🌑', 'tắt đèn', 'Cúp điện cả nhà ma', 'chỉ còn những đôi mắt đỏ…'],
-    ['💃', 'nhảy', 'Cho con ma của bạn nhảy múa', 'Còn có: “cười” · “khóc” · “ôm tên” · “chạy”'],
-    ['🎁', 'Tặng quà', 'Nhận bùa hộ mệnh, không ai hù được', 'Quà lớn: triệu hồi BÀ MA bắt cả phòng!']
-  ];
-  // Thẻ CÁCH CHƠI: mỗi lần 1 lệnh, tự chuyển, tự ẩn khi có quà / thông báo lớn
+  // "Cách chơi": cho khung lệnh nháy sáng gây chú ý
   let howtoTimer = 0;
-  let howtoIdx = 0;
   function showHowto() {
     // không hiện thẻ to giữa màn hình nữa: chỉ cho khung hướng dẫn bên phải nháy sáng gây chú ý
     const box = $('g-cmd');

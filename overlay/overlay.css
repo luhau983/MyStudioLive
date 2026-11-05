@@ -28,6 +28,13 @@ html, body {
   overflow: hidden;
 }
 
+/* ===================================================================
+   VÙNG AN TOÀN TIKTOK (khung 1080×1920) — mọi khung chữ phải nằm trong
+   - trên 240px: tên chủ phòng, số người xem, nút tắt của TikTok
+   - dưới 480px: bình luận + nút quà/chia sẻ
+   - hai bên 110px: điện thoại dài hơn 9:16 bị cắt mép
+   =================================================================== */
+
 /* ---------- Nền ma mị ---------- */
 #bg { position: absolute; inset: 0; opacity: 0; transition: opacity .8s; }
 body.haunted #bg { opacity: 1; }
@@ -45,7 +52,7 @@ body.haunted #stage { background: radial-gradient(ellipse at 50% 35%, #15241a 0%
 
 /* ---------- HUD ---------- */
 #hud {
-  position: absolute; top: 70px; left: 50%; transform: translateX(-50%);
+  position: absolute; top: 250px; left: 50%; transform: translateX(-50%);
   display: flex; gap: 18px;
 }
 .pill {
@@ -156,6 +163,7 @@ body.haunted #stage { background: radial-gradient(ellipse at 50% 35%, #15241a 0%
   position: absolute; left: 40px; top: 420px;
   display: flex; flex-direction: column; gap: 12px;
 }
+body.game #streak-zone { left: auto; right: 110px; top: 700px; }
 .streak {
   display: flex; align-items: center; gap: 14px;
   padding: 10px 26px 10px 10px;
@@ -175,7 +183,7 @@ body.haunted #stage { background: radial-gradient(ellipse at 50% 35%, #15241a 0%
 #gift-zone { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
 .gift-alert {
   position: absolute; left: 50%; top: 570px;
-  width: 860px; margin-left: -430px;
+  width: 820px; margin-left: -410px;
   display: flex; flex-direction: column; align-items: center;
   padding: 40px 40px 36px;
   border-radius: 40px;
@@ -228,43 +236,79 @@ body.haunted #stage { background: radial-gradient(ellipse at 50% 35%, #15241a 0%
 }
 
 #offline {
-  position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+  position: absolute; bottom: 520px; left: 50%; transform: translateX(-50%);
   padding: 12px 26px; border-radius: 999px; background: rgba(0, 0, 0, .6); font-size: 22px; color: #fca5a5;
   transition: opacity .4s;
 }
 
+/* Tạm dừng: đứng hình toàn bộ hiệu ứng CSS */
+body.paused *, body.paused *::before, body.paused *::after { animation-play-state: paused !important; }
+#paused-badge {
+  position: absolute; top: 250px; right: 110px; z-index: 30; display: none;
+  padding: 10px 22px; border-radius: 999px; background: rgba(0, 0, 0, .7); border: 2px solid #f59e0b;
+  color: #fde68a; font-size: 26px; font-weight: 800;
+}
+body.paused #paused-badge { display: block; }
+
+/* Lưới hiển thị vùng bị TikTok che (chỉ hiện trong khung xem trước khi bật) */
+#safe-guide { position: absolute; inset: 0; z-index: 50; pointer-events: none; display: none; }
+body.show-safe #safe-guide { display: block; }
+#safe-guide div { position: absolute; background: rgba(239, 68, 68, .28); border: 3px dashed rgba(239, 68, 68, .85);
+  color: #fff; font: 800 30px system-ui, sans-serif; display: flex; align-items: center; justify-content: center; text-align: center;
+  text-shadow: 0 2px 6px #000; }
+#safe-guide .sg-top { left: 0; right: 0; top: 0; height: 240px; }
+#safe-guide .sg-bottom { left: 0; right: 0; bottom: 0; height: 480px; }
+#safe-guide .sg-left { left: 0; top: 240px; bottom: 480px; width: 110px; font-size: 22px; writing-mode: vertical-rl; }
+#safe-guide .sg-right { right: 0; top: 240px; bottom: 480px; width: 110px; font-size: 22px; writing-mode: vertical-rl; }
+
+/* ---------- Thẻ lệnh "gõ vào bình luận" (dùng chung cho các cảnh) ---------- */
+.cmd { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 700; color: #e2e8f0; }
+.cmd .key {
+  padding: 4px 14px; text-transform: none; border-radius: 12px; font-weight: 900; font-size: 26px;
+  background: var(--accent); color: #111; box-shadow: 0 0 16px rgba(var(--accent-rgb), .6);
+}
+.cmd.gift .key { background: var(--gold); box-shadow: 0 0 16px rgba(250, 204, 21, .6); }
+.cmd .key::before { content: '“'; opacity: .6; } .cmd .key::after { content: '”'; opacity: .6; }
+.cmd.gift .key::before, .cmd.gift .key::after { content: none; }
+
 /* ================= TRÒ CHƠI NHÀ MA ================= */
 #game { position: absolute; inset: 0; width: 1080px; height: 1920px; }
-body.game #bg { display: none; }
-body.game #top-gifter { top: 160px; }
+body.game #bg, body.game #top-gifter, body.game #chat-zone { display: none; }
 
 #game-ui { position: absolute; inset: 0; pointer-events: none; }
+
+/* Bảng điểm + thẻ lệnh: góc trái trên, thu nhỏ .8 để thấy nhiều cảnh hơn */
 #g-board {
-  position: absolute; left: 30px; top: 260px; width: 330px;
-  padding: 16px 18px; border-radius: 24px;
+  position: absolute; left: 110px; top: 330px; width: 360px;
+  padding: 16px 20px; border-radius: 24px;
   background: rgba(8, 10, 14, .72); border: 2px solid rgba(var(--accent-rgb), .5);
   box-shadow: 0 0 24px rgba(var(--accent-rgb), .2);
+  transform: scale(.8); transform-origin: top left;
 }
-.lb-title { font-size: 26px; font-weight: 900; color: var(--accent); letter-spacing: 1px; margin-bottom: 8px; }
-.lb-row { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 700; padding: 4px 0; }
+.lb-title { font-size: 30px; font-weight: 900; color: var(--accent); letter-spacing: 1px; margin-bottom: 8px; }
+.lb-row { display: flex; align-items: center; gap: 10px; font-size: 28px; font-weight: 700; padding: 4px 0; }
 .lb-rank { width: 34px; text-align: center; color: #94a3b8; }
 .lb-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .lb-score { color: var(--gold); font-weight: 900; font-variant-numeric: tabular-nums; }
-.lb-empty { font-size: 20px; color: #94a3b8; }
+.lb-empty { font-size: 24px; color: #94a3b8; }
 .lb-empty b { color: var(--accent); }
 
-#g-feed { position: absolute; right: 30px; top: 260px; width: 420px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+#g-feed {
+  position: absolute; right: 110px; top: 330px; width: 470px;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  transform: scale(.85); transform-origin: top right;
+}
 .kf {
-  max-width: 100%; padding: 8px 16px; border-radius: 14px;
+  max-width: 100%; padding: 10px 18px; border-radius: 14px;
   background: rgba(8, 10, 14, .72); border-left: 4px solid var(--accent);
-  font-size: 21px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 25px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   animation: kfIn .35s ease-out both; transition: opacity .6s;
 }
 .kf.gone { opacity: 0; }
 @keyframes kfIn { from { opacity: 0; transform: translateX(40px); } }
 
 #g-banner {
-  position: absolute; left: 60px; right: 60px; top: 580px;
+  position: absolute; left: 130px; right: 130px; top: 580px;
   padding: 26px 30px; border-radius: 30px; text-align: center;
   background: linear-gradient(180deg, rgba(127, 29, 29, .88), rgba(10, 4, 6, .92));
   border: 3px solid #ef4444; box-shadow: 0 0 60px rgba(239, 68, 68, .5);
@@ -275,21 +319,38 @@ body.game #top-gifter { top: 160px; }
 .b-sub { font-size: 30px; font-weight: 700; color: #fecaca; margin-top: 6px; }
 
 #g-cmd {
-  position: absolute; left: 24px; right: 24px; bottom: 36px;
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  padding: 16px; border-radius: 26px;
-  background: rgba(8, 10, 14, .78); border: 2px solid rgba(var(--accent-rgb), .45);
+  position: absolute; left: 110px; top: 505px; width: 380px;
+  display: flex; flex-direction: column; align-items: stretch; gap: 14px;
+  padding: 20px 20px 18px; border-radius: 26px;
+  background: rgba(8, 10, 14, .78); border: 3px solid rgba(var(--accent-rgb), .45);
+  transform: scale(.8); transform-origin: top left;
 }
-.cmd { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 700; color: #e2e8f0; }
-.cmd .key {
-  padding: 4px 14px; text-transform: none; border-radius: 12px; font-weight: 900; font-size: 26px;
-  background: var(--accent); color: #111; box-shadow: 0 0 16px rgba(var(--accent-rgb), .6);
-  animation: keyPulse 2.4s ease-in-out infinite;
-}
-.cmd:nth-child(2) .key { animation-delay: .4s; } .cmd:nth-child(3) .key { animation-delay: .8s; }
-.cmd.gift .key { background: var(--gold); box-shadow: 0 0 16px rgba(250, 204, 21, .6); animation: none; }
-@keyframes keyPulse { 50% { transform: scale(1.1); } }
+#g-cmd.pulse { animation: cmdPulse 1s ease-in-out 6; }
+@keyframes cmdPulse { 50% { box-shadow: 0 0 0 6px rgba(var(--accent-rgb), .55), 0 0 60px rgba(var(--accent-rgb), .75); } }
+.cmd-label { font-size: 26px; font-weight: 900; letter-spacing: 1px; color: var(--accent); text-align: center; line-height: 1.2; }
+.cmd-row { display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; align-items: stretch; gap: 12px; }
+.cmd-row.rot { min-height: 0; border-top: 1px solid rgba(255, 255, 255, .12); padding-top: 12px; transition: opacity .4s, transform .4s; }
+.cmd-row.rot.swap { opacity: 0; transform: translateY(8px); }
+.cmd-row.rot .key { background: #c084fc; box-shadow: 0 0 16px rgba(192, 132, 252, .6); }
+.cmd-row.rot .cmd.gift .key { background: var(--gold); }
+#g-cmd .cmd { font-size: 27px; gap: 14px; font-weight: 800; line-height: 1.15; }
+#g-cmd .cmd .key { flex: none; font-size: 34px; padding: 4px 16px; }
 
+/* Ma ló mặt bất ngờ */
+#g-peek { position: absolute; display: none; pointer-events: none; z-index: 6; }
+#g-peek .pk-face { width: 100%; height: 100%; }
+#g-peek .pk-face svg { width: 100%; height: 100%; filter: drop-shadow(0 0 30px rgba(0, 0, 0, .9)); }
+#g-peek.on { display: block; }
+#g-peek.left { left: -40px; top: 760px; width: 420px; height: 546px; animation: pkLeft 1.6s cubic-bezier(.2, .9, .3, 1) forwards; }
+#g-peek.right { right: -40px; top: 860px; width: 420px; height: 546px; animation: pkRight 1.6s cubic-bezier(.2, .9, .3, 1) forwards; }
+#g-peek.window { left: 520px; top: 680px; width: 150px; height: 195px; animation: pkWin 1.8s ease-out forwards; }
+#g-peek.bottom { left: 290px; bottom: 0; width: 500px; height: 650px; animation: pkBottom 1.5s cubic-bezier(.2, .9, .3, 1) forwards; }
+@keyframes pkLeft { 0% { transform: translateX(-110%) rotate(25deg); } 25%, 70% { transform: translateX(-35%) rotate(18deg); } 74% { transform: translateX(-30%) rotate(14deg) scale(1.08); } 100% { transform: translateX(-120%) rotate(25deg); } }
+@keyframes pkRight { 0% { transform: translateX(110%) rotate(-25deg); } 25%, 70% { transform: translateX(35%) rotate(-18deg); } 74% { transform: translateX(30%) rotate(-14deg) scale(1.08); } 100% { transform: translateX(120%) rotate(-25deg); } }
+@keyframes pkWin { 0% { opacity: 0; transform: scale(.6); } 20%, 75% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(.9); } }
+@keyframes pkBottom { 0% { transform: translateY(100%); } 30%, 70% { transform: translateY(40%); } 100% { transform: translateY(105%); } }
+
+/* Jumpscare */
 #g-jumpscare { position: absolute; inset: 0; z-index: 20; display: none; background: #000; overflow: hidden; }
 #g-jumpscare.on { display: block; animation: jsCut 2.4s steps(1) forwards; }
 .js-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
@@ -303,7 +364,7 @@ body.game #top-gifter { top: 160px; }
 .js-vignette { position: absolute; inset: 0; box-shadow: inset 0 0 260px 120px #000; background: radial-gradient(circle at 50% 45%, transparent 40%, rgba(120, 0, 0, .55) 100%); }
 #g-jumpscare.on .js-vignette { animation: jsRed .3s steps(2) 3; }
 .js-text {
-  position: absolute; left: 0; right: 0; bottom: 210px; padding: 0 60px; text-align: center;
+  position: absolute; left: 0; right: 0; bottom: 560px; padding: 0 60px; text-align: center;
   font-size: 50px; font-weight: 900; color: #fff; letter-spacing: 1px; white-space: pre-line; line-height: 1.25;
   text-shadow: 3px 0 #ef4444, -3px 0 #22d3ee, 0 0 30px #000;
   opacity: 0;
@@ -334,74 +395,12 @@ body.game #top-gifter { top: 160px; }
 @keyframes jsRed { 50% { background: radial-gradient(circle at 50% 45%, transparent 20%, rgba(200, 0, 0, .8) 100%); } }
 @keyframes jsTextIn { 0% { opacity: 0; } 30% { opacity: 1; } 78% { opacity: 0; } 82% { opacity: 1; } 100% { opacity: 0; } }
 
-body.game #chat-zone { display: none; }
-
-body.game #streak-zone { top: auto; bottom: 200px; left: 30px; flex-direction: column-reverse; }
-
-.cmd-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; }
-.cmd-row.rot { min-height: 40px; transition: opacity .4s, transform .4s; }
-.cmd-row.rot.swap { opacity: 0; transform: translateY(8px); }
-.cmd-row.rot .key { background: #c084fc; box-shadow: 0 0 16px rgba(192, 132, 252, .6); animation: none; }
-.cmd-row.rot .cmd.gift .key { background: var(--gold); }
-
-/* Ma ló mặt bất ngờ */
-#g-peek { position: absolute; display: none; pointer-events: none; z-index: 6; }
-#g-peek .pk-face { width: 100%; height: 100%; }
-#g-peek .pk-face svg { width: 100%; height: 100%; filter: drop-shadow(0 0 30px rgba(0, 0, 0, .9)); }
-#g-peek.on { display: block; }
-#g-peek.left { left: -40px; top: 760px; width: 420px; height: 546px; animation: pkLeft 1.6s cubic-bezier(.2, .9, .3, 1) forwards; }
-#g-peek.right { right: -40px; top: 860px; width: 420px; height: 546px; animation: pkRight 1.6s cubic-bezier(.2, .9, .3, 1) forwards; }
-#g-peek.window { left: 520px; top: 680px; width: 150px; height: 195px; animation: pkWin 1.8s ease-out forwards; }
-#g-peek.bottom { left: 290px; bottom: 0; width: 500px; height: 650px; animation: pkBottom 1.5s cubic-bezier(.2, .9, .3, 1) forwards; }
-@keyframes pkLeft { 0% { transform: translateX(-110%) rotate(25deg); } 25%, 70% { transform: translateX(-35%) rotate(18deg); } 74% { transform: translateX(-30%) rotate(14deg) scale(1.08); } 100% { transform: translateX(-120%) rotate(25deg); } }
-@keyframes pkRight { 0% { transform: translateX(110%) rotate(-25deg); } 25%, 70% { transform: translateX(35%) rotate(-18deg); } 74% { transform: translateX(30%) rotate(-14deg) scale(1.08); } 100% { transform: translateX(120%) rotate(-25deg); } }
-@keyframes pkWin { 0% { opacity: 0; transform: scale(.6); } 20%, 75% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(.9); } }
-@keyframes pkBottom { 0% { transform: translateY(100%); } 30%, 70% { transform: translateY(40%); } 100% { transform: translateY(105%); } }
-
-.cmd-label { font-size: 22px; font-weight: 900; letter-spacing: 2px; color: var(--accent); }
-.cmd .key::before { content: '“'; opacity: .6; } .cmd .key::after { content: '”'; opacity: .6; }
-.cmd.gift .key::before, .cmd.gift .key::after { content: none; }
-
-/* Thẻ CÁCH CHƠI nhỏ — nằm trên vùng ngôi nhà, không che sân chơi */
-#g-howto {
-  position: absolute; left: 150px; right: 150px; top: 640px; z-index: 4;
-  padding: 16px 22px 14px; border-radius: 26px;
-  background: rgba(10, 8, 16, .78);
-  border: 2px solid rgba(var(--accent-rgb), .7);
-  box-shadow: 0 0 34px rgba(var(--accent-rgb), .25);
-  opacity: 0; transform: translateY(20px) scale(.95); pointer-events: none;
-  transition: opacity .4s, transform .4s cubic-bezier(.2, 1.3, .4, 1);
-}
-#g-howto.on { opacity: 1; transform: none; }
-.ht-head { display: flex; justify-content: space-between; font-size: 22px; font-weight: 800; color: var(--accent); letter-spacing: .5px; }
-.ht-step { color: #94a3b8; }
-.ht-body { display: grid; grid-template-columns: 70px auto 1fr; align-items: center; gap: 16px; margin-top: 10px; min-height: 92px; }
-.ht-body.swap { animation: htSwap .45s ease-out; }
-@keyframes htSwap { from { opacity: 0; transform: translateX(30px); } }
-.ht-ico { font-size: 56px; text-align: center; }
-.ht-cmd { padding: 6px 20px; border-radius: 16px; background: var(--accent); color: #111; font-size: 42px; font-weight: 900; white-space: nowrap; box-shadow: 0 0 20px rgba(var(--accent-rgb), .6); }
-.ht-cmd.gift { background: var(--gold); box-shadow: 0 0 20px rgba(250, 204, 21, .6); }
-.ht-desc { font-size: 28px; font-weight: 800; color: #f8fafc; line-height: 1.2; }
-.ht-desc small { display: block; font-size: 21px; color: #a1a1aa; font-weight: 600; margin-top: 2px; }
-.ht-dots { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
-.ht-dots i { width: 10px; height: 10px; border-radius: 50%; background: #3f3f46; }
-.ht-dots i.on { background: var(--accent); width: 26px; border-radius: 6px; transition: width .3s; }
-
-/* Tạm dừng: đứng hình toàn bộ hiệu ứng CSS */
-body.paused *, body.paused *::before, body.paused *::after { animation-play-state: paused !important; }
-#paused-badge {
-  position: absolute; top: 24px; right: 24px; z-index: 30; display: none;
-  padding: 10px 22px; border-radius: 999px; background: rgba(0, 0, 0, .7); border: 2px solid #f59e0b;
-  color: #fde68a; font-size: 26px; font-weight: 800;
-}
-body.paused #paused-badge { display: block; }
-
 /* ================= ĐI CHÙA ================= */
 #temple { position: absolute; inset: 0; width: 1080px; height: 1920px; display: none; }
 #temple-ui { position: absolute; inset: 0; pointer-events: none; display: none; font-family: "Be Vietnam Pro", system-ui, sans-serif; }
 body.mode-chua #hud, body.mode-chua #top-gifter, body.mode-chua #game-ui, body.mode-chua #chat-zone,
 body.mode-chua #gift-zone, body.mode-chua #toasts, body.mode-chua #streak-zone, body.mode-chua #bg, body.mode-chua #game { display: none !important; }
-.t-head { position: absolute; top: 34px; left: 40px; right: 40px; text-align: center; }
+.t-head { position: absolute; top: 215px; left: 110px; right: 110px; text-align: center; transform: scale(.85); transform-origin: top center; }
 .t-title { font-family: "Lora", Georgia, "Times New Roman", serif; font-size: 78px; font-weight: 700; letter-spacing: 6px; color: #fde68a;
   text-shadow: 0 0 24px rgba(251, 191, 36, .7), 0 4px 0 #7c2d12; }
 .t-sub { font-family: "Lora", Georgia, serif; font-size: 34px; color: #fef3c7; margin-top: 2px; text-shadow: 0 2px 8px #000; }
@@ -413,8 +412,9 @@ body.mode-chua #gift-zone, body.mode-chua #toasts, body.mode-chua #streak-zone, 
   background: rgba(40, 10, 4, .6); border: 1px solid rgba(212, 160, 60, .5); font-size: 22px; color: #fde68a; padding: 6px 0; }
 .t-ticker span { display: inline-block; padding-left: 100%; animation: tTick 26s linear infinite; }
 @keyframes tTick { to { transform: translateX(-100%); } }
-.t-board { position: absolute; right: 22px; top: 560px; width: 250px; padding: 12px 14px; border-radius: 18px;
-  background: rgba(30, 8, 3, .78); border: 2px solid rgba(212, 160, 60, .75); color: #fef3c7; }
+.t-board { position: absolute; left: 110px; top: 540px; width: 250px; padding: 12px 14px; border-radius: 18px;
+  background: rgba(30, 8, 3, .78); border: 2px solid rgba(212, 160, 60, .75); color: #fef3c7;
+  transform: scale(.85); transform-origin: top left; }
 .tb-title { font-size: 22px; font-weight: 800; color: #fde68a; margin-bottom: 6px; text-align: center; }
 .tb-row { display: flex; gap: 8px; align-items: center; font-size: 19px; padding: 2px 0; }
 .tb-rank { width: 26px; height: 26px; border-radius: 50%; background: #7c2d12; color: #fde68a; font-weight: 800; font-size: 15px; display: grid; place-items: center; flex: none; }
@@ -422,7 +422,7 @@ body.mode-chua #gift-zone, body.mode-chua #toasts, body.mode-chua #streak-zone, 
 .tb-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tb-pts { font-weight: 800; color: #fde68a; }
 .tb-empty { font-size: 18px; color: #d6b98c; text-align: center; }
-.t-plate { position: absolute; left: 50%; top: 330px; transform: translate(-50%, -20px) scale(.9); opacity: 0;
+.t-plate { position: absolute; left: 50%; top: 1190px; transform: translate(-50%, -20px) scale(.9); opacity: 0;
   display: flex; align-items: center; gap: 18px; padding: 14px 34px 14px 14px; border-radius: 999px;
   background: linear-gradient(90deg, rgba(120, 53, 15, .95), rgba(40, 10, 4, .95)); border: 3px solid #fbbf24;
   box-shadow: 0 0 50px rgba(251, 191, 36, .6); transition: opacity .5s, transform .5s cubic-bezier(.2, 1.4, .4, 1); }
@@ -432,113 +432,17 @@ body.mode-chua #gift-zone, body.mode-chua #toasts, body.mode-chua #streak-zone, 
 .np-av img { width: 100%; height: 100%; object-fit: cover; }
 .np-name { font-family: "Lora", Georgia, serif; font-size: 42px; font-weight: 700; color: #fde68a; max-width: 600px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .np-gift { font-size: 26px; color: #fef3c7; }
-.t-caption { position: absolute; left: 60px; right: 60px; bottom: 170px; text-align: center; font-size: 30px; font-weight: 700; color: #fff;
+.t-caption { position: absolute; left: 120px; right: 120px; top: 420px; text-align: center; font-size: 30px; font-weight: 700; color: #fff;
   padding: 12px 20px; border-radius: 18px; background: rgba(0, 0, 0, .55); opacity: 0; transition: opacity .4s; }
 .t-caption.on { opacity: 1; }
-.t-cmd { position: absolute; left: 24px; right: 24px; bottom: 36px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px;
-  padding: 16px; border-radius: 26px; background: rgba(30, 8, 3, .8); border: 2px solid rgba(212, 160, 60, .7); }
-.t-cmd .cmd { color: #fef3c7; }
-.t-cmd .key { background: #fbbf24; color: #422006; box-shadow: 0 0 16px rgba(251, 191, 36, .6); animation: none; }
+.t-cmd { position: absolute; left: 110px; top: 735px; display: flex; flex-direction: column; justify-content: center; align-items: stretch; gap: 10px;
+  padding: 16px 18px; border-radius: 26px; background: rgba(30, 8, 3, .8); border: 2px solid rgba(212, 160, 60, .7);
+  transform: scale(.85); transform-origin: top left; }
+.t-cmd .cmd { flex-direction: row; align-items: center; gap: 12px; font-size: 23px; font-weight: 800; line-height: 1.15; white-space: nowrap; color: #fef3c7; }
+.t-cmd .key { flex: none; font-size: 25px; padding: 3px 12px; white-space: nowrap; text-align: center;
+  background: #fbbf24; color: #422006; box-shadow: 0 0 16px rgba(251, 191, 36, .6); }
 .t-cmd .cmd.heart .key { background: #f472b6; }
-
 .t-cmd .cmd.skin .key { background: #a78bfa; color: #1e1037; }
-
-/* ===== Thanh lệnh dọc ở góc phải: tránh vùng bình luận TikTok (dưới bên trái) ===== */
-#g-cmd {
-  left: auto; right: 20px; bottom: auto; top: 560px; width: 260px;
-  align-items: stretch; gap: 10px; padding: 16px 16px 14px;
-}
-#g-cmd .cmd-label { font-size: 19px; letter-spacing: 1px; text-align: center; line-height: 1.2; }
-#g-cmd .cmd-row { flex-direction: column; align-items: stretch; gap: 9px; }
-#g-cmd .cmd-row.rot { min-height: 0; border-top: 1px solid rgba(255, 255, 255, .12); padding-top: 9px; }
-#g-cmd .cmd { font-size: 21px; gap: 10px; line-height: 1.15; }
-#g-cmd .cmd .key { flex: none; font-size: 23px; padding: 3px 12px; animation: none; }
-#g-howto { left: 30px; right: 300px; }
-
-.t-cmd {
-  left: auto; right: 22px; bottom: auto; top: 870px; width: 250px;
-  flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 10px; padding: 14px;
-}
-.t-cmd .cmd { font-size: 20px; gap: 10px; line-height: 1.15; }
-.t-cmd .key { flex: none; font-size: 21px; padding: 3px 12px; white-space: normal; text-align: center; }
-.t-cmd .cmd.skin { flex-direction: column; align-items: flex-start; gap: 4px; }
-.t-caption { bottom: auto; top: 310px; }
-.t-plate { top: 440px; }
-.t-cmd { top: 760px; gap: 8px; }
-.t-cmd .cmd { flex-direction: column; align-items: flex-start; gap: 3px; font-size: 19px; }
-.t-cmd { top: 785px; }
-
-/* ===== Gọn lại cho người xem trên điện thoại: ít khung, chữ to ===== */
-#g-howto { display: none !important; }
-#g-board { width: 360px; padding: 16px 20px; }
-#g-board .lb-title { font-size: 30px; }
-#g-board .lb-row { font-size: 28px; }
-#g-board .lb-empty { font-size: 24px; }
-#g-feed { width: 470px; gap: 10px; }
-#g-feed .kf { font-size: 25px; padding: 10px 18px; }
-#g-cmd { top: 470px; width: 380px; padding: 20px 20px 18px; gap: 14px; border-width: 3px; }
-#g-cmd .cmd-label { font-size: 26px; letter-spacing: 1px; }
-#g-cmd .cmd-row { gap: 12px; }
-#g-cmd .cmd { font-size: 27px; gap: 14px; font-weight: 800; }
-#g-cmd .cmd .key { font-size: 34px; padding: 4px 16px; }
-#g-cmd .cmd-row.rot { padding-top: 12px; }
-#g-cmd.pulse { animation: cmdPulse 1s ease-in-out 6; }
-@keyframes cmdPulse { 50% { box-shadow: 0 0 0 6px rgba(var(--accent-rgb), .5), 0 0 60px rgba(var(--accent-rgb), .7); transform: scale(1.04); } }
-
-.t-cmd { width: 300px; padding: 18px; gap: 12px; }
-.t-cmd .cmd { font-size: 24px; font-weight: 800; }
-.t-cmd .key { font-size: 28px; padding: 4px 14px; }
-
-.t-cmd { top: 780px; width: 330px; gap: 10px; padding: 16px 18px; }
-.t-cmd .cmd, .t-cmd .cmd.skin { flex-direction: row; align-items: center; gap: 12px; font-size: 25px; white-space: nowrap; }
-.t-cmd .key { font-size: 27px; padding: 3px 12px; white-space: nowrap; }
-.t-cmd { width: auto; right: 18px; } .t-cmd .cmd, .t-cmd .cmd.skin { font-size: 23px; } .t-cmd .key { font-size: 25px; }
-
-/* ===== Gom bảng điểm + hướng dẫn về góc trái trên, thu nhỏ để thấy nhiều cảnh hơn ===== */
-#g-board { left: 24px; top: 250px; transform: scale(.8); transform-origin: top left; }
-#g-cmd { right: auto; left: 24px; top: 425px; transform: scale(.8); transform-origin: top left; }
-#g-cmd.pulse { animation: cmdPulse2 1s ease-in-out 6; }
-@keyframes cmdPulse2 { 50% { box-shadow: 0 0 0 6px rgba(var(--accent-rgb), .55), 0 0 60px rgba(var(--accent-rgb), .75); } }
-#g-feed { transform: scale(.85); transform-origin: top right; }
-
-.t-head { transform: scale(.85); transform-origin: top center; }
-.t-board { right: auto; left: 22px; top: 540px; transform: scale(.85); transform-origin: top left; }
-.t-cmd { right: auto; left: 22px; top: 735px; transform: scale(.85); transform-origin: top left; }
-
-/* ===================================================================
-   VÙNG AN TOÀN TIKTOK (khung 1080×1920)
-   - trên 240px: tên chủ phòng, số người xem, nút tắt của TikTok
-   - dưới 480px: bình luận + nút quà/chia sẻ
-   - hai bên 110px: điện thoại dài hơn 9:16 bị cắt mép
-   =================================================================== */
-#hud { top: 250px; }
-body.game #top-gifter { display: none; }
-#g-board { left: 110px; top: 330px; }
-#g-cmd { left: 110px; top: 505px; }
-#g-feed { right: 110px; top: 330px; }
-#g-banner { left: 130px; right: 130px; }
-.gift-alert { width: 820px; margin-left: -410px; }
-body.game #streak-zone { left: auto; right: 110px; top: 700px; bottom: auto; flex-direction: column; }
-#paused-badge { top: 250px; right: 110px; }
-#offline { bottom: 520px; }
-.js-text { bottom: 560px; }
-
-.t-head { top: 215px; left: 110px; right: 110px; }
-.t-board { left: 110px; top: 540px; }
-.t-cmd { left: 110px; top: 735px; }
-.t-caption { top: 420px; left: 120px; right: 120px; }
-.t-plate { top: 1190px; }
-
-/* Lưới hiển thị vùng bị TikTok che (chỉ hiện trong khung xem trước khi bật) */
-#safe-guide { position: absolute; inset: 0; z-index: 50; pointer-events: none; display: none; }
-body.show-safe #safe-guide { display: block; }
-#safe-guide div { position: absolute; background: rgba(239, 68, 68, .28); border: 3px dashed rgba(239, 68, 68, .85);
-  color: #fff; font: 800 30px system-ui, sans-serif; display: flex; align-items: center; justify-content: center; text-align: center;
-  text-shadow: 0 2px 6px #000; }
-#safe-guide .sg-top { left: 0; right: 0; top: 0; height: 240px; }
-#safe-guide .sg-bottom { left: 0; right: 0; bottom: 0; height: 480px; }
-#safe-guide .sg-left { left: 0; top: 240px; bottom: 480px; width: 110px; font-size: 22px; writing-mode: vertical-rl; }
-#safe-guide .sg-right { right: 0; top: 240px; bottom: 480px; width: 110px; font-size: 22px; writing-mode: vertical-rl; }
 
 /* ================= RẠP PHIM ONLINE ================= */
 #rap { position: absolute; inset: 0; width: 1080px; height: 1920px; display: none; }
@@ -548,24 +452,29 @@ body.mode-rap #toasts, body.mode-rap #streak-zone, body.mode-rap #bg, body.mode-
 .r-head { position: absolute; left: 120px; right: 120px; top: 246px; height: 46px; display: flex; align-items: center; justify-content: space-between; gap: 16px; z-index: 2; }
 .r-title { font-size: 28px; font-weight: 900; letter-spacing: 2px; color: #fde68a; text-shadow: 0 0 16px rgba(251, 191, 36, .6), 0 2px 0 #000; white-space: nowrap; }
 .r-now { font-size: 21px; font-weight: 700; color: #fecdd3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 2px 4px #000; }
-.r-caption { position: absolute; left: 150px; right: 150px; top: 690px; text-align: center; font-size: 28px; font-weight: 800; color: #fff;
-  text-shadow: 0 2px 0 #000, 0 0 12px #000; opacity: 0; transition: opacity .4s; }
+/* Chữ to, nền đậm, dễ đọc trên điện thoại */
+.r-caption { position: absolute; left: 140px; right: 140px; top: 696px; text-align: center; font-size: 30px; font-weight: 800; line-height: 1.3; color: #fff;
+  padding: 8px 16px; border-radius: 14px; background: rgba(0, 0, 0, .75); opacity: 0; transition: opacity .4s; }
 .r-caption.on { opacity: 1; }
-.r-like { position: absolute; left: 120px; right: 120px; top: 800px; height: 34px; border-radius: 999px; overflow: hidden; background: rgba(20, 8, 12, .8); border: 2px solid rgba(251, 191, 36, .6); }
+.r-like { position: absolute; left: 120px; right: 120px; top: 790px; height: 46px; border-radius: 999px; overflow: hidden;
+  background: rgba(12, 6, 8, .9); border: 2.5px solid rgba(251, 191, 36, .9); }
 .r-like-fill { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg, #be123c, #fb923c, #fde68a); transition: width .6s; }
-.r-like-text { position: relative; display: block; text-align: center; line-height: 30px; font-size: 19px; font-weight: 800; color: #fff; text-shadow: 0 1px 3px #000; }
-.r-board { position: absolute; left: 120px; top: 845px; width: 300px; padding: 8px 12px; border-radius: 14px; background: rgba(15, 8, 12, .82); border: 1.5px solid rgba(251, 191, 36, .55); color: #fff; }
-.rb-title { font-size: 17px; font-weight: 900; color: #fde68a; }
-.rb-row { display: flex; gap: 8px; align-items: center; font-size: 17px; font-weight: 700; }
+.r-like-text { position: relative; display: block; text-align: center; line-height: 41px; font-size: 24px; font-weight: 800; color: #fff; text-shadow: 0 1px 3px #000; }
+/* TOP khán giả (2 người) + thanh lệnh: hai viên thuốc dưới thanh tim */
+.r-board, .r-cmd { position: absolute; top: 846px; display: flex; padding: 6px 14px; border-radius: 999px;
+  background: rgba(10, 6, 8, .92); border: 2px solid rgba(251, 191, 36, .9); }
+.r-board { left: 120px; max-width: 300px; align-items: center; gap: 8px; color: #fff; }
+.rb-title { font-size: 19px; font-weight: 900; color: #fde68a; white-space: nowrap; }
+.rb-list { display: flex; gap: 12px; min-width: 0; }
+.rb-row { display: flex; gap: 4px; align-items: center; font-size: 19px; font-weight: 700; max-width: 120px; }
+.rb-row:nth-child(n+3) { display: none; }
 .rb-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rb-pts { color: #fde68a; font-weight: 900; }
-.rb-empty { font-size: 15px; color: #d6c3a0; }
-.r-cmd { position: absolute; right: 120px; top: 845px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 10px; max-width: 520px;
-  padding: 8px 12px; border-radius: 14px; background: rgba(15, 8, 12, .82); border: 1.5px solid rgba(251, 191, 36, .55); }
-.r-cmd .cmd { font-size: 19px; font-weight: 800; color: #fff; gap: 6px; }
-.r-cmd .key { background: #fbbf24; color: #3b1d03; font-size: 20px; padding: 2px 10px; animation: none; box-shadow: none; }
-.r-cmd .cmd.gift .key { background: #f472b6; color: #3b0718; }
-.r-plate { position: absolute; left: 50%; top: 1190px; transform: translate(-50%, -20px) scale(.9); opacity: 0;
+.rb-empty { font-size: 18px; white-space: nowrap; color: #f5e3bf; }
+.r-cmd { right: 120px; justify-content: flex-end; gap: 7px; padding: 6px 12px; }
+.r-cmd .cmd { font-size: 20px; font-weight: 800; color: #fff; gap: 3px; }
+.r-cmd .key { background: #fbbf24; color: #3b1d03; font-size: 21px; padding: 2px 9px; box-shadow: none; }
+.r-plate { position: absolute; left: 50%; top: 470px; transform: translate(-50%, -20px) scale(.9); opacity: 0;
   display: flex; align-items: center; gap: 16px; padding: 12px 30px 12px 12px; border-radius: 999px;
   background: linear-gradient(90deg, rgba(120, 80, 10, .95), rgba(20, 8, 12, .95)); border: 3px solid #fbbf24;
   box-shadow: 0 0 40px rgba(251, 191, 36, .55); transition: opacity .5s, transform .5s cubic-bezier(.2, 1.4, .4, 1); }
@@ -573,39 +482,8 @@ body.mode-rap #toasts, body.mode-rap #streak-zone, body.mode-rap #bg, body.mode-
 .r-plate .np-av { width: 72px; height: 72px; }
 .r-plate .np-name { font-size: 36px; }
 
-.r-board { top: 826px; width: 260px; padding: 6px 12px; }
-.r-cmd { top: 826px; }
-.r-board, .r-cmd { top: 846px; }
-
-.r-plate { top: 650px; }
-
 .r-yt { position: absolute; display: none; background: #000; overflow: hidden; pointer-events: none; }
 .r-yt iframe { width: 100%; height: 100%; border: 0; display: block; }
-
-/* ===== Rạp: chữ to, nền đậm, dễ đọc trên điện thoại ===== */
-.r-caption { top: 696px; left: 140px; right: 140px; font-size: 30px; line-height: 1.3; background: rgba(0, 0, 0, .75); border-radius: 14px; padding: 8px 16px; text-shadow: none; }
-.r-like { top: 790px; height: 46px; border-width: 2.5px; border-color: rgba(251, 191, 36, .9); background: rgba(12, 6, 8, .9); }
-.r-like-text { line-height: 41px; font-size: 24px; }
-.r-board { top: 846px; left: 120px; width: auto; max-width: 340px; display: flex; align-items: center; gap: 10px; padding: 6px 16px;
-  border-radius: 999px; background: rgba(10, 6, 8, .92); border: 2px solid rgba(251, 191, 36, .9); }
-.r-board .rb-title { font-size: 19px; white-space: nowrap; margin: 0; }
-.r-board .rb-list { display: flex; gap: 12px; min-width: 0; }
-.r-board .rb-row { font-size: 19px; gap: 4px; max-width: 135px; }
-.r-board .rb-row:nth-child(n+3) { display: none; }
-.r-board .rb-empty { font-size: 18px; white-space: nowrap; color: #f5e3bf; }
-.r-cmd { top: 846px; right: 120px; max-width: none; flex-wrap: nowrap; gap: 10px; padding: 6px 14px; border-radius: 999px;
-  background: rgba(10, 6, 8, .92); border: 2px solid rgba(251, 191, 36, .9); }
-.r-cmd .cmd { font-size: 22px; gap: 4px; }
-.r-cmd .key { font-size: 22px; padding: 2px 10px; }
-.r-cmd .cmd.gift { display: none; }
-.r-plate { top: 470px; }
-.r-board { max-width: 300px; gap: 8px; padding: 6px 14px; }
-.r-board .rb-title { font-size: 0; }
-.r-board .rb-title::before { content: '🏆 TOP'; font-size: 19px; }
-.r-board .rb-row { max-width: 120px; }
-.r-cmd { gap: 7px; padding: 6px 12px; }
-.r-cmd .cmd { font-size: 20px; gap: 3px; }
-.r-cmd .key { font-size: 21px; padding: 2px 9px; }
 
 /* ================= TRÀ ĐÁ VỈA HÈ & ĐI NHẬU (quan.js) ================= */
 .quan-canvas { position: absolute; inset: 0; width: 1080px; height: 1920px; display: none; }
