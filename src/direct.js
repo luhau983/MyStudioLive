@@ -80,8 +80,41 @@ class DirectConnection extends EventEmitter {
       try { dbg.attach('1.3'); } catch (e) { return done(new Error('Không gắn được bộ đọc dữ liệu: ' + e.message)); }
       dbg.sendCommand('Network.enable').catch(() => {});
 
+      // Phòng live đã kết thúc: TikTok vẫn cho vào trang và mở socket webcast nhưng không đẩy dữ liệu nào.
+      const ended = () => Object.assign(new Error('Phiên LIVE của kênh này đã kết thúc. Hãy bật live rồi kết nối lại.'), { offline: true });
+      // Chỉ báo "đã kết nối" khi đã nhận gói webcast VÀ TikTok xác nhận vào phòng (room/enter) thành công.
+      let gotFrame = 0;
+      let enterOk = false;
+      const tryResolve = () => {
+        if (gotFrame && (enterOk || Date.now() - gotFrame > 6000)) done(null, { roomId: this.roomId, isConnected: true });
+      };
+      const apiCalls = new Map(); // requestId -> 'enter' | 'alive'
+      const readApi = async (requestId, kind) => {
+        let body;
+        try { body = JSON.parse((await dbg.sendCommand('Network.getResponseBody', { requestId })).body); } catch { return; }
+        if (kind === 'enter') {
+          if (body?.status_code === 30003 || /finished/i.test(body?.data?.message || '')) return done(ended());
+          if (body?.status_code === 0) { enterOk = true; tryResolve(); }
+        } else if (this.roomId) {
+          const mine = (body?.data || []).find((r) => String(r.room_id_str) === this.roomId);
+          if (mine?.alive === false) {
+            if (!settled) done(ended());
+            else if (!this.closed) this.emit('streamEnd', { action: 'check_alive' });
+          }
+        }
+      };
+
       dbg.on('message', (_e, method, params) => {
-        if (method === 'Network.webSocketCreated' && /webcast|im\/push|\/ws\//i.test(params.url)) {
+        if (method === 'Network.requestWillBeSent') {
+          const u = params.request?.url || '';
+          if (/\/webcast\/room\/enter\//.test(u)) apiCalls.set(params.requestId, 'enter');
+          else if (/\/webcast\/room\/check_alive\//.test(u)) apiCalls.set(params.requestId, 'alive');
+        } else if (method === 'Network.loadingFinished' && apiCalls.has(params.requestId)) {
+          const kind = apiCalls.get(params.requestId);
+          apiCalls.delete(params.requestId);
+          readApi(params.requestId, kind);
+        } else if (method === 'Network.webSocketCreated' && /\/webcast\/im\/|im\/push/i.test(params.url)) {
+          // Chỉ socket webcast; im-ws-*.tiktok.com/ws/v2 là socket tin nhắn riêng, không chứa dữ liệu live
           this.wsIds.add(params.requestId);
           const m = /[?&]room_id=(\d+)/.exec(params.url);
           if (m) this.roomId = m[1];
@@ -89,7 +122,8 @@ class DirectConnection extends EventEmitter {
           const r = params.response;
           if (r.opcode !== 2) return;
           this.handleFrame(Buffer.from(r.payloadData, 'base64')).then((ok) => {
-            if (ok) done(null, { roomId: this.roomId, isConnected: true });
+            if (ok && !gotFrame) gotFrame = Date.now();
+            if (ok) tryResolve();
           });
         } else if (method === 'Network.webSocketClosed' && this.wsIds.has(params.requestId)) {
           this.wsIds.delete(params.requestId);
@@ -109,16 +143,24 @@ class DirectConnection extends EventEmitter {
       // Kiểm tra trang: kênh không live / bị yêu cầu xác minh
       const probe = setInterval(async () => {
         if (settled || win.isDestroyed()) return;
+        tryResolve();
         try {
           const st = await win.webContents.executeJavaScript(`(() => {
             const t = document.body ? document.body.innerText : '';
+            let room = {};
+            try { room = JSON.parse(document.getElementById('SIGI_STATE')?.textContent || '{}').LiveRoom?.liveRoomUserInfo || {}; } catch {}
             return {
+              roomId: String(room.user?.roomId || room.liveRoom?.roomId || ''),
+              // LiveRoom status: 2 = đang live, 4 = đã kết thúc
+              roomStatus: Number(room.liveRoom?.status ?? room.user?.status ?? 0),
               offline: /LIVE has ended|không còn phát trực tiếp|is not LIVE|currently unavailable|đã kết thúc|hiện không LIVE|Buổi LIVE đã kết thúc/i.test(t),
               captcha: !!document.querySelector('#captcha-verify-container, .captcha_verify_container, [id*="captcha"]'),
               notFound: /Couldn't find this account|Không thể tìm thấy tài khoản này/i.test(t)
             };
           })()`);
+          if (st.roomId && !this.roomId) this.roomId = st.roomId;
           if (st.notFound) done(new Error('Không tìm thấy kênh TikTok này. Kiểm tra lại username.'));
+          else if (st.roomStatus === 4) done(ended());
           else if (st.offline) done(Object.assign(new Error('Kênh này hiện không phát live. Hãy bật live trước rồi kết nối lại.'), { offline: true }));
           else if (st.captcha) done(new Error('TikTok yêu cầu xác minh. Bấm "Đăng nhập TikTok" trong Cài đặt, đăng nhập/xác minh một lần rồi kết nối lại.'));
         } catch { /* trang đang tải */ }
